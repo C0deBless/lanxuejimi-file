@@ -12,7 +12,10 @@ namespace zhr
     {
         static void Main(string[] args)
         {
-
+            DownloadHelper dh = new DownloadHelper();
+            string str=dh.GetPage("http://wwww.baidu.com", "http://wwww.baidu.com", "utf-8");
+            Console.WriteLine(str);
+            Console.Read();
         }
     }
     public class DownloadHelper
@@ -85,93 +88,52 @@ namespace zhr
             try
             {
                 string strResult = "";
-
                 HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(strURL);
-
                 myHttpWebRequest.AllowAutoRedirect = true;
-
                 myHttpWebRequest.KeepAlive = true;
-
                 myHttpWebRequest.Accept = "image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/vnd.ms-excel, application/msword, application/x-shockwave-flash, */*";
-
                 myHttpWebRequest.Referer = strReferer;
-
                 myHttpWebRequest.UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; Maxthon; .NET CLR 2.0.50727)";
-
-
                 if (string.IsNullOrEmpty(contentType))
                 {
-
                     myHttpWebRequest.ContentType = "application/x-www-form-urlencoded";
-
                 }
-
                 else
                 {
-
                     myHttpWebRequest.ContentType = contentType;
-
                 }
-
                 myHttpWebRequest.Method = method;
-
-
-
                 myHttpWebRequest.Headers.Add("Accept-Encoding", "gzip, deflate");
-
                 if (myHttpWebRequest.CookieContainer == null)
                 {
-
                     myHttpWebRequest.CookieContainer = new CookieContainer();
-
                 }
-
                 if (this.CookieHeader.Length > 0)
                 {
-
                     myHttpWebRequest.Headers.Add("cookie:" + this.CookieHeader);
-
                     myHttpWebRequest.CookieContainer.SetCookies(new Uri(strURL), this.CookieHeader);
-
                 }
 
                 byte[] postData = Encoding.GetEncoding(code).GetBytes(strArgs);
-
                 myHttpWebRequest.ContentLength = postData.Length;
 
-
-
                 System.IO.Stream PostStream = myHttpWebRequest.GetRequestStream();
-
                 PostStream.Write(postData, 0, postData.Length);
-
                 PostStream.Close();
 
                 HttpWebResponse response = null;
-
                 System.IO.StreamReader sr = null;
-
                 response = (HttpWebResponse)myHttpWebRequest.GetResponse();
-
-
 
                 if (myHttpWebRequest.CookieContainer != null)
                 {
-
                     this.CookieHeader = myHttpWebRequest.CookieContainer.GetCookieHeader(new Uri(strURL));
-
                 }
 
-
-
                 sr = new System.IO.StreamReader(response.GetResponseStream(), Encoding.GetEncoding(code));    //    //utf-8     
-
                 strResult = sr.ReadToEnd();
-
                 sr.Close();
-
                 response.Close();
-
                 return strResult;
 
             }
@@ -198,21 +160,13 @@ namespace zhr
         public string GetPage(string strURL, string strReferer, string code, string contentType)
         {
             string strResult = "";
-
             HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(strURL);
-
             myHttpWebRequest.AllowAutoRedirect = true;
-
             myHttpWebRequest.KeepAlive = false;
-
             myHttpWebRequest.Accept = "*/*";
-
             myHttpWebRequest.Referer = strReferer;
-
             myHttpWebRequest.Headers.Add("Accept-Encoding", "gzip, deflate");
-
             myHttpWebRequest.UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; MSIE 7.0; MSIE 8.0 Windows NT 5.1; SV1; Maxthon; .NET CLR 2.0.50727)";
-
             if (string.IsNullOrEmpty(contentType))
             {
                 myHttpWebRequest.ContentType = "application/x-www-form-urlencoded";
@@ -224,7 +178,6 @@ namespace zhr
             }
 
             myHttpWebRequest.Method = "GET";
-
 
             if (myHttpWebRequest.CookieContainer == null)
             {
@@ -239,75 +192,52 @@ namespace zhr
             }
 
             HttpWebResponse response = null;
-
             System.IO.StreamReader sr = null;
-
             response = (HttpWebResponse)myHttpWebRequest.GetResponse();
-
             Stream streamReceive;
-
             string gzip = response.ContentEncoding;
-
             if (string.IsNullOrEmpty(gzip) || gzip.ToLower() != "gzip")
             {
                 streamReceive = response.GetResponseStream();
             }
-
             else
             {
                 streamReceive = new System.IO.Compression.GZipStream(response.GetResponseStream(), System.IO.Compression.CompressionMode.Decompress);
             }
 
             sr = new System.IO.StreamReader(streamReceive, Encoding.GetEncoding(code));
-
             if (response.ContentLength > 1)
             {
                 strResult = sr.ReadToEnd();
             }
-
             else
             {
                 char[] buffer = new char[256];
-
                 int count = 0;
-
                 StringBuilder sb = new StringBuilder();
-
                 while ((count = sr.Read(buffer, 0, buffer.Length)) > 0)
                 {
                     sb.Append(new string(buffer));
                 }
-
                 strResult = sb.ToString();
             }
 
             sr.Close();
-
             response.Close();
-
             return strResult;
         }
 
         public void SaveLink(string strURL, string strReferer, string code)
         {
             HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(strURL);
-
             myHttpWebRequest.AllowAutoRedirect = true;
-
             myHttpWebRequest.KeepAlive = false;
-
             myHttpWebRequest.Accept = "*/*";
-
             myHttpWebRequest.Referer = strReferer;
-
             myHttpWebRequest.Headers.Add("Accept-Encoding", "gzip, deflate");
-
             myHttpWebRequest.UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; MSIE 7.0; MSIE 8.0 Windows NT 5.1; SV1; Maxthon; .NET CLR 2.0.50727)";
-
             myHttpWebRequest.ContentType = "application/x-www-form-urlencoded";
-
             myHttpWebRequest.Method = "GET";
-
             if (myHttpWebRequest.CookieContainer == null)
             {
                 myHttpWebRequest.CookieContainer = new CookieContainer();
@@ -316,33 +246,23 @@ namespace zhr
             if (this.CookieHeader.Length > 0)
             {
                 myHttpWebRequest.Headers.Add("cookie:" + this.CookieHeader);
-
                 myHttpWebRequest.CookieContainer.SetCookies(new Uri(strURL), this.CookieHeader);
             }
 
             HttpWebResponse response = null;
-
             response = (HttpWebResponse)myHttpWebRequest.GetResponse();
-
             long count = response.ContentLength;
         }
 
         public void DownloadPage(string strURL, string strReferer, string code, string contentType, string path)
         {
             HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(strURL);
-
             myHttpWebRequest.AllowAutoRedirect = true;
-
             myHttpWebRequest.KeepAlive = false;
-
             myHttpWebRequest.Accept = "*/*";
-
             myHttpWebRequest.Referer = strReferer;
-
             myHttpWebRequest.Headers.Add("Accept-Encoding", "gzip, deflate,");
-
             myHttpWebRequest.UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; MSIE 7.0; MSIE 8.0; Windows NT 5.1; SV1; Maxthon; .NET CLR 2.0.50727)";
-
             if (string.IsNullOrEmpty(contentType))
             {
                 myHttpWebRequest.ContentType = "application/x-www-form-urlencoded";
@@ -362,14 +282,11 @@ namespace zhr
             if (this.CookieHeader.Length > 0)
             {
                 myHttpWebRequest.Headers.Add("cookie:" + this.CookieHeader);
-
                 myHttpWebRequest.CookieContainer.SetCookies(new Uri(strURL), this.CookieHeader);
             }
 
             HttpWebResponse response = null;
-
             response = (HttpWebResponse)myHttpWebRequest.GetResponse();
-
             Stream stream = response.GetResponseStream();
             byte[] arrByte = new byte[1024];
             int startPos = 0;
@@ -378,12 +295,9 @@ namespace zhr
             while (true)
             {
                 int readCnt = stream.Read(arrByte, 0, 1024);
-
                 if (readCnt == 0)
                     break;
-
                 fStream.Write(arrByte, 0, readCnt);
-
                 startPos += readCnt;
             }
 
