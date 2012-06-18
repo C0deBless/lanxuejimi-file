@@ -19,12 +19,12 @@
 // This file contains a default set of security policies to be enforced (by the
 // JVM) when Catalina is executed with the "-security" option.  In addition
 // to the permissions granted here, the following additional permissions are
-// granted specific to each web application:
+// granted to each web application:
 //
-// * Read access to its document root directory
-// * Read, write and delete access to its working directory
+// * Read access to the web application's document root directory
+// * Read, write and delete access to the web application's working directory
 //
-// $Id: catalina.policy 1079755 2011-03-09 11:38:38Z markt $
+// $Id: catalina.policy 1088176 2011-04-02 23:09:37Z kkolinko $
 // ============================================================================
 
 
@@ -89,7 +89,8 @@ grant codeBase "file:${catalina.home}/bin/tomcat-juli.jar" {
         // Note: To enable per context logging configuration, permit read access to
         // the appropriate file. Be sure that the logging configuration is
         // secure before enabling such access.
-        // E.g. for the examples web application:
+        // E.g. for the examples web application (uncomment and unwrap
+        // the following to be on a single line):
         // permission java.io.FilePermission "${catalina.base}${file.separator}
         //  webapps${file.separator}examples${file.separator}WEB-INF
         //  ${file.separator}classes${file.separator}logging.properties", "read";
