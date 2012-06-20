@@ -10,7 +10,7 @@ public class GUILoader {
 		this.name = name;
 	}
 
-	MainFrame frame = new MainFrame();
+	TestFrame frame = new TestFrame();
 	ConsoleFrame console = new ConsoleFrame();
 	String name;
 
