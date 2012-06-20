@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="811,583" id="org.runtimemonitoring.tracing" metadata="uml2-1.0" initialized="true" tag="1000" key="32303037303533312D313030302052756E74696D654D6F6E69746F72696E672F576869746568654E">
+  <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.1/@sourceConnections.0" name="ITracer" location="50,50" size="296,513" id="org.runtimemonitoring.tracing/ITracer" runTimeClassModel="trace(Ljava.lang.String;[Ljava.lang.String;),traceIncident([Ljava.lang.String;),mETRIC_TYPE_DELTA_INT,traceIncident(I[Ljava.lang.String;),trace(J[Ljava.lang.String;),mETRIC_TYPE_INT,mETRIC_TYPE_INCIDENT,trace(I[Ljava.lang.String;),mETRIC_TYPE_STRING,traceDeltaSticky(I[Ljava.lang.String;),traceSticky(J[Ljava.lang.String;),mETRIC_TYPE_COUNTER_LONG,trace(Ljava.util.Date;[Ljava.lang.String;),trace(Ljava.lang.String;Ljava.lang.String;[Ljava.lang.String;),mETRIC_TYPE_DELTA_STICKY_INT,endThreadInfoCapture([Ljava.lang.String;),lookupRange(Ljava.lang.String;J),startThreadInfoCapture(I),traceSticky(I[Ljava.lang.String;),mETRIC_TYPE_LONG,traceDelta(J[Ljava.lang.String;),mETRIC_TYPE_COUNTER_INT,mETRIC_TYPE_DELTA_STICKY_LONG,traceDelta(I[Ljava.lang.String;),traceDeltaSticky(J[Ljava.lang.String;),mETRIC_TYPE_DELTA_LONG">
+    <children xsi:type="editmodel:CompartmentEditModel" size="238,180">
+      <children xsi:type="editmodel:AttributeEditModel" name="mETRIC_TYPE_COUNTER_INT" id="org.runtimemonitoring.tracing/ITracer#mETRIC_TYPE_COUNTER_INT"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="mETRIC_TYPE_COUNTER_LONG" id="org.runtimemonitoring.tracing/ITracer#mETRIC_TYPE_COUNTER_LONG"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="mETRIC_TYPE_DELTA_INT" id="org.runtimemonitoring.tracing/ITracer#mETRIC_TYPE_DELTA_INT"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="mETRIC_TYPE_DELTA_LONG" id="org.runtimemonitoring.tracing/ITracer#mETRIC_TYPE_DELTA_LONG"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="mETRIC_TYPE_DELTA_STICKY_INT" id="org.runtimemonitoring.tracing/ITracer#mETRIC_TYPE_DELTA_STICKY_INT"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="mETRIC_TYPE_DELTA_STICKY_LONG" id="org.runtimemonitoring.tracing/ITracer#mETRIC_TYPE_DELTA_STICKY_LONG"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="mETRIC_TYPE_INCIDENT" id="org.runtimemonitoring.tracing/ITracer#mETRIC_TYPE_INCIDENT"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="mETRIC_TYPE_INT" id="org.runtimemonitoring.tracing/ITracer#mETRIC_TYPE_INT"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="mETRIC_TYPE_LONG" id="org.runtimemonitoring.tracing/ITracer#mETRIC_TYPE_LONG"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="mETRIC_TYPE_STRING" id="org.runtimemonitoring.tracing/ITracer#mETRIC_TYPE_STRING"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="273,270">
+      <children xsi:type="editmodel:MethodEditModel" name="trace" id="org.runtimemonitoring.tracing/ITracer#trace(Ljava.lang.String;Ljava.lang.String;[Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="traceDeltaSticky" id="org.runtimemonitoring.tracing/ITracer#traceDeltaSticky(J[Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="trace" id="org.runtimemonitoring.tracing/ITracer#trace(J[Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="traceDelta" id="org.runtimemonitoring.tracing/ITracer#traceDelta(J[Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="traceIncident" id="org.runtimemonitoring.tracing/ITracer#traceIncident([Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="traceDeltaSticky" id="org.runtimemonitoring.tracing/ITracer#traceDeltaSticky(I[Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="traceSticky" id="org.runtimemonitoring.tracing/ITracer#traceSticky(J[Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="traceIncident" id="org.runtimemonitoring.tracing/ITracer#traceIncident(I[Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="trace" id="org.runtimemonitoring.tracing/ITracer#trace(Ljava.lang.String;[Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="endThreadInfoCapture" id="org.runtimemonitoring.tracing/ITracer#endThreadInfoCapture([Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="trace" id="org.runtimemonitoring.tracing/ITracer#trace(Ljava.util.Date;[Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="traceDelta" id="org.runtimemonitoring.tracing/ITracer#traceDelta(I[Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="lookupRange" id="org.runtimemonitoring.tracing/ITracer#lookupRange(Ljava.lang.String;J)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="trace" id="org.runtimemonitoring.tracing/ITracer#trace(I[Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="startThreadInfoCapture" id="org.runtimemonitoring.tracing/ITracer#startThreadInfoCapture(I)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterTypes="true" showMethodsReturnType="true" showMethodsParameterNames="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="TracerFactory" location="480,180" size="255,139" id="org.runtimemonitoring.tracing/TracerFactory" runTimeClassModel="getInstance(Ljava.lang.String;),getInstance(),iTRACER_CLASS_NAME_PROPERTY,iTRACER_KEY,getInstance(Ljava.util.Properties;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="232,36">
+      <children xsi:type="editmodel:AttributeEditModel" name="iTRACER_KEY" id="org.runtimemonitoring.tracing/TracerFactory#iTRACER_KEY"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="iTRACER_CLASS_NAME_PROPERTY" id="org.runtimemonitoring.tracing/TracerFactory#iTRACER_CLASS_NAME_PROPERTY"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="209,54">
+      <children xsi:type="editmodel:MethodEditModel" name="getInstance" id="org.runtimemonitoring.tracing/TracerFactory#getInstance(Ljava.util.Properties;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getInstance" id="org.runtimemonitoring.tracing/TracerFactory#getInstance(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getInstance" id="org.runtimemonitoring.tracing/TracerFactory#getInstance()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="org.runtimemonitoring.tracing/TracerFactory-Soyatec::Import->org.runtimemonitoring.tracing/ITracer" source="//@children.1" target="//@children.0" targetEnd="//@children.1/@sourceConnections.0/@children.2" label="//@children.1/@sourceConnections.0/@children.0" sourceEnd="//@children.1/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,69" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="296,199"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterTypes="true" showMethodsReturnType="true" showMethodsParameterNames="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=1;Product=eUML2" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>
