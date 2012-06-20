@@ -25,8 +25,6 @@ import org.osgi.framework.launch.Framework;
 import org.osgi.framework.launch.FrameworkFactory;
 import org.slf4j.Logger;
 
-import com.trnnn.osgi.lancher.ServiceLoader;
-
 public class FrameworkConfigListener implements ServletContextListener {
 
 	private static final String CONTEXT_PARAM_OSGI_PLUGINS_LOCATION = "OSGI_PLUGINS_LOCATION";
@@ -132,6 +130,7 @@ public class FrameworkConfigListener implements ServletContextListener {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	private static void initFramework(Framework framework,
 			ServletContextEvent event) throws IOException {
 		BundleContext bundleContext = framework.getBundleContext();
@@ -220,6 +219,7 @@ public class FrameworkConfigListener implements ServletContextListener {
 				servletContext, properties);
 	}
 
+	@SuppressWarnings("deprecation")
 	private static Map<String, String> loadFrameworkConfig(
 			ServletContext context) throws MalformedURLException {
 		String configLocation = context
