@@ -17,6 +17,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import org.eclipse.osgi.framework.internal.core.Constants;
+import org.eclipse.osgi.launch.EquinoxFactory;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
@@ -28,13 +29,13 @@ import com.trnnn.osgi.lancher.ServiceLoader;
 
 public class FrameworkConfigListener implements ServletContextListener {
 
-	private static final String CONTEXT_PARAM_OSGI_PLUGINS_LOCATION = null;
-	private static final String DEFAULT_OSGI_PLUGINS_LOCATION = null;
-	private static final String CONTEXT_PARAM_OSGI_CONFIG_LOCATION = null;
-	private static final String DEFAULT_OSGI_CONFIG_LOCATION = null;
-	private static final String PROPERTY_FRAMEWORK_STORAGE = null;
-	private static final String DEFAULT_OSGI_STORAGE_DIRECTORY = null;
-	private static final String WEB_ROOT = null;
+	private static final String CONTEXT_PARAM_OSGI_PLUGINS_LOCATION = "OSGI_PLUGINS_LOCATION";
+	private static final String DEFAULT_OSGI_PLUGINS_LOCATION = "/plugins";
+	private static final String CONTEXT_PARAM_OSGI_CONFIG_LOCATION = "OSGI_CONFIG_LOCATION";
+	private static final String DEFAULT_OSGI_CONFIG_LOCATION = "/osgi.properties";
+	private static final String PROPERTY_FRAMEWORK_STORAGE = "PROPERTY_FRAMEWORK_STORAGE";
+	private static final String DEFAULT_OSGI_STORAGE_DIRECTORY = "/framework.properties";
+	private static final String WEB_ROOT = "osgi-web";
 	static Logger logger = org.slf4j.LoggerFactory
 			.getLogger(FrameworkConfigListener.class);
 	Framework framework;
@@ -72,24 +73,28 @@ public class FrameworkConfigListener implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
 
-		Class<FrameworkFactory> frameworkFactoryClass = null;
+		Class<EquinoxFactory> frameworkFactoryClass = null;
 		try {
-			frameworkFactoryClass = ServiceLoader.load(FrameworkFactory.class);
+			// frameworkFactoryClass =
+			// ServiceLoader.load(FrameworkFactory.class);
+			frameworkFactoryClass = EquinoxFactory.class;
 		} catch (Exception e) {
 			throw new IllegalArgumentException(
 					" FrameworkFactory service load error. ", e);
 		}
-		if (frameworkFactoryClass == null) {
-			throw new IllegalArgumentException(
-					" FrameworkFactory service not found. ");
-		}
+		// if (frameworkFactoryClass == null) {
+		// throw new IllegalArgumentException(
+		// " FrameworkFactory service not found. ");
+		// }
 
 		FrameworkFactory frameworkFactory;
 		try {
 			frameworkFactory = frameworkFactoryClass.newInstance();
 		} catch (Exception e) {
-			throw new IllegalArgumentException(
-					" FrameworkFactory instantiation error. ", e);
+			// throw new IllegalArgumentException(
+			// " FrameworkFactory instantiation error. ", e);
+			e.printStackTrace();
+			return;
 		}
 
 		Map<String, String> configuration;
