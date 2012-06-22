@@ -31,7 +31,7 @@ public class JMXClient3 {
 		JMXCollector collector = new JMXCollector("JMXTracer", serviceUrl);
 		MBeanServerConnection connection = collector.getMBeanServerConnection();
 		Object result = connection.invoke(new ObjectName(
-				"java.lang:type=CommandMBean"), "user", new Object[] { "all" },
+				"java.lang:type=CommandMBean"), "gamedata", new Object[] { "view","mission" },
 				new String[] {});
 		System.out.println(result);
 		Thread.currentThread().join();
