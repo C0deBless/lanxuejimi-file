@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="cache/src"/>
+	<classpathentry kind="src" path="core/src"/>
+	<classpathentry kind="src" path="json/src"/>
+	<classpathentry kind="src" path="log/src"/>
+	<classpathentry kind="src" path="profile/src"/>
+	<classpathentry kind="src" path="test/src"/>
+	<classpathentry kind="lib" path="lib/jackson-all-1.9.2.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.6.4.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-log4j12-1.6.4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
