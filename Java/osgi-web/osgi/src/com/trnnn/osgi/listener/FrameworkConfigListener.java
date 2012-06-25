@@ -28,6 +28,8 @@ import org.osgi.framework.launch.Framework;
 import org.osgi.framework.launch.FrameworkFactory;
 import org.slf4j.Logger;
 
+import com.trnnn.osgi.classloader.BridgeClassLoader;
+
 public class FrameworkConfigListener implements ServletContextListener {
 
 	private static final String CONTEXT_PARAM_OSGI_PLUGINS_LOCATION = "OSGI_PLUGINS_LOCATION";
@@ -41,6 +43,8 @@ public class FrameworkConfigListener implements ServletContextListener {
 			.getLogger(FrameworkConfigListener.class);
 	Framework framework;
 	boolean succeed;
+	final BridgeClassLoader bridgeClassLoader = new BridgeClassLoader(
+			FrameworkConfigListener.class.getClassLoader());
 
 	@Override
 	public void contextDestroyed(ServletContextEvent event) {
@@ -134,22 +138,12 @@ public class FrameworkConfigListener implements ServletContextListener {
 
 	private void initClassLoader(Framework framework) {
 		BundleContext bundleContext = framework.getBundleContext();
+		bridgeClassLoader.resolveBundleClassSpace(bundleContext);
 		bundleContext.addBundleListener(new BundleListener() {
 			@Override
 			public void bundleChanged(BundleEvent event) {
 				Bundle bundle = event.getBundle();
-				Dictionary<String, String> dic = bundle.getHeaders();
-				Enumeration<String> it = dic.keys();
-				logger.info("[Bundle changed] headers : {}, location: {}",
-						bundle.getSymbolicName(), bundle.getLocation());
-				while (it.hasMoreElements()) {
-					String key = it.nextElement();
-					// if (!key.equals("Export-Package")) {
-					// continue;
-					// }
-					String attr = dic.get(key);
-					logger.info("{}: {}", key, attr);
-				}
+				bridgeClassLoader.resolveBundleClassSpace(bundle);
 			}
 		});
 	}
