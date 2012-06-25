@@ -6,6 +6,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Dictionary;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
@@ -20,7 +21,9 @@ import org.eclipse.osgi.framework.internal.core.Constants;
 import org.eclipse.osgi.launch.EquinoxFactory;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.BundleEvent;
 import org.osgi.framework.BundleException;
+import org.osgi.framework.BundleListener;
 import org.osgi.framework.launch.Framework;
 import org.osgi.framework.launch.FrameworkFactory;
 import org.slf4j.Logger;
@@ -42,8 +45,7 @@ public class FrameworkConfigListener implements ServletContextListener {
 	@Override
 	public void contextDestroyed(ServletContextEvent event) {
 		if (framework != null) {
-			if (logger.isInfoEnabled())
-				logger.info(" Stopping OSGi Framework ");
+			logger.info(" Stopping OSGi Framework ");
 
 			boolean succeed = false;
 			try {
@@ -58,12 +60,10 @@ public class FrameworkConfigListener implements ServletContextListener {
 			} catch (InterruptedException e) {
 				throw new OSGiStopException(" Stop OSGi Framework error! ", e);
 			} finally {
-				if (logger.isInfoEnabled()) {
-					if (succeed)
-						logger.info(" OSGi Framework Stopped! ");
-					else
-						logger.info(" OSGi Framework not stop! ");
-				}
+				if (succeed)
+					logger.info(" OSGi Framework Stopped! ");
+				else
+					logger.info(" OSGi Framework not stop! ");
 			}
 		}
 	}
@@ -99,12 +99,9 @@ public class FrameworkConfigListener implements ServletContextListener {
 		try {
 			// 载入Framework启动配置
 			configuration = loadFrameworkConfig(event.getServletContext());
-			if (logger.isInfoEnabled()) {
-				logger.info(" Load Framework configuration: [ ");
-				for (Object key : configuration.keySet()) {
-					logger.info(" /t " + key + "  =  " + configuration.get(key));
-				}
-				logger.info(" ] ");
+			for (Object key : configuration.keySet()) {
+				logger.info("Load Framework configuration:  \t " + key
+						+ "  =  " + configuration.get(key));
 			}
 		} catch (Exception e) {
 			throw new IllegalArgumentException(
@@ -112,11 +109,14 @@ public class FrameworkConfigListener implements ServletContextListener {
 		}
 
 		try {
+
 			framework = frameworkFactory.newFramework(configuration);
 			framework.init();
 
+			logger.info("Initializing new OSGi framework \t  ");
 			// 初始化Framework环境
 			initFramework(framework, event);
+			initClassLoader(framework);
 
 			// 启动Framework
 			framework.start();
@@ -128,6 +128,30 @@ public class FrameworkConfigListener implements ServletContextListener {
 			throw new OSGiStartException(" Init OSGi Framework error ", e);
 		}
 
+		// Class1 clazz = new Class1();
+		// clazz.output();
+	}
+
+	private void initClassLoader(Framework framework) {
+		BundleContext bundleContext = framework.getBundleContext();
+		bundleContext.addBundleListener(new BundleListener() {
+			@Override
+			public void bundleChanged(BundleEvent event) {
+				Bundle bundle = event.getBundle();
+				Dictionary<String, String> dic = bundle.getHeaders();
+				Enumeration<String> it = dic.keys();
+				logger.info("[Bundle changed] headers : {}, location: {}",
+						bundle.getSymbolicName(), bundle.getLocation());
+				while (it.hasMoreElements()) {
+					String key = it.nextElement();
+					// if (!key.equals("Export-Package")) {
+					// continue;
+					// }
+					String attr = dic.get(key);
+					logger.info("{}: {}", key, attr);
+				}
+			}
+		});
 	}
 
 	@SuppressWarnings("deprecation")
@@ -139,10 +163,9 @@ public class FrameworkConfigListener implements ServletContextListener {
 		// 将ServletContext注册为服务
 		registerContext(bundleContext, servletContext);
 
-		File file = bundleContext.getDataFile(" .init ");
+		File file = bundleContext.getDataFile(".init");
 		if (!file.isFile()) { // 第一次初始化
-			if (logger.isInfoEnabled())
-				logger.info(" Init Framework ");
+			logger.info(" Init Framework ");
 
 			String pluginLocation = servletContext
 					.getInitParameter(CONTEXT_PARAM_OSGI_PLUGINS_LOCATION);
@@ -151,17 +174,18 @@ public class FrameworkConfigListener implements ServletContextListener {
 			else if (!pluginLocation.startsWith(" / "))
 				pluginLocation = " / ".concat(pluginLocation);
 
+			String bundleRootPath = servletContext.getRealPath(pluginLocation);
+			logger.info("Load bundles from path -> " + bundleRootPath);
 			// 安装bundle
-			File bundleRoot = new File(
-					servletContext.getRealPath(pluginLocation));
+			File bundleRoot = new File(bundleRootPath);
 			if (bundleRoot.isDirectory()) {
-				if (logger.isInfoEnabled())
-					logger.info(" Load Framework bundles from:  "
-							+ pluginLocation);
+				logger.info(" Load Framework bundles from:  " + pluginLocation);
 
 				File bundleFiles[] = bundleRoot.listFiles(new FilenameFilter() {
 					public boolean accept(File dir, String name) {
-						return name.endsWith(" .jar ");
+						logger.info("Searching file -> " + name + ",  path -> "
+								+ dir.getPath());
+						return name.endsWith(".jar");
 					}
 				});
 
@@ -170,15 +194,15 @@ public class FrameworkConfigListener implements ServletContextListener {
 						try {
 							bundleContext.installBundle(bundleFile.toURL()
 									.toExternalForm());
-							if (logger.isInfoEnabled())
-								logger.info(" Install bundle success:  "
-										+ bundleFile.getName());
+							logger.info(" Install bundle success:  "
+									+ bundleFile.getName());
 						} catch (Throwable e) {
-							if (logger.isWarnEnabled())
-								logger.warn(" Install bundle error:  "
-										+ bundleFile, e);
+							logger.warn(
+									" Install bundle error:  " + bundleFile, e);
 						}
 					}
+				} else {
+					logger.warn("Bundle files is empty...");
 				}
 
 				for (Bundle bundle : bundleContext.getBundles()) {
@@ -187,12 +211,10 @@ public class FrameworkConfigListener implements ServletContextListener {
 						if (bundle.getHeaders().get(Constants.BUNDLE_ACTIVATOR) != null) {
 							try {
 								bundle.start(Bundle.START_ACTIVATION_POLICY);
-								if (logger.isInfoEnabled())
-									logger.info(" Start bundle:  " + bundle);
+								logger.info(" Start bundle:  " + bundle);
 							} catch (Throwable e) {
-								if (logger.isWarnEnabled())
-									logger.warn(" Start bundle error:  "
-											+ bundle, e);
+								logger.warn(" Start bundle error:  " + bundle,
+										e);
 							}
 						}
 					}
@@ -200,8 +222,9 @@ public class FrameworkConfigListener implements ServletContextListener {
 			}
 
 			new FileWriter(file).close();
-			if (logger.isInfoEnabled())
-				logger.info(" Framework inited. ");
+			logger.info(" Framework inited. ");
+		} else {
+			logger.info("file.isFile()");
 		}
 	}
 
@@ -233,9 +256,8 @@ public class FrameworkConfigListener implements ServletContextListener {
 		try {
 			// 载入配置项
 			config.load(context.getResourceAsStream(configLocation));
-			if (logger.isInfoEnabled())
-				logger.info(" Load Framework configuration from:  "
-						+ configLocation);
+			logger.info(" Load Framework configuration from:  "
+					+ configLocation);
 		} catch (IOException e) {
 			if (logger.isWarnEnabled())
 				logger.warn(" Load Framework configuration error from:  "
@@ -257,8 +279,7 @@ public class FrameworkConfigListener implements ServletContextListener {
 		}
 		storageDirectory = new File(storageDirectory).toURL().toExternalForm();
 		config.setProperty(PROPERTY_FRAMEWORK_STORAGE, storageDirectory);
-		if (logger.isInfoEnabled())
-			logger.info(" Use Framework Storage:  " + storageDirectory);
+		logger.info(" Use Framework Storage:  " + storageDirectory);
 
 		return propertiesToMap(config);
 	}
