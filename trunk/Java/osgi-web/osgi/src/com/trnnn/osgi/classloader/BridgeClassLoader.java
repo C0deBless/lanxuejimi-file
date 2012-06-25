@@ -64,6 +64,10 @@ public class BridgeClassLoader extends ClassLoader {
 		}
 
 		List<String> packages = parsePackages(bundle);
+		resolveBundleClassCache(bundle, packages);
+	}
+
+	private void resolveBundleClassCache(Bundle bundle, List<String> packages) {
 
 	}
 
@@ -80,10 +84,12 @@ public class BridgeClassLoader extends ClassLoader {
 			strExportPackage = dic.get(key);
 		}
 
+		logger.info("packages -> {}", strExportPackage);
+
 		if (strExportPackage != null) {
 			String[] tmp = strExportPackage.split(",");
 			for (String string : tmp) {
-
+				
 			}
 		}
 		return null;

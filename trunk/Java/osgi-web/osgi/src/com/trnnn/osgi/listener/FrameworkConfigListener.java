@@ -6,7 +6,6 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Dictionary;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
@@ -101,7 +100,7 @@ public class FrameworkConfigListener implements ServletContextListener {
 
 		Map<String, String> configuration;
 		try {
-			// 载入Framework启动配置
+			// 杞藉叆Framework鍚姩閰嶇疆
 			configuration = loadFrameworkConfig(event.getServletContext());
 			for (Object key : configuration.keySet()) {
 				logger.info("Load Framework configuration:  \t " + key
@@ -118,11 +117,11 @@ public class FrameworkConfigListener implements ServletContextListener {
 			framework.init();
 
 			logger.info("Initializing new OSGi framework \t  ");
-			// 初始化Framework环境
+			// 鍒濆鍖朏ramework鐜
 			initFramework(framework, event);
 			initClassLoader(framework);
 
-			// 启动Framework
+			// 鍚姩Framework
 			framework.start();
 
 			succeed = true;
@@ -154,11 +153,11 @@ public class FrameworkConfigListener implements ServletContextListener {
 		BundleContext bundleContext = framework.getBundleContext();
 		ServletContext servletContext = event.getServletContext();
 
-		// 将ServletContext注册为服务
+		// 灏哠ervletContext娉ㄥ唽涓烘湇鍔�
 		registerContext(bundleContext, servletContext);
 
 		File file = bundleContext.getDataFile(".init");
-		if (!file.isFile()) { // 第一次初始化
+		if (!file.isFile()) { // 绗竴娆″垵濮嬪寲
 			logger.info(" Init Framework ");
 
 			String pluginLocation = servletContext
@@ -170,7 +169,7 @@ public class FrameworkConfigListener implements ServletContextListener {
 
 			String bundleRootPath = servletContext.getRealPath(pluginLocation);
 			logger.info("Load bundles from path -> " + bundleRootPath);
-			// 安装bundle
+			// 瀹夎bundle
 			File bundleRoot = new File(bundleRootPath);
 			if (bundleRoot.isDirectory()) {
 				logger.info(" Load Framework bundles from:  " + pluginLocation);
@@ -248,7 +247,7 @@ public class FrameworkConfigListener implements ServletContextListener {
 
 		Properties config = new Properties();
 		try {
-			// 载入配置项
+			// 杞藉叆閰嶇疆椤�
 			config.load(context.getResourceAsStream(configLocation));
 			logger.info(" Load Framework configuration from:  "
 					+ configLocation);
@@ -260,13 +259,13 @@ public class FrameworkConfigListener implements ServletContextListener {
 
 		String storageDirectory = config.getProperty(
 				PROPERTY_FRAMEWORK_STORAGE, DEFAULT_OSGI_STORAGE_DIRECTORY);
-		// 检查storageDirectory合法性
+		// 妫�煡storageDirectory鍚堟硶鎬�
 		if (storageDirectory.startsWith(WEB_ROOT)) {
-			// 如果以WEB_ROOT常量字符串开头，那么相对于WEB_ROOT来定 位
+			// 濡傛灉浠EB_ROOT甯搁噺瀛楃涓插紑澶达紝閭ｄ箞鐩稿浜嶹EB_ROOT鏉ュ畾 浣�
 			storageDirectory = storageDirectory.substring(WEB_ROOT.length());
 			storageDirectory = context.getRealPath(storageDirectory);
 		} else {
-			// 如果是相对路径，那么相对于WEB_ROOT来定位
+			// 濡傛灉鏄浉瀵硅矾寰勶紝閭ｄ箞鐩稿浜嶹EB_ROOT鏉ュ畾浣�
 			if (!new File(storageDirectory).isAbsolute()) {
 				storageDirectory = context.getRealPath(storageDirectory);
 			}
