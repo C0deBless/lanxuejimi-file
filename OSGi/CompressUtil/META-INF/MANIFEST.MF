@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: CompressUtil
+Bundle-SymbolicName: CompressUtil
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: com.trnnn.compress.jar,
+ com.trnnn.compress.zip
+Import-Package: com.trnnn.io

@@ -1,0 +1,17 @@
+#webservices{
+}
+#webservices tbody{
+	font-size:13px;
+}
+.addendpoint{
+	background-color:#eee;
+}
+.head{
+	font-size:30px;
+	color:#FFF;
+	background-color:#222;
+	height:50px;
+	width:100%;
+	padding-top:10px;
+	padding-left:40px;
+}

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<servlet>
+		<servlet-name>AdminIndex</servlet-name>
+		<servlet-class>com.trnnn.osgi.admin.servlet.AdminIndex</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>StopBundle</servlet-name>
+		<servlet-class>com.trnnn.osgi.admin.bundle.servlet.StopBundle</servlet-class>
+	</servlet>
+  <servlet>
+    <servlet-name>StartBundle</servlet-name>
+    <servlet-class>com.trnnn.osgi.admin.bundle.servlet.StartBundle</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UpdateBundle</servlet-name>
+    <servlet-class>com.trnnn.osgi.admin.bundle.servlet.UpdateBundle</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>InstallBundle</servlet-name>
+    <servlet-class>com.trnnn.osgi.admin.bundle.servlet.InstallBundle</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UninstallBundle</servlet-name>
+    <servlet-class>com.trnnn.osgi.admin.bundle.servlet.UninstallBundle</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>BundleInfo</servlet-name>
+    <servlet-class>com.trnnn.osgi.admin.bundle.servlet.BundleInfo</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Index</servlet-name>
+    <servlet-class>com.trnnn.osgi.admin.webservice.servlet.Index</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AddEndpoint</servlet-name>
+    <servlet-class>com.trnnn.osgi.admin.webservice.servlet.AddEndpoint</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>RemoveEndpoint</servlet-name>
+    <servlet-class>com.trnnn.osgi.admin.webservice.servlet.RemoveEndpoint</servlet-class>
+  </servlet>
+
+
+
+
+
+
+
+
+
+
+	<servlet-mapping>
+		<servlet-name>AdminIndex</servlet-name>
+		<url-pattern>/index</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>StopBundle</servlet-name>
+		<url-pattern>/bundle/stop</url-pattern>
+	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StartBundle</servlet-name>
+    <url-pattern>/bundle/start</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UpdateBundle</servlet-name>
+    <url-pattern>/bundle/update</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>InstallBundle</servlet-name>
+    <url-pattern>/bundle/install</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UninstallBundle</servlet-name>
+    <url-pattern>/bundle/uninstall</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>BundleInfo</servlet-name>
+    <url-pattern>/bundle/info</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Index</servlet-name>
+    <url-pattern>/webservice/index</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddEndpoint</servlet-name>
+    <url-pattern>/servlet/webservice/addendpoint</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RemoveEndpoint</servlet-name>
+    <url-pattern>/servlet/webservice/removeendpoint</url-pattern>
+  </servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	<context-param>
+		<param-name>contextClass</param-name>
+		<param-value>org.springframework.osgi.web.context.support.OsgiBundleXmlWebApplicationContext
+		</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+</web-app>

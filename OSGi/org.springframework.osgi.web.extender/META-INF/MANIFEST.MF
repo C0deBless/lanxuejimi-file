@@ -1,0 +1,36 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: spring-osgi-web-extender
+Bundle-SymbolicName: org.springframework.osgi.web.extender
+Bundle-Version: 1.2.1
+Bundle-Activator: org.springframework.osgi.web.extender.internal.activator.WarLoaderListener
+Bundle-Vendor: SpringSource
+Implementation-Version: 1.2.1
+Spring-DM-Version: 1.2.1
+Import-Package: org.apache.catalina;version="5.5.23",
+ org.apache.commons.logging;version="[1.0,2.0)",
+ org.osgi.framework;version="1.3",
+ org.osgi.service.packageadmin;version="1.2",
+ org.springframework.beans.factory;version="[2.5.6,4.0)",
+ org.springframework.core;version="[2.5.6,4.0)",
+ org.springframework.core.task;version="[2.5.6,4.0)",
+ org.springframework.osgi;version="[1.2.1,1.2.1]",
+ org.springframework.osgi.context;version="[1.2.1,1.2.1]",
+ org.springframework.osgi.context.support;version="[1.2.1,1.2.1]",
+ org.springframework.osgi.util;version="[1.2.1,1.2.1]",
+ org.springframework.osgi.web.deployer;version="[1.2.1,1.2.1]",
+ org.springframework.osgi.web.deployer.jetty;version="[1.2.1,1.2.1]";resolution:=optional,
+ org.springframework.osgi.web.deployer.support;version="[1.2.1,1.2.1]",
+ org.springframework.osgi.web.deployer.tomcat;version="[1.2.1,1.2.1]";resolution:=optional,
+ org.springframework.scheduling.timer;version="[2.5.6,4.0)",
+ org.springframework.util;version="[2.5.6,4.0)"
+Built-By: costin
+Bundle-Description: Spring/OSGi web extender. Detects war bundles and deploys them into the configured web container.
+Spring-Version: 2.5.6.SEC01
+Implementation-Vendor-Id: org.springframework.osgi
+Bundle-DocURL: http://www.springframework.org/osgi
+Bundle-Classpath: spring-osgi-web-extender-1.2.1.jar
+Implementation-Vendor: SpringSource
+Implementation-Title: Spring Dynamic Modules Framework
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0
+Build-Jdk: 1.5.0_22
