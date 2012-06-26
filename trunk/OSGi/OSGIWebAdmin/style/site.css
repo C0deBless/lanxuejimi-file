@@ -1,0 +1,19 @@
+@charset "utf-8";
+body {
+	font-family: "微软雅黑";
+	font-size: 13px;
+	color: #222;
+}
+
+.table {
+	border-collapse:collapse;
+}
+.table td{
+	border:1px solid #CCC;
+	padding:5px 10px;
+}
+
+.table thead{
+	background-color:#222;
+	color:#FFF;
+}

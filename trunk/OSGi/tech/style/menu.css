@@ -1,0 +1,65 @@
+/* Sidebar Menu---------------------------------------- */
+
+#sidebar {
+	width: 179px;
+}
+
+#sidebar .sideNav { width: 179px; }
+
+#sidebar .sideNav li { border-bottom: 1px solid #ddd; width: 179px; }
+
+#sidebar .sideNav li a {
+	display: block;
+	color: #646464;
+	background: #f6f6f6;
+	text-decoration: none;
+	height: 29px;
+	line-height: 29px;
+	padding: 0px;
+	padding-left:19px;
+}
+
+#sidebar .sideNav li a:hover { background: #f0f7fa;color: #c66653; }
+/*SubMenu----------------------------------------------*/
+.menu_group{
+	width:140px;
+	left:193px;
+	display:none;
+	border:1px solid #DDD;
+	text-align:left;
+	position:absolute;
+	background-color:#FFF;
+}
+.menu_group ul li {
+	border-bottom:1px dotted #CCC;
+	height:20px;
+}
+.menu_group ul li a {
+	padding-left:15px;
+	line-height:20px;
+}
+#submenu_net{
+	top:129px;
+}
+#submenu_java{
+	top:159px;
+}
+#submenu_flash{
+	top:189px;
+}
+#submenu_webfront{
+	top:219px;
+}
+#submenu_mobile{
+	top:249px;
+}
+#submenu_database{
+	top:279px;
+}
+/*ContextMemu----------------------------------------------*/
+.contextmenu{
+	height:150px;
+	width:70px;
+	position:absolute;
+	background-color:red;
+}

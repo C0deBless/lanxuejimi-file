@@ -1,0 +1,78 @@
+@charset "utf-8";
+.head{
+	font-size:30px;
+	color:#FFF;
+	background-color:#222;
+	height:50px;
+	width:100%;
+	padding-top:10px;
+	padding-left:40px;
+}
+#uploadbutton{
+	padding:3px 20px;
+	background-color:#222;
+	color:#FFF;
+	border:0px solid #FFF;
+	font-family:"微软雅黑";
+	font-size:15px;
+}
+#uploaddiv{
+	height:50px;
+	width:100%;
+}
+#bundlediv{
+	height:auto;
+	width:100%;
+}
+#bundles td{
+	border:1px solid #CCC;
+	padding:5px 10px;
+}
+#bundles bundlename{
+	color:#FE7275;
+}
+#bundles{
+	font-size: 13px;
+}
+.bundleTrHover{
+	background-color:#DDD;
+}
+#bundles{
+	width:100%;
+}
+#bundles thead{
+	background-color:#222;
+	color:#FFF;
+}
+.bundleinfo{
+	font-size:12px;
+	border:0px;
+	border-bottom:1px solid #CCC;
+	display:none;
+}
+.bundleinfo .key{
+	text-align:right;
+	font-weight:bold;
+	color:#000;
+}
+.bundleinfo .value{
+	color:blue;
+}
+.servicereferences{
+	font-size:12px;
+}
+.closeDiv{
+	width:18px;
+	height:18px;
+	float:right;
+}
+.closeDiv a{
+	display:block;
+	height:18px;
+	width:18px;
+	cursor:hand;
+	background:url(../image/close1.png);
+}
+.closeDiv a:hover{
+	background:url(../image/close2.png);
+}

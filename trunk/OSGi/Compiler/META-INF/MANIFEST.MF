@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Compiler
+Bundle-SymbolicName: Compiler
+Bundle-Version: 1.0.0.qualifier
+Export-Package: com.trnnn.compile
+Import-Package: com.trnnn.compress.jar,
+ com.trnnn.io

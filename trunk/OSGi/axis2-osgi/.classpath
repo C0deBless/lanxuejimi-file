@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry exported="true" kind="lib" path="axiom-api-1.2.10.jar"/>
+	<classpathentry exported="true" kind="lib" path="axiom-dom-1.2.10.jar"/>
+	<classpathentry exported="true" kind="lib" path="axiom-impl-1.2.10.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry exported="true" kind="lib" path="axis2-jaxws-1.5.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="org.apache.axis2.osgi-1.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="org.apache.servicemix.specs.jaxws-api-2.1-1.5.0.jar"/>
+	<classpathentry kind="lib" path="axis2-metadata-1.5.4.jar" sourcepath="C:/Users/lanxuejimi/Desktop/OSGi/axis2-1.5.4-src.zip"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
