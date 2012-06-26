@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlowViewLayout Version="1.2">
+  <StrutsTransition id=";6,null,,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="60,81" />
+      <AbsolutePoint location="60,181" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id=",null,,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="40,181" />
+      <AbsolutePoint location="40,151" />
+      <AbsolutePoint location="0,151" />
+      <AbsolutePoint location="0,214" />
+      <AbsolutePoint location="30,214" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+</FlowViewLayout>
+

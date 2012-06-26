@@ -27,6 +27,8 @@ import org.osgi.framework.launch.Framework;
 import org.osgi.framework.launch.FrameworkFactory;
 import org.slf4j.Logger;
 
+import testplugin1.Class1;
+
 import com.trnnn.osgi.classloader.BridgeClassLoader;
 
 public class FrameworkConfigListener implements ServletContextListener {
@@ -42,8 +44,7 @@ public class FrameworkConfigListener implements ServletContextListener {
 			.getLogger(FrameworkConfigListener.class);
 	Framework framework;
 	boolean succeed;
-	final BridgeClassLoader bridgeClassLoader = new BridgeClassLoader(
-			FrameworkConfigListener.class.getClassLoader());
+	BridgeClassLoader bridgeClassLoader;
 
 	@Override
 	public void contextDestroyed(ServletContextEvent event) {
@@ -73,7 +74,8 @@ public class FrameworkConfigListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
-
+		this.bridgeClassLoader = new BridgeClassLoader(event
+				.getServletContext().getClassLoader());
 		Class<EquinoxFactory> frameworkFactoryClass = null;
 		try {
 			// frameworkFactoryClass =
@@ -100,7 +102,6 @@ public class FrameworkConfigListener implements ServletContextListener {
 
 		Map<String, String> configuration;
 		try {
-			// 杞藉叆Framework鍚姩閰嶇疆
 			configuration = loadFrameworkConfig(event.getServletContext());
 			for (Object key : configuration.keySet()) {
 				logger.info("Load Framework configuration:  \t " + key
@@ -131,8 +132,19 @@ public class FrameworkConfigListener implements ServletContextListener {
 			throw new OSGiStartException(" Init OSGi Framework error ", e);
 		}
 
-		// Class1 clazz = new Class1();
-		// clazz.output();
+		Class<?> clazz;
+		try {
+			clazz = this.bridgeClassLoader.loadClass("testplugin1.Class1");
+			Class1 c = (Class1) clazz.newInstance();
+			c.output();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	private void initClassLoader(Framework framework) {

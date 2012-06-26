@@ -1,0 +1,5 @@
+SmtpHost=smtp.qq.com
+SmtpName=name
+SmtpPwd=password
+SitePath=http://lcoalhost/Demo1/
+filepath=/files
