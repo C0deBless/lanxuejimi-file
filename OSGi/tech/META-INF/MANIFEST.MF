@@ -460,3 +460,4 @@ Export-Package: Legal,
  template.simple,
  template.xhtml,
  test.ssl
+Require-Bundle: javax.servlet;bundle-version="2.5.0"
