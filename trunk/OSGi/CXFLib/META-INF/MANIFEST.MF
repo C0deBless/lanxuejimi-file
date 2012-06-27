@@ -443,4 +443,3 @@ Export-Package: com.ibm.wsdl,
  org.eclipse.jetty.util.security,
  org.eclipse.jetty.util.statistic,
  org.eclipse.jetty.util.thread
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
