@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.util.Dictionary;
 import java.util.HashMap;
@@ -135,13 +136,24 @@ public class FrameworkConfigListener implements ServletContextListener {
 		Class<?> clazz;
 		try {
 			clazz = this.bridgeClassLoader.loadClass("testplugin1.Class1");
-			Class1 c = (Class1) clazz.newInstance();
-			c.output();
+			Class1 c1 = new Class1();
+			Object c = clazz.newInstance();
+			clazz.getMethod("output").invoke(c);
+			// Class1 c = (Class1) clazz.newInstance();
+			// c.output();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		}
 
