@@ -12,27 +12,7 @@ import java.util.jar.JarInputStream;
 
 import org.osgi.framework.Bundle;
 
-/**
- * @since 2006-11-27
- * @author wushugen
- * 
- *         Modified History:
- * 
- */
 public class PackageParser {
-
-	/**
-	 * @param args
-	 * @throws IOException
-	 */
-	public static void main(String[] args) throws IOException {
-		/*
-		 * List<Class<? extends Object>> cls = new
-		 * PackageParser().getClassInPackage("java.util"); for (Class<? extends
-		 * Object> s : cls) { System.out.println(s); }
-		 */
-
-	}
 
 	public List<String> getClassInPackage(String pkgName, Bundle bundle) {
 		List<String> ret = new ArrayList<String>();
@@ -68,9 +48,7 @@ public class PackageParser {
 						if (eName.startsWith(rPath) && !eName.endsWith("/")) {
 							String clsName = (eName.replace('/', '.')
 									.substring(0, eName.length() - 6));
-							// bundle.getBundleContext().getServiceReference(clsName).
 							ret.add(clsName);
-							// System.out.println("Inspect class : " + clsName);
 						}
 						jis.closeEntry();
 					}
@@ -83,11 +61,6 @@ public class PackageParser {
 
 		return ret;
 	}
-
-	// private String[] CLASS_PATH_PROP = { "java.class.path",
-	// "java.ext.dirs","sun.boot.class.path" };
-
-	// private List<File> CLASS_PATH_ARRAY = getClassPath();
 
 	private List<File> getClassPath(Bundle bundle) {
 
@@ -127,16 +100,6 @@ public class PackageParser {
 					"") + path;
 			ret.add(new File(fileName));
 		}
-		// ret.add(new
-		// File(bundleLocation.replace("initial@reference:file:","")+"bin/"));
-		/*
-		 * String delim = ":"; if
-		 * (System.getProperty("os.name").indexOf("Windows") != -1) delim = ";";
-		 * for (String pro : CLASS_PATH_PROP) { String[] pathes =
-		 * System.getProperty(pro).split(delim);
-		 * System.out.println("Current ClassPath:"+System.getProperty(pro)); for
-		 * (String path : pathes) ret.add(new File(path)); }
-		 */
 		return ret;
 	}
 }
