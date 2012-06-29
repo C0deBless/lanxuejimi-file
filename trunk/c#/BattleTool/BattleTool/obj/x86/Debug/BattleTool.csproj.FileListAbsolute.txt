@@ -1,0 +1,8 @@
+D:\lanxuejimi-file\c#\BattleTool\BattleTool\bin\Debug\BattleTool.exe
+D:\lanxuejimi-file\c#\BattleTool\BattleTool\bin\Debug\BattleTool.pdb
+D:\lanxuejimi-file\c#\BattleTool\BattleTool\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\lanxuejimi-file\c#\BattleTool\BattleTool\obj\x86\Debug\BattleTool.Properties.Resources.resources
+D:\lanxuejimi-file\c#\BattleTool\BattleTool\obj\x86\Debug\GenerateResource.read.1.tlog
+D:\lanxuejimi-file\c#\BattleTool\BattleTool\obj\x86\Debug\GenerateResource.write.1.tlog
+D:\lanxuejimi-file\c#\BattleTool\BattleTool\obj\x86\Debug\BattleTool.exe
+D:\lanxuejimi-file\c#\BattleTool\BattleTool\obj\x86\Debug\BattleTool.pdb
