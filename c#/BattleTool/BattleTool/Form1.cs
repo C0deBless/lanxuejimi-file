@@ -19,7 +19,7 @@ namespace BattleTool
 
         const int CLOSE_SIZE = 15;
         Bitmap closeHover = new Bitmap("close_hover.png");
-        Bitmap closeLeave = new Bitmap("close_leave.png"); 
+        Bitmap closeLeave = new Bitmap("close_leave.png");
 
         private void maintab_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -95,7 +95,55 @@ namespace BattleTool
 
         private void maintab_MouseMove(object sender, MouseEventArgs e)
         {
+            int x = e.X, y = e.Y;
 
+            //计算关闭区域      
+            Rectangle myTabRect = this.maintab.GetTabRect(this.maintab.SelectedIndex);
+            
+            myTabRect.Offset(myTabRect.Width - (CLOSE_SIZE + 3), 2);
+            myTabRect.Width = CLOSE_SIZE;
+            myTabRect.Height = CLOSE_SIZE;
+
+            //如果鼠标在区域内就关闭选项卡      
+            bool isClose = x > myTabRect.X && x < myTabRect.Right
+             && y > myTabRect.Y && y < myTabRect.Bottom;
+
+            if (isClose == true)
+            {
+                Bitmap bt = new Bitmap(closeLeave);
+                Point p5 = new Point(myTabRect.X + 60, 4);
+                //this.maintabGraphics.DrawImage(bt, p5);
+            }
+            else
+            {
+                Bitmap bt = new Bitmap(closeLeave);
+                Point p5 = new Point(myTabRect.X + 60, 4);
+                //this.maintabGraphics.DrawImage(bt, p5);
+            }
+        }
+
+        private void maintab_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                int x = e.X, y = e.Y;
+
+                //计算关闭区域      
+                Rectangle myTabRect = this.maintab.GetTabRect(this.maintab.SelectedIndex);
+
+                myTabRect.Offset(myTabRect.Width - (CLOSE_SIZE + 3), 2);
+                myTabRect.Width = CLOSE_SIZE;
+                myTabRect.Height = CLOSE_SIZE;
+
+                //如果鼠标在区域内就关闭选项卡      
+                bool isClose = x > myTabRect.X && x < myTabRect.Right
+                 && y > myTabRect.Y && y < myTabRect.Bottom;
+
+                if (isClose == true)
+                {
+                    this.maintab.TabPages.Remove(this.maintab.SelectedTab);
+                }
+            }   
         }
 
 
