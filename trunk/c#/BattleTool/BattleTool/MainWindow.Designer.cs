@@ -1,6 +1,6 @@
 ﻿namespace BattleTool
 {
-    partial class Form1
+    partial class MainWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -34,32 +34,32 @@
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_ViewBattlefield = new System.Windows.Forms.ToolStripMenuItem();
             this.triggerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.maintab = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.button1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.newPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
-            this.maintab.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.viewToolStripMenuItem,
             this.triggerToolStripMenuItem,
-            this.toolsToolStripMenuItem});
+            this.toolsToolStripMenuItem,
+            this.newPageToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1009, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1512, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -86,58 +86,45 @@
             // 
             // viewToolStripMenuItem
             // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TSMI_ViewBattlefield});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
             this.viewToolStripMenuItem.Text = "View";
+            // 
+            // TSMI_ViewBattlefield
+            // 
+            this.TSMI_ViewBattlefield.Name = "TSMI_ViewBattlefield";
+            this.TSMI_ViewBattlefield.Size = new System.Drawing.Size(122, 22);
+            this.TSMI_ViewBattlefield.Text = "전장보기";
+            this.TSMI_ViewBattlefield.Click += new System.EventHandler(this.TSMI_ViewBattlefield_Click);
             // 
             // triggerToolStripMenuItem
             // 
             this.triggerToolStripMenuItem.Name = "triggerToolStripMenuItem";
-            this.triggerToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.triggerToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.triggerToolStripMenuItem.Text = "Trigger";
             // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // maintab
             // 
             this.maintab.AllowDrop = true;
-            this.maintab.Controls.Add(this.tabPage1);
-            this.maintab.Controls.Add(this.tabPage2);
             this.maintab.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.maintab.ItemSize = new System.Drawing.Size(60, 18);
             this.maintab.Location = new System.Drawing.Point(0, 27);
             this.maintab.Name = "maintab";
             this.maintab.SelectedIndex = 0;
-            this.maintab.Size = new System.Drawing.Size(1009, 742);
+            this.maintab.Size = new System.Drawing.Size(1512, 882);
             this.maintab.TabIndex = 1;
             this.maintab.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.maintab_DrawItem);
+            this.maintab.SelectedIndexChanged += new System.EventHandler(this.maintab_SelectedIndexChanged);
             this.maintab.MouseDown += new System.Windows.Forms.MouseEventHandler(this.maintab_MouseDown);
             this.maintab.MouseMove += new System.Windows.Forms.MouseEventHandler(this.maintab_MouseMove);
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1001, 716);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1001, 716);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // contextMenuStrip1
             // 
@@ -146,40 +133,57 @@
             this.button2ToolStripMenuItem,
             this.button3ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(117, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(118, 70);
             // 
             // button1ToolStripMenuItem
             // 
             this.button1ToolStripMenuItem.Name = "button1ToolStripMenuItem";
-            this.button1ToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.button1ToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.button1ToolStripMenuItem.Text = "button1";
             // 
             // button2ToolStripMenuItem
             // 
             this.button2ToolStripMenuItem.Name = "button2ToolStripMenuItem";
-            this.button2ToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.button2ToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.button2ToolStripMenuItem.Text = "button2";
             // 
             // button3ToolStripMenuItem
             // 
             this.button3ToolStripMenuItem.Name = "button3ToolStripMenuItem";
-            this.button3ToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.button3ToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.button3ToolStripMenuItem.Text = "button3";
             // 
-            // Form1
+            // statusStrip1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 912);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1512, 22);
+            this.statusStrip1.TabIndex = 2;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // newPageToolStripMenuItem
+            // 
+            this.newPageToolStripMenuItem.Name = "newPageToolStripMenuItem";
+            this.newPageToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
+            this.newPageToolStripMenuItem.Text = "NewPage";
+            this.newPageToolStripMenuItem.Click += new System.EventHandler(this.newPageToolStripMenuItem_Click);
+            // 
+            // MainWindow
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(1009, 768);
+            this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.ClientSize = new System.Drawing.Size(1512, 934);
             this.Controls.Add(this.maintab);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.statusStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "MainWindow";
+            this.Text = "전장툴";
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainWindow_KeyUp);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.maintab.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -196,12 +200,13 @@
         private System.Windows.Forms.ToolStripMenuItem triggerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.TabControl maintab;
-        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem button1ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem button2ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem button3ToolStripMenuItem;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_ViewBattlefield;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripMenuItem newPageToolStripMenuItem;
     }
 }
 

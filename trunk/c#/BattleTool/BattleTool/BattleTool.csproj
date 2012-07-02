@@ -46,16 +46,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="BattleFieldAddView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="BattleFieldAddView.Designer.cs">
+      <DependentUpon>BattleFieldAddView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BattleFieldView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BattleFieldView.Designer.cs">
+      <DependentUpon>BattleFieldView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataManager.cs" />
+    <Compile Include="MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="SceneFactory.cs" />
+    <Compile Include="SceneObject.cs" />
+    <Compile Include="ScenePage.cs" />
+    <Compile Include="XmlHelper.cs" />
+    <EmbeddedResource Include="BattleFieldAddView.resx">
+      <DependentUpon>BattleFieldAddView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BattleFieldView.resx">
+      <DependentUpon>BattleFieldView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -77,12 +100,22 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="close_hover.png">
+    <Content Include="res\close_hover.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="close_leave.png">
+    <Content Include="res\close_leave.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxShockwaveFlashObjects">
+      <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
