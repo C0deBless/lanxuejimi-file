@@ -1,0 +1,282 @@
+/* Basic  ---------------------------------------- */
+
+.clear { clear: both; }
+
+
+
+#wrapper {
+	text-align: left;
+}
+
+/* Logo  ---------------------------------------- */
+
+.header {
+	margin: 15px 0 10px 5px;
+	width: 225px;
+	height: 28px;
+	background: url(../img/transdmin-light.gif) no-repeat left top;
+}
+
+.header a {
+	display: block;
+	width: 225px;
+	height: 28px;
+}
+
+.header span { display: none; }
+/* header --------------------------------------------------- */
+#header{
+	background-color:#EEE;
+	padding:6px;
+	height:auto;
+	margin: 8px 7px 20px 7px;
+}
+/* Main Navigation ---------------------------------------- */
+
+#mainNav {
+	height: 37px;
+	padding: 0px;
+	background-color:#F6F6F6;
+	border: 1px solid #ddd;	/* We used a background image making the thick border and the thin one to keep the html structure simple */
+}
+
+#mainNav li {
+	float: left;
+	height: 37px;
+	border-right: 1px solid #ddd;
+}
+
+#mainNav li a {
+	display: block;
+	float: left;
+	height: 37px;
+	font-weight: bold;
+	line-height: 37px;
+	text-decoration: none;
+	color: #646464;
+	padding: 0 20px;
+}
+
+#mainNav li.logout {
+	float: right;
+	border-left: 1px solid #ddd;
+	border-right: none;
+}
+
+#mainNav li a:hover { background: #fdfcf6; }
+
+#mainNav li a.active, #mainNav li a.active {
+	color: #454545;
+}
+
+/* Container ---------------------------------------- */
+
+#containerHolder {
+	background: #eee;
+	padding: 5px;
+	margin:0px 7px 0px 7px;
+}
+
+
+#container {
+	background: #fff ;
+	border: 1px solid #ddd;
+	height:auto;
+}
+/* Left ---------------------------------------- */
+#left{
+	width:179px;
+	height:600px;
+	top:130px;
+	left:13px;
+	position:absolute;
+}
+/* right ---------------------------------------- */
+#right{
+	width:300px;
+	height:400px;
+	right:13px;
+	border:1px solid #DDD;
+	top:130px;
+	position:absolute;
+}
+/* Breadcrumb --------------
+
+h2 {
+	width: 718px;
+	float: right;
+	color: #646464;
+	font-size: 16px;
+	line-height: 16px;
+	font-weight: bold;
+	margin: 20px 0 0 0;
+	padding: 0 0 10px 0;
+	border-bottom: 1px solid #ddd;
+}
+
+h2 a {
+	color: #646464;
+	text-decoration: none;
+}
+
+h2 a.active { color: #c66653; }
+
+h2 a:hover { text-decoration: underline; }
+-------------------------- */
+/* Content ---------------------------------------- */
+
+#main {
+	min-height:570px;
+	min-width:850px;
+	border:1px solid #DDD;
+	margin-top:30px;
+	margin-left:210px;
+	margin-right:50px;
+}
+
+
+
+.button-submit {
+	font: 11px Arial, Helvetica, sans-serif;
+	color: #646464;
+	width: 94px;
+	height: 29px;
+	cursor: pointer;
+	border: none;
+	background: url(../img/button-submit.gif) no-repeat left top;
+}
+
+/* Footer ---------------------------------------- */
+
+#footer {
+	margin: 7px 0 0px 7px;
+	font-size: 11px;
+	line-height: 11px;
+	color: #9B9B9B;
+	padding: 0 0 0 5px;
+}
+
+#footer a { color: #9B9B9B; }
+
+#footer a:hover { text-decoration: none; }
+/* signin ---------------------------------------- */
+#signin{
+	line-height:38px;
+	padding:0 10px;
+}
+/* progress ---------------------------------------- */
+.progress{
+	padding-left:15px;
+	height:0px;
+	min-width:200px;
+	position:fixed;
+	background-color:#f7922a;
+	color:#FFF;
+	line-height:30px;
+	font-size:13px;
+	left:800px;
+	top:0px;
+}
+/* topnav ---------------------------------------- */
+#topnav{
+	height:30px;
+	width:350px;
+	margin-right:50px;
+	float:right;
+}
+#topnav li{
+	text-align:center;
+	line-height:30px;
+	width:50px;
+	float:left;
+}
+/* Sidebar Menu---------------------------------------- */
+#sidebar {
+	width: 179px;
+	border-right:1px solid #DDD;
+}
+
+#sidebar .sideNav { width: 179px; }
+
+#sidebar .sideNav li { border-bottom: 1px solid #ddd; width: 179px; }
+
+#sidebar .sideNav li a {
+	display: block;
+	color: #646464;
+	background: #f6f6f6;
+	text-decoration: none;
+	height: 29px;
+	line-height: 29px;
+	padding: 0px;
+	padding-left:19px;
+}
+
+#sidebar .sideNav li a:hover { background: #f0f7fa;color: #c66653; }
+/* Essay category---------------------------------------- */
+.site_category{
+	padding:10px;
+}
+/* Essay List Style---------------------------------------- */
+.essaylist_title{
+	color:#5494AF;
+	font-size:14px;
+	heigth:40px;
+	margin-left:5px;
+	line-height:30px;
+}
+.essaylist_content{
+	padding:5px;
+	font-size:12px;
+	line-height:20px;
+}
+.essaylist_summary{
+	
+}
+.essaylist_summary span{
+	margin-left:10px;
+	margin-right:20px;
+}
+/* Essay Style---------------------------------------- */
+.essay{
+	margin:15px;
+}
+.essay_title{
+	margin:10px 0px 10px 0px;
+	height:20px;
+	padding:5px 0px 5px 0px;
+	font-size:14px;
+	border-bottom:1px solid #CCC; 
+}
+.essay_text{
+	border-bottom:1px solid #CCC;
+}
+.essay_summary{
+	
+}
+.essay_summary a{
+	color:#C66653;
+}
+.essay_reply{
+	
+}
+.essay_reply_item{
+	width:700px;
+	margin-top:10px;
+}
+.replyitem_avatar{
+	width:40px;
+	height:40px;
+}
+.replyitem_text{
+	width:600px;
+	margin-left:40px;
+	margin-top:-40px;
+	min-height:40px;
+	height:auto;
+}
+
+
+
+
+
+
