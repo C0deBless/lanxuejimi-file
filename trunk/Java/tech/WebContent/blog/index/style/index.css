@@ -1,0 +1,145 @@
+/* CSS Document */
+body
+{
+	background-color:#EEE;
+	margin:0px;
+	text-align:center;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+a
+{
+	color:#000;
+	text-decoration:none;
+}
+ 
+a:hover
+{
+	text-decoration:underline;
+}
+ 
+.main_top
+{
+	background-color:#333;
+	height:30px;
+	width:auto;
+	margin-left:0px;
+	margin-right:0px;
+}
+.main_container
+{
+	width:1000px;
+	min-height:600px;
+	background-color:#FFF;
+	margin-top:20px;
+	margin-left:auto;
+	margin-right:auto
+}
+.c_1
+{
+	width:auto;
+	height:100px;
+	
+}
+
+.c_title
+{
+	height:auto;
+	font-size:30px;
+	font-family:'Helvetica Neue','Arial';
+	font-weight:bold;
+	float:left;
+	margin-left:10px;
+	margin-top:30px;
+}
+.c_titile_m
+{
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-size:12px;
+	float:right;
+	margin-top:50px;
+	margin-right:10px;
+	font-style: italic;
+}
+.c_2
+{
+	width:940px;
+	height:40px;
+	background-image:url(../res/berries.jpg);
+	background-repeat:no-repeat;
+	background-color:#222;
+	margin-left:auto;
+	margin-right:auto;
+	position:relative;
+	padding-top:200px;
+}
+.c_h
+{
+	color:#FFF;
+	width:auto;
+	height:40px;
+	position:relative;
+}
+
+.c_list
+{
+	width:940px;
+	height:auto;
+	margin-top:40px;
+	margin-left:auto;
+	margin-right:auto;	
+	position:relative;
+	min-height:500px;
+}
+
+.c_h span
+{
+	font-size:10px;
+	line-height:40px;
+	vertical-align:bottom;
+	float:left;
+	position:relative;
+	margin-left:15px;
+}
+.c_h span a
+{
+	text-decoration:none;
+	color:#FFF;
+	display:block;
+}
+
+.essay
+{
+	text-align:left;
+	widht:500px;
+	border-bottom:1px solid #333;
+	padding:10px;
+}
+
+.essay .essay_title
+{
+	height:40px;
+}
+
+.essay .essay_title a
+{
+	font-size:20px;
+	font-weight:bold;
+}
+
+.essay .essay_text
+{
+	padding: 10px 0px 20px 0px;	
+	line-height:25px;
+}
+
+.essay .essay_bottom
+{
+	color:#999;
+}
+
+.essay .essay_title_time
+{
+	color:#999;
+	font-size:7px;
+}
