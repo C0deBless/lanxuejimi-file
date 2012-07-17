@@ -7,12 +7,13 @@ import com.trnnn.osgi.lancher.EquinoxLancher;
 
 public class FrameworkConfigListener implements ServletContextListener {
 
-	protected EquinoxLancher equinox;
+	public static EquinoxLancher equinox;
 
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
 		equinox = new EquinoxLancher(event.getServletContext());
 		equinox.start();
+
 	}
 
 	@Override

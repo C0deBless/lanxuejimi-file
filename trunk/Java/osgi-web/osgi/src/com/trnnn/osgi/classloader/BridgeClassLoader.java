@@ -2,6 +2,8 @@ package com.trnnn.osgi.classloader;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,11 +25,35 @@ public class BridgeClassLoader extends ClassLoader {
 	protected final Map<Bundle, Set<Class<?>>> bundleClassCache = new HashMap<>();
 	PackageParser packageParser = new PackageParser();
 	final ClassLoader primaryClassLoader;
+	Method resolveMethod;
+	Method defineMethod;
 
 	public BridgeClassLoader(ClassLoader primary) {
 		super(primary);
 		primaryClassLoader = primary;
+		initMethods();
 	}
+
+	private void initMethods() {
+//		Class<?> clazz = this.primaryClassLoader.getClass();
+		try {
+			resolveMethod = ClassLoader.class.getDeclaredMethod("resolveClass",
+					Class.class);
+			resolveMethod.setAccessible(true);
+			defineMethod = ClassLoader.class.getDeclaredMethod("defineClass",
+					String.class, byte[].class, int.class, int.class);
+			defineMethod.setAccessible(true);
+		} catch (NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// public static void main(String[] args){
+	// Method[] ms=ClassLoader.class.getMethods();
+	// for(Method method : ms){
+	// System.out.println(method);
+	// }
+	// }
 
 	@Override
 	public Class<?> loadClass(String name) throws ClassNotFoundException {
@@ -102,11 +128,23 @@ public class BridgeClassLoader extends ClassLoader {
 				byte[] buffer = new byte[is.available()];
 				is.read(buffer);
 				is.close();
-				Class<?> c = this.defineClass(className, buffer, 0,
+				// Class<?> c = this.defineClass(className, buffer, 0,
+				// buffer.length);
+				Class<?> c = (Class<?>) this.defineMethod.invoke(
+						this.primaryClassLoader, className, buffer, 0,
 						buffer.length);
-				this.resolveClass(c);
+//				this.resolveClass(c);
+				this.resolveMethod.invoke(this.primaryClassLoader, c);
+				this.primaryClassLoader.loadClass(className);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
 

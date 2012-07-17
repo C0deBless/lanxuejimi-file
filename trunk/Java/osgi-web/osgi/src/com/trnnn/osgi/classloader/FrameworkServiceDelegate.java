@@ -4,6 +4,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+
+import testplugin1.CalculateService;
+
+import com.trnnn.osgi.listener.FrameworkConfigListener;
+
 public class FrameworkServiceDelegate {
 
 	Map<ServiceCacheKey, ServiceDelegate> classCache = Collections
@@ -16,6 +23,18 @@ public class FrameworkServiceDelegate {
 
 	public Object invoke(Object obj, String methodName, Object... objects) {
 
+		return null;
+	}
+	
+	public Object invokeService(Class<?> clazz){
+		BundleContext context=FrameworkConfigListener.equinox.getBundleContext();
+		ServiceReference<?> sr=context.getServiceReference(clazz);
+		if(sr!=null)
+		{
+			CalculateService cs=(CalculateService)context.getService(sr);
+			int c=cs.add(2, 3);
+			System.out.println("----------"+c);
+		}
 		return null;
 	}
 }
