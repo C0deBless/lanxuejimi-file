@@ -14,6 +14,7 @@ public class Activator implements BundleActivator {
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
 		System.out.println("TestPlugin started...");
+		Activator.context.registerService(CalculateService.class, new CalculateService(), null);
 	}
 
 	public void stop(BundleContext bundleContext) throws Exception {

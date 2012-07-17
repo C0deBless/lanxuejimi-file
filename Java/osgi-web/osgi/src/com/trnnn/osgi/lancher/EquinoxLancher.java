@@ -25,8 +25,11 @@ import org.osgi.framework.launch.Framework;
 import org.osgi.framework.launch.FrameworkFactory;
 import org.slf4j.Logger;
 
+import testplugin1.CalculateService;
+
 import com.trnnn.osgi.admin.BundleFactory;
 import com.trnnn.osgi.classloader.BridgeClassLoader;
+import com.trnnn.osgi.classloader.FrameworkServiceDelegate;
 import com.trnnn.osgi.listener.FrameworkConfigListener;
 import com.trnnn.osgi.listener.OSGiStartException;
 import com.trnnn.osgi.listener.OSGiStopException;
@@ -129,6 +132,10 @@ public class EquinoxLancher {
 
 			succeed = true;
 			BundleFactory.setBundleContext(framework.getBundleContext());
+			
+			FrameworkServiceDelegate fsd=new FrameworkServiceDelegate();
+			fsd.invokeService(CalculateService.class);
+
 		} catch (BundleException e) {
 			throw new OSGiStartException(" Start OSGi Framework error! ", e);
 		} catch (IOException e) {
@@ -285,6 +292,11 @@ public class EquinoxLancher {
 			values.put(key.toString(), value);
 		}
 		return values;
+	}
+
+	public BundleContext getBundleContext() {
+		
+		return this.framework.getBundleContext();
 	}
 
 }

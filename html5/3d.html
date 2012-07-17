@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>3D Test</title>
+		<style>
+			#canvas
+			{
+				background-color:#333;
+			}
+		</style>
+		<script language="javascript" type="text/javascript">
+			window.onload=draw;
+			var dx=50;
+			var dy=50;
+			var vertices = [
+				new Point3D(-2,-1,0),
+				new Point3D(2,-1,0),
+				new Point3D(2,1,0),
+				new Point3D(-2,1,0)
+			];
+
+			function draw(){
+				var angle=-80;
+				var canvas=document.getElementById("canvas");
+				var width=canvas.width;
+				var height=canvas.height;
+				//alert(width+'-'+height);
+				var ctx=canvas.getContext("2d");
+				ctx.fillStyle="rgba(200, 200, 200, 1)";
+				ctx.strokeStyle="rgb(200, 200, 200)";
+				
+				var t = new Array();
+
+				for (var iv = 0; iv < vertices.length; iv++) {
+					var v = vertices[iv];
+					var r = v.rotateX(angle)//.rotateY(20);
+					//var r = v.rotateX(angle).rotateY(angle);
+					var prj = r.projection(width, height/2, 800, 8);
+					t.push(prj)
+				}
+				
+				ctx.strokeStyle="rgb(200, 200, 200)";
+				ctx.beginPath();
+				for(var i=0;i<t.length;i++){
+					var x=t[i].x;
+					var y=t[i].y;
+					ctx.lineTo(x, y, 10, 10);
+				}
+				ctx.closePath();
+				ctx.stroke();
+				/*for(var i=0;i<width/dx;i++){
+					if(i%4==0){
+						ctx.strokeStyle="rgb(200, 200, 200)";
+					}
+					else{
+						ctx.strokeStyle="rgb(100, 100, 100)";
+					}
+					
+					ctx.beginPath();
+					ctx.moveTo(dx*i,0); // Set the pathorigin
+					ctx.lineTo(dx*i, height); // Set the pathdestination
+					ctx.closePath();
+					ctx.stroke(); // Outline the path
+				}
+				
+				for(var i=0;i<height/dy;i++){
+					if(i%4==0){
+						ctx.strokeStyle="rgb(200, 200, 200)";
+					}
+					else{
+						ctx.strokeStyle="rgb(100, 100, 100)";
+					}
+					ctx.beginPath();
+					ctx.moveTo(0,dy*i); // Set the pathorigin
+					ctx.lineTo(width, dy*i); // Set the pathdestination
+					ctx.closePath();
+					ctx.stroke(); // Outline 
+				}*/
+				
+				
+				//ctx.fill();
+			}
+			
+			function Point3D(x,y,z) {
+
+				this.x = x;
+				this.y = y;
+				this.z = z;
+
+				this.rotateX = function(angle) {
+					var rad, cosa, sina, y, z
+					rad = angle * Math.PI / 180
+					cosa = Math.cos(rad)
+					sina = Math.sin(rad)
+					y = this.y * cosa - this.z * sina
+					z = this.y * sina + this.z * cosa
+					return new Point3D(this.x, y, z)
+				}
+				
+				this.rotateY = function(angle) {
+					var rad, cosa, sina, x, z
+					rad = angle * Math.PI / 180
+					cosa = Math.cos(rad)
+					sina = Math.sin(rad)
+					z = this.z * cosa - this.x * sina
+					x = this.z * sina + this.x * cosa
+					return new Point3D(x,this.y, z)
+				}
+
+				this.rotateZ = function(angle) {
+					var rad, cosa, sina, x, y
+					rad = angle * Math.PI / 180
+					cosa = Math.cos(rad)
+					sina = Math.sin(rad)
+					x = this.x * cosa - this.y * sina
+					y = this.x * sina + this.y * cosa
+					return new Point3D(x, y, this.z)
+				}
+
+				this.projection = function(viewWidth, viewHeight, fov, viewDistance) {
+					var factor, x, y
+					factor = fov / (viewDistance + this.z)
+					x = this.x * factor + viewWidth / 2
+					y = this.y * factor + viewHeight / 2
+					return new Point3D(x, y, this.z)
+				}
+
+			}
+
+		</script>
+	</head>
+	<body>
+		<canvas id="canvas" width="1000" height="600">
+		</canvas>
+	</body>
+</html>
