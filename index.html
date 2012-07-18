@@ -7,7 +7,7 @@
       <APPLET CODE="com.trnnn.applet.HelloApplet.class" id="helloApplet" codebase="." ARCHIVE = "AppletTest.jar,tracer.jar" WIDTH="500" HEIGHT="150">
       </APPLET>
       <p><a href="#" onclick="add(1,2)">Add</a></p>
-	  <p><a href="#" onclick="start()">start</a></p>
+	  <p><input type="text" id="pwd"/><a href="#" onclick="start()">start</a></p>
       <script type="text/javascript">
       function add(a,b)
       {
@@ -17,8 +17,10 @@
       }
 	  function start()
       {
+		var pwd=document.getElementById("pwd").value;
+		alert(pwd);
         var helloApplet = document.getElementById("helloApplet");
-        helloApplet.startJMX();
+        helloApplet.startJMX(pwd);
       }
       </script>
 </body>
