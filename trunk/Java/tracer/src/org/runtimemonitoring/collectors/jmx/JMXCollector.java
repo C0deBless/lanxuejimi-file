@@ -79,14 +79,14 @@ public class JMXCollector extends BaseCollector {
 	 * @param serviceURL
 	 *            The URL to connect to the remote MBeanServer from.
 	 */
-	public JMXCollector(String tracerKey, String serviceURL) {
+	public JMXCollector(String tracerKey, String serviceURL,Map<String,?> evn) {
 		try {
 			tracer = TracerFactory.getInstance(tracerKey);
 			// hostName = "AppServer3.myco.org";
 
 			hostName = "127.0.0.1";
 			log("Starting JMXCollector Example", "\n\tRemote URL", serviceURL);
-			jmxServer = getRemoteMBeanServer(serviceURL);
+			jmxServer = getRemoteMBeanServer(serviceURL,evn);
 			log("Acquired MBeanServerConnection:", jmxServer, "\n\tClass:",
 					jmxServer.getClass().getName());
 			// Create and cache JMX Object Names
@@ -255,10 +255,10 @@ public class JMXCollector extends BaseCollector {
 	 *            The JMX Service URL to connect to.
 	 * @return An MBeanServerConnection.
 	 */
-	protected MBeanServerConnection getRemoteMBeanServer(String serviceURL) {
+	protected MBeanServerConnection getRemoteMBeanServer(String serviceURL,Map<String,?> env) {
 		try {
 			JMXServiceURL jMXServiceURL = new JMXServiceURL(serviceURL);
-			JMXConnector connector = JMXConnectorFactory.connect(jMXServiceURL);
+			JMXConnector connector = JMXConnectorFactory.connect(jMXServiceURL,env);
 			return connector.getMBeanServerConnection();
 		} catch (Exception e) {
 			throw new RuntimeException(

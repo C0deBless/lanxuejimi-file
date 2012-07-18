@@ -26,7 +26,7 @@ public class DataSourceCollector extends JMXCollector {
 			tracer = TracerFactory.getInstance(tracerKey);
 			hostName = "AppServer3.myco.org";
 			log("Starting DataSourceCollector Example", "\n\tRemote URL", serviceURL);
-			jmxServer = getRemoteMBeanServer(serviceURL);
+			jmxServer = getRemoteMBeanServer(serviceURL,null);
 			log("Acquired MBeanServerConnection:", jmxServer, "\n\tClass:", jmxServer.getClass().getName());
 			objectNameCache.put("DS_OBJ_NAME", new ObjectName("jboss.jca:service=ManagedConnectionPool,name=AA4HDataSource"));
 			scheduler.registerCollectionSchedule(this, 10000, 0);
