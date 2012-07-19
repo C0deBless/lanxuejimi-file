@@ -9,23 +9,50 @@
 			}
 		</style>
 		<script language="javascript" type="text/javascript">
-			window.onload=draw;
+			window.onload=init;
 			var dx=50;
 			var dy=50;
+			var angleX=-70;
+			var angleY=0;
+			var angleZ=0;
+			var isDragging=false;
 			var vertices = [
 				new Point3D(-2,-1,0),
 				new Point3D(2,-1,0),
 				new Point3D(2,1,0),
 				new Point3D(-2,1,0)
 			];
+			
+			function init(){
+				var canvas=document.getElementById("canvas");
+				canvas.onmousedown=dragDown;
+				canvas.onmousemove=dragMove;
+				canvas.onmouseup=dragUp;
+				draw();
+			}
+			
+			function dragDown(){
+				isDragging=true;
+			}
+			
+			function dragUp(){
+				isDragging=false;
+			}
+			
+			function dragMove(){
+				if(isDragging){
+					angleY-=3;
+					draw();
+				}
+			}
 
 			function draw(){
-				var angle=-80;
 				var canvas=document.getElementById("canvas");
 				var width=canvas.width;
 				var height=canvas.height;
 				//alert(width+'-'+height);
 				var ctx=canvas.getContext("2d");
+				ctx.clearRect(0,0,width,height);
 				ctx.fillStyle="rgba(200, 200, 200, 1)";
 				ctx.strokeStyle="rgb(200, 200, 200)";
 				
@@ -33,7 +60,7 @@
 
 				for (var iv = 0; iv < vertices.length; iv++) {
 					var v = vertices[iv];
-					var r = v.rotateX(angle)//.rotateY(20);
+					var r = v.rotateX(angleX).rotateY(angleY);//.rotateY(20);
 					//var r = v.rotateX(angle).rotateY(angle);
 					var prj = r.projection(width, height/2, 800, 8);
 					t.push(prj)
