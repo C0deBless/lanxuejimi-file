@@ -1,0 +1,2 @@
+serviceClass: com.tntblocker.client.GreetingService
+path: D1A233C3A06D74063E7BBD13654754CC.gwt.rpc

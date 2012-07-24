@@ -1,0 +1,3 @@
+# Module tntblocker
+# RPC service class, partial path of RPC policy file
+com.tntblocker.client.GreetingService, D1A233C3A06D74063E7BBD13654754CC.gwt.rpc
