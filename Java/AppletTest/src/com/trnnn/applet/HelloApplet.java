@@ -2,11 +2,17 @@ package com.trnnn.applet;
 
 import java.applet.Applet;
 import java.awt.Graphics;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.management.InstanceNotFoundException;
+import javax.management.MBeanException;
 import javax.management.MBeanServerConnection;
+import javax.management.MalformedObjectNameException;
+import javax.management.ObjectName;
+import javax.management.ReflectionException;
 import javax.management.remote.JMXConnector;
 
 import org.runtimemonitoring.collectors.jmx.JMXCollector;
@@ -15,6 +21,7 @@ import org.runtimemonitoring.tracing.TracerFactory;
 public class HelloApplet extends Applet {
 
 	private static final long serialVersionUID = 1224360515438731409L;
+	MBeanServerConnection connection;
 	int connectorServerPort = 1090;
 
 	public void paint(Graphics g) {
@@ -27,21 +34,34 @@ public class HelloApplet extends Applet {
 		return a + b;
 	}
 
+	public String invoke() {
+		if (this.connection == null) {
+			return null;
+		}
+		try {
+			Object obj = connection.invoke(new ObjectName(
+					"java.lang:type=CommandMBean"), "gamedata", new String[] {
+					"view", "mission" }, null);
+			return obj.toString();
+		} catch (InstanceNotFoundException | MalformedObjectNameException
+				| MBeanException | ReflectionException | IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	@Override
 	public void stop() {
-		// TODO Auto-generated method stub
 		super.stop();
 		System.exit(0);
 	}
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
 		super.destroy();
 		System.exit(0);
 	}
 
-	@SuppressWarnings("unused")
 	public void startJMX(String pwd) {
 		String jmxServerName = "jmxconnector";
 		String serviceUrl = "service:jmx:rmi:///jndi/rmi://127.0.0.1:1090/"
@@ -56,6 +76,7 @@ public class HelloApplet extends Applet {
 		Map<String, Object> env = new HashMap<>();
 		env.put(JMXConnector.CREDENTIALS, pwd);
 		JMXCollector collector = new JMXCollector("JMXTracer", serviceUrl, env);
-		MBeanServerConnection connection = collector.getMBeanServerConnection();
+		connection = collector.getMBeanServerConnection();
+
 	}
 }
