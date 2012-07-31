@@ -1,0 +1,25 @@
+<script>
+	function viewMission() {
+		var helloApplet = document.getElementById("helloApplet");
+		var str = helloApplet.viewMission();
+		$("#gd_result").html(str);
+		var obj = eval("(" + str + ")");
+		var i = 0;
+		for (prop in obj) {
+			if(i==1){
+				alert("prop: "+prop+", value: "+obj[prop]);
+			}
+			i++;
+		}
+		alert(i);
+	}
+</script>
+<div id="gd_header">
+	<select>
+		<option>Mission</option>
+		<option>Event</option>
+		<option>NPC</option>
+		<option>MapData</option>
+	</select> <input type="button" value="Request" onclick="viewMission();" />
+</div>
+<div id="gd_result"></div>

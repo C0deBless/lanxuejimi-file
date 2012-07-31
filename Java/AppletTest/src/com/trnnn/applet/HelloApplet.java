@@ -25,8 +25,8 @@ public class HelloApplet extends Applet {
 	int connectorServerPort = 1090;
 
 	public void paint(Graphics g) {
-		g.drawRect(0, 0, 499, 149);
-		g.drawString("Hello World", 5, 70);
+		// g.drawRect(0, 0, 499, 149);
+		// g.drawString("Hello World", 5, 70);
 	}
 
 	public int add(int a, int b) {
@@ -34,7 +34,7 @@ public class HelloApplet extends Applet {
 		return a + b;
 	}
 
-	public String invoke() {
+	public String viewMission() {
 		if (this.connection == null) {
 			return null;
 		}
