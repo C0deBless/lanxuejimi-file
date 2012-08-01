@@ -64,7 +64,7 @@ public class HelloApplet extends Applet {
 
 	public void startJMX(String pwd) {
 		String jmxServerName = "jmxconnector";
-		String serviceUrl = "service:jmx:rmi:///jndi/rmi://www.easymode.com:1090/"
+		String serviceUrl = "service:jmx:rmi:///jndi/rmi://127.0.0.1:1090/"
 				+ jmxServerName;
 		// LocateRegistry.createRegistry(1090);
 		Properties p = new Properties();
