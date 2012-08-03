@@ -1,19 +1,15 @@
 package com.example.androiddemo1;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
-import android.graphics.drawable.Drawable;
+import android.graphics.RectF;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,8 +18,6 @@ public class TestView extends View {
 
 	float pX = 20;
 	float pY = 20;
-	Drawable drawable;
-	Matrix matrix;
 	SensorManager sensorMgr;
 	Sensor sensor;
 	float x;
@@ -45,7 +39,7 @@ public class TestView extends View {
 				z = e.values[SensorManager.DATA_Z];
 				// TestView.this.setTitle("x=" + (int) x + "," + "y=" + (int) y
 				// + "," + "z=" + (int) z);
-				Log.i("AndroidDemo1", "x=" + x + ", y=" + y + ", z=" + z);
+				// Log.i("AndroidDemo1", "x=" + x + ", y=" + y + ", z=" + z);
 			}
 
 			public void onAccuracyChanged(Sensor s, int accuracy) {
@@ -58,17 +52,10 @@ public class TestView extends View {
 		this.setBackgroundColor(Color.WHITE);
 		paint.setAntiAlias(true);
 		paint.setStyle(Style.FILL);
-		drawable = this.getResources().getDrawable(R.drawable.ball);
-		bitmap = BitmapFactory.decodeResource(this.getResources(),
-				R.drawable.ball);
-		matrix = new Matrix();
-		matrix.postScale(0.2f, 0.2f);
-		System.out.println("bitmap size width=" + bitmap.getWidth()
-				+ ", height=" + bitmap.getHeight());
 	}
 
 	Paint paint = new Paint();
-	Bitmap bitmap;
+	RectF rect = new RectF();
 
 	@Override
 	protected void onDraw(Canvas canvas) {
@@ -76,8 +63,16 @@ public class TestView extends View {
 
 		// matrix.postTranslate((canvas.getWidth() - bitmap.getWidth()) / 2,
 		// (canvas.getHeight() - bitmap.getHeight()) / 2);
-		matrix.postTranslate(dx, dy);
-		canvas.drawBitmap(bitmap, matrix, paint);
+		float r = 20f;
+		float left = pX - r / 2;
+		float top = pY - r / 2;
+		float bottom = top + 2 * r;
+		float right = left + 2 * r;
+		rect.left = left;
+		rect.right = right;
+		rect.top = top;
+		rect.bottom = bottom;
+		canvas.drawArc(rect, 0, 360, true, paint);
 		super.onDraw(canvas);
 	}
 

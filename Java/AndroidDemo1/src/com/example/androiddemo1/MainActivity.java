@@ -7,7 +7,7 @@ import android.view.Menu;
 
 public class MainActivity extends Activity {
 
-	TestView view;
+	TestView2 view;
 	SensorManager sensorMgr;
 
 	@Override
@@ -15,7 +15,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
 
-		view = new TestView(this, sensorMgr);
+		view = new TestView2(this, sensorMgr);
 		// setContentView(R.layout.activity_main);
 		setContentView(view);
 	}
