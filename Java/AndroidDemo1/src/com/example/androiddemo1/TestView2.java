@@ -1,6 +1,8 @@
 package com.example.androiddemo1;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,24 +16,42 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.example.androiddemo1.model.Ball;
+
 public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 
-	float pX = 20;
-	float pY = 20;
 	RectF rect = new RectF();
 	SensorManager sensorMgr;
 	Sensor sensor;
 	Paint paint = new Paint();
 	Thread thread;
-	float x;
-	float y;
-	float z;
+	float sensorX;
+	float sensorY;
+	float sensorZ;
+	// float ax = 0f;
+	// float ay = 0f;
 	SurfaceHolder holder;
 	int fps = 30;
 	boolean isRunning = false;
+	final List<Ball> balls = new ArrayList<Ball>();
+	Timer timer = new Timer();
+	float factor = 5;
+
+	SensorEventListener lsn = new SensorEventListener() {
+		public void onSensorChanged(SensorEvent e) {
+			sensorX = e.values[SensorManager.DATA_X] * factor;
+			sensorY = e.values[SensorManager.DATA_Y] * factor;
+			sensorZ = e.values[SensorManager.DATA_Z] * factor;
+			updateAccelerate();
+		}
+
+		public void onAccuracyChanged(Sensor s, int accuracy) {
+		}
+	};
 
 	public TestView2(Context context, SensorManager sensorMgr) {
 		super(context);
@@ -44,19 +64,23 @@ public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 		this.holder = this.getHolder();
 		this.holder.addCallback(this);
 		sensor = sensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-		SensorEventListener lsn = new SensorEventListener() {
-			public void onSensorChanged(SensorEvent e) {
-				x = e.values[SensorManager.DATA_X];
-				y = e.values[SensorManager.DATA_Y];
-				z = e.values[SensorManager.DATA_Z];
-			}
-
-			public void onAccuracyChanged(Sensor s, int accuracy) {
-			}
-		};
 
 		sensorMgr
 				.registerListener(lsn, sensor, SensorManager.SENSOR_DELAY_GAME);
+		initBalls();
+	}
+
+	public void updateAccelerate() {
+		Log.i("AndroidDemo1.sensor", "x=" + sensorX + ", y=" + sensorY + ", z="
+				+ sensorZ);
+	}
+
+	private void initBalls() {
+		Ball ball = new Ball();
+		ball.px = 20f;
+		ball.py = 20f;
+		ball.radius = 20f;
+		this.balls.add(ball);
 	}
 
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
@@ -71,22 +95,48 @@ public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 
 	public void surfaceDestroyed(SurfaceHolder holder) {
 		this.isRunning = false;
+		timer.cancel();
 	}
 
 	public void start() {
 		// thread = new Thread(new MyThread());
 		// thread.run();
-		Timer timer = new Timer();
+
 		timer.schedule(new MyTimerTask(), new Date(), 1000 / fps);
+
 	}
 
 	public void draw() {
 
 		Canvas canvas = holder.lockCanvas();
 		canvas.drawColor(Color.BLACK);
-		pX++;
-		pY++;
-		float r = 20f;
+		for (Ball ball : this.balls) {
+			this.drawBall(ball, canvas);
+		}
+		holder.unlockCanvasAndPost(canvas);
+	}
+
+	public void drawBall(Ball ball, Canvas canvas) {
+
+		this.checkBorder(ball);
+
+		float dTime = (float) (1.0 / fps);
+
+		float vx = ball.vx;
+		float vy = ball.vy;
+
+		ball.vx += (-this.sensorX) * dTime;
+		ball.vy += (this.sensorY) * dTime;
+
+		float dx = (vx + ball.vx) * dTime / 2;
+		float dy = (vy + ball.vy) * dTime / 2;
+
+		ball.px += dx;
+		ball.py += dy;
+
+		float pX = ball.px;
+		float pY = ball.py;
+		float r = ball.radius;
 		float left = pX - r / 2;
 		float top = pY - r / 2;
 		float bottom = top + 2 * r;
@@ -96,7 +146,17 @@ public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 		rect.top = top;
 		rect.bottom = bottom;
 		canvas.drawArc(rect, 0, 360, true, paint);
-		holder.unlockCanvasAndPost(canvas);
+	}
+
+	private void checkBorder(Ball ball) {
+		int width = this.getWidth();
+		int height = this.getHeight();
+		if (ball.px < 0 || ball.px + 2 * ball.radius > width) {
+			ball.vx = -ball.vx;
+		}
+		if (ball.py < 0 || ball.py + 2 * ball.radius > height) {
+			ball.vy = -ball.vy;
+		}
 	}
 
 	class MyTimerTask extends TimerTask {
