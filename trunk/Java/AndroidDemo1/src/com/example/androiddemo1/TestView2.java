@@ -39,14 +39,15 @@ public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 	boolean isRunning = false;
 	final List<Ball> balls = new ArrayList<Ball>();
 	Timer timer = new Timer();
-	float factor = 5;
+	float factor = 20;
+	float lostRate = 0.5f;
 
 	SensorEventListener lsn = new SensorEventListener() {
 		public void onSensorChanged(SensorEvent e) {
 			sensorX = e.values[SensorManager.DATA_X] * factor;
 			sensorY = e.values[SensorManager.DATA_Y] * factor;
 			sensorZ = e.values[SensorManager.DATA_Z] * factor;
-			updateAccelerate();
+			// updateAccelerate();
 		}
 
 		public void onAccuracyChanged(Sensor s, int accuracy) {
@@ -141,21 +142,29 @@ public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 		float top = pY - r / 2;
 		float bottom = top + 2 * r;
 		float right = left + 2 * r;
-		rect.left = left;
-		rect.right = right;
-		rect.top = top;
-		rect.bottom = bottom;
+		rect.left = Math.round(left);
+		rect.right = Math.round(right);
+		rect.top = Math.round(top);
+		rect.bottom = Math.round(bottom);
 		canvas.drawArc(rect, 0, 360, true, paint);
 	}
 
 	private void checkBorder(Ball ball) {
 		int width = this.getWidth();
 		int height = this.getHeight();
-		if (ball.px < 0 || ball.px + 2 * ball.radius > width) {
-			ball.vx = -ball.vx;
+		if ((ball.px < 0 && ball.vx < 0)
+				|| (ball.px + 2 * ball.radius > width && ball.vx > 0)) {
+			ball.vx = -ball.vx * (1 - this.lostRate);
+			if (Math.abs(ball.vx) < 1) {
+				ball.vx = 0;
+			}
 		}
-		if (ball.py < 0 || ball.py + 2 * ball.radius > height) {
-			ball.vy = -ball.vy;
+		if ((ball.py < 0 && ball.vy < 0)
+				|| (ball.py + 2 * ball.radius > height && ball.vy > 0)) {
+			ball.vy = -ball.vy * (1 - this.lostRate);
+			if (Math.abs(ball.vy) < 1) {
+				ball.vy = 0;
+			}
 		}
 	}
 
