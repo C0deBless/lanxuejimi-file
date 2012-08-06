@@ -3,14 +3,15 @@ package com.example.androiddemo1;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Paint.Style;
+import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.RectF;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -27,7 +28,6 @@ public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 	RectF rect = new RectF();
 	SensorManager sensorMgr;
 	Sensor sensor;
-	Paint paint = new Paint();
 	Thread thread;
 	float sensorX;
 	float sensorY;
@@ -35,7 +35,7 @@ public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 	// float ax = 0f;
 	// float ay = 0f;
 	SurfaceHolder holder;
-	int fps = 30;
+	int fps = 50;
 	boolean isRunning = false;
 	final List<Ball> balls = new ArrayList<Ball>();
 	Timer timer = new Timer();
@@ -56,9 +56,6 @@ public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 
 	public TestView2(Context context, SensorManager sensorMgr) {
 		super(context);
-		paint.setAntiAlias(true);
-		paint.setStyle(Style.FILL);
-		paint.setColor(Color.WHITE);
 		// this.setBackgroundColor(Color.WHITE);
 		this.setFocusable(true);
 		this.sensorMgr = sensorMgr;
@@ -68,7 +65,7 @@ public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 
 		sensorMgr
 				.registerListener(lsn, sensor, SensorManager.SENSOR_DELAY_GAME);
-		initBalls();
+
 	}
 
 	public void updateAccelerate() {
@@ -76,12 +73,43 @@ public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 				+ sensorZ);
 	}
 
+	int ballCount = 10;
+
 	private void initBalls() {
-		Ball ball = new Ball();
-		ball.px = 20f;
-		ball.py = 20f;
-		ball.radius = 20f;
-		this.balls.add(ball);
+		for (int i = 0; i < ballCount; i++) {
+			Ball ball = new Ball();
+			Random ran = new Random();
+
+			int r = ran.nextInt(255);
+			int g = ran.nextInt(255);
+			int b = ran.nextInt(255);
+			ball.radius = 20f;
+			ball.color = Color.argb(255, r, g, b);
+			Point point = this.getNextBallPos(ball.radius);
+			ball.px = point.x;
+			ball.py = point.y;
+			this.balls.add(ball);
+		}
+	}
+
+	private Point getNextBallPos(float radius) {
+		Random ran = new Random();
+		for (;;) {
+			int px = (int) (ran.nextInt(this.getWidth() - (int) radius) + 2 / radius);
+			int py = (int) (ran.nextInt(this.getHeight() - (int) radius) + 2 / radius);
+			boolean success = true;
+			for (Ball ball : this.balls) {
+				double f = Math.pow(px - ball.px, 2)
+						+ Math.pow(py - ball.py, 2);
+				double d = Math.pow(f, 0.5);
+				if (d < radius + ball.radius) {
+					success = false;
+				}
+			}
+			if (success) {
+				return new Point(px, py);
+			}
+		}
 	}
 
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
@@ -91,6 +119,7 @@ public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 	public void surfaceCreated(SurfaceHolder holder) {
 		this.holder = holder;
 		this.isRunning = true;
+		initBalls();
 		this.start();
 	}
 
@@ -102,7 +131,7 @@ public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 	public void start() {
 		// thread = new Thread(new MyThread());
 		// thread.run();
-
+		timer = new Timer();
 		timer.schedule(new MyTimerTask(), new Date(), 1000 / fps);
 
 	}
@@ -110,7 +139,7 @@ public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 	public void draw() {
 
 		Canvas canvas = holder.lockCanvas();
-		canvas.drawColor(Color.BLACK);
+		canvas.drawColor(Color.WHITE);
 		for (Ball ball : this.balls) {
 			this.drawBall(ball, canvas);
 		}
@@ -146,7 +175,7 @@ public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 		rect.right = Math.round(right);
 		rect.top = Math.round(top);
 		rect.bottom = Math.round(bottom);
-		canvas.drawArc(rect, 0, 360, true, paint);
+		canvas.drawArc(rect, 0, 360, true, ball.paint());
 	}
 
 	private void checkBorder(Ball ball) {
@@ -166,6 +195,38 @@ public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 				ball.vy = 0;
 			}
 		}
+
+		for (Ball b : balls) {
+			if (b == ball) {
+				continue;
+			}
+			double f = Math.pow(b.px - ball.px, 2)
+					+ Math.pow(b.py - ball.py, 2);
+			double d = Math.pow(f, 0.5);
+			if (d > b.radius + ball.radius) {
+				continue;
+			}
+			double mx = ball.px - b.px;
+			double my = ball.py - b.py;
+			PointF p1 = getMirrorVectory(mx, my, ball.vx, ball.vy);
+			PointF p2 = getMirrorVectory(-mx, -my, b.vx, b.vy);
+
+			Log.i("AndroidDemo1", "p1 -> " + p1.x + ", " + p1.y);
+			ball.vx = p1.x;
+			ball.vy = p1.y;
+			Log.i("AndroidDemo1", "p2 -> " + p2.x + ", " + p2.y);
+			b.vx = p2.x;
+			b.vy = p2.y;
+			break;
+		}
+	}
+
+	private PointF getMirrorVectory(double mx, double my, double vx, double vy) {
+		double M = Math.sqrt(Math.pow(mx, 2) + Math.pow(my, 2));
+		double D = -my * vx / M + mx * vy / M;
+		double x = vx - 2 * my * D / M;
+		double y = vy + 2 * mx * D / M;
+		return new PointF((float) x, (float) y);
 	}
 
 	class MyTimerTask extends TimerTask {
