@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.WindowManager;
 
 public class MainActivity extends Activity {
 
@@ -18,6 +19,8 @@ public class MainActivity extends Activity {
 		view = new TestView2(this, sensorMgr);
 		// setContentView(R.layout.activity_main);
 		setContentView(view);
+		this.getWindow().addFlags(
+				WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 	}
 
 	@Override
