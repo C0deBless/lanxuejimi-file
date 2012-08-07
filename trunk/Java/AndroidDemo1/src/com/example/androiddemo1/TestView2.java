@@ -217,15 +217,15 @@ public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 			Log.i("AndroidDemo1", "p2 -> " + p2.x + ", " + p2.y);
 			b.vx = p2.x;
 			b.vy = p2.y;
-			break;
 		}
 	}
 
 	private PointF getMirrorVectory(double mx, double my, double vx, double vy) {
 		double M = Math.sqrt(Math.pow(mx, 2) + Math.pow(my, 2));
-		double D = -my * vx / M + mx * vy / M;
-		double x = vx - 2 * my * D / M;
-		double y = vy + 2 * mx * D / M;
+		double D = -vx * mx - vy * my;
+		double A = 2 * D / Math.pow(M, 2);
+		double x = vx + mx * A;
+		double y = vy + my * A;
 		return new PointF((float) x, (float) y);
 	}
 
