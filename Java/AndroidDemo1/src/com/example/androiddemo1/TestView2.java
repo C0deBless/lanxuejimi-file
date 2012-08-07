@@ -11,7 +11,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.graphics.PointF;
 import android.graphics.RectF;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -22,6 +21,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.androiddemo1.model.Ball;
+import com.example.androiddemo1.model.Vector2D;
 
 public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 
@@ -73,7 +73,7 @@ public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 				+ sensorZ);
 	}
 
-	int ballCount = 10;
+	int ballCount = 2;
 
 	private void initBalls() {
 		for (int i = 0; i < ballCount; i++) {
@@ -140,6 +140,7 @@ public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 
 		Canvas canvas = holder.lockCanvas();
 		canvas.drawColor(Color.WHITE);
+		this.checkBorder();
 		for (Ball ball : this.balls) {
 			this.drawBall(ball, canvas);
 		}
@@ -148,7 +149,7 @@ public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 
 	public void drawBall(Ball ball, Canvas canvas) {
 
-		this.checkBorder(ball);
+		// this.checkBorder(ball);
 
 		float dTime = (float) (1.0 / fps);
 
@@ -171,85 +172,124 @@ public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 		float top = pY - r / 2;
 		float bottom = top + 2 * r;
 		float right = left + 2 * r;
-		rect.left = Math.round(left);
-		rect.right = Math.round(right);
-		rect.top = Math.round(top);
-		rect.bottom = Math.round(bottom);
+		rect.left = left;
+		rect.right = right;
+		rect.top = top;
+		rect.bottom = bottom;
 		canvas.drawArc(rect, 0, 360, true, ball.paint());
 	}
 
-	private void checkBorder(Ball ball) {
+	private void checkBorder() {
+
 		int width = this.getWidth();
 		int height = this.getHeight();
-		if ((ball.px < 0 && ball.vx < 0)
-				|| (ball.px + 2 * ball.radius > width && ball.vx > 0)) {
-			ball.vx = -ball.vx * (1 - this.lostRate);
-			if (Math.abs(ball.vx) < 1) {
-				ball.vx = 0;
+
+		for (Ball ball : this.balls) {
+			if ((ball.px < 0 && ball.vx < 0)
+					|| (ball.px + 2 * ball.radius > width && ball.vx > 0)) {
+				ball.vx = -ball.vx * (1 - this.lostRate);
+				if (Math.abs(ball.vx) < 1) {
+					ball.vx = 0;
+				}
 			}
-		}
-		if ((ball.py < 0 && ball.vy < 0)
-				|| (ball.py + 2 * ball.radius > height && ball.vy > 0)) {
-			ball.vy = -ball.vy * (1 - this.lostRate);
-			if (Math.abs(ball.vy) < 1) {
-				ball.vy = 0;
+			if ((ball.py < 0 && ball.vy < 0)
+					|| (ball.py + 2 * ball.radius > height && ball.vy > 0)) {
+				ball.vy = -ball.vy * (1 - this.lostRate);
+				if (Math.abs(ball.vy) < 1) {
+					ball.vy = 0;
+				}
 			}
 		}
 
-		for (Ball b : balls) {
-			if (b == ball) {
-				continue;
-			}
-			double f = Math.pow(b.px - ball.px, 2)
-					+ Math.pow(b.py - ball.py, 2);
-			double d = Math.pow(f, 0.5);
-			if (d > b.radius + ball.radius) {
-				continue;
-			}
-			double mx = ball.px - b.px;
-			double my = ball.py - b.py;
-			PointF p1 = getMirrorVectory(mx, my, ball.vx, ball.vy);
-			PointF p2 = getMirrorVectory(-mx, -my, b.vx, b.vy);
+		for (int i = 0; i < this.balls.size(); i++) {
 
-			Log.i("AndroidDemo1", "p1 -> " + p1.x + ", " + p1.y);
-			ball.vx = p1.x;
-			ball.vy = p1.y;
-			Log.i("AndroidDemo1", "p2 -> " + p2.x + ", " + p2.y);
-			b.vx = p2.x;
-			b.vy = p2.y;
+			Ball ball = this.balls.get(i);
+
+			Vector2D v1 = new Vector2D();
+			v1.x = ball.vx;
+			v1.y = ball.vy;
+
+			for (Ball b : balls) {
+				if (b == ball) {
+					continue;
+				}
+
+				float mx = ball.px - b.px;
+				float my = ball.py - b.py;
+
+				Vector2D v0 = new Vector2D();
+				v0.x = mx;
+				v0.y = my;
+				if (v0.length() > b.radius + ball.radius) {
+					continue;
+				}
+
+				Vector2D v2 = new Vector2D();
+				v2.x = b.vx;
+				v2.y = b.vy;
+				// Vector2D v11 = this.getVectorReflection(v1, v0);
+				// Vector2D v22 = this.getVectorReflection(v2, v0a);
+				// Vector2D vs = v11.add(v22);
+				// double angle = Vector2D.angle(vs, v0);
+				//
+				// if (angle == 0) {
+				// continue;
+				// }
+				// else {
+				// Log.i("AndroidDemo1", "angle -> " + angle * 180 / Math.PI);
+				// }
+
+				Vector2D p1 = getMirrorVector(v0, v1);
+				Vector2D p2 = getMirrorVector(v0, v2);
+
+				// Log.i("AndroidDemo1", "p1 -> " + p1.x + ", " + p1.y);
+				ball.vx = (float) p1.x;
+				ball.vy = (float) p1.y;
+				// Log.i("AndroidDemo1", "p2 -> " + p2.x + ", " + p2.y);
+				b.vx = (float) p2.x;
+				b.vy = (float) p2.y;
+			}
 		}
 	}
 
-	private PointF getMirrorVectory(double mx, double my, double vx, double vy) {
+	public Vector2D getVectorReflection(Vector2D v1, Vector2D v2) {
+		double d1 = v1.x * v2.x + v1.y * v2.y;
+		double d2 = d1 / Math.pow(v2.length(), 2);
+		Vector2D v = new Vector2D();
+		v.x = v2.x * d2;
+		v.y = v2.y * d2;
+		return v;
+	}
+
+	private Vector2D getMirrorVector(Vector2D vm, Vector2D vv) {
+		double mx = vm.x;
+		double my = vm.y;
+		double vx = vv.x;
+		double vy = vv.y;
 		double M = Math.sqrt(Math.pow(mx, 2) + Math.pow(my, 2));
 		double D = -vx * mx - vy * my;
 		double A = 2 * D / Math.pow(M, 2);
 		double x = vx + mx * A;
 		double y = vy + my * A;
-		return new PointF((float) x, (float) y);
+		Vector2D vec = new Vector2D(x, y);
+		return vec;
 	}
+
+	// private PointF getMirrorVectory(double mx, double my, double vx, double
+	// vy) {
+	// double M = Math.sqrt(Math.pow(mx, 2) + Math.pow(my, 2));
+	// double D = -vx * mx - vy * my;
+	// double A = 2 * D / Math.pow(M, 2);
+	// double x = vx + mx * A;
+	// double y = vy + my * A;
+	// return new PointF((float) x, (float) y);
+	// }
 
 	class MyTimerTask extends TimerTask {
 
 		@Override
 		public void run() {
 			draw();
-		}
-
-	}
-
-	class MyThread implements Runnable {
-
-		public void run() {
-			while (isRunning) {
-				draw();
-				try {
-					// long time = 1000 / this.fps;
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
 	}
