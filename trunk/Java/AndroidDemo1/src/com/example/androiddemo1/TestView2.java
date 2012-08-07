@@ -41,6 +41,7 @@ public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 	Timer timer = new Timer();
 	float factor = 20;
 	float lostRate = 0.5f;
+	int ballCount = 3;
 
 	SensorEventListener lsn = new SensorEventListener() {
 		public void onSensorChanged(SensorEvent e) {
@@ -73,8 +74,6 @@ public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 				+ sensorZ);
 	}
 
-	int ballCount = 2;
-
 	private void initBalls() {
 		for (int i = 0; i < ballCount; i++) {
 			Ball ball = new Ball();
@@ -83,7 +82,7 @@ public class TestView2 extends SurfaceView implements SurfaceHolder.Callback {
 			int r = ran.nextInt(255);
 			int g = ran.nextInt(255);
 			int b = ran.nextInt(255);
-			ball.radius = 20f;
+			ball.radius = 40f;
 			ball.color = Color.argb(255, r, g, b);
 			Point point = this.getNextBallPos(ball.radius);
 			ball.px = point.x;
