@@ -8,7 +8,7 @@ import android.view.WindowManager;
 
 public class MainActivity extends Activity {
 
-	TestView2 view;
+	TestView3 view;
 	SensorManager sensorMgr;
 
 	@Override
@@ -16,7 +16,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
 
-		view = new TestView2(this, sensorMgr);
+		view = new TestView3(this, sensorMgr);
 		// setContentView(R.layout.activity_main);
 		setContentView(view);
 		this.getWindow().addFlags(
