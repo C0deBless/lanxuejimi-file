@@ -9,6 +9,7 @@ import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
@@ -23,6 +24,7 @@ public class AndroidGraphics implements Graphics {
 	Paint paint;
 	Rect srcRect = new Rect();
 	Rect dstRect = new Rect();
+	Matrix matrix = new Matrix();
 
 	public AndroidGraphics(AssetManager assets, Bitmap frameBuffer) {
 		this.assets = assets;
@@ -96,6 +98,11 @@ public class AndroidGraphics implements Graphics {
 
 	public void drawPixmap(Pixmap pixmap, int x, int y, int srcX, int srcY,
 			int srcWidth, int srcHeight) {
+		this.drawPixmap(pixmap, x, y, srcX, srcY, srcWidth, srcHeight, 0);
+	}
+
+	public void drawPixmap(Pixmap pixmap, int x, int y, int srcX, int srcY,
+			int srcWidth, int srcHeight, int rotate) {
 		srcRect.left = srcX;
 		srcRect.top = srcY;
 		srcRect.right = srcX + srcWidth - 1;
@@ -105,13 +112,32 @@ public class AndroidGraphics implements Graphics {
 		dstRect.top = y;
 		dstRect.right = x + srcWidth - 1;
 		dstRect.bottom = y + srcHeight - 1;
+		Bitmap source = ((AndroidPixmap) pixmap).bitmap;
+		if (rotate > 0) {
+			matrix.reset();
+			matrix.setRotate((float) (rotate * Math.PI / 180));
+			source = Bitmap.createBitmap(source, srcX, srcY, srcWidth,
+					srcHeight, matrix, true);
+		}
 
-		canvas.drawBitmap(((AndroidPixmap) pixmap).bitmap, srcRect, dstRect,
-				null);
+		canvas.drawBitmap(source, srcRect, dstRect, null);
 	}
 
 	public void drawPixmap(Pixmap pixmap, int x, int y) {
 		canvas.drawBitmap(((AndroidPixmap) pixmap).bitmap, x, y, null);
+	}
+
+	public void drawPixmap(Pixmap pixmap, int x, int y, int rotate) {
+		Bitmap source = ((AndroidPixmap) pixmap).bitmap;
+		if (rotate > 0) {
+			matrix.reset();
+			// matrix.setRotate((float) (rotate * Math.PI / 180));
+			matrix.setRotate(rotate);
+			source = Bitmap.createBitmap(source, 0, 0, source.getWidth(),
+					source.getHeight(), matrix, true);
+		}
+
+		canvas.drawBitmap(source, x, y, null);
 	}
 
 	public int getWidth() {
@@ -121,4 +147,5 @@ public class AndroidGraphics implements Graphics {
 	public int getHeight() {
 		return frameBuffer.getHeight();
 	}
+
 }
