@@ -7,11 +7,14 @@ public class SQLExecutor {
 	Connection connection;
 
 	public SQLExecutor(Connection connection) {
+		if (connection == null) {
+			throw new NullPointerException();
+		}
 		this.connection = connection;
 	}
 
-	public void executor(String sql) {
-
+	public void execute(String sql) {
+		
 	}
 
 }
