@@ -10,8 +10,8 @@ import com.trnnn.orm.tools.ClassHelper;
 
 public class ORMModelPool {
 
-	static final Map<Class<?>, ModelInfo> pool = Collections
-			.synchronizedMap(new HashMap<Class<?>, ModelInfo>());
+	static final Map<String, ModelInfo> pool = Collections
+			.synchronizedMap(new HashMap<String, ModelInfo>());
 	static {
 		initPool();
 	}
@@ -21,8 +21,12 @@ public class ORMModelPool {
 		for (Class<?> class1 : set) {
 			if (class1.isAnnotationPresent(ORMModel.class)) {
 				ModelInfo model = ModelInfo.parse(class1);
-				pool.put(class1, model);
+				pool.put(model.getTableName(), model);
 			}
 		}
+	}
+
+	public ModelInfo getModelInfo(Action action) {
+		return pool.get(action.getTableName());
 	}
 }
