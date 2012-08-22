@@ -2,13 +2,13 @@ package com.trnnn.orm;
 
 public class Restrictions {
 
-	public static final int EQUAL                              = 0x1;
-	public static final int OR                                     = 0x10;
-	public static final int AND                                  = 0x100;
-	public static final int LARGER                            = 0x1000;
-	public static final int SMALLER                         = 0x10000;
-	public static final int LARGER_OR_EQUAL      = 0x100000;
-	public static final int SMALLER_OR_EQUAL   = 0x1000000;
+	public static final int EQUAL = 0x1;
+	public static final int OR = 0x10;
+	public static final int AND = 0x100;
+	public static final int LARGER = 0x1000;
+	public static final int SMALLER = 0x10000;
+	public static final int LARGER_OR_EQUAL = 0x100000;
+	public static final int SMALLER_OR_EQUAL = 0x1000000;
 
 	private String key;
 	private Object value;
@@ -34,6 +34,14 @@ public class Restrictions {
 
 	public void setValue(Object value) {
 		this.value = value;
+	}
+
+	public int getLR() {
+		return LR;
+	}
+
+	public void setLR(int lR) {
+		LR = lR;
 	}
 
 	@Override
@@ -75,13 +83,5 @@ public class Restrictions {
 	public static Restrictions create(String key, Object value, int LR) {
 		Restrictions res = new Restrictions(key, value, LR);
 		return res;
-	}
-
-	public int getLR() {
-		return LR;
-	}
-
-	public void setLR(int lR) {
-		LR = lR;
 	}
 }
