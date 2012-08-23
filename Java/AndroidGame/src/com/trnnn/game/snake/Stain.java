@@ -1,4 +1,4 @@
-package com.trnnn.game;
+package com.trnnn.game.snake;
 
 public class Stain {
     public static final int TYPE_1 = 0;

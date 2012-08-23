@@ -1,4 +1,4 @@
-package com.trnnn.game;
+package com.trnnn.game.snake;
 
 public class SnakePart {
 	public int x, y;
