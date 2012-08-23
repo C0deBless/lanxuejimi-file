@@ -1,4 +1,4 @@
-package com.trnnn.game;
+package com.trnnn.game.snake;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

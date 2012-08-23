@@ -1,5 +1,5 @@
 /** Automatically generated file. DO NOT MODIFY */
-package com.example.game.framework.impl;
+package com.trnnn.game;
 
 public final class BuildConfig {
     public final static boolean DEBUG = true;

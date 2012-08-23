@@ -1,4 +1,4 @@
-package com.trnnn.game;
+package com.trnnn.game.snake;
 
 import com.example.game.framework.Game;
 import com.example.game.framework.Graphics;

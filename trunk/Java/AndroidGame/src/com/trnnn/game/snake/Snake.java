@@ -1,9 +1,9 @@
-package com.trnnn.game;
+package com.trnnn.game.snake;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.trnnn.game.SnakePart.PartType;
+import com.trnnn.game.snake.SnakePart.PartType;
 
 public class Snake {
 	public static final int UP = 0;

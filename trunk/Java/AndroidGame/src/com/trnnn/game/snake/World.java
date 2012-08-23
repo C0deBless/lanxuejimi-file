@@ -1,4 +1,4 @@
-package com.trnnn.game;
+package com.trnnn.game.snake;
 
 import java.util.Random;
 

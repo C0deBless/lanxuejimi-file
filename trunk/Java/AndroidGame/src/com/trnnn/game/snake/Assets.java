@@ -1,4 +1,4 @@
-package com.trnnn.game;
+package com.trnnn.game.snake;
 
 import com.example.game.framework.Pixmap;
 import com.example.game.framework.Sound;

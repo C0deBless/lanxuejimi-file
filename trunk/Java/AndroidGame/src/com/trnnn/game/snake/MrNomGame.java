@@ -1,4 +1,4 @@
-package com.trnnn.game;
+package com.trnnn.game.snake;
 
 import com.example.game.framework.Screen;
 import com.example.game.framework.impl.AndroidGame;
