@@ -36,6 +36,11 @@ public class Snake {
 	}
 
 	public void eat() {
+		for (SnakePart part : this.parts) {
+			if (part.type == PartType.Tail) {
+				part.isRotating = false;
+			}
+		}
 		SnakePart end = parts.get(parts.size() - 1);
 		parts.add(new SnakePart(end.x, end.y, PartType.Tail, true));
 	}

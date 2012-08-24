@@ -5,6 +5,7 @@ public class SnakePart {
 	private int angle = 0;
 	final public int changeDelta;
 	public boolean isRotating = false;
+	public PartType type;
 
 	enum PartType {
 		Head, Tail
@@ -13,6 +14,7 @@ public class SnakePart {
 	public SnakePart(int x, int y, PartType type, boolean isRotating) {
 		this.x = x;
 		this.y = y;
+		this.type = type;
 		if (type == PartType.Head) {
 			changeDelta = 1;
 		} else {
