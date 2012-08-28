@@ -130,8 +130,20 @@ public abstract class Serializable {
 	public static void main(String[] args) throws NoSuchMethodException,
 			SecurityException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException {
-		test();
+		// test();
 		// testJson();
+		String str = "this is a test message";
+		str.getBytes();
+		str.getBytes();
+		str.getBytes();
+		str.getBytes();
+		str.getBytes();
+		str.getBytes();
+		str.getBytes();
+		long d1 = System.nanoTime();
+		str.getBytes();
+		long d2 = System.nanoTime();
+		System.out.println(d2 - d1);
 	}
 
 }

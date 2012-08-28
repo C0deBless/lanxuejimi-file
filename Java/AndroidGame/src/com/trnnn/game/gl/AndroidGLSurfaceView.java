@@ -7,6 +7,8 @@ public class AndroidGLSurfaceView extends GLSurfaceView {
 
 	public AndroidGLSurfaceView(Context context) {
 		super(context);
+		
 	}
 
+	
 }

@@ -28,8 +28,19 @@ public class Cube extends Mesh {
                             4, 6, 5,
                             3, 0, 1,
                             3, 1, 2, };
- 
+        float[] colors = {
+                1f, 0f, 0f, 1f, // vertex 0 red
+                0f, 1f, 0f, 1f, // vertex 1 green
+                0f, 0f, 1f, 1f, // vertex 2 blue
+                1f, 0f, 1f, 1f, // vertex 3 magenta
+                1f, 0f, 0f, 1f, // vertex 4 red
+                0f, 1f, 0f, 1f, // vertex 5 green
+                0f, 0f, 1f, 1f, // vertex 6 blue
+                1f, 0f, 1f, 1f, // vertex 7 magenta
+        };
         setIndices(indices);
         setVertices(vertices);
+        setFlatColors(colors);
     }
+
 }

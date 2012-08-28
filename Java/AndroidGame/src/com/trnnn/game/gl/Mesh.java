@@ -79,6 +79,14 @@ public class Mesh {
 		verticesBuffer.position(0);
 	}
 
+	protected void setFlatColors(float[] colors) {
+		ByteBuffer vbb = ByteBuffer.allocateDirect(colors.length * 4);
+		vbb.order(ByteOrder.nativeOrder());
+		colorBuffer = vbb.asFloatBuffer();
+		colorBuffer.put(colors);
+		colorBuffer.position(0);
+	}
+
 	protected void setIndices(short[] indices) {
 		// short is 2 bytes, therefore we multiply the number if
 		// vertices with 2.
