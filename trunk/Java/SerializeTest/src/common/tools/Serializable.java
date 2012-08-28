@@ -2,7 +2,6 @@ package common.tools;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -89,6 +88,9 @@ public abstract class Serializable {
 		tc.setName("trnnn");
 		tc.setPos("1000,800");
 		// tc.setSkills(Arrays.asList(1, 2, 3, 4, 5));
+		tc.serialize(buffer);
+		tc.serialize(buffer);
+		tc.serialize(buffer);
 		long d1 = System.nanoTime();
 		tc.serialize(buffer);
 		long d2 = System.nanoTime();
@@ -125,32 +127,17 @@ public abstract class Serializable {
 		System.out.println(d4 - d3);
 	}
 
-	public static void main(String[] args) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-//		test();
+	public static void main(String[] args) throws NoSuchMethodException,
+			SecurityException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
+		test();
 		// testJson();
-		int testTime = 10000000;     
-        PerformanceTest test = new PerformanceTest();     
-        String msg = "this is test message";     
-        long bTime = System.currentTimeMillis();     
-        for(int i=0; i<testTime; i++) {     
-            test.takeAction(msg);     
-        }     
-        long eTime = System.currentTimeMillis();     
-        System.out.println(eTime - bTime);     
-             
-        Method method = test.getClass().getMethod("takeAction", String.class);     
-        
-        bTime = System.currentTimeMillis();     
-        for(int i=0; i<testTime; i++) {     
-            method.invoke(test, msg);     
-        }     
-        eTime = System.currentTimeMillis();     
-        System.out.println(eTime - bTime);     
 	}
-	
+
 }
-class PerformanceTest {     
-	public int takeAction(String msg) {     
-        return (msg.length() * (int)(System.currentTimeMillis() % 100000));     
-    } 
+
+class PerformanceTest {
+	public int takeAction(String msg) {
+		return (msg.length() * (int) (System.currentTimeMillis() % 100000));
+	}
 }
