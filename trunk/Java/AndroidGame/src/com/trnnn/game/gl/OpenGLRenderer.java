@@ -3,16 +3,24 @@ package com.trnnn.game.gl;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+import android.content.Context;
 import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.GLU;
+import android.util.Log;
+import android.view.GestureDetector.OnGestureListener;
+import android.view.MotionEvent;
+import android.widget.Toast;
 
-public class OpenGLRenderer implements Renderer {
+public class OpenGLRenderer implements Renderer, OnGestureListener {
 
 	Square square = new Square();
 	float angle; // Don't forget to add this.
 	Cube cube;
 
-	public OpenGLRenderer() {
+	Context context;
+
+	public OpenGLRenderer(Context context) {
+		this.context = context;
 		cube = new Cube(1, 1, 1);
 		cube.rx = 45;
 		cube.ry = 45;
@@ -48,13 +56,13 @@ public class OpenGLRenderer implements Renderer {
 	 * microedition.khronos.opengles.GL10)
 	 */
 	public void onDrawFrame(GL10 gl) {
-		 // Clears the screen and depth buffer.
-		 gl.glClear(GL10.GL_COLOR_BUFFER_BIT | // OpenGL docs.
-		 GL10.GL_DEPTH_BUFFER_BIT);
-		 // Replace the current matrix with the identity matrix
-		 gl.glLoadIdentity(); // OpenGL docs
-		 // Translates 4 units into the screen.
-		 gl.glTranslatef(0, 0, -4); // OpenGL docs
+		// Clears the screen and depth buffer.
+		gl.glClear(GL10.GL_COLOR_BUFFER_BIT | // OpenGL docs.
+				GL10.GL_DEPTH_BUFFER_BIT);
+		// Replace the current matrix with the identity matrix
+		gl.glLoadIdentity(); // OpenGL docs
+		// Translates 4 units into the screen.
+		gl.glTranslatef(0, 0, -4); // OpenGL docs
 		// // square.draw(gl); // ( NEW )
 		// // SQUARE A
 		// // Save the current matrix.
@@ -121,5 +129,35 @@ public class OpenGLRenderer implements Renderer {
 		gl.glMatrixMode(GL10.GL_MODELVIEW);// OpenGL docs.
 		// Reset the modelview matrix
 		gl.glLoadIdentity();// OpenGL docs.
+	}
+
+	public boolean onDown(MotionEvent e) {
+		return false;
+	}
+
+	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+			float velocityY) {
+		Toast.makeText(context,
+				"velocityX, velocityY -> " + velocityX + ", " + velocityY,
+				Toast.LENGTH_LONG).show();
+		Log.i("OpenGLRender", "velocityX, velocityY -> " + velocityX + ", "
+				+ velocityY);
+		return true;
+	}
+
+	public void onLongPress(MotionEvent e) {
+	}
+
+	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
+			float distanceY) {
+		return false;
+	}
+
+	public void onShowPress(MotionEvent e) {
+
+	}
+
+	public boolean onSingleTapUp(MotionEvent e) {
+		return false;
 	}
 }
