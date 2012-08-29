@@ -26,6 +26,8 @@ public class OpenGLTestActivity extends Activity {
 		view.setRenderer(render);
 		render.setGestrueDetector(dector);
 		view.setOnTouchListener(render);
+		view.setClickable(true);
+		view.setLongClickable(true);
 		setContentView(view);
 	}
 }
