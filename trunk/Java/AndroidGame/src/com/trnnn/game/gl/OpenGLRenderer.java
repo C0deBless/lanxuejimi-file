@@ -8,11 +8,15 @@ import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.GLU;
 import android.util.Log;
 import android.view.GestureDetector.OnGestureListener;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.Toast;
 
-public class OpenGLRenderer implements Renderer, OnGestureListener {
-
+public class OpenGLRenderer implements Renderer, OnGestureListener,
+		OnTouchListener {
+	GestureDetector gestureDetector;
 	Square square = new Square();
 	float angle; // Don't forget to add this.
 	Cube cube;
@@ -159,5 +163,16 @@ public class OpenGLRenderer implements Renderer, OnGestureListener {
 
 	public boolean onSingleTapUp(MotionEvent e) {
 		return false;
+	}
+
+	public void setGestrueDetector(GestureDetector gd) {
+		this.gestureDetector = gd;
+	}
+
+	public boolean onTouch(View v, MotionEvent event) {
+		if (gestureDetector == null) {
+			return false;
+		}
+		return gestureDetector.onTouchEvent(event);
 	}
 }

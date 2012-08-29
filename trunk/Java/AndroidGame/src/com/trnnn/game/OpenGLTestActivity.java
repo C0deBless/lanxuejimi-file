@@ -21,8 +21,11 @@ public class OpenGLTestActivity extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN); // (NEW)
 		AndroidGLSurfaceView view = new AndroidGLSurfaceView(this);
 		OpenGLRenderer render = new OpenGLRenderer(this);
-		view.setRenderer(render);
+
 		dector = new GestureDetector(this, render);
+		view.setRenderer(render);
+		render.setGestrueDetector(dector);
+		view.setOnTouchListener(render);
 		setContentView(view);
 	}
 }
