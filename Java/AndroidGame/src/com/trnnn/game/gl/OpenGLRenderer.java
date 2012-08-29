@@ -7,12 +7,11 @@ import android.content.Context;
 import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.GLU;
 import android.util.Log;
-import android.view.GestureDetector.OnGestureListener;
 import android.view.GestureDetector;
+import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
-import android.widget.Toast;
 
 public class OpenGLRenderer implements Renderer, OnGestureListener,
 		OnTouchListener {
@@ -20,6 +19,9 @@ public class OpenGLRenderer implements Renderer, OnGestureListener,
 	Square square = new Square();
 	float angle; // Don't forget to add this.
 	Cube cube;
+
+	int dragX = 0;
+	int dragY = 0;
 
 	Context context;
 
@@ -110,6 +112,8 @@ public class OpenGLRenderer implements Renderer, OnGestureListener,
 		//
 		// // Increse the angle.
 		// angle++;
+		cube.setDragX(dragX);
+		cube.setDragY(dragY);
 		cube.draw(gl);
 	}
 
@@ -141,11 +145,13 @@ public class OpenGLRenderer implements Renderer, OnGestureListener,
 
 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
 			float velocityY) {
-		Toast.makeText(context,
-				"velocityX, velocityY -> " + velocityX + ", " + velocityY,
-				Toast.LENGTH_LONG).show();
+		// Toast.makeText(context,
+		// "velocityX, velocityY -> " + velocityX + ", " + velocityY,
+		// Toast.LENGTH_LONG).show();
 		Log.i("OpenGLRender", "velocityX, velocityY -> " + velocityX + ", "
 				+ velocityY);
+		this.dragX += velocityX;
+		this.dragX += velocityY;
 		return true;
 	}
 

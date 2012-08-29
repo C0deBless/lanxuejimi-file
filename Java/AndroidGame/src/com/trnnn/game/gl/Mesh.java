@@ -33,7 +33,19 @@ public class Mesh {
 	// Smooth Colors
 	private FloatBuffer colorBuffer = null;
 
+	long lastDrawedTime = 0;
+
+	int rotateSpeed = 100;// on second
+
 	public void draw(GL10 gl) {
+
+		long currentTime = System.currentTimeMillis();
+
+		if (lastDrawedTime != 0) {
+			long dTime = currentTime - lastDrawedTime;
+			int dAngle = (int) (dTime / 1000.0 * rotateSpeed);
+			this.rx += dAngle;
+		}
 		// Counter-clockwise winding.
 		gl.glFrontFace(GL10.GL_CCW);
 		// Enable face culling.
@@ -67,6 +79,7 @@ public class Mesh {
 		gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
 		// Disable face culling.
 		gl.glDisable(GL10.GL_CULL_FACE);
+		this.lastDrawedTime = currentTime;
 	}
 
 	protected void setVertices(float[] vertices) {
