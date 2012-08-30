@@ -9,6 +9,8 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class Mesh {
 
+	int dragX = 0;
+	int dragY = 0;
 	// Translate params.
 	public float x = 0;
 	public float y = 0;
@@ -35,16 +37,35 @@ public class Mesh {
 
 	long lastDrawedTime = 0;
 
-	int rotateSpeed = 100;// on second
+	// int rotateSpeed = 100;// on second
+	long factor = 100;
+
+	long tick = 0;
+
+	private double function(double time) {
+		double y = -factor * Math.pow(time, 2) + factor;
+		return y;
+	}
 
 	public void draw(GL10 gl) {
 
 		long currentTime = System.currentTimeMillis();
 
-		if (lastDrawedTime != 0) {
+		if (lastDrawedTime != 0 && dragX > 0) {
+
 			long dTime = currentTime - lastDrawedTime;
-			int dAngle = (int) (dTime / 1000.0 * rotateSpeed);
+			float time = (float) (dTime / 1000.0);
+			tick += time;
+			float dAngle = time * dragX / 10;
 			this.rx += dAngle;
+
+			double y = function(tick);
+			dragX -= y;
+			if (dragX <= 0) {
+				dragX = 0;
+				tick = 0;
+			}
+
 		}
 		// Counter-clockwise winding.
 		gl.glFrontFace(GL10.GL_CCW);
@@ -127,4 +148,22 @@ public class Mesh {
 		colorBuffer.put(colors);
 		colorBuffer.position(0);
 	}
+
+	public int getDragX() {
+		return dragX;
+	}
+
+	public void setDragX(int dragX) {
+		this.dragX = dragX;
+		this.factor=dragX;
+	}
+
+	public int getDragY() {
+		return dragY;
+	}
+
+	public void setDragY(int dragY) {
+		this.dragY = dragY;
+	}
+
 }

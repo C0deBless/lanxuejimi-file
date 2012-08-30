@@ -1,24 +1,6 @@
 package com.trnnn.game.gl;
 
 public class Cube extends Mesh {
-	int dragX = 0;
-	int dragY = 0;
-
-	public int getDragX() {
-		return dragX;
-	}
-
-	public void setDragX(int dragX) {
-		this.dragX = dragX;
-	}
-
-	public int getDragY() {
-		return dragY;
-	}
-
-	public void setDragY(int dragY) {
-		this.dragY = dragY;
-	}
 
 	public Cube(float width, float height, float depth) {
 		width /= 2;
