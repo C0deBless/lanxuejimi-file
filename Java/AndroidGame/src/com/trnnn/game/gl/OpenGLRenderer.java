@@ -113,7 +113,9 @@ public class OpenGLRenderer implements Renderer, OnGestureListener,
 		// // Increse the angle.
 		// angle++;
 		cube.setDragX(dragX);
+		this.dragX = 0;
 		cube.setDragY(dragY);
+		this.dragY = 0;
 		cube.draw(gl);
 	}
 

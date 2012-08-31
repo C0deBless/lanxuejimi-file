@@ -37,7 +37,7 @@ public class Mesh {
 
 	long lastDrawedTime = 0;
 
-	// int rotateSpeed = 100;// on second
+	float rotateSpeed = 0;// on second
 	long factor = 100;
 
 	long tick = 0;
@@ -51,20 +51,14 @@ public class Mesh {
 
 		long currentTime = System.currentTimeMillis();
 
-		if (lastDrawedTime != 0 && dragX > 0) {
+		if (lastDrawedTime != 0 && rotateSpeed > 0) {
 
 			long dTime = currentTime - lastDrawedTime;
 			float time = (float) (dTime / 1000.0);
 			tick += time;
-			float dAngle = time * dragX / 10;
+			rotateSpeed = (float) function(tick);
+			float dAngle = (float) (time * rotateSpeed);
 			this.rx += dAngle;
-
-			double y = function(tick);
-			dragX -= y;
-			if (dragX <= 0) {
-				dragX = 0;
-				tick = 0;
-			}
 
 		}
 		// Counter-clockwise winding.
@@ -155,7 +149,10 @@ public class Mesh {
 
 	public void setDragX(int dragX) {
 		this.dragX = dragX;
-		this.factor=dragX;
+		if (rotateSpeed <= 0 && dragX > 0) {
+			this.factor = 100;
+			this.rotateSpeed = 100;
+		}
 	}
 
 	public int getDragY() {
