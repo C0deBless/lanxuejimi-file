@@ -6,10 +6,17 @@
  */
 
 #include <iostream>
+#include <windows.h>
 using namespace std;
 
 int main() {
-	cout << "hello world";
+	double start = GetTickCount(), end(0);
+	cout << start << "\n";
+	Sleep(1000);
+	end = GetTickCount();
+	cout << end << "\n";
+	double result = end - start;
+	cout << result;
 	return 0;
 }
 
