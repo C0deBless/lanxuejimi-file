@@ -1,19 +1,19 @@
 package main;
 
+import java.io.FileNotFoundException;
+
 import model.FolderCache;
 import thread.Worker;
 
 public class Main {
 
-	public static void main(String[] args) {
-		FolderCache cache = new FolderCache();
+	public static void main(String[] args) throws FileNotFoundException,
+			InterruptedException {
+		String root = "E:\\xunlei";
+		FolderCache cache = new FolderCache(root);
 		Worker worker = new Worker(cache);
 		new Monitor(worker).run();
-		try {
-			Thread.currentThread().join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		Thread.currentThread().join();
 	}
 
 }
