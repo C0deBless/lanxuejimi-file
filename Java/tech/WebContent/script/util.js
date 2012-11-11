@@ -246,15 +246,17 @@ function formatDateString(source) {
 function addEssayReply(essayId, replyText, toAccount, toReply) {
 	$.ajax({
 		url : "blog/addreply",
-		data : {essayId:essayId,replyText:replyText},
+		data : {
+			essayId : essayId,
+			replyText : replyText
+		},
 		type : "post",
-		dataType:"json",
+		dataType : "json",
 		success : function(data) {
-			if(data.err=="logoff"){
-				
-			}
-			else{
-				
+			if (data.err == "logoff") {
+
+			} else {
+
 			}
 		}
 	});
