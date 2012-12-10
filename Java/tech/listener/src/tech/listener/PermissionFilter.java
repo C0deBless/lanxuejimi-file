@@ -23,7 +23,7 @@ public class PermissionFilter implements Filter {
 	public PermissionFilter() {
 	}
 
-	public void destroy() {
+	public void init(FilterConfig fConfig) throws ServletException {
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response,
@@ -35,7 +35,6 @@ public class PermissionFilter implements Filter {
 		chain.doFilter(request, response);
 	}
 
-	public void init(FilterConfig fConfig) throws ServletException {
+	public void destroy() {
 	}
-
 }
