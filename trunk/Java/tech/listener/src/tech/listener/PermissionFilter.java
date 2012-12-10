@@ -10,12 +10,15 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@WebFilter(dispatcherTypes = { DispatcherType.REQUEST }, urlPatterns = { "/*" })
+@WebFilter(dispatcherTypes = { DispatcherType.REQUEST, DispatcherType.FORWARD,
+		DispatcherType.INCLUDE }, urlPatterns = { "/*" }, initParams = { @WebInitParam(name = "encoding", value = "UTF-8") })
 public class PermissionFilter implements Filter {
 
 	static Logger logger = LoggerFactory.getLogger(PermissionFilter.class);
@@ -23,16 +26,20 @@ public class PermissionFilter implements Filter {
 	public PermissionFilter() {
 	}
 
-	public void init(FilterConfig fConfig) throws ServletException {
+	public void init(FilterConfig config) throws ServletException {
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
+		String contextPath = ((HttpServletRequest) request).getContextPath();
+		String requestUrl = ((HttpServletRequest) request).getRequestURI();
+		String cuttedUrl = requestUrl.replace(contextPath, "");
+		logger.info("PermissionFilter.doFilter, url:{}", cuttedUrl);
+		if (cuttedUrl.equals("/")) {
+			((HttpServletResponse) response).sendRedirect("index");
+		} else
+			chain.doFilter(request, response);
 
-		logger.info("PermissionFilter.doFilter, contextPath:{} url:{}",
-				((HttpServletRequest) request).getContextPath(),
-				((HttpServletRequest) request).getRequestURI());
-		chain.doFilter(request, response);
 	}
 
 	public void destroy() {
