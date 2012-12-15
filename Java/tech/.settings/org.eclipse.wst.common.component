@@ -8,6 +8,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/model/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/controller/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/log/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/b3log/src"/>
         <property name="context-root" value="tech"/>
         <property name="java-output-path" value="/tech/build/classes"/>
     </wb-module>
