@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="gameserver" default="build" basedir="D:\dev\fb\server\gameserver">
+<property name="src" value="src"/>
+<property name="gamedata_src" value="${basedir}\gamedata\src"/>
+<property name="whitelist_src" value="${basedir}\whitelist\"/>
+<property name="common_src" value="${basedir}\..\common\"/>
+<property name="dest" value="d:\server_release\"/>
+<property name="jar" value="${dest}\bin\gameserver.jar"/>
+<property name="lib" value="${dest}\bin\gameserver_lib\"/>
+
+<path id="project.classpath"> 
+	<fileset dir="${basedir}"><!--4-->
+           <include name="**/*.jar"/> 
+    </fileset> 
+</path>
+<target name="init">
+   <mkdir dir="${dest}"/>
+   <mkdir dir="${dest}/classes"/>
+   <mkdir dir="${lib}"/>
+</target>
+<target name="copyConfig" depends="init">   
+        <copy todir="${dest}/classes">   
+                <fileset dir="${src}">
+                     <include name="*.properties" />
+					 <include name="*.txt" />
+                </fileset>
+				<fileset dir="${common_src}">
+                     <include name="*.properties" />
+                </fileset>
+        </copy>      
+		<copy todir="${lib}">   
+                <fileset dir="${basedir}">
+                     <include name="*.jar" />
+                </fileset>
+        </copy>  		
+</target>
+<target name="compile" depends="copyConfig">
+   <javac destdir="${dest}/classes" encoding="utf-8">
+	<src path="${common_src}"/>
+	<src path="${gamedata_src}"/>
+	<src path="${whitelist_src}"/>
+	<src path="${src}"/>
+	<classpath refid="project.classpath"/>
+   </javac>
+</target>
+<target name="build" depends="compile">
+   <jar jarfile="${jar}" basedir="${dest}/classes">
+	 <manifest>
+	  <attribute name="Main-class" value="com.easymode.armada.gameserver.ServerMain"/>
+	  <attribute name="Class-Path" value=". gameserver_lib/log4j-1.2.16.jar gameserver_lib/slf4j-log4j12-1.6.4.jar gameserver_lib/mysql-connector-java-5.1.18-bin.jar gameserver_lib/jackson-all-1.9.2.jar gameserver_lib/slf4j-api-1.6.4.jar "/>
+	 </manifest>
+   </jar>
+</target>
+<target name="clean">
+   <delete dir="${dest}" />
+   <delete file="${jar}" />
+</target>
+</project>
