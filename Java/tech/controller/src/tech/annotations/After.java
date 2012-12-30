@@ -20,7 +20,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import tech.processor.AfterRequestProcessAdvice;
+import tech.processor.advice.AfterRequestProcessAdvice;
 
 /**
  * the after advice mark for processMethod. 

@@ -20,7 +20,6 @@ import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -29,66 +28,28 @@ import javax.servlet.http.HttpServletResponse;
 
 import tech.renderer.AbstractHTTPResponseRenderer;
 import tech.renderer.HTTP404Renderer;
-import tech.util.StaticResources;
+import tech.renderer.StaticResources;
 import tech.util.Stopwatchs;
 import tech.util.Strings;
 
-/**
- * Front controller for HTTP request dispatching.
- * 
- * @author <a href="mailto:DL88250@gmail.com">Liang Ding</a>
- * @version 1.0.2.0, Aug 10, 2012
- */
 public final class HTTPRequestDispatcher extends HttpServlet {
 
-	/**
-	 * Default serial version uid.
-	 */
 	private static final long serialVersionUID = 1L;
-	/**
-	 * Logger.
-	 */
 	private static final Logger LOGGER = Logger
 			.getLogger(HTTPRequestDispatcher.class.getName());
-	/**
-	 * Default Servlet name used by Tomcat, Jetty, JBoss, and GlassFish.
-	 */
 	private static final String COMMON_DEFAULT_SERVLET_NAME = "default";
-	/**
-	 * Default Servlet name used by Google App Engine.
-	 */
 	private static final String GAE_DEFAULT_SERVLET_NAME = "_ah_default";
-	/**
-	 * Default Servlet name used by Resin.
-	 */
 	private static final String RESIN_DEFAULT_SERVLET_NAME = "resin-file";
-	/**
-	 * Default Servlet name used by WebLogic.
-	 */
 	private static final String WEBLOGIC_DEFAULT_SERVLET_NAME = "FileServlet";
-	/**
-	 * Default Servlet name used by WebSphere.
-	 */
 	private static final String WEBSPHERE_DEFAULT_SERVLET_NAME = "SimpleFileServlet";
-	/**
-	 * Current default servlet name.
-	 */
 	private String defaultServletName;
 
 	private static String contextPath;
 
-	/**
-	 * Initializes this servlet.
-	 * 
-	 * <p>
-	 * Scans classpath for discovering request processors, configured the
-	 * 'default' servlet for static resource processing.
-	 * </p>
-	 * 
-	 * @throws ServletException
-	 *             servlet exception
-	 * @see RequestProcessors#discover()
-	 */
+	public static String contentPath() {
+		return contextPath;
+	}
+
 	@Override
 	public void init() throws ServletException {
 		Stopwatchs.start("Discovering Request Processors");
@@ -121,7 +82,6 @@ public final class HTTPRequestDispatcher extends HttpServlet {
 			throw new IllegalStateException(
 					"Unable to locate the default servlet for serving static content. "
 							+ "Please set the 'defaultServletName' property explicitly.");
-			// TODO: Loads from local.properties
 		}
 
 		LOGGER.log(Level.CONFIG,
@@ -129,18 +89,6 @@ public final class HTTPRequestDispatcher extends HttpServlet {
 				defaultServletName);
 	}
 
-	/**
-	 * Serves.
-	 * 
-	 * @param request
-	 *            the specified HTTP servlet request
-	 * @param response
-	 *            the specified HTTP servlet response
-	 * @throws ServletException
-	 *             servlet exception
-	 * @throws IOException
-	 *             io exception
-	 */
 	@Override
 	protected void service(final HttpServletRequest request,
 			final HttpServletResponse response) throws ServletException,
@@ -152,19 +100,6 @@ public final class HTTPRequestDispatcher extends HttpServlet {
 				"Request[contextPath={0}, pathTranslated={1}, requestURI={2}]",
 				new Object[] { request.getContextPath(), resourcePath,
 						requestURI });
-
-		if (StaticResources.isStatic(request)) {
-			final RequestDispatcher requestDispatcher = getServletContext()
-					.getNamedDispatcher(defaultServletName);
-			if (null == requestDispatcher) {
-				throw new IllegalStateException(
-						"A RequestDispatcher could not be located for the default servlet ["
-								+ this.defaultServletName + "]");
-			}
-
-			requestDispatcher.forward(request, response);
-			return;
-		}
 
 		final long startTimeMillis = System.currentTimeMillis();
 		request.setAttribute(Keys.HttpRequest.START_TIME_MILLIS,
@@ -191,16 +126,6 @@ public final class HTTPRequestDispatcher extends HttpServlet {
 		dispatch(context);
 	}
 
-	/**
-	 * Dispatches with the specified context.
-	 * 
-	 * @param context
-	 *            the specified specified context
-	 * @throws ServletException
-	 *             servlet exception
-	 * @throws IOException
-	 *             io exception
-	 */
 	public static void dispatch(final HTTPRequestContext context)
 			throws ServletException, IOException {
 		final HttpServletRequest request = context.getRequest();

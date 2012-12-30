@@ -1,18 +1,3 @@
-/*
- * Copyright (c) 2009, 2010, 2011, 2012, B3log Team
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package tech.listener;
 
 import java.io.DataInputStream;
@@ -51,63 +36,28 @@ import tech.annotations.Before;
 import tech.annotations.PathVariable;
 import tech.annotations.RequestProcessing;
 import tech.annotations.RequestProcessor;
+import tech.config.Config;
 import tech.convertor.ConvertSupport;
-import tech.processor.AfterRequestProcessAdvice;
-import tech.processor.BeforeRequestProcessAdvice;
-import tech.processor.RequestProcessAdvice;
-import tech.processor.RequestProcessAdviceException;
+import tech.processor.advice.AfterRequestProcessAdvice;
+import tech.processor.advice.BeforeRequestProcessAdvice;
+import tech.processor.advice.RequestProcessAdvice;
+import tech.processor.advice.RequestProcessAdviceException;
 import tech.util.AntPathMatcher;
 import tech.util.ReflectHelper;
 import tech.util.RegexPathMatcher;
 
-/**
- * Request processor utilities.
- * 
- * @author <a href="mailto:DL88250@gmail.com">Liang Ding</a>
- * @author <a href="mailto:wmainlove@gmail.com">Love Yao</a>
- * @version 1.0.1.2, Oct 23, 2012
- */
 public final class RequestProcessors {
-
-	/**
-	 * Logger.
-	 */
 	private static final Logger LOGGER = Logger
 			.getLogger(RequestProcessors.class.getName());
-	/**
-	 * Processor methods.
-	 */
 	private static Set<ProcessorMethod> processorMethods = new HashSet<ProcessorMethod>();
-	/**
-	 * Processors.
-	 */
 	private static Map<Method, Object> processors = new HashMap<Method, Object>();
-	/**
-	 * the BeforeRequestProcessAdvice instance holder.
-	 */
 	private static Map<Class<? extends RequestProcessAdvice>, ? extends RequestProcessAdvice> adviceMap = new HashMap<Class<? extends RequestProcessAdvice>, RequestProcessAdvice>();
-	/**
-	 * the data convertMap cache.
-	 */
 	private static Map<Class<? extends ConvertSupport>, ConvertSupport> convertMap = new HashMap<Class<? extends ConvertSupport>, ConvertSupport>();
 
-	/**
-	 * Invokes a processor method with the specified request URI, method and
-	 * context.
-	 * 
-	 * @param requestURI
-	 *            the specified request URI
-	 * @param contextPath
-	 *            the specified context path
-	 * @param method
-	 *            the specified method
-	 * @param context
-	 *            the specified context
-	 * @return invoke result, returns {@code null} if invoke failed
-	 */
 	public static Object invoke(final String requestURI,
 			final String contextPath, final String method,
 			final HTTPRequestContext context) {
+
 		final ProcessorMethod processMethod = getProcessorMethod(requestURI,
 				contextPath, method);
 
@@ -180,15 +130,10 @@ public final class RequestProcessors {
 						instance.doAdvice(context, args);
 					}
 				} catch (final RequestProcessAdviceException e) {
-					// final JSONObject exception = e.getJsonObject();
-					//
-					// LOGGER.log(Level.WARNING,
-					// "Occurs an exception before request processing [errMsg={0}]",
-					// exception.optString(Keys.MSG));
-					//
-					// final JSONRenderer ret = new JSONRenderer();
-					// ret.setJSONObject(exception);
-					// context.setRenderer(ret);
+					LOGGER.log(
+							Level.WARNING,
+							"Occurs an exception before request processing [errMsg={0}]",
+							e.getMessage());
 					return null;
 				}
 
@@ -222,15 +167,6 @@ public final class RequestProcessors {
 		}
 	}
 
-	/**
-	 * get the converter in this method,using cache.
-	 * 
-	 * @param convertClass
-	 *            the class of {@link ConvertSupport}
-	 * @throws Exception
-	 *             Exception
-	 * @return {@link ConvertSupport}
-	 */
 	private static ConvertSupport getConerter(
 			final Class<? extends ConvertSupport> convertClass)
 			throws Exception {
@@ -244,26 +180,15 @@ public final class RequestProcessors {
 		return convertSupport;
 	}
 
-	/**
-	 * Scans classpath to discover request processor classes via annotation
-	 * {@linkplain org.b3log.latke.servlet.annotation.RequestProcessor}.
-	 * 
-	 * @throws Exception
-	 *             exception
-	 */
 	public static void discover() throws Exception {
 		discoverFromClassesDir();
 		discoverFromLibDir();
 	}
 
-	/**
-	 * Scans classpath (classes directory) to discover request processor
-	 * classes.
-	 */
 	private static void discoverFromClassesDir() {
-		final String webRoot = AbstractServletListener.getWebRoot();
-		final File classesDir = new File(webRoot + File.separator + "WEB-INF"
-				+ File.separator + "classes" + File.separator);
+		final String webRoot = Config.webRoot();
+		final File classesDir = new File(webRoot + "WEB-INF" + File.separator
+				+ "classes" + File.separator);
 		@SuppressWarnings("unchecked")
 		final Collection<File> classes = FileUtils.listFiles(classesDir,
 				new String[] { "class" }, true);
@@ -305,13 +230,10 @@ public final class RequestProcessors {
 		}
 	}
 
-	/**
-	 * Scans classpath (lib directory) to discover request processor classes.
-	 */
 	private static void discoverFromLibDir() {
-		final String webRoot = AbstractServletListener.getWebRoot();
-		final File libDir = new File(webRoot + File.separator + "WEB-INF"
-				+ File.separator + "lib" + File.separator);
+		final String webRoot = Config.webRoot();
+		final File libDir = new File(webRoot + "WEB-INF" + File.separator
+				+ "lib" + File.separator);
 		@SuppressWarnings("unchecked")
 		final Collection<File> files = FileUtils.listFiles(libDir,
 				new String[] { "jar" }, true);
@@ -404,17 +326,6 @@ public final class RequestProcessors {
 		}
 	}
 
-	/**
-	 * Discover {@link RequestProcessor} to the ReuqestMapping from a specific
-	 * class.
-	 * 
-	 * <p>
-	 * <b>NOTE</b>: This method ONLY for test.
-	 * </p>
-	 * 
-	 * @param clazz
-	 *            the specific clazz need to be add Request Mapping
-	 */
 	public static void discoverFromClass(final Class<?> clazz) {
 
 		final RequestProcessor requestProcessor = clazz
@@ -438,17 +349,6 @@ public final class RequestProcessors {
 		}
 	}
 
-	/**
-	 * Gets process method for the specified request URI and method.
-	 * 
-	 * @param requestURI
-	 *            the specified request URI
-	 * @param contextPath
-	 *            the specified context path
-	 * @param method
-	 *            the specified method
-	 * @return process method, returns {@code null} if not found
-	 */
 	private static ProcessorMethod getProcessorMethod(final String requestURI,
 			final String contextPath, final String method) {
 		LOGGER.log(
@@ -530,16 +430,6 @@ public final class RequestProcessors {
 		return matches.get(0);
 	}
 
-	/**
-	 * Adds processor method by the specified annotation, class and method.
-	 * 
-	 * @param requestProcessing
-	 *            the specified annotation
-	 * @param clz
-	 *            the specified class
-	 * @param method
-	 *            the specified method
-	 */
 	private static void addProcessorMethod(
 			final RequestProcessing requestProcessing, final Class<?> clz,
 			final Method method) {
@@ -573,196 +463,82 @@ public final class RequestProcessors {
 		}
 	}
 
-	/**
-	 * Default private constructor.
-	 */
 	private RequestProcessors() {
 	}
 
-	/**
-	 * Request processor method.
-	 * 
-	 * @author <a href="mailto:DL88250@gmail.com">Liang Ding</a>
-	 * @version 1.0.0.2, May 1, 2012
-	 */
 	private static final class ProcessorMethod {
 
-		/**
-		 * URI path pattern.
-		 */
 		private String uriPattern;
-		/**
-		 * Checks dose whether the URI pattern with the context path.
-		 */
 		private boolean withContextPath;
-		/**
-		 * URI pattern mode.
-		 */
 		private URIPatternMode uriPatternMode;
-		/**
-		 * Request method.
-		 */
 		private String method;
-		/**
-		 * Class.
-		 */
 		private Class<?> processorClass;
-		/**
-		 * Method.
-		 */
 		private Method processorMethod;
-		/**
-		 * the userdefined data converclass.
-		 */
 		private Class<? extends ConvertSupport> convertClass;
 
-		/**
-		 * Sets the URI pattern mode with the specified URI pattern mode.
-		 * 
-		 * @param uriPatternMode
-		 *            the specified URI pattern mode
-		 */
 		public void setURIPatternModel(final URIPatternMode uriPatternMode) {
 			this.uriPatternMode = uriPatternMode;
 		}
 
-		/**
-		 * Gets the URI pattern mode.
-		 * 
-		 * @return URI pattern mode
-		 */
 		public URIPatternMode getURIPatternMode() {
 			return uriPatternMode;
 		}
 
-		/**
-		 * Gets method.
-		 * 
-		 * @return method
-		 */
 		public String getMethod() {
 			return method;
 		}
 
-		/**
-		 * Sets the method with the specified method.
-		 * 
-		 * @param method
-		 *            the specified method
-		 */
 		public void setMethod(final String method) {
 			this.method = method;
 		}
 
-		/**
-		 * Gets the processor class.
-		 * 
-		 * @return processor class
-		 */
 		public Class<?> getProcessorClass() {
 			return processorClass;
 		}
 
-		/**
-		 * Sets the processor class with the specified processor class.
-		 * 
-		 * @param processorClass
-		 *            the specified processor class
-		 */
 		public void setProcessorClass(final Class<?> processorClass) {
 			this.processorClass = processorClass;
 		}
 
-		/**
-		 * Gets the processor method.
-		 * 
-		 * @return processor method
-		 */
 		public Method getProcessorMethod() {
 			return processorMethod;
 		}
 
-		/**
-		 * Sets the processor method with the specified processor method.
-		 * 
-		 * @param processorMethod
-		 *            the specified processor method
-		 */
 		public void setProcessorMethod(final Method processorMethod) {
 			this.processorMethod = processorMethod;
 		}
 
-		/**
-		 * Gets the URI pattern.
-		 * 
-		 * @return URI pattern
-		 */
 		public String getURIPattern() {
 			return uriPattern;
 		}
 
-		/**
-		 * Sets the URI pattern with the specified URI pattern.
-		 * 
-		 * @param uriPattern
-		 *            the specified URI pattern
-		 */
 		public void setURIPattern(final String uriPattern) {
 			this.uriPattern = uriPattern;
 		}
 
-		/**
-		 * Checks dose whether the URI pattern with the context path.
-		 * 
-		 * @return {@code true} if it is with the context path, returns
-		 *         {@code false} otherwise
-		 */
 		public boolean isWithContextPath() {
 			return withContextPath;
 		}
 
-		/**
-		 * Sets the with context path flag with the specified with context path
-		 * flag.
-		 * 
-		 * @param withContextPath
-		 *            the specified with context path flag
-		 */
 		public void setWithContextPath(final boolean withContextPath) {
 			this.withContextPath = withContextPath;
 		}
 
-		/**
-		 * @return the convertClass
-		 */
 		public Class<? extends ConvertSupport> getConvertClass() {
 			return convertClass;
 		}
 
-		/**
-		 * @param convertClass
-		 *            the convertClass to set
-		 */
 		public void setConvertClass(
 				final Class<? extends ConvertSupport> convertClass) {
 			this.convertClass = convertClass;
 		}
 
-		/**
-		 * the mappingString for mapping.
-		 */
 		private String mappingString;
 
-		/**
-		 * @return the mappingString
-		 */
 		public String getMappingString() {
 			return mappingString;
 		}
 
-		/**
-		 * analysis the Pattern,do the other things to fill the pattren mapping.
-		 */
 		public void analysis() {
 			mappingString = handleMappingString();
 
@@ -783,36 +559,15 @@ public final class RequestProcessors {
 
 		}
 
-		/**
-		 * the paramNames in pattern.
-		 */
 		private List<String> paramNames = new ArrayList<String>();
-		/**
-		 * the posSpan in pattern.
-		 */
 		private List<Integer> posSpan = new ArrayList<Integer>();
-		/**
-		 * the character after the pattern.
-		 */
 		private List<Character> afertCharacters = new ArrayList<Character>();
-		/**
-		 * the Names in method.
-		 */
 		private String[] methodParamNames;
 
-		/**
-		 * @return the methodParamNames
-		 */
 		public String[] getMethodParamNames() {
 			return methodParamNames;
 		}
 
-		/**
-		 * using regex to get the mappingString,if no matching return the orgin
-		 * uriPattern.
-		 * 
-		 * @return the mappingString.
-		 */
 		private String handleMappingString() {
 			final Pattern pattern = Pattern.compile("\\{[^}]+\\}");
 			final Matcher matcher = pattern.matcher(uriPattern);
@@ -847,15 +602,6 @@ public final class RequestProcessors {
 			return uriMapping.toString();
 		}
 
-		/**
-		 * get pathVariableValueMap in requestURI.
-		 * 
-		 * @param requestURI
-		 *            requestURI
-		 * @return map
-		 * @throws Exception
-		 *             exception
-		 */
 		public Map<String, String> pathVariableValueMap(final String requestURI)
 				throws Exception {
 
