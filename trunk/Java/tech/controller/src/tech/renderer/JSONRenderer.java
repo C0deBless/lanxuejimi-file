@@ -8,42 +8,43 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletResponse;
 
 import tech.listener.HTTPRequestContext;
+import tech.util.JsonHelper;
 
 public final class JSONRenderer extends AbstractHTTPResponseRenderer {
 
-    private static final Logger LOGGER = Logger.getLogger(JSONRenderer.class.getName());
-    private String callback = "callback";
+	private static final Logger logger = Logger.getLogger(JSONRenderer.class
+			.getName());
+	private String json;
 
+	public void setObject(String json) {
+		this.json = json;
+	}
 
-    public void setCallback(final String callback) {
-        this.callback = callback;
-    }
+	public void setObject(Object obj) {
+		this.json = JsonHelper.serialize(obj);
+	}
 
-    @Override
-    public void render(final HTTPRequestContext context) {
-        final HttpServletResponse response = context.getResponse();
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
+	@Override
+	public void render(final HTTPRequestContext context) {
+		final HttpServletResponse response = context.getResponse();
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
 
-//        try {
-//            final PrintWriter writer = response.getWriter();
-//
-//            if (!isJSONP) {
-//                writer.println(jsonObject);
-//            } else {
-//                writer.print(callback + "(" + jsonObject + ")");
-//            }
-//
-//            writer.close();
-//        } catch (final Exception e) {
-//            LOGGER.log(Level.SEVERE, "FreeMarker renders error", e);
-//
-//            try {
-//                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-//                return;
-//            } catch (final IOException ex) {
-//                LOGGER.log(Level.SEVERE, "Can not send error 500!", ex);
-//            }
-//        }
-    }
+		try {
+			if (this.json != null) {
+				final PrintWriter writer = response.getWriter();
+				writer.print(this.json);
+				writer.close();
+			}
+		} catch (final Exception e) {
+			logger.log(Level.SEVERE, "FreeMarker renders error", e);
+
+			try {
+				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				return;
+			} catch (final IOException ex) {
+				logger.log(Level.SEVERE, "Can not send error 500!", ex);
+			}
+		}
+	}
 }

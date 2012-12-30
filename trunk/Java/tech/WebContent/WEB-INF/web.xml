@@ -1,88 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:javaee="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-  	<listener>
-        <listener-class>org.b3log.solo.SoloServletListener</listener-class>
+   	<listener>
+        <listener-class>tech.listener.StartUpServletListener</listener-class>
     </listener>
-    <filter>
-        <filter-name>EncodingFilter</filter-name>
-        <filter-class>org.b3log.latke.servlet.filter.EncodingFilter</filter-class>
-        <init-param>
-            <param-name>requestEncoding</param-name>
-            <param-value>UTF-8</param-value>
-        </init-param>
-        <init-param>
-            <param-name>responseEncoding</param-name>
-            <param-value>UTF-8</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>EncodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    
-    <filter>
-        <filter-name>AuthFilter</filter-name>
-        <filter-class>org.b3log.solo.filter.AuthFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>AuthFilter</filter-name>
-        <url-pattern>/admin-index.do</url-pattern>
-        <url-pattern>/admin-main.do</url-pattern>
-        <url-pattern>/admin-article.do</url-pattern>
-        <url-pattern>/admin-article-list.do</url-pattern>
-        <url-pattern>/admin-comment-list.do</url-pattern>
-        <url-pattern>/admin-link-list.do</url-pattern>
-        <url-pattern>/admin-preference.do</url-pattern>
-        <url-pattern>/admin-page-list.do</url-pattern>
-        <url-pattern>/admin-others.do</url-pattern>
-        <url-pattern>/admin-draft-list.do</url-pattern>
-        <url-pattern>/admin-user-list.do</url-pattern>
-        <url-pattern>/admin-plugin-list.do</url-pattern>
-        <url-pattern>/admin-about.do</url-pattern>
-        <url-pattern>/rm-all-data.do</url-pattern>
-        <url-pattern>/fix/*</url-pattern>
-    </filter-mapping>
-    <filter>
-        <filter-name>PageCacheFilter</filter-name>
-        <filter-class>org.b3log.solo.filter.PageCacheFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>PageCacheFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    <filter>
-        <filter-name>PermalinkFilter</filter-name>
-        <filter-class>org.b3log.solo.filter.PermalinkFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>PermalinkFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    <filter>
-        <filter-name>InitCheckFilter</filter-name>
-        <filter-class>org.b3log.solo.filter.InitCheckFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>InitCheckFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    
-    <session-config>
-        <session-timeout>
-            5
-        </session-timeout>
-    </session-config>
-    
     <servlet>
         <servlet-name>HTTPRequestDispatcher</servlet-name>
-        <servlet-class>org.b3log.latke.servlet.HTTPRequestDispatcher</servlet-class>
+        <servlet-class>tech.listener.HTTPRequestDispatcher</servlet-class>
         <load-on-startup>2</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>HTTPRequestDispatcher</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
-    
+    <filter>
+        <filter-name>StaticResourceFilter</filter-name>
+        <filter-class>tech.listener.StaticResourceFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>StaticResourceFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <!-- Error Pages -->
     <error-page>
         <error-code>404</error-code>
@@ -96,9 +33,4 @@
         <error-code>500</error-code>
         <location>/error/500.html</location>
     </error-page>
-
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-  </welcome-file-list>
 </web-app>

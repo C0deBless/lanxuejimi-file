@@ -13,27 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tech.annotations;
+package tech.processor.advice;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-import tech.processor.advice.BeforeRequestProcessAdvice;
+import tech.listener.HTTPRequestContext;
 
 /**
- * the before advice mark for processMethod.
+ * BeforeRequestProcessAdvice.
  * @author <a href="mailto:wmainlove@gmail.com">Love Yao</a>
- * @version 1.0.0.0, Sep 29, 2012
+ * @version 1.0.0.1, Oct 14, 2012
  */
-@Target(ElementType.METHOD)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface Before {
+public class AfterRequestProcessAdvice implements RequestProcessAdvice {
 
     /**
-     * the real BeforeRequestProcessAdvice.
+     * doAdvice.
+     * @param context {@link HTTPRequestContext}
+     * @param ret  the invoke ret
      */
-    Class<? extends BeforeRequestProcessAdvice>[] adviceClass() default BeforeRequestProcessAdvice.class;
-
+    public void doAdvice(final HTTPRequestContext context, final Object ret) {
+    }
 }
