@@ -1,4 +1,4 @@
-package tech.factory;
+package tech.service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,7 +8,7 @@ import tech.db.ConnectionPool;
 import tech.db.DBConnection;
 import tech.model.Tag;
 
-public class TagFactory {
+public class TagService {
 
 	public void loadTag() {
 		Global.TAGS.clear();
