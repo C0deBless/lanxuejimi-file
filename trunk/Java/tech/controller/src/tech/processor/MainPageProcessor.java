@@ -17,10 +17,6 @@ public class MainPageProcessor {
 	public void html(final HTTPRequestContext context,
 			final HttpServletRequest request, final HttpServletResponse response) {
 		AbstractFreeMarkerRenderer renderer = new FrontRenderer();
-		// Map<String, Object> values = renderer.getDataModel();
-		// values.put("param1", "param1");
-		// values.put("param2", "param2");
-		// values.put("param3", "param3");
 		context.setRenderer(renderer);
 		renderer.setTemplateName("index.ftl");
 	}
