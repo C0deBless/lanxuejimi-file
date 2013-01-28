@@ -50,4 +50,12 @@ public class AcccountProcessor {
 		context.setRenderer(renderer);
 		renderer.setTemplateName("login.ftl");
 	}
+
+	@RequestProcessing(value = "/register", method = HTTPRequestMethod.GET)
+	public void registerPage(final HTTPRequestContext context,
+			final HttpServletRequest request, final HttpServletResponse response) {
+		AbstractFreeMarkerRenderer renderer = new FrontRenderer();
+		context.setRenderer(renderer);
+		renderer.setTemplateName("register.ftl");
+	}
 }

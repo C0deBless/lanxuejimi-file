@@ -7,6 +7,6 @@
     </head>
     <body>
     <div>This is register page</div>
-    ${param1}
+ 
     </body>
 </html>
