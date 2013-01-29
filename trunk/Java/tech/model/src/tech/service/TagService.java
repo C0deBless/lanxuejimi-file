@@ -4,19 +4,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import tech.cache.Global;
-import tech.db.ConnectionPool;
-import tech.db.DBConnection;
 import tech.model.Tag;
 
 public class TagService {
 
 	public void loadTag() {
 		Global.TAGS.clear();
-		DBConnection conn = ConnectionPool.getConnection();
 
 		try {
 			String sql = "select * from tag_root";
-			ResultSet rs = conn.doSelectQuery(sql);
+			ResultSet rs = DataBaseService.getService().doSelectQuery(sql);
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
@@ -28,7 +25,7 @@ public class TagService {
 				Global.TAGS.put(id, tag);
 			}
 			sql = "select * from tag_sub";
-			rs = conn.doSelectQuery(sql);
+			rs = DataBaseService.getService().doSelectQuery(sql);
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				int parent = rs.getInt("parent");
