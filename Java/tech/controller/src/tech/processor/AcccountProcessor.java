@@ -58,4 +58,12 @@ public class AcccountProcessor {
 		context.setRenderer(renderer);
 		renderer.setTemplateName("register.ftl");
 	}
+
+	@RequestProcessing(value = "/register.do", method = HTTPRequestMethod.POST)
+	public void register(final HTTPRequestContext context,
+			final HttpServletRequest request, final HttpServletResponse response) {
+		String name = request.getParameter("userName");
+		String pwd = request.getParameter("userPwd");
+		String remember = request.getParameter("remember");
+	}
 }
