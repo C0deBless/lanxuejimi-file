@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="db/src"/>
 	<classpathentry kind="src" path="cache/src"/>
 	<classpathentry kind="src" path="listener/src"/>
 	<classpathentry kind="src" path="model/src"/>

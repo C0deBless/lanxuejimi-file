@@ -28,7 +28,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import tech.renderer.AbstractHTTPResponseRenderer;
 import tech.renderer.HTTP404Renderer;
-import tech.renderer.StaticResources;
 import tech.util.Stopwatchs;
 import tech.util.Strings;
 

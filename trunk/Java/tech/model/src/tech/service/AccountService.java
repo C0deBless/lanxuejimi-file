@@ -40,8 +40,16 @@ public class AccountService {
 		}
 	}
 
-	public boolean changePwd(String email, String newPwd) {
-
+	public boolean changePwd(int userId, String email, String newPwd) {
+		email = Strings.filterSingleQuotes(email);
+		newPwd = Strings.filterSingleQuotes(newPwd);
+		String sql = "update account set pwd=PASSWORD('%s') where user_id=%d and email='%s'";
+		sql = String.format(sql, newPwd, userId, email);
+		DataBaseService db = DataBaseService.getService();
+		int cnt = db.doExecuteUpdateQuery(sql);
+		if (cnt >= 1) {
+			return true;
+		}
 		return false;
 	}
 
