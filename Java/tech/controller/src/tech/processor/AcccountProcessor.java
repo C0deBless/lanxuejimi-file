@@ -16,9 +16,9 @@ public class AcccountProcessor {
 	@RequestProcessing(value = "/login", method = HTTPRequestMethod.POST)
 	public void processLogin(final HTTPRequestContext context,
 			final HttpServletRequest request, final HttpServletResponse response) {
-		String name = request.getParameter("userName");
-		String pwd = request.getParameter("userPwd");
-		String remember = request.getParameter("remember");
+		// String name = request.getParameter("userName");
+		// String pwd = request.getParameter("userPwd");
+		// String remember = request.getParameter("remember");
 
 		// if (data.status == "succeed") {
 		// showProgress("登录成功", function() {

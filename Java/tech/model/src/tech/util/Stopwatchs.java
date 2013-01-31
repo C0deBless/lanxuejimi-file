@@ -368,7 +368,8 @@ public final class Stopwatchs {
          * 
          * @return end time
          */
-        public long getEndTime() {
+        @SuppressWarnings("unused")
+		public long getEndTime() {
             return endTime;
         }
 

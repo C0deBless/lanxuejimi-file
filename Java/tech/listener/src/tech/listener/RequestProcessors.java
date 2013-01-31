@@ -42,7 +42,6 @@ import tech.processor.advice.AfterRequestProcessAdvice;
 import tech.processor.advice.BeforeRequestProcessAdvice;
 import tech.processor.advice.RequestProcessAdvice;
 import tech.processor.advice.RequestProcessAdviceException;
-import tech.util.AntPathMatcher;
 import tech.util.ReflectHelper;
 import tech.util.RegexPathMatcher;
 
@@ -375,10 +374,6 @@ public final class RequestProcessors {
 				boolean found = false;
 
 				switch (processorMethod.getURIPatternMode()) {
-
-				case ANT_PATH:
-					found = AntPathMatcher.match(uriPattern, requestURI);
-					break;
 				case REGEX:
 					found = RegexPathMatcher.match(uriPattern, requestURI);
 					break;
