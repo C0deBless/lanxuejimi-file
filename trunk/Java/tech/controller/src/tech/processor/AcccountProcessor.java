@@ -7,8 +7,12 @@ import tech.annotations.RequestProcessing;
 import tech.annotations.RequestProcessor;
 import tech.listener.HTTPRequestContext;
 import tech.listener.HTTPRequestMethod;
+import tech.model.Account;
 import tech.renderer.AbstractFreeMarkerRenderer;
 import tech.renderer.FrontRenderer;
+import tech.renderer.JSONRenderer;
+import tech.service.AccountService;
+import tech.service.ServiceFactory;
 
 @RequestProcessor
 public class AcccountProcessor {
@@ -62,8 +66,34 @@ public class AcccountProcessor {
 	@RequestProcessing(value = "/register.do", method = HTTPRequestMethod.POST)
 	public void register(final HTTPRequestContext context,
 			final HttpServletRequest request, final HttpServletResponse response) {
-		String name = request.getParameter("userName");
-		String pwd = request.getParameter("userPwd");
-		String remember = request.getParameter("remember");
+		String nick = request.getParameter("nick");
+		String email = request.getParameter("email");
+		String pwd = request.getParameter("pwd");
+		String role = Account.ROLE_NORMAL;
+		String locale = "zh-cn";
+		AccountService service = ServiceFactory.getAccountService();
+		JSONRenderer renderer = new JSONRenderer();
+		context.setRenderer(renderer);
+		if (!service.validateEmail(email)) {
+			String json = "{\"res\":3}";
+			renderer.setObject(json);
+			return;
+		}
+		if (!service.validatePassword(pwd)) {
+			String json = "{\"res\":4}";
+			renderer.setObject(json);
+			return;
+		}
+		if (service.checkUserEmailDuplicate(email)) {
+			String json = "{\"res\":2}";
+			renderer.setObject(json);
+			return;
+		} else {
+			// do add account here
+			service.register(nick, email, locale, role, pwd);
+			String json = "{\"res\":1}";
+			renderer.setObject(json);
+			return;
+		}
 	}
 }
