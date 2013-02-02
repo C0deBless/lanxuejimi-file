@@ -2,10 +2,14 @@ package tech.model;
 
 public class Account {
 
+	public static final String ROLE_NORMAL = "normal";
+	public static final String ROLE_SUPER_ADMIN = "superadmin";
+	public static final String ROLE_BLOG_ADMIN = "blogadmin";
+	public static final String ROLE_SITE_ADMIN = "siteadmin";
+
 	private int userId;
 	private String nickName;
 	private String email;
-	private String gender;
 	private String locale;
 	private String role;
 	private String pwd;
@@ -32,14 +36,6 @@ public class Account {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
 	}
 
 	public String getLocale() {

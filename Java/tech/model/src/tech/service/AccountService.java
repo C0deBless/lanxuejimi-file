@@ -10,6 +10,34 @@ import tech.model.Account;
 import tech.util.Strings;
 
 public class AccountService {
+
+	public Account getAccount(String email) {
+		email = Strings.filterSingleQuotes(email);
+		DataBaseService db = DataBaseService.getService();
+		String sql = "select * from account where email='%s'";
+		sql = String.format(sql, email);
+		ResultSet rs = db.doSelectQuery(sql);
+		try {
+			if (rs.next()) {
+				int userId = rs.getInt("user_id");
+				String nickName = rs.getString("nickname");
+				String locale = rs.getString("locale");
+				String role = rs.getString("role");
+				Account account = new Account();
+				account.setEmail(email);
+				account.setUserId(userId);
+				account.setNickName(nickName);
+				account.setRole(role);
+				account.setLocale(locale);
+				return account;
+			} else {
+				return null;
+			}
+		} catch (SQLException e) {
+			throw new ServiceException(e);
+		}
+	}
+
 	public Account login(String email, String pwd) {
 		email = Strings.filterSingleQuotes(email);
 		pwd = Strings.filterSingleQuotes(pwd);
@@ -21,13 +49,11 @@ public class AccountService {
 			if (rs.next()) {
 				int userId = rs.getInt("user_id");
 				String nickName = rs.getString("nickname");
-				String gender = rs.getString("gender");
 				String locale = rs.getString("locale");
 				String role = rs.getString("role");
 				Account account = new Account();
 				account.setEmail(email);
 				account.setUserId(userId);
-				account.setGender(gender);
 				account.setNickName(nickName);
 				account.setRole(role);
 				account.setLocale(locale);
@@ -69,21 +95,41 @@ public class AccountService {
 		}
 	}
 
-	public void register(String nickName, String email, String gender,
-			String locale, String role, String pwd) {
+	public void register(String nickName, String email, String locale,
+			String role, String pwd) {
 		try {
-			String sql = "insert into account(nickname,email,gender,locale,role,pwd) values(?,?,?,?,?,PASSWORD(?))";
+			String sql = "insert into account(nickname,email,locale,role,pwd) values(?,?,?,?,PASSWORD(?))";
 			DataBaseService db = DataBaseService.getService();
 			PreparedStatement stmt = db.prepareStatement(sql);
 			stmt.setString(1, nickName);
 			stmt.setString(2, email);
-			stmt.setString(3, gender);
-			stmt.setString(4, locale);
-			stmt.setString(5, role);
-			stmt.setString(6, pwd);
+			stmt.setString(3, locale);
+			stmt.setString(4, role);
+			stmt.setString(5, pwd);
 			db.executeStatement(stmt);
 		} catch (SQLException e) {
 			throw new SqlExecuteException(e);
 		}
+	}
+
+	public boolean validateNickName(String nick) {
+		if (nick == null || nick.equals("")) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean validatePassword(String pwd) {
+		if (pwd == null) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean validateEmail(String email) {
+		if (email == null) {
+			return false;
+		}
+		return true;
 	}
 }
