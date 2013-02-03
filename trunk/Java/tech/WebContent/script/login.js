@@ -2,8 +2,8 @@ function showLogon() {
 	var div = document.createElement("div");
 	// div.innerHTML="This is logon page";
 	div.id = "signindiv";
-	ShowDom(div, "登录", 350, 160);
-	$("#signindiv").load("component/login");
+	ShowDom(div, "登录", 310, 160);
+	$("#signindiv").load("component/login.html");
 }
 function logout() {
 	$
