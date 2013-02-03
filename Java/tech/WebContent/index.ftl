@@ -34,6 +34,14 @@
 			initpage();
 		});
 	}
+	
+	function showRegister(){
+		var div = document.createElement("div");
+		// div.innerHTML="This is logon page";
+		div.id = "registerdiv";
+		ShowDom(div, "登录", 350, 160);
+		$("#registerdiv").load("component/register.html");
+	}
 </script>
 </head>
 <body>
@@ -50,7 +58,7 @@
 				<li><a href="#">个人主页</a></li>
 				<li><a href="#">问答区</a></li>
 				<li><a href="#">讨论区</a></li>
-				<li class="logout" id="register"><a href="register">注册</a></li>
+				<li class="logout" id="register"><a href="javascript:void(0);" onclick="javascript:showRegister();">注册</a></li>
 				<li class="logout" id="signin"><a href="javascript:void(0);"
 					onclick="javascript:showLogon();">登陆</a></li>
 			</ul>

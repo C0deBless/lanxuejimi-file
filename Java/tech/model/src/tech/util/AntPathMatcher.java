@@ -493,7 +493,7 @@ public final class AntPathMatcher {
 			return null;
 		}
 		StringTokenizer st = new StringTokenizer(str, delimiters);
-		List tokens = new ArrayList();
+		List<String> tokens = new ArrayList<>();
 		while (st.hasMoreTokens()) {
 			String token = st.nextToken();
 			token = token.trim();
@@ -513,10 +513,10 @@ public final class AntPathMatcher {
 	 * @return the String array (<code>null</code> if the passed-in Collection
 	 *         was <code>null</code>)
 	 */
-	private static String[] toStringArray(Collection collection) {
+	private static String[] toStringArray(Collection<String> collection) {
 		if (collection == null) {
 			return null;
 		}
-		return (String[]) collection.toArray(new String[collection.size()]);
+		return collection.toArray(new String[collection.size()]);
 	}
 }

@@ -19,6 +19,7 @@ public class StaticResources {
 		staticPaths.add("/error");
 		staticPaths.add("/dic");
 		staticPaths.add("/res");
+		staticPaths.add("/component");
 	}
 
 	public static boolean isStaticPath(String contextPath, String requestUrl) {
