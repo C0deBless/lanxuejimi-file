@@ -1,5 +1,4 @@
 <div>
-login component
 <div>用户名：<input type="text" id="userName"/></div>
 <div>密码：<input type="password" id="password"/></div>
 <div><input type="checkbox" id="remember"/>记住我</div>

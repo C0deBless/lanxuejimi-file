@@ -116,6 +116,7 @@ public class AccountService {
 		if (nick == null || nick.equals("")) {
 			return false;
 		}
+		// FIXME check nick name here
 		return true;
 	}
 
@@ -123,6 +124,7 @@ public class AccountService {
 		if (pwd == null) {
 			return false;
 		}
+		// FIXME check password here
 		return true;
 	}
 
@@ -130,6 +132,7 @@ public class AccountService {
 		if (email == null) {
 			return false;
 		}
+		// FIXME check email here
 		return true;
 	}
 }
