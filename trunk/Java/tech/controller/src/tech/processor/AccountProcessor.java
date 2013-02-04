@@ -3,6 +3,9 @@ package tech.processor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import tech.annotations.RequestProcessing;
 import tech.annotations.RequestProcessor;
 import tech.listener.HTTPRequestContext;
@@ -15,11 +18,14 @@ import tech.service.AccountService;
 import tech.service.ServiceFactory;
 
 @RequestProcessor
-public class AcccountProcessor {
+public class AccountProcessor {
+
+	static Logger logger = LoggerFactory.getLogger(AccountProcessor.class);
 
 	@RequestProcessing(value = "/login", method = HTTPRequestMethod.POST)
 	public void processLogin(final HTTPRequestContext context,
 			final HttpServletRequest request, final HttpServletResponse response) {
+
 		// String name = request.getParameter("userName");
 		// String pwd = request.getParameter("userPwd");
 		// String remember = request.getParameter("remember");
@@ -66,11 +72,12 @@ public class AcccountProcessor {
 	@RequestProcessing(value = "/register.do", method = HTTPRequestMethod.POST)
 	public void register(final HTTPRequestContext context,
 			final HttpServletRequest request, final HttpServletResponse response) {
+		logger.trace("AccountProcessor.register");
 		String nick = request.getParameter("nick");
 		String email = request.getParameter("email");
 		String pwd = request.getParameter("pwd");
 		String role = Account.ROLE_NORMAL;
-		String locale = "zh-cn";
+		String locale = "en-us";
 		AccountService service = ServiceFactory.getAccountService();
 		JSONRenderer renderer = new JSONRenderer();
 		context.setRenderer(renderer);

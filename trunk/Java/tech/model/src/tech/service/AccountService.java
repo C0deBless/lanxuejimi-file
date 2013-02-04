@@ -51,12 +51,14 @@ public class AccountService {
 				String nickName = rs.getString("nickname");
 				String locale = rs.getString("locale");
 				String role = rs.getString("role");
+				String sig = rs.getString("sig");
 				Account account = new Account();
 				account.setEmail(email);
 				account.setUserId(userId);
 				account.setNickName(nickName);
 				account.setRole(role);
 				account.setLocale(locale);
+				account.setSig(sig);
 				return account;
 			} else {
 				return null;
@@ -87,12 +89,29 @@ public class AccountService {
 		ResultSet rs = db.doSelectQuery(sql);
 		try {
 			if (rs.next()) {
-				return false;
-			} else
 				return true;
+			} else
+				return false;
 		} catch (SQLException e) {
 			throw new SqlExecuteException(e);
 		}
+	}
+
+	public void generateSigniture(Account account) {
+		long currentTime = System.currentTimeMillis();
+		String email = account.getEmail();
+		StringBuffer sb = new StringBuffer();
+		sb.append(email);
+		sb.append(currentTime);
+		String sig = sb.toString();
+		sig = tech.util.MD5.hash(sig);
+		DataBaseService db = DataBaseService.getService();
+		String sql = "update account set sig=%s where user_id=%d";
+		sql = String.format(sql, sig, account.getUserId());
+		if (db.doExecuteUpdateQuery(sql) <= 0) {
+			throw new SqlExecuteException("cannot find row", sql);
+		}
+		account.setSig(sig);
 	}
 
 	public void register(String nickName, String email, String locale,

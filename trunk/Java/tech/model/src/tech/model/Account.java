@@ -13,6 +13,15 @@ public class Account {
 	private String locale;
 	private String role;
 	private String pwd;
+	private String sig;
+
+	public String getSig() {
+		return sig;
+	}
+
+	public void setSig(String sig) {
+		this.sig = sig;
+	}
 
 	public int getUserId() {
 		return userId;
