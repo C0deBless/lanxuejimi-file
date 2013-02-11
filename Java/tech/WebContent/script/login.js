@@ -2,7 +2,7 @@ function showLogon() {
 	var div = document.createElement("div");
 	// div.innerHTML="This is logon page";
 	div.id = "signindiv";
-	ShowDom(div, "登录", 310, 160);
+	ShowDom(div, "Sign In", 310, 160);
 	$("#signindiv").load("component/login.html");
 }
 function logout() {
@@ -30,7 +30,7 @@ function login(username, userpwd, remember) {
 		type : "post",
 		dataType : "json",
 		data : {
-			userName : username,
+			email : username,
 			userPwd : userpwd,
 			remember : remember
 		},

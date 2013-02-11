@@ -26,10 +26,15 @@ public class AccountProcessor {
 	public void processLogin(final HTTPRequestContext context,
 			final HttpServletRequest request, final HttpServletResponse response) {
 
-		// String name = request.getParameter("userName");
-		// String pwd = request.getParameter("userPwd");
-		// String remember = request.getParameter("remember");
+		String email = request.getParameter("email");
+		String pwd = request.getParameter("userPwd");
+		@SuppressWarnings("unused")
+		String remember = request.getParameter("remember");
+		AccountService service = ServiceFactory.getAccountService();
+		Account account = service.login(email, pwd);
+		if (account == null) {
 
+		}
 		// if (data.status == "succeed") {
 		// showProgress("登录成功", function() {
 		// window.setTimeout(function() {
@@ -51,14 +56,6 @@ public class AccountProcessor {
 		// addData("userLogonName", data.userLogonName);
 		// addData("userAvatarPath", data.userAvatarPath);
 		// }
-	}
-
-	@RequestProcessing(value = "/login", method = HTTPRequestMethod.GET)
-	public void loginPage(final HTTPRequestContext context,
-			final HttpServletRequest request, final HttpServletResponse response) {
-		AbstractFreeMarkerRenderer renderer = new FrontRenderer();
-		context.setRenderer(renderer);
-		renderer.setTemplateName("login.ftl");
 	}
 
 	@RequestProcessing(value = "/register", method = HTTPRequestMethod.GET)
@@ -102,5 +99,20 @@ public class AccountProcessor {
 			renderer.setObject(json);
 			return;
 		}
+	}
+
+	static class ClassA {
+		int a = 100;
+	}
+
+	static class ClassB extends ClassA {
+		int a = 200;
+	}
+
+	public static void main(String[] args) {
+		ClassB classB = new ClassB();
+		ClassA classA = classB;
+		System.out.println(classB.a);
+		System.out.println(classA.a);
 	}
 }
