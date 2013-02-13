@@ -1,5 +1,8 @@
 package tech.processor;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -32,9 +35,16 @@ public class AccountProcessor {
 		String remember = request.getParameter("remember");
 		AccountService service = ServiceFactory.getAccountService();
 		Account account = service.login(email, pwd);
+		Map<String, Object> values = new HashMap<>();
 		if (account == null) {
-
+			values.put("res", -1);
+		} else {
+			values.put("res", 1);
+			values.put("accunt", account);
 		}
+		JSONRenderer renderer = new JSONRenderer();
+		renderer.setObject(values);
+		context.setRenderer(renderer);
 		// if (data.status == "succeed") {
 		// showProgress("登录成功", function() {
 		// window.setTimeout(function() {
