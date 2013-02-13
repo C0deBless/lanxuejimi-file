@@ -43,7 +43,7 @@ function login(username, userpwd, remember) {
 			}
 		},
 		success : function(data) {
-			if (data.status == "succeed") {
+			if (data.res == 1) {
 				showProgress("登录成功", function() {
 					window.setTimeout(function() {
 						hideProgress();
@@ -57,12 +57,19 @@ function login(username, userpwd, remember) {
 				a.innerHTML = "注销";
 				$("#register").append(a);
 				// install user data here
-				addData("userId", data.userId);
-				addData("userName", data.userName);
-				addData("userNickName", data.userNickName);
-				addData("userCompetence", data.userCompetence);
-				addData("userLogonName", data.userLogonName);
-				addData("userAvatarPath", data.userAvatarPath);
+				var account = data.acccount;
+				addData("userId", account.userId);
+				addData("userName", account.email);
+				addData("userNickName", account.nickName);
+				// addData("userCompetence", account.userCompetence);
+				// addData("userLogonName", account.userLogonName);
+				// addData("userAvatarPath", account.userAvatarPath);
+			} else if (data.res == -1) {
+				showProgress("signin failed!!", function() {
+					window.setTimeout(function() {
+						hideProgress();
+					}, 1000);
+				});
 			}
 		}
 	});

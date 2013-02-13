@@ -39,6 +39,12 @@ public class AccountService {
 	}
 
 	public Account login(String email, String pwd) {
+		if (email == null || pwd == null) {
+			return null;
+		}
+		if (email.equals("") || pwd.equals("")) {
+			return null;
+		}
 		email = Strings.filterSingleQuotes(email);
 		pwd = Strings.filterSingleQuotes(pwd);
 		DataBaseService db = DataBaseService.getService();

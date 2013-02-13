@@ -321,7 +321,7 @@ Popup.prototype = {
 		var baseZIndex = 10001 + this.info.overlay * 10;
 		var showZIndex = baseZIndex + 2;
 		this.iframeIdName = 'ifr_popup' + this.info.overlay;
-		var path = "img/dialogclose.gif";
+		var path = "res/dialogclose.gif";
 		var close = '<input type="image" id="dialogBoxClose" src="'
 				+ path
 				+ '" border="0" width="16" height="16" align="absmiddle" title="关闭"/>';
