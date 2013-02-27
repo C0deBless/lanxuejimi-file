@@ -110,19 +110,4 @@ public class AccountProcessor {
 			return;
 		}
 	}
-
-	static class ClassA {
-		int a = 100;
-	}
-
-	static class ClassB extends ClassA {
-		int a = 200;
-	}
-
-	public static void main(String[] args) {
-		ClassB classB = new ClassB();
-		ClassA classA = classB;
-		System.out.println(classB.a);
-		System.out.println(classA.a);
-	}
 }
