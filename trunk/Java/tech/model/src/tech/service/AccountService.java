@@ -141,8 +141,29 @@ public class AccountService {
 		if (nick == null || nick.equals("")) {
 			return false;
 		}
+
+		if (checkUserNickNameDuplicate(nick)) {
+			return false;
+		}
+
 		// FIXME check nick name here
 		return true;
+	}
+
+	private boolean checkUserNickNameDuplicate(String nick) {
+		String sql = "select * from `account` where nickname='%s'";
+		sql = String.format(sql, nick);
+		DataBaseService db = DataBaseService.getService();
+		ResultSet rs = db.doSelectQuery(sql);
+		try {
+			if (rs.next()) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (SQLException e) {
+			throw new SqlExecuteException(e);
+		}
 	}
 
 	public boolean validatePassword(String pwd) {

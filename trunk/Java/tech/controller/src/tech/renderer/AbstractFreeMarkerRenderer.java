@@ -45,7 +45,7 @@ public abstract class AbstractFreeMarkerRenderer extends
 	private static final Logger LOGGER = Logger
 			.getLogger(AbstractFreeMarkerRenderer.class.getName());
 	private String templateName;
-	private Map<String, Object> dataModel = new HashMap<String, Object>();
+	private final Map<String, Object> dataModel = new HashMap<String, Object>();
 
 	protected Template getTemplate(final String templateDirName,
 			final String templateName) throws IOException {
@@ -92,6 +92,11 @@ public abstract class AbstractFreeMarkerRenderer extends
 
 			if (Templates.hasExpression(template, "${request}")) {
 				dataModel.put(Keys.REQUEST, request);
+			}
+
+			if (Templates.hasExpression(template, "${contextPath}")) {
+				String contextPath = request.getContextPath();
+				dataModel.put(Keys.CONTEXT_PATH, contextPath);
 			}
 
 			beforeRender(context);
@@ -161,5 +166,13 @@ public abstract class AbstractFreeMarkerRenderer extends
 
 	public void setTemplateName(final String templateName) {
 		this.templateName = templateName;
+	}
+
+	public void putDataModel(String key, String value) {
+		this.dataModel.put(key, value);
+	}
+
+	public void putDataModel(Map<String, Object> values) {
+		this.dataModel.putAll(values);
 	}
 }

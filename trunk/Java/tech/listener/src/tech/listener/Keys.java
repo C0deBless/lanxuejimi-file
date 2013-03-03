@@ -96,6 +96,8 @@ public final class Keys {
 	 */
 	public static final String FREEMARKER_ACTION = "FreeMarkerAction";
 
+	public static final String CONTEXT_PATH = "contextPath";
+
 	/**
 	 * This class defines HTTP request keys.
 	 * 
