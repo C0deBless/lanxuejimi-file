@@ -98,6 +98,11 @@ public class AccountProcessor {
 			renderer.setObject(json);
 			return;
 		}
+		if (!service.validateNickName(nick)) {
+			String json = "{\"res\":5}";
+			renderer.setObject(json);
+			return;
+		}
 		if (service.checkUserEmailDuplicate(email)) {
 			String json = "{\"res\":2}";
 			renderer.setObject(json);

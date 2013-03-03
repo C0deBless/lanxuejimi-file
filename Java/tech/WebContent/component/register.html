@@ -11,10 +11,6 @@
 				<td><input name="pwd" type="password" /></td>
 			</tr>
 			<tr>
-				<td>Confirm Password:</td>
-				<td><input name="confirm" type="password" /></td>
-			</tr>
-			<tr>
 				<td>Nick Name:</td>
 				<td><input name="nick" type="text" /></td>
 			</tr>
@@ -23,14 +19,35 @@
 				<td><input type="button" value="Sign In"
 					onclick="doRegister();" /></td>
 			</tr>
+			<tr>
+				<td></td>
+				<td style="color: red;" id="register_msg"></td>
+			</tr>
 		</table>
 	</form>
 	<script>
 		function doRegister() {
-			$("#registerForm").ajaxSubmit(function(data) {
-				console.log("form submitted. returned data");
-				console.log(data);
-			});
+			$("#registerForm")
+					.ajaxSubmit(
+							function(data) {
+								data = eval('\'' + data + '\'');
+								if (data.res == 1) {
+									$("#register_msg").html(
+											"registered account successfully.");
+								} else if (data.res == 2) {
+									$("#register_msg").html(
+											"duplicate email address.");
+								} else if (data.res == 3) {
+									$("#register_msg").html(
+											"illegal email address.");
+								} else if (data.res == 4) {
+									$("#register_msg")
+											.html("illegal password.");
+								} else if (data.res == 5) {
+									$("#register_msg").html(
+											"duplicate nick name.");
+								}
+							});
 		}
 	</script>
 </div>

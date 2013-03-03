@@ -1,48 +1,41 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="pragma" content="no-cache" />
-<meta http-equiv="cache-control" content="no-cache" />
-<meta http-equiv="expires" content="0" />
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3" />
-<meta http-equiv="description" content="This is my page" />
-<title>主页面</title>
-<!-- CSS -->
-<link href="style/transdmin.css" rel="stylesheet" type="text/css"
-	media="screen" />
-<link href="style/menu.css" rel="stylesheet" type="text/css"
-	media="screen" />
-<link href="style/layout.css" rel="stylesheet" type="text/css"
-	media="screen" />
-<!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="style/ie6.css" /><![endif]-->
-
-<!--[if IE 7]><link rel="stylesheet" type="text/css" media="screen" href="style/ie7.css" /><![endif]-->
-
-<script type="text/javascript" src="script/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="script/popup.js"></script>
-<script type="text/javascript" src="script/menu.js"></script>
-<script type="text/javascript" src="script/util.js"></script>
-<script language="javascript" type="text/javascript">
-	window.onload = function iniPage() {
-		//var hs=document.location.hash;
-		//var method=hs.toString().substr(1,hs.toString().length-1);
-		//if(method.length>0){
-		//	eval(method+"();");
-		//}
-		$.getScript("script/login.js", function() {
-			initpage();
-		});
-	}
-	
-	function showRegister(){
-		var div = document.createElement("div");
-		// div.innerHTML="This is logon page";
-		div.id = "registerdiv";
-		ShowDom(div, "登录", 350, 160);
-		$("#registerdiv").load("component/register.html");
-	}
-</script>
+	<base href="${contextPath}/"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3" />
+	<meta http-equiv="description" content="This is my page" />
+	<title>Main Page</title>
+	<link href="style/transdmin.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="style/menu.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="style/layout.css" rel="stylesheet" type="text/css" media="screen" />
+	<script type="text/javascript" src="script/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="script/popup.js"></script>
+	<script type="text/javascript" src="script/menu.js"></script>
+	<script type="text/javascript" src="script/util.js"></script>
+	<script language="javascript" type="text/javascript">
+		window.onload = function iniPage() {
+			//var hs=document.location.hash;
+			//var method=hs.toString().substr(1,hs.toString().length-1);
+			//if(method.length>0){
+			//	eval(method+"();");
+			//}
+			$.getScript("script/login.js", function() {
+				initpage();
+			});
+		}
+		
+		function showRegister(){
+			var div = document.createElement("div");
+			// div.innerHTML="This is logon page";
+			div.id = "registerdiv";
+			ShowDom(div, "登录", 350, 160);
+			$("#registerdiv").load("component/register.html");
+		}
+	</script>
 </head>
 <body>
 	<div id="wrapper">
@@ -53,14 +46,14 @@
 		<!-- You can name the links with lowercase, they will be transformed to uppercase by CSS, we prefered to name them with uppercase to have the same effect with disabled stylesheet -->
 		<div id="header">
 			<ul id="mainNav">
-				<li><a href="#" class="active">首页</a></li>
+				<li><a href="#" class="active">Home</a></li>
 				<!-- Use the "active" class for the active menu item  -->
-				<li><a href="#">个人主页</a></li>
-				<li><a href="#">问答区</a></li>
-				<li><a href="#">讨论区</a></li>
-				<li class="logout" id="register"><a href="javascript:void(0);" onclick="javascript:showRegister();">注册</a></li>
+				<li><a href="#">My Page</a></li>
+				<li><a href="#">Questions</a></li>
+				<li><a href="#">Disguss</a></li>
+				<li class="logout" id="register"><a href="javascript:void(0);" onclick="javascript:showRegister();">Create An Account</a></li>
 				<li class="logout" id="signin"><a href="javascript:void(0);"
-					onclick="javascript:showLogon();">登陆</a></li>
+					onclick="javascript:showLogon();">Signin</a></li>
 			</ul>
 		</div>
 		<!-- // #end mainNav -->
