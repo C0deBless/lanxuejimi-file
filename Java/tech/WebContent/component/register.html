@@ -30,7 +30,7 @@
 			$("#registerForm")
 					.ajaxSubmit(
 							function(data) {
-								data = eval('\'' + data + '\'');
+								data = eval('(' + data + ')');
 								if (data.res == 1) {
 									$("#register_msg").html(
 											"registered account successfully.");
