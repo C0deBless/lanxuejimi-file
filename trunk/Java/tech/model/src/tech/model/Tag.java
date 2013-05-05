@@ -1,13 +1,22 @@
 package tech.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Tag {
 	private int id;
+
 	private String name;
 	private String value;
-	private List<Tag> sub = new ArrayList<>();;
+	private int parent;
+
+	public Tag(int id, String name, String value, int parent) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.value = value;
+		this.parent = parent;
+	}
+
+	public Tag() {
+	}
 
 	public int getId() {
 		return id;
@@ -33,12 +42,12 @@ public class Tag {
 		this.value = value;
 	}
 
-	public List<Tag> getSub() {
-		return sub;
+	public int getParent() {
+		return parent;
 	}
 
-	public void addSub(Tag tag) {
-		this.sub.add(tag);
+	public void setParent(int parent) {
+		this.parent = parent;
 	}
 
 }

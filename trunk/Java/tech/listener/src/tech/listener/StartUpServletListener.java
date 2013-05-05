@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSessionListener;
 
 import tech.config.Config;
 import tech.renderer.StaticResources;
+import tech.service.ServiceFactory;
 import tech.util.Templates;
 
 public class StartUpServletListener implements ServletContextListener,
@@ -125,6 +126,7 @@ public class StartUpServletListener implements ServletContextListener,
 		String webRoot = arg0.getServletContext().getRealPath("/");
 		Config.setWebRoot(webRoot);
 		StaticResources.init();
+		ServiceFactory.init();
 	}
 
 }
