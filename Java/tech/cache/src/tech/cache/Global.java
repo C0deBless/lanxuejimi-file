@@ -1,12 +1,12 @@
 package tech.cache;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import tech.model.Tag;
 
 public class Global {
 
-	public static final Map<Integer, Tag> TAGS = new HashMap<>();
+	public static final List<Tag> TAGS = new ArrayList<>();
 
 }
