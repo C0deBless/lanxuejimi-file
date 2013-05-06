@@ -60,28 +60,8 @@
 		<div id="containerHolder">
 			<div id="container">
 				<div id="left">
-					<div id="sidebar"
-						onmouseout="javascript:if(menuflag!=0){hideMenu('net');hideMenu('flash');hideMenu('java');hideMenu('webfront');hideMenu('mobile');hideMenu('database');}">
-						<ul class="sideNav">
-							<li><a href="javascript:void(0);"
-								onmouseover="showMenu('net');">.NET</a></li>
-							<li><a href="javascript:void(0);"
-								onmouseover="showMenu('java');">JAVA</a></li>
-							<li><a href="javascript:void(0);"
-								onmouseover="showMenu('flash');">Flash</a></li>
-							<li><a href="javascript:void(0);"
-								onmouseover="showMenu('webfront');">Web前端</a></li>
-							<li><a href="javascript:void(0);"
-								onmouseover="showMenu('mobile');">移动应用</a></li>
-							<li><a href="javascript:void(0);"
-								onmouseover="showMenu('database');">数据库</a></li>
-							<li><a href="javascript:void(0);">PHP</a></li>
-							<li><a href="javascript:void(0);">设计模式</a></li>
-							<li><a href="javascript:void(0);">软件工程</a></li>
-							<li><a href="javascript:void(0);">其他分类</a></li>
-						</ul>
-						<!-- // .sideNav -->
-
+					<div id="sidebar">
+						
 					</div>
 				</div>
 				<h2 style="display: none;">
@@ -99,7 +79,7 @@
 		<p id="footer">Feel free to use and customize it. Credit is
 			appreciated.</p>
 	</div>
-	<!-- // #wrapper -->
+	<!--
 	<div class="menu_group" id="submenu_net" onmouseover="showMenu('net');"
 		onmouseout="hideMenu('net');">
 		<ul>
@@ -168,6 +148,7 @@
 			<li><a href="javascript:void(0);">其他数据库</a></li>
 		</ul>
 	</div>
+	-->
 </body>
 </html>
 
