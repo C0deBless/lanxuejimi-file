@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.ImageView;
 
@@ -17,14 +18,11 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-				.detectDiskReads().detectDiskWrites().detectNetwork() // 这里可以替换为detectAll()
-																		// 就包括了磁盘读写和网络I/O
-				.penaltyLog() // 打印logcat，当然也可以定位到dropbox，通过文件保存相应的log
-				.build());
+				.detectDiskReads().detectDiskWrites().detectNetwork()
+				.penaltyLog().build());
 		StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-				.detectLeakedSqlLiteObjects() // 探测SQLite数据库操作
-				.penaltyLog() // 打印logcat
-				.penaltyDeath().build());
+				.detectLeakedSqlLiteObjects().penaltyLog().penaltyDeath()
+				.build());
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_main);
 		ImageView view = (ImageView) this.findViewById(R.id.imageView1);
@@ -48,12 +46,18 @@ public class MainActivity extends Activity {
 			myFileURL = new URL(url);
 			HttpURLConnection conn = (HttpURLConnection) myFileURL
 					.openConnection();
-			conn.setConnectTimeout(6000);
 			conn.setDoInput(true);
-			conn.setUseCaches(false);
-			InputStream is = conn.getInputStream();
-			bitmap = BitmapFactory.decodeStream(is);
-			is.close();
+			conn.setRequestMethod("GET");
+			conn.setRequestProperty("Referer",
+					"http://www.imanhua.com/comic/54/list_82968.html");
+			conn.connect();
+			if (conn.getResponseCode() == 200) {
+				InputStream is = conn.getInputStream();
+				bitmap = BitmapFactory.decodeStream(is);
+				is.close();
+			} else {
+				Log.e("IManHua", "response code " + conn.getResponseCode());
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
