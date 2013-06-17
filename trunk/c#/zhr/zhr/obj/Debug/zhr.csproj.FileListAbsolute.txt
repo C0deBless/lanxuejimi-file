@@ -1,7 +1,0 @@
-c:\users\이청봉\documents\visual studio 11\Projects\zhr\zhr\bin\Debug\zhr.exe.config
-D:\lanxuejimi-file\c#\zhr\zhr\bin\Debug\zhr.exe.config
-D:\lanxuejimi-file\c#\zhr\zhr\bin\Debug\zhr.exe
-D:\lanxuejimi-file\c#\zhr\zhr\bin\Debug\zhr.pdb
-D:\lanxuejimi-file\c#\zhr\zhr\obj\Debug\zhr.csprojResolveAssemblyReference.cache
-D:\lanxuejimi-file\c#\zhr\zhr\obj\Debug\zhr.exe
-D:\lanxuejimi-file\c#\zhr\zhr\obj\Debug\zhr.pdb
