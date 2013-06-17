@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<server>
-	<listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
-	<service name="Catalina">
-		<connector port="8080" protocol="HTTP/1.1"
-			connectionTimeout="20000" />
-	</service>
-</server>
