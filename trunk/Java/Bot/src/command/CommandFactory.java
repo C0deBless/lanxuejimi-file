@@ -2,6 +2,7 @@ package command;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -43,6 +44,9 @@ public class CommandFactory implements Runnable {
 					}
 				}
 			}
+
+			Thread thread = new Thread(this, "CommandFactory");
+			thread.start();
 		} catch (Exception e) {
 			PrintStackTrace.print(logger, e);
 		}
@@ -55,11 +59,26 @@ public class CommandFactory implements Runnable {
 		init();
 	}
 
+	public void pushPacket(List<Packet> packets) {
+		this.packetQueue.addAll(packets);
+	}
+
 	@Override
 	public void run() {
 		while (true) {
 			try {
 				Packet packet = this.packetQueue.take();
+				CommandBinder binder = this.binders.get(packet.command());
+				if (binder != null) {
+					try {
+						binder.execute(packet);
+					} catch (Exception e) {
+						PrintStackTrace.print(logger, e);
+					}
+				} else {
+					logger.error("cannot find commander binder, cmd:{}",
+							packet.command());
+				}
 			} catch (InterruptedException e) {
 				PrintStackTrace.print(logger, e);
 			}
