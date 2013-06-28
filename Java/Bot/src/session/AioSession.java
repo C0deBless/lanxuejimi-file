@@ -1,4 +1,5 @@
 package session;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -146,7 +147,7 @@ public abstract class AioSession {
 		this.listener = listener;
 	}
 
-	protected AioSession(AsynchronousSocketChannel channel, SessionType type) {
+	public AioSession(AsynchronousSocketChannel channel, SessionType type) {
 		this.sessionId = sessionIndex.addAndGet(1);
 		this.readCompletionHandler = new ReadComletionHandler();
 		this.writeCompletionHandler = new WriteCompletionHandler();

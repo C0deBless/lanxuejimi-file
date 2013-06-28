@@ -1,6 +1,5 @@
 package common.struct;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -8,13 +7,12 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import common.serialize.Serializable;
-import common.serialize.SerializationHelper;
-
-public class UserBase implements Serializable {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class UserBase {
 	private static final Logger logger = LoggerFactory
 			.getLogger(UserBase.class);
 	private static final List<Integer> MATERAIL_ITEM_LIST = Arrays.asList(
@@ -550,76 +548,6 @@ public class UserBase implements Serializable {
 		this.skills.add(skill);
 	}
 
-	public void serialize(ByteBuffer bb) {
-		commander.serialize(bb);
-		fleet.serialize(bb);
-		SerializationHelper.serializeList(ships, bb);
-		SerializationHelper.serializeList(pc, bb);
-		SerializationHelper.serializeList(missions, bb);
-		cash.serialize(bb);
-		SerializationHelper.serializeList(events, bb);
-		SerializationHelper.serializeList(items, bb);
-		SerializationHelper.serializeList(skills, bb);
-		SerializationHelper.serializeList(factions, bb);
-		SerializationHelper.serializeList(buildings, bb);
-		SerializationHelper.serializeList(products, bb);
-		SerializationHelper.serializeList(warehouse, bb);
-		SerializationHelper.serializeList(docks, bb);
-		SerializationHelper.serializeList(baselist, bb);
-		SerializationHelper.serializeStringList(exploreMap, bb);
-		SerializationHelper.serializeIntegerList(explorePort, bb);
-		SerializationHelper.serializeIntegerList(recipes, bb);
-		SerializationHelper.serializeList(categorys, bb);
-		bb.putInt(this.allyTotalCount);
-		SerializationHelper.serializeList(revenges, bb);
-		bb.putLong(this.regDate);
-		tickBase.serialize(bb);
-		bb.putInt(this.saleMyRegGoodsCount);
-		bb.putInt(this.amountRceivedCount);
-		SerializationHelper.serializeLongList(interceptList, bb);
-		SerializationHelper.serializeList(allyHelpRecords, bb);
-	}
-
-	public static UserBase deserialize(ByteBuffer bb) {
-		CommanderBase commander = CommanderBase.deserialize(bb);
-		FleetBase fleet = FleetBase.deserialize(bb);
-		List<ShipBase> ship = ShipBase.deserializeList(bb);
-		List<PCBase> pc = PCBase.deserializeList(bb);
-		List<Mission> missions = Mission.deserializeList(bb);
-		Cash cash = Cash.deserialize(bb);
-		List<EventLog> events = EventLog.deserializeList(bb);
-		List<Item> items = Item.deserializeList(bb);
-		List<UserSkill> skills = UserSkill.deserializeList(bb);
-		List<FactionBase> factions = FactionBase.deserializeList(bb);
-		List<Building> buildings = Building.deserializeList(bb);
-		List<Product> products = Product.deserializeList(bb);
-		List<WarehouseItem> warehouse = WarehouseItem.deserializeList(bb);
-		List<Dock> docks = Dock.deserializeList(bb);
-		List<BaseInfo> baselist = BaseInfo.deserializeList(bb);
-		List<String> exploreMap = SerializationHelper.deserializeStringList(bb);
-		List<Integer> explorePort = SerializationHelper
-				.deserializeIntegerList(bb);
-		List<Integer> recipes = SerializationHelper.deserializeIntegerList(bb);
-		List<BattleCategory> categorys = BattleCategory.deserializeList(bb);
-		int allyTotalCount = bb.getInt();
-		List<RevengeModel> revenges = RevengeModel.deserializeList(bb);
-		long regDate = bb.getLong();
-		TickBase tickBase = TickBase.deserialize(bb);
-		int saleMyRegGoodsCount = bb.getInt();
-		int amountRceivedCount = bb.getInt();
-		List<Long> interceptList = SerializationHelper.deserializeLongList(bb);
-		List<AllyHelpModel> allyHelpRecords = AllyHelpModel.deserializeList(bb);
-
-		UserBase user = new UserBase(commander, fleet, ship, pc, missions,
-				cash, events, items, skills, factions, buildings, products,
-				warehouse, docks, baselist, exploreMap, explorePort, recipes,
-				categorys, allyTotalCount, revenges, tickBase,
-				saleMyRegGoodsCount, amountRceivedCount, interceptList,
-				allyHelpRecords);
-		user.regDate = regDate;
-		return user;
-	}
-
 	public void removeAllSkill(int pcId) {
 		Iterator<UserSkill> iter = this.skills.iterator();
 		while (iter.hasNext()) {
@@ -995,20 +923,8 @@ public class UserBase implements Serializable {
 		return this.commander.getName();
 	}
 
-	public int shadowPvPLevel() {
-		int level = this.level() + (this.getsPvpVictory() / 5);
-		if (200 < level) {
-			level = 200;
-		}
-		return level;
-	}
-
 	public int level() {
 		return this.commander.getLevel();
-	}
-
-	public int getsPvpVictory() {
-		return this.fleet.getsPvpVictory();
 	}
 
 	public void setGuild_srl(int guild_srl) {
