@@ -9,6 +9,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import main.BotContext;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -142,6 +144,7 @@ public abstract class AioSession {
 			SessionState.UNKNOWN);
 	private SessionEventListener listener = null;
 	private final SessionType type;
+	private BotContext context;
 
 	public void setEventListener(SessionEventListener listener) {
 		this.listener = listener;
@@ -295,6 +298,14 @@ public abstract class AioSession {
 
 	public SessionType getType() {
 		return type;
+	}
+
+	public BotContext getContext() {
+		return context;
+	}
+
+	public void setContext(BotContext context) {
+		this.context = context;
 	}
 
 }

@@ -5,9 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.LinkedBlockingDeque;
 
-import main.BotContext;
 import main.PrintStackTrace;
 
 import org.slf4j.Logger;
@@ -17,11 +15,9 @@ import packet.Packet;
 
 import common.tools.ClassParser;
 
-public class CommandFactory implements Runnable {
+public class CommandFactory {
 
 	static Logger logger = LoggerFactory.getLogger("bot");
-
-	LinkedBlockingDeque<Packet> packetQueue = new LinkedBlockingDeque<>();
 
 	final Map<Integer, CommandBinder> binders = new HashMap<>();
 	final String commandPackage = "command.impl";
@@ -45,43 +41,29 @@ public class CommandFactory implements Runnable {
 				}
 			}
 
-			Thread thread = new Thread(this, "CommandFactory");
-			thread.start();
 		} catch (Exception e) {
 			PrintStackTrace.print(logger, e);
 		}
 	}
 
-	final BotContext context;
-
-	public CommandFactory(BotContext context) {
-		this.context = context;
+	public CommandFactory() {
 		init();
 	}
 
 	public void pushPacket(List<Packet> packets) {
-		this.packetQueue.addAll(packets);
-	}
-
-	@Override
-	public void run() {
-		while (true) {
-			try {
-				Packet packet = this.packetQueue.take();
-				CommandBinder binder = this.binders.get(packet.command());
-				if (binder != null) {
-					try {
-						binder.execute(packet);
-					} catch (Exception e) {
-						PrintStackTrace.print(logger, e);
-					}
-				} else {
-					logger.error("cannot find commander binder, cmd:{}",
-							packet.command());
+		for (Packet packet : packets) {
+			CommandBinder binder = this.binders.get(packet.command());
+			if (binder != null) {
+				try {
+					binder.execute(packet);
+				} catch (Exception e) {
+					PrintStackTrace.print(logger, e);
 				}
-			} catch (InterruptedException e) {
-				PrintStackTrace.print(logger, e);
+			} else {
+				// logger.error("cannot find commander binder, cmd:{}",
+				// packet.command());
 			}
 		}
 	}
+
 }
