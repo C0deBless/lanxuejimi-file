@@ -1,22 +1,112 @@
 var net = require('net');
-var Packet = require('Packet');
+var Packet = require('./Packet.js');
 
-var json = "{\"user_id\":100003075441353,\"sig\":\"f5d7598f260f4fe83cc2e6167f6adff8\"}";
-var bufferSize = 300000;
+var userId = 100003075441353;
+var sig = "15c6befe59673e130c0b5a0fe99fbd20";
+var bufferSize = 32768;
 
-var client = net.connect(8000, "www.easymode.com", function() {
+var userData = {};
+
+var readBuffer = null;
+
+function toByteArray(buffer, offset, length) {
+	var bytes = [];
+	for ( var i = 0; i < length; i++) {
+		bytes[i] = buffer[i + offset];
+	}
+	return bytes;
+}
+
+function bytesToString(bytes) {
+	var str = "";
+	for ( var i = 0; i < bytes.length; i++) {
+		str += String.fromCharCode(bytes[i]);
+	}
+	return str;
+}
+
+function putByteToBuffer(buffer, offset, bytes) {
+	for ( var index = 0; index < bytes.length; index++) {
+		buffer.writeUInt8(bytes[index], index + offset);
+	}
+}
+
+function parsePacket(data) {
+
+	// console.log("receive binary:", data);
+
+	var packetSize = 0;
+	if (readBuffer === null) {
+		readBuffer = new Buffer(data);
+	} else {
+		var offset = readBuffer.length;
+		var tmpBuffer = new Buffer(readBuffer.length + data.length);
+		readBuffer.copy(tmpBuffer);
+		readBuffer = tmpBuffer;
+		putByteToBuffer(readBuffer, offset, data);
+	}
+
+	for (;;) {
+
+		if (readBuffer === null) {
+			break;
+		}
+		packetSize = readBuffer.readInt32BE(0);
+
+		if (readBuffer.length >= packetSize) {
+			var cmd = readBuffer.readInt16BE(4);
+			// var json = readBuffer.toString("utf8", 6, buffer.length);
+			var bytes = toByteArray(readBuffer, 6, packetSize - 6);
+
+			var packet = new Packet(cmd, bytes);
+			handlePacket(packet);
+
+			if (readBuffer.length > packetSize) {
+				readBuffer = readBuffer.slice(packetSize, readBuffer.length);
+			} else if (readBuffer.length == packetSize) {
+				readBuffer = null;
+			} else {
+
+			}
+		} else {
+			console.log("quit loop,", packetSize, readBuffer.length);
+			break;
+		}
+	}
+}
+
+function handlePacket(packet) {
+	var cmd = packet.cmd;
+	var data = packet.data;
+	console.log("packet:", cmd, bytesToString(data));
+
+	if (cmd == 1300) {
+		sendPacket(301, "");
+	} else if (cmd == 1301) {
+		var strJson = bytesToString(data);
+		console.log("user data:", strJson);
+		var jsonData = JSON.parse(strJson);
+		userData = jsonData;
+		console.log("energy=" + userData.commander.energy);
+	}
+}
+
+function sendPacket(cmd, data) {
+	var packetSize = data.length + 4 + 2;
+	var buffer = new Buffer(bufferSize);
+	buffer.writeInt32BE(packetSize, 0);
+	buffer.writeInt16BE(cmd, 4);
+	buffer.write(data, 6);
+	var str = buffer.toString("utf-8", 0, packetSize);
+	client.write(str);
+	console.log("send packet:", cmd, data);
+}
+
+var client = net.connect(8100, "www.easymode.com", function() {
 	console.log("client connected,");
 
 	client.on('data', function(data) {
-		var buffer = new Buffer(data);
-		var packetSize = buffer.readInt32BE(0);
-		var cmd = buffer.readInt16BE(4);
-		var json = buffer.toString("utf8", 6, buffer.length);
-		console.log("data:", packetSize, cmd, json);
-
-		if (cmd == 1300) {
-
-		}
+		parsePacket(data);
 	});
 	client.on('end', function() {
 		console.log('client disconnected');
@@ -25,13 +115,13 @@ var client = net.connect(8000, "www.easymode.com", function() {
 		console.log('tcp connection closed');
 	});
 
-	var packetSize = json.length + 4 + 2;
-	var buffer = new Buffer(bufferSize);
-	buffer.writeInt32BE(packetSize, 0);
-	buffer.writeInt16BE(300, 4);
-	buffer.write(json, 6);
-	var str = buffer.toString("utf-8", 0, packetSize);
-	client.write(str);
+	// var packetSize = json.length + 4 + 2;
+	// var buffer = new Buffer(bufferSize);
+	// buffer.writeInt32BE(packetSize, 0);
+	// buffer.writeInt16BE(300, 4);
+	// buffer.write(json, 6);
+	// var str = buffer.toString("utf-8", 0, packetSize);
+	// client.write(str);
+	sendPacket(300, "{\"user_id\":" + userId + ",\"sig\":\"" + sig + "\"}");
 
-	console.log("send login packet,", packetSize, str);
 });
