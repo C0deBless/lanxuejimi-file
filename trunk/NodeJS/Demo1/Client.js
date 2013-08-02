@@ -9,6 +9,11 @@ var userData = {};
 
 var readBuffer = null;
 
+var Command = {
+	C_LOGIN : 300,
+	C_UDATAREQ : 301
+};
+
 function toByteArray(buffer, offset, length) {
 	var bytes = [];
 	for ( var i = 0; i < length; i++) {
@@ -81,7 +86,7 @@ function handlePacket(packet) {
 	console.log("packet:", cmd, bytesToString(data));
 
 	if (cmd == 1300) {
-		sendPacket(301, "");
+		sendPacket(Command.C_UDATAREQ, "");
 	} else if (cmd == 1301) {
 		var strJson = bytesToString(data);
 		console.log("user data:", strJson);
@@ -115,13 +120,6 @@ var client = net.connect(8100, "www.easymode.com", function() {
 		console.log('tcp connection closed');
 	});
 
-	// var packetSize = json.length + 4 + 2;
-	// var buffer = new Buffer(bufferSize);
-	// buffer.writeInt32BE(packetSize, 0);
-	// buffer.writeInt16BE(300, 4);
-	// buffer.write(json, 6);
-	// var str = buffer.toString("utf-8", 0, packetSize);
-	// client.write(str);
 	sendPacket(300, "{\"user_id\":" + userId + ",\"sig\":\"" + sig + "\"}");
 
 });
