@@ -1,5 +1,5 @@
 var net = require('net');
-var Packet = require('./Packet.js');
+var Packet = require('./Packet');
 
 var userId = 100003075441353;
 var sig = "15c6befe59673e130c0b5a0fe99fbd20";
