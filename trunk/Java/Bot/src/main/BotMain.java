@@ -21,8 +21,8 @@ import session.AioSession.SessionType;
 public class BotMain {
 
 	static Logger logger = LoggerFactory.getLogger("bot");
-	// private static final long userId = 100003075441353l;
-	private static final String sig = "1234";
+	private static final long userId = 127580510;
+	private static final String sig = "4b681c648e9987dd8072e346499953e9";
 	private static final PacketBuilder PACKET_BUILDER = new PacketBuilder() {
 
 		@Override
@@ -32,25 +32,20 @@ public class BotMain {
 		}
 	};
 
-	private static final int userIdStart = 10000;
-	private static final int userIdEnd = 13000;
-
 	public static final Map<Long, BotContext> pool = new ConcurrentHashMap<>();
 
 	public static void main(String[] args) throws IOException,
 			InterruptedException {
 
-		for (int i = userIdStart; i < userIdEnd; i++) {
-			openChannel(i);
-		}
+		openChannel(userId);
 		Thread.currentThread().join();
 	}
 
 	private static void openChannel(final long userId) throws IOException {
 		final AsynchronousSocketChannel channel = AsynchronousSocketChannel
 				.open();
-		final String addr = "127.0.0.1";
-		final int port = 8000;
+		final String addr = "ec2-107-21-127-76.compute-1.amazonaws.com";// "www.easymode.com";
+		final int port = 8030;// 8300;
 		channel.connect(new InetSocketAddress(addr, port), null,
 				new CompletionHandler<Void, Object>() {
 

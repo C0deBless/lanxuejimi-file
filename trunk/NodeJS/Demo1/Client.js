@@ -1,5 +1,6 @@
 var net = require('net');
 var Packet = require('./Packet');
+var eventEmitter = require('events').EventEmitter;
 
 var userId = 100003075441353;
 var sig = "15c6befe59673e130c0b5a0fe99fbd20";
@@ -9,10 +10,24 @@ var userData = {};
 
 var readBuffer = null;
 
+var leftTopNS = "N62";
+var leftTopEW = "W023";
+var rightTopNS = 'N62';
+var rightTopEW = "W019";
+var leftBottomNS = 'N46';
+var leftBottomEW = 'W023';
+var rightBottomNS = "N46";
+var rightBottomEW = "W019";
+
 var Command = {
 	C_LOGIN : 300,
-	C_UDATAREQ : 301
+	C_UDATAREQ : 301,
+	S_OBJECT_UPDATE : 1405
 };
+
+function loadMapObject() {
+
+}
 
 function toByteArray(buffer, offset, length) {
 	var bytes = [];
@@ -89,10 +104,20 @@ function handlePacket(packet) {
 		sendPacket(Command.C_UDATAREQ, "");
 	} else if (cmd == 1301) {
 		var strJson = bytesToString(data);
-		console.log("user data:", strJson);
+		console.log("recieve user data:", strJson);
 		var jsonData = JSON.parse(strJson);
 		userData = jsonData;
 		console.log("energy=" + userData.commander.energy);
+	} else if (cmd == Command.S_OBJECT_UPDATE) {
+		var buffer = new Buffer(data.length);
+		putByteToBuffer(buffer, 0, data);
+		var index = 0;
+		var res = buffer.readInt32BE(index);
+		index += 4;
+		var clear = buffer.readInt32BE(index);
+		index += 4;
+		var length = buffer.readInt32BE(index);
+		
 	}
 }
 

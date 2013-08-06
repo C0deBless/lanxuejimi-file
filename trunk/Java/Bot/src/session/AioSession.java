@@ -214,6 +214,7 @@ public abstract class AioSession {
 	}
 
 	public void responseJson(int command, String json) {
+		logger.error("response, cmd:{}, data:{}", json);
 		byte[] data = json.getBytes();
 		this.responseBinary(command, data);
 	}
