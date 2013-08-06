@@ -41,6 +41,7 @@ public class UserBase {
 	protected List<RevengeModel> revenges = new ArrayList<>();
 	protected List<Long> interceptList = new ArrayList<>();
 	protected List<AllyHelpModel> allyHelpRecords = new ArrayList<>();
+	protected List<MapObjectData> objects = new ArrayList<>();
 
 	protected int mailTotalCount;
 	protected int allyTotalCount;
@@ -152,6 +153,14 @@ public class UserBase {
 
 	public FleetBase getFleet() {
 		return fleet;
+	}
+
+	public List<MapObjectData> getObjects() {
+		return objects;
+	}
+
+	public void setObjects(List<MapObjectData> objects) {
+		this.objects = objects;
 	}
 
 	public void setFleet(FleetBase fleet) {
