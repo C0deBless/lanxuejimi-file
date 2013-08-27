@@ -214,6 +214,7 @@
             this.MinimumSize = new System.Drawing.Size(512, 200);
             this.Name = "Form1";
             this.Text = "管道长度计算器";
+            this.Leave += new System.EventHandler(this.Form1_Leave);
             this.ResumeLayout(false);
             this.PerformLayout();
 

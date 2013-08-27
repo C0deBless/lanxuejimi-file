@@ -154,7 +154,7 @@ namespace WindowsFormsApplication1
         }
         public void fileloading()
         {
-            FileStream fs = new FileStream("C:\\BWYQ\\pipe_data.txt", FileMode.Open);
+            FileStream fs = new FileStream(@"C:\Users\trnnn\Desktop\pipe_data.txt", FileMode.Open);
             StreamReader m_streamReader = new StreamReader(fs);
             m_streamReader.BaseStream.Seek(0, SeekOrigin.Begin);
             int i = 0;
