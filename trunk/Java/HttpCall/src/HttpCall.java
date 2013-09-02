@@ -1,17 +1,16 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.CookieManager;
-import java.net.HttpCookie;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
 public class HttpCall {
 
-	public static void main(String[] args) {
-
+	public static void main(String[] args) throws IOException,
+			URISyntaxException {
+		call("https://apps.facebook.com/fbml/ajax/dialog/apprequests");
 	}
 
 	private static String call(String url) throws IOException,
@@ -24,37 +23,26 @@ public class HttpCall {
 				"application/x-www-form-urlencoded");
 		conn.setRequestProperty("content-type",
 				"application/x-www-form-urlencoded");
-		HttpCookie cookie1 = new HttpCookie("xs",
-				"2%3AYAKK9gNJNl-NxA%3A2%3A1378108285%3A17422");
-		HttpCookie cookie2 = new HttpCookie("s", "Aa5Xh5Qimecq5aW0.BSJEN9");
-		HttpCookie cookie3 = new HttpCookie("lu", "ggNjy-WBcwZL8xPjLBRYKskw");
-		HttpCookie cookie4 = new HttpCookie("datr", "k_fPUNidc-XE7pl9bh5EjXHe");
-		HttpCookie cookie5 = new HttpCookie("csm", "2");
-		HttpCookie cookie6 = new HttpCookie("c_user", "100004979255608");
-		HttpCookie cookie7 = new HttpCookie("fr",
-				"08y4moPYqbJQc0uEK.AWVoylbbKKzmJDHLN6hGmSWWMtU.BQTUQZ.6T.FIk.AWV2oWeQ");
-		HttpCookie cookie8 = new HttpCookie("sub", "266240");
-		HttpCookie cookie9 = new HttpCookie("p", "78");
-		HttpCookie cookie10 = new HttpCookie(
-				"presence",
-				"EM378108537EuserFA21B04979255608A2EstateFDsb2F0Et2F_5b_5dElm2FnullEuct2F1378107689BEtrFnullEtwF2800235194EatF1378108485152G378108537789CEchFDp_5f1B04979255608F4CC; locale=ko_KR; wd=1439x840; act=1378108562097%2F7; _e_0arK_6=%5B%220arK%22%2C1378108562099%2C%22act%22%2C1378108562097%2C7%2C%22ok_clicked%22%2C%22click%22%2C%22click%22%2C%22-%22%2C%22r%22%2C%22%2Fplayarmada%2F%3Ffb_source%3Dbookmark_apps%26ref%3Dbookmarks%26count%3D0%26fb_bmpos%3D3_0%22%2C%7B%22ft%22%3A%7B%7D%2C%22gt%22%3A%7B%7D%7D%2C0%2C0%2C0%2C1412%2C16%5D");
-		// CookieManager manager = new CookieManager();
-		// manager.getCookieStore().add(new URI(url), cookie1);
-		// manager.getCookieStore().add(new URI(url), cookie2);
-		// manager.getCookieStore().add(new URI(url), cookie3);
-		// manager.getCookieStore().add(new URI(url), cookie4);
-		// manager.getCookieStore().add(new URI(url), cookie5);
-		// manager.getCookieStore().add(new URI(url), cookie6);
-		// manager.getCookieStore().add(new URI(url), cookie7);
-		// manager.getCookieStore().add(new URI(url), cookie8);
-		// manager.getCookieStore().add(new URI(url), cookie9);
-		// manager.getCookieStore().add(new URI(url), cookie10);
-
-		conn.setDoOutput(false);
-		// OutputStreamWriter writer = new OutputStreamWriter(
-		// conn.getOutputStream());
-		// writer.flush();
-		// writer.close();
+		conn.setRequestProperty(
+				"Cookie",
+				"i_id=%3Aasync_conf; c_user=100004979255608; csm=2; datr=wiyGUSxH_3wA--mMYFl7RN1l; lu=RgjLisbXV--qTn1CPzGaauVw; s=Aa75A4IXjCmhRrvO.BSJHA3; xs=61%3Aqqm3KFt0_PdDig%3A2%3A1378119735%3A17422; sub=536870912; p=78; fr=0RfVkae2QY8KOpMDu.AWUjE2QyjiXaBYKxrqoiM3pF6vs.BRhizL.X9.FIk.AWUEDBQ2; presence=EM378119745EuserFA21B04979255608A2EstateFDsb2F0Et2F_5b_5dElm2FnullEuct2F137811914B0EtrFnullEtwF2186511273EatF1378119741707G378119745370CEchFDp_5f1B04979255608F5CC; locale=ko_KR; wd=1474x836; act=1378119782744%2F0; _e_0KUs_1=%5B%220KUs%22%2C1378119782746%2C%22act%22%2C1378119782744%2C0%2C%22ok_clicked%22%2C%22click%22%2C%22click%22%2C%22-%22%2C%22r%22%2C%22%2Fplayarmada%2F%3Ffb_source%3Dbookmark_apps%26ref%3Dbookmarks%26count%3D0%26fb_bmpos%3D3_0%22%2C%7B%22ft%22%3A%7B%7D%2C%22gt%22%3A%7B%7D%7D%2C0%2C0%2C0%2C1447%2C16%5D");
+		conn.setRequestProperty("Origin", "https://apps.facebook.com");
+		conn.setRequestProperty(
+				"Referer",
+				"https://apps.facebook.com/playarmada/?fb_source=bookmark_apps&ref=bookmarks&count=0&fb_bmpos=3_0");
+		conn.setRequestProperty(
+				"user-agent",
+				"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.62 Safari/537.36");
+		conn.setRequestProperty("x-svn-rev", "924754");
+		conn.setDoOutput(true);
+		OutputStreamWriter writer = new OutputStreamWriter(
+				conn.getOutputStream());
+		String formData = "_path=apprequests&app_id=127395434040269&redirect_uri=https%3A%2F%2Farmada.nwzcloud.com%2F&sdk=joey&display=async&message=TRNNNN%EB%8B%98%EC%9D%B4%20%EC%95%84%EB%A5%B4%EB%A7%88%EB%8B%A4%EC%97%90%EC%84%9C%20%EC%84%A0%EB%AC%BC%EC%9D%84%20%EB%B3%B4%EB%83%88%EC%8A%B5%EB%8B%88%EB%8B%A4.&to=1547439183&data=0_gift_"
+				+ 855047
+				+ "&e2e=%7B%7D&locale=en_US&frictionless=true&__d=1&__user=100004979255608&__a=1&__dyn=7n8ahyj34fxl2u5F97Keobo&__req=4&from_post=1&default_setting=true&ok_clicked=Send%20Request&fb_dtsg=AQCEENq4&ttstamp=265816769697811352";
+		writer.write(formData);
+		writer.flush();
+		writer.close();
 		int code = conn.getResponseCode();
 		String msg = conn.getResponseMessage();
 		if (code != 200) {
@@ -72,5 +60,4 @@ public class HttpCall {
 		}
 		return sb.toString();
 	}
-
 }
