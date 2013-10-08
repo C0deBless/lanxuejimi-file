@@ -13,5 +13,6 @@ public class SimpleEventHandler implements EventHandler<SimpleEvent> {
 	public void onEvent(SimpleEvent event, long sequence, boolean endOfBatch)
 			throws Exception {
 		valuesSeen.add(event.getValue());
+		System.out.println("onEvent:" + event.getValue());
 	}
 }
