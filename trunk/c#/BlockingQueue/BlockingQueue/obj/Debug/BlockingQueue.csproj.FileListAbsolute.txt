@@ -1,0 +1,5 @@
+C:\workspace\lanxuejimi-file\c#\BlockingQueue\BlockingQueue\obj\Debug\BlockingQueue.csprojResolveAssemblyReference.cache
+C:\workspace\lanxuejimi-file\c#\BlockingQueue\BlockingQueue\bin\Debug\BlockingQueue.dll
+C:\workspace\lanxuejimi-file\c#\BlockingQueue\BlockingQueue\bin\Debug\BlockingQueue.pdb
+C:\workspace\lanxuejimi-file\c#\BlockingQueue\BlockingQueue\obj\Debug\BlockingQueue.dll
+C:\workspace\lanxuejimi-file\c#\BlockingQueue\BlockingQueue\obj\Debug\BlockingQueue.pdb
