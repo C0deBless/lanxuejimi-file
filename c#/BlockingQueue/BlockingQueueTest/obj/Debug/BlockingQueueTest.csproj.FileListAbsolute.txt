@@ -1,0 +1,8 @@
+C:\workspace\lanxuejimi-file\c#\BlockingQueue\BlockingQueueTest\bin\Debug\BlockingQueueTest.exe.config
+C:\workspace\lanxuejimi-file\c#\BlockingQueue\BlockingQueueTest\bin\Debug\BlockingQueueTest.exe
+C:\workspace\lanxuejimi-file\c#\BlockingQueue\BlockingQueueTest\bin\Debug\BlockingQueueTest.pdb
+C:\workspace\lanxuejimi-file\c#\BlockingQueue\BlockingQueueTest\bin\Debug\BlockingQueue.dll
+C:\workspace\lanxuejimi-file\c#\BlockingQueue\BlockingQueueTest\bin\Debug\BlockingQueue.pdb
+C:\workspace\lanxuejimi-file\c#\BlockingQueue\BlockingQueueTest\obj\Debug\BlockingQueueTest.csprojResolveAssemblyReference.cache
+C:\workspace\lanxuejimi-file\c#\BlockingQueue\BlockingQueueTest\obj\Debug\BlockingQueueTest.exe
+C:\workspace\lanxuejimi-file\c#\BlockingQueue\BlockingQueueTest\obj\Debug\BlockingQueueTest.pdb
