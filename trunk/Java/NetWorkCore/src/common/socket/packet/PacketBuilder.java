@@ -1,0 +1,65 @@
+package common.socket.packet;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import common.socket.session.AioSession;
+import common.socket.utils.PrintStackTrace;
+
+public abstract class PacketBuilder {
+
+	static final Logger logger = LoggerFactory.getLogger(PacketBuilder.class);
+
+	public abstract void queue(ByteBuffer buffer, AioSession session);
+
+	protected final List<Packet> parse(ByteBuffer buffer, AioSession session) {
+		List<Packet> packets = new ArrayList<>();
+
+		boolean loop = true;
+		int remaining = 0;
+
+		while (loop) {
+			remaining = buffer.remaining();
+
+			if (remaining >= 6) {
+				int len = buffer.getInt(buffer.position());
+				if (len < 6) {
+					logger.error(
+							"PakcetBuilder.parse, illegal,  length:{}, data ->{}",
+							len, buffer.array());
+					try {
+						session.close();
+					} catch (IOException e) {
+						logger.error("PacketBuilder.parse, " + e.getMessage());
+						PrintStackTrace.print(logger, e);
+					}
+					return Collections.emptyList();
+				}
+				if (remaining >= len) {
+					buffer.getInt(); // to forward position
+					short cmd = buffer.getShort();
+					byte[] data = new byte[len - 6];
+					buffer.get(data);
+
+					packets.add(new Packet(cmd, data, session));
+				} else {
+					loop = false;
+				}
+			} else {
+				loop = false;
+			}
+		}
+
+		buffer.compact();
+		buffer.clear();
+		buffer.position(remaining);
+
+		return packets;
+	}
+}
