@@ -9,16 +9,16 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import common.socket.session.AioSession;
+import common.socket.session.AioTcpession;
 import common.socket.utils.PrintStackTrace;
 
 public abstract class PacketBuilder {
 
 	static final Logger logger = LoggerFactory.getLogger(PacketBuilder.class);
 
-	public abstract void queue(ByteBuffer buffer, AioSession session);
+	public abstract void queue(ByteBuffer buffer, AioTcpession session);
 
-	protected final List<Packet> parse(ByteBuffer buffer, AioSession session) {
+	protected final List<Packet> parse(ByteBuffer buffer, AioTcpession session) {
 		List<Packet> packets = new ArrayList<>();
 
 		boolean loop = true;
