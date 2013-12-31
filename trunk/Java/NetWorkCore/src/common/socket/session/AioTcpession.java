@@ -14,9 +14,9 @@ import org.slf4j.LoggerFactory;
 
 import common.socket.utils.PrintStackTrace;
 
-public abstract class AioSession {
+public abstract class AioTcpession {
 
-	static final Logger logger = LoggerFactory.getLogger(AioSession.class);
+	static final Logger logger = LoggerFactory.getLogger(AioTcpession.class);
 
 	public static class SessionState {
 
@@ -46,9 +46,9 @@ public abstract class AioSession {
 	}
 
 	private class WriteCompletionHandler implements
-			CompletionHandler<Integer, AioSession> {
+			CompletionHandler<Integer, AioTcpession> {
 		@Override
-		public void completed(Integer result, AioSession session) {
+		public void completed(Integer result, AioTcpession session) {
 			if (result < 0 || !session.getChannel().isOpen()) {
 				try {
 					close();
@@ -67,7 +67,7 @@ public abstract class AioSession {
 		}
 
 		@Override
-		public void failed(Throwable exc, AioSession session) {
+		public void failed(Throwable exc, AioTcpession session) {
 			try {
 				close();
 			} catch (IOException e) {
@@ -79,9 +79,9 @@ public abstract class AioSession {
 	}
 
 	private class ReadComletionHandler implements
-			CompletionHandler<Integer, AioSession> {
+			CompletionHandler<Integer, AioTcpession> {
 		@Override
-		public void completed(Integer result, AioSession session) {
+		public void completed(Integer result, AioTcpession session) {
 			try {
 				if (result > 0) {
 					session.pendingRead();
@@ -114,7 +114,7 @@ public abstract class AioSession {
 		}
 
 		@Override
-		public void failed(Throwable exc, AioSession session) {
+		public void failed(Throwable exc, AioTcpession session) {
 			try {
 				session.close();
 			} catch (IOException e) {
@@ -140,8 +140,8 @@ public abstract class AioSession {
 	protected AsynchronousSocketChannel channel;
 	protected AtomicBoolean isWriting = new AtomicBoolean(false);
 	protected final int sessionId;
-	protected CompletionHandler<Integer, AioSession> readCompletionHandler;
-	protected CompletionHandler<Integer, AioSession> writeCompletionHandler;
+	protected CompletionHandler<Integer, AioTcpession> readCompletionHandler;
+	protected CompletionHandler<Integer, AioTcpession> writeCompletionHandler;
 	private final ConcurrentLinkedQueue<ByteBuffer> outs = new ConcurrentLinkedQueue<>();
 	private ByteBuffer writeBuffer;
 	protected static final AtomicInteger sessionIndex = new AtomicInteger(1);
@@ -153,7 +153,7 @@ public abstract class AioSession {
 		this.listener = listener;
 	}
 
-	protected AioSession(AsynchronousSocketChannel channel) {
+	protected AioTcpession(AsynchronousSocketChannel channel) {
 		this.sessionId = sessionIndex.addAndGet(1);
 		this.readCompletionHandler = new ReadComletionHandler();
 		this.writeCompletionHandler = new WriteCompletionHandler();

@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4DD47E6C-D902-4BE1-AEDF-E72A1A662198}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>d3bd1d02-5bbf-4fae-ad44-e7311651a8e9</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NetworkCore</RootNamespace>
-    <AssemblyName>NetworkCore</AssemblyName>
+    <RootNamespace>NetworkTest</RootNamespace>
+    <AssemblyName>NetworkTest</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -39,17 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ISession.cs" />
-    <Compile Include="ISessionHandler.cs" />
-    <Compile Include="Packet.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SocketAsyncResult.cs" />
-    <Compile Include="SocketAsyncState.cs" />
-    <Compile Include="SessionBase.cs" />
-    <Compile Include="SocketEventArgs.cs" />
-    <Compile Include="SocketHandler.cs" />
-    <Compile Include="AioTcpSession.cs" />
-    <Compile Include="TCPListener.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,7 +6,7 @@ import java.nio.ByteBuffer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import common.socket.session.AioSession;
+import common.socket.session.AioTcpession;
 import common.socket.utils.PrintStackTrace;
 
 public class Packet {
@@ -14,7 +14,7 @@ public class Packet {
 
 	private final int command;
 	private byte[] data;
-	private AioSession session;
+	private AioTcpession session;
 	private long beginTime;
 	private int count;
 	private int packetId;
@@ -45,7 +45,7 @@ public class Packet {
 		this.count = count;
 	}
 
-	public Packet(int command, byte[] data, AioSession session) {
+	public Packet(int command, byte[] data, AioTcpession session) {
 		this.command = command;
 		this.data = data;
 		this.session = session;
@@ -73,11 +73,11 @@ public class Packet {
 		this.data = b;
 	}
 
-	public AioSession getSession() {
+	public AioTcpession getSession() {
 		return session;
 	}
 
-	public void session(AioSession session) {
+	public void session(AioTcpession session) {
 		this.session = session;
 	}
 
