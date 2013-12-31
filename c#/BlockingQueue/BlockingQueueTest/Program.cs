@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using BlockingQueue;
 using System.Threading;
+using System.Collections.Concurrent;
 
 namespace BlockingQueueTest
 {
     class Program
     {
+        ConcurrentQueue<int> queue;
         static BlockingQueue<int> TestQueue =new BlockingQueue<int>();
         static void Main(string[] args)
         {
