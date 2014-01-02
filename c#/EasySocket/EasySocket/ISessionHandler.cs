@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace NetworkCore
+namespace EasySocket
 {
     /// <summary>
     /// Socket处理程序接口
