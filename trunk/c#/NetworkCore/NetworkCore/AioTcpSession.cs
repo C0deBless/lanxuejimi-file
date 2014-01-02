@@ -10,19 +10,38 @@ using System.Net.Security;
 
 namespace NetworkCore
 {
-    /// <summary>
-    /// TCP客户端
-    /// </summary>
     public class AioTcpSession : SessionBase
     {
 
-        /// <summary>
-        /// 实例化TCP客户端。
-        /// </summary>
+        public event EventHandler<Packet> OnPacketReceived;
+
         public AioTcpSession(Socket socket)
             : base(socket, new SocketHandler())
         {
+            this.ReceiveCompleted += AioTcpSession_ReceiveCompleted;
+        }
 
+        private void AioTcpSession_ReceiveCompleted(object sender, SocketEventArgs e)
+        {
+            byte[] data = e.Data;
+            int length = e.DataLength;
+
+            byte[] cmdBytes = new byte[2];
+            cmdBytes[0] = data[0];
+            cmdBytes[1] = data[1];
+            short cmd = BitConverter.ToInt16(cmdBytes, 0);
+
+            byte[] packetData = new byte[data.Length - 2];
+            for (int i = 0; i < data.Length - 2; i++)
+            {
+                packetData[i] = data[i + 2];
+            }
+
+            Packet packet = new Packet(cmd, packetData);
+            if (this.OnPacketReceived != null)
+            {
+                this.OnPacketReceived(this, packet);
+            }
         }
 
         public static AioTcpSession Connect(IPEndPoint endpoint)
@@ -44,7 +63,7 @@ namespace NetworkCore
                 socket.EndConnect(result);
                 state.Completed = true;
             }, state).AsyncWaitHandle.WaitOne();
-            //等待异步全部处理完成
+
             while (!state.Completed)
             {
                 Thread.Sleep(1);
