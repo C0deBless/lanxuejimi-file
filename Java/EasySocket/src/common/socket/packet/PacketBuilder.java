@@ -12,13 +12,11 @@ import org.slf4j.LoggerFactory;
 import common.socket.session.AioTcpession;
 import common.socket.utils.PrintStackTrace;
 
-public abstract class PacketBuilder {
+public class PacketBuilder {
 
 	static final Logger logger = LoggerFactory.getLogger(PacketBuilder.class);
 
-	public abstract void queue(ByteBuffer buffer, AioTcpession session);
-
-	protected final List<Packet> parse(ByteBuffer buffer, AioTcpession session) {
+	public final List<Packet> parse(ByteBuffer buffer, AioTcpession session) {
 		List<Packet> packets = new ArrayList<>();
 
 		boolean loop = true;

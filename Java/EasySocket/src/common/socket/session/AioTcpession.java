@@ -5,45 +5,32 @@ import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
+import java.nio.channels.ReadPendingException;
+import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import common.socket.packet.Packet;
+import common.socket.packet.PacketBuilder;
+import common.socket.session.event.SessionEventListener;
+import common.socket.session.event.SessionReceivedPacketEventListener;
 import common.socket.utils.PrintStackTrace;
 
-public abstract class AioTcpession {
+/**
+ * Use <code>AioTcpSession</code> to store the information of a socket connection
+ * 
+ * Invoke {@link #onReceivePacket(SessionReceivedPacketEventListener)} to specify packet received event lister
+ * 
+ * @see SessionReceivedPacketEventListener
+ */
+public class AioTcpession {
 
 	static final Logger logger = LoggerFactory.getLogger(AioTcpession.class);
-
-	public static class SessionState {
-
-		public static final int UNKNOWN = 0;
-		public static final int OPENED = 1;
-		public static final int CLOSED = 2;
-		public static final int PACKETPROCESSING = 3;
-		public static final int PACKETBLOCKED = 4;
-
-		private int state0;
-
-		public SessionState(int state) {
-			this.state0 = state;
-		}
-
-		public void set(int state) {
-			this.state0 = state;
-		}
-
-		public int getState() {
-			return this.state0;
-		}
-	}
-
-	public static interface SessionEventListener {
-		void onClose();
-	}
 
 	private class WriteCompletionHandler implements
 			CompletionHandler<Integer, AioTcpession> {
@@ -147,10 +134,21 @@ public abstract class AioTcpession {
 	protected static final AtomicInteger sessionIndex = new AtomicInteger(1);
 	public final SessionState sessionState = new SessionState(
 			SessionState.UNKNOWN);
-	private SessionEventListener listener = null;
+	private List<SessionEventListener> eventListeners = new CopyOnWriteArrayList<>();
+	private boolean hasStartedReading = false;
 
-	public void setEventListener(SessionEventListener listener) {
-		this.listener = listener;
+	private static final PacketBuilder PACKET_BUILDER = new PacketBuilder();
+
+	public void registerEventListener(SessionEventListener listener) {
+		this.eventListeners.add(listener);
+	}
+
+	public void unregisterEventListener(SessionEventListener listener) {
+		this.eventListeners.remove(listener);
+	}
+
+	public void onReceivePacket(SessionReceivedPacketEventListener listener) {
+		this.eventListeners.add(listener);
 	}
 
 	protected AioTcpession(AsynchronousSocketChannel channel) {
@@ -161,7 +159,20 @@ public abstract class AioTcpession {
 		this.sessionState.set(SessionState.OPENED);
 	}
 
-	protected abstract void queuePacket(ByteBuffer buffer);
+	protected void queuePacket(ByteBuffer buffer) {
+		List<Packet> packets = PACKET_BUILDER.parse(buffer, this);
+		if (packets == null || packets.size() <= 0) {
+			return;
+		}
+
+		this.onReceivedPackets(packets);
+	}
+
+	private void onReceivedPackets(List<Packet> packets) {
+		for (SessionEventListener listener : this.eventListeners) {
+			listener.onReceivePackets(packets);
+		}
+	}
 
 	private void beforeRead(ByteBuffer readBuffer) {
 		readBuffer.flip();
@@ -178,6 +189,11 @@ public abstract class AioTcpession {
 	}
 
 	public final void pendingRead() {
+		if (hasStartedReading) {
+			logger.error("this session has started reading already");
+			throw new ReadPendingException();
+		}
+		hasStartedReading = true;
 		beforeRead(this.readBuffer);
 		// if (this.channel.isOpen())
 		this.channel.read(this.readBuffer, this, this.readCompletionHandler);
@@ -193,11 +209,15 @@ public abstract class AioTcpession {
 	}
 
 	public void close() throws IOException {
-		if (this.listener != null) {
-			this.listener.onClose();
-		}
+		this.onClose();
 		if (this.channel.isOpen())
 			this.channel.close();
+	}
+
+	private void onClose() {
+		for (SessionEventListener listener : this.eventListeners) {
+			listener.onClose();
+		}
 	}
 
 	protected final void pushWriteData(ByteBuffer buffer) {
