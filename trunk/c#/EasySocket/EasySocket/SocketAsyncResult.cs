@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace NetworkCore
+namespace EasySocket
 {
     /// <summary>
     /// Socket异步操作状态

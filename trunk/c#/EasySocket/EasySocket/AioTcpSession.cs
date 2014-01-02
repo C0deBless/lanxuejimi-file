@@ -8,11 +8,10 @@ using System.Threading;
 using System.IO;
 using System.Net.Security;
 
-namespace NetworkCore
+namespace EasySocket
 {
     public class AioTcpSession : SessionBase
     {
-
         public event EventHandler<Packet> OnPacketReceived;
 
         public AioTcpSession(Socket socket)
