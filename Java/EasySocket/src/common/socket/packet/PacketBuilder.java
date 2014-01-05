@@ -9,14 +9,14 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import common.socket.session.AioTcpession;
+import common.socket.session.AioTcpSession;
 import common.socket.utils.PrintStackTrace;
 
 public class PacketBuilder {
 
 	static final Logger logger = LoggerFactory.getLogger(PacketBuilder.class);
 
-	public final List<Packet> parse(ByteBuffer buffer, AioTcpession session) {
+	public final List<Packet> parse(ByteBuffer buffer, AioTcpSession session) {
 		List<Packet> packets = new ArrayList<>();
 
 		boolean loop = true;

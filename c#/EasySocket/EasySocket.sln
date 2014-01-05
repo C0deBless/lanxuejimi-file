@@ -5,7 +5,9 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasySocket", "EasySocket\EasySocket.csproj", "{4DD47E6C-D902-4BE1-AEDF-E72A1A662198}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasySocketTest", "EasySocketTest\EasySocketTest.csproj", "{088E1E3A-E13C-41C8-B868-06AC0591C3F3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasySocketClientTest", "EasySocketTest\EasySocketClientTest.csproj", "{088E1E3A-E13C-41C8-B868-06AC0591C3F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasySocketServerTest", "EasySocketServerTest\EasySocketServerTest.csproj", "{4317B4EA-CFA3-4CA9-AA9C-6696142F6C97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{088E1E3A-E13C-41C8-B868-06AC0591C3F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{088E1E3A-E13C-41C8-B868-06AC0591C3F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{088E1E3A-E13C-41C8-B868-06AC0591C3F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4317B4EA-CFA3-4CA9-AA9C-6696142F6C97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4317B4EA-CFA3-4CA9-AA9C-6696142F6C97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4317B4EA-CFA3-4CA9-AA9C-6696142F6C97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4317B4EA-CFA3-4CA9-AA9C-6696142F6C97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
