@@ -1,0 +1,5 @@
+C:\workspace\lanxuejimi-file\c#\EasySocket\EasySocket\bin\Debug\NetworkCore.dll
+C:\workspace\lanxuejimi-file\c#\EasySocket\EasySocket\bin\Debug\NetworkCore.pdb
+C:\workspace\lanxuejimi-file\c#\EasySocket\EasySocket\obj\Debug\EasySocket.csprojResolveAssemblyReference.cache
+C:\workspace\lanxuejimi-file\c#\EasySocket\EasySocket\obj\Debug\NetworkCore.dll
+C:\workspace\lanxuejimi-file\c#\EasySocket\EasySocket\obj\Debug\NetworkCore.pdb
