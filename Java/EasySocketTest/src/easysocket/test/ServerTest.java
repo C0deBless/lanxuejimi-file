@@ -9,13 +9,15 @@
 package easysocket.test;
 
 import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.util.Date;
+import java.util.List;
 
 import easysocket.packet.Packet;
 import easysocket.server.SocketServer;
 import easysocket.server.SocketServer.ClientConnectedEventHandler;
 import easysocket.session.AioTcpSession;
+import easysocket.session.event.SessionReceivedPacketListener;
+import easysocket.utils.StringUtil;
 
 public class ServerTest {
 
@@ -25,6 +27,17 @@ public class ServerTest {
 				new ClientConnectedEventHandler() {
 					@Override
 					public void OnConnect(final AioTcpSession session) {
+						session.registerEventListener(new SessionReceivedPacketListener() {
+
+							@Override
+							public void onReceivePackets(List<Packet> packets) {
+								for (Packet packet : packets) {
+									String msg = StringUtil.getString(packet
+											.getByteBuffer());
+									System.out.println("client:" + msg);
+								}
+							}
+						});
 						Thread thread = new Thread(new Runnable() {
 							@Override
 							public void run() {
@@ -32,11 +45,10 @@ public class ServerTest {
 
 									String msg = "this is message from server, "
 											+ new Date();
-									Packet packet = new Packet((short) 1000,
-											4 + msg.length(), session);
-									ByteBuffer buffer = packet.getByteBuffer();
-									buffer.putInt(msg.length());
-									buffer.put(msg.getBytes());
+									Packet packet = new Packet(1000, 4 + msg
+											.length(), session);
+									StringUtil.putString(
+											packet.getByteBuffer(), msg);
 									session.sendPacket(packet);
 									try {
 										Thread.sleep(1000);
