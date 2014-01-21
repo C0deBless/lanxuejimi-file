@@ -18,17 +18,17 @@ import org.slf4j.LoggerFactory;
 import easysocket.packet.Packet;
 import easysocket.packet.PacketBuilder;
 import easysocket.session.event.SessionEventListener;
-import easysocket.session.event.SessionReceivedPacketEventListener;
+import easysocket.session.event.SessionReceivedPacketListener;
 import easysocket.utils.PrintStackTrace;
 
 /**
  * Use <code>AioTcpSession</code> to store the information of a socket
  * connection
  * 
- * Invoke {@link #onReceivePacket(SessionReceivedPacketEventListener)} to
+ * Invoke {@link #onReceivePacket(SessionReceivedPacketListener)} to
  * specify packet received event lister
  * 
- * @see SessionReceivedPacketEventListener
+ * @see SessionReceivedPacketListener
  */
 public class AioTcpSession {
 
@@ -149,7 +149,7 @@ public class AioTcpSession {
 		this.eventListeners.remove(listener);
 	}
 
-	public void onReceivePacket(SessionReceivedPacketEventListener listener) {
+	public void onReceivePacket(SessionReceivedPacketListener listener) {
 		this.eventListeners.add(listener);
 	}
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 import easysocket.packet.Packet;
 
-public abstract class SessionReceivedPacketEventListener implements
+public abstract class SessionReceivedPacketListener implements
 		SessionEventListener {
 	@Override
 	public void onClose() {
