@@ -74,9 +74,7 @@ namespace BlockingQueue
                     }
                     resetEvent.Reset();
                 }
-                
             }
-            
         }
     }
 }
