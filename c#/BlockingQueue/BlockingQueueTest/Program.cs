@@ -11,8 +11,11 @@ namespace BlockingQueueTest
 {
     class Program
     {
-        ConcurrentQueue<int> queue;
         static BlockingQueue<int> TestQueue =new BlockingQueue<int>();
+		static BlockingCollection<int> TestQueue2 = new BlockingCollection<int>(new ConcurrentQueue<int>());
+
+		static long QueueTime = 0;
+
         static void Main(string[] args)
         {
             Thread productThread = new Thread(new ThreadStart(Product));
@@ -30,6 +33,9 @@ namespace BlockingQueueTest
         {
             while (true)
             {
+				QueueTime = DateTime.Now.Ticks;
+				//TestQueue2.Add(2);
+				//TestQueue2.Add(3);
                 TestQueue.Push(2);
                 TestQueue.Push(3);
                 Thread.Sleep(5000);
@@ -39,8 +45,9 @@ namespace BlockingQueueTest
         {
             while (true)
             {
+				//int value = TestQueue2.Take();
                 int value = TestQueue.Pull();
-                Console.WriteLine("pull queue data :{0},{1}", value, Thread.CurrentThread.Name);
+				Console.WriteLine("pull queue data :{0},{1},{2} * 100 ns", value, Thread.CurrentThread.Name, (DateTime.Now.Ticks - QueueTime)); ;
             }
         }
     }
