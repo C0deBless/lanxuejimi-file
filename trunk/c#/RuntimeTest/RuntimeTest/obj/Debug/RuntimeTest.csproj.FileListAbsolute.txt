@@ -1,0 +1,6 @@
+D:\lanxuejimi-file\c#\RuntimeTest\RuntimeTest\bin\Debug\RuntimeTest.exe.config
+D:\lanxuejimi-file\c#\RuntimeTest\RuntimeTest\bin\Debug\RuntimeTest.exe
+D:\lanxuejimi-file\c#\RuntimeTest\RuntimeTest\bin\Debug\RuntimeTest.pdb
+D:\lanxuejimi-file\c#\RuntimeTest\RuntimeTest\obj\Debug\RuntimeTest.csprojResolveAssemblyReference.cache
+D:\lanxuejimi-file\c#\RuntimeTest\RuntimeTest\obj\Debug\RuntimeTest.exe
+D:\lanxuejimi-file\c#\RuntimeTest\RuntimeTest\obj\Debug\RuntimeTest.pdb
