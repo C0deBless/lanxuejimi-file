@@ -1,15 +1,24 @@
 ﻿<UserControl x:Class="ProcessView.Pages.Home"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:graph="clr-namespace:ProcessView"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="600" d:DesignWidth="800" BorderThickness="1" Width="Auto" Height="Auto">
     <Grid Style="{StaticResource ContentRoot}">
         <ScrollViewer>
-            <StackPanel MinWidth="200">
-                <TextBlock Text="TODO: add content" />
-            </StackPanel>
+            <TabControl x:Name="TC_MAIN" Background="White" BorderThickness="0">
+                <TabItem Header="Processes" Background="#FF7670F7">
+                    <Grid Background="White">
+                        <graph:LineGraph />
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Threads" Background="#FF78AFFF">
+                    <Grid Background="White"/>
+                </TabItem>
+            </TabControl>
+
         </ScrollViewer>
     </Grid>
 </UserControl>
