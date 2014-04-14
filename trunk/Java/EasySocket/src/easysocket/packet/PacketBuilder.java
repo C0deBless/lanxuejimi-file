@@ -25,9 +25,9 @@ public class PacketBuilder {
 		while (loop) {
 			remaining = buffer.remaining();
 
-			if (remaining >= 6) {
+			if (remaining >= 8) {
 				int len = buffer.getInt(buffer.position());
-				if (len < 6) {
+				if (len < 8) {
 					logger.error(
 							"PakcetBuilder.parse, illegal,  length:{}, data ->{}",
 							len, buffer.array());
@@ -41,8 +41,9 @@ public class PacketBuilder {
 				}
 				if (remaining >= len) {
 					buffer.getInt(); // to forward position
-					short cmd = buffer.getShort();
-					byte[] data = new byte[len - 6];
+					short crc = buffer.getShort();
+					int cmd = buffer.getInt();
+					byte[] data = new byte[len - 10];
 					buffer.get(data);
 
 					packets.add(new Packet(cmd, data, session));
