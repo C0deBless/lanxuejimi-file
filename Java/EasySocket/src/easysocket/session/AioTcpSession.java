@@ -3,6 +3,7 @@ package easysocket.session;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
 import java.nio.channels.ReadPendingException;
@@ -19,14 +20,15 @@ import easysocket.packet.Packet;
 import easysocket.packet.PacketBuilder;
 import easysocket.session.event.SessionEventListener;
 import easysocket.session.event.SessionReceivedPacketListener;
+import easysocket.utils.CRC16;
 import easysocket.utils.PrintStackTrace;
 
 /**
  * Use <code>AioTcpSession</code> to store the information of a socket
  * connection
  * 
- * Invoke {@link #onReceivePacket(SessionReceivedPacketListener)} to
- * specify packet received event lister
+ * Invoke {@link #onReceivePacket(SessionReceivedPacketListener)} to specify
+ * packet received event lister
  * 
  * @see SessionReceivedPacketListener
  */
@@ -137,7 +139,7 @@ public class AioTcpSession {
 	public final SessionState sessionState = new SessionState(
 			SessionState.UNKNOWN);
 	private List<SessionEventListener> eventListeners = new CopyOnWriteArrayList<>();
-	private boolean hasStartedReading = false;
+	public static final ByteOrder BYTE_ORDER = ByteOrder.LITTLE_ENDIAN;
 
 	private static final PacketBuilder PACKET_BUILDER = new PacketBuilder();
 
@@ -159,6 +161,7 @@ public class AioTcpSession {
 		this.writeCompletionHandler = new WriteCompletionHandler();
 		this.channel = channel;
 		this.sessionState.set(SessionState.OPENED);
+		this.readBuffer.order(BYTE_ORDER);
 	}
 
 	protected void queuePacket(ByteBuffer buffer) {
@@ -191,11 +194,6 @@ public class AioTcpSession {
 	}
 
 	public final void pendingRead() {
-		if (hasStartedReading) {
-			logger.error("this session has started reading already");
-			throw new ReadPendingException();
-		}
-		hasStartedReading = true;
 		beforeRead(this.readBuffer);
 		// if (this.channel.isOpen())
 		this.channel.read(this.readBuffer, this, this.readCompletionHandler);
@@ -207,6 +205,7 @@ public class AioTcpSession {
 		tmp.position(0);
 
 		readBuffer = ByteBuffer.allocate(readBuffer.capacity() * 2);
+		readBuffer.order(BYTE_ORDER);
 		readBuffer.put(tmp.array(), 0, pos);
 	}
 
@@ -228,17 +227,32 @@ public class AioTcpSession {
 	}
 
 	public void sendPacket(Packet packet) {
-		ByteBuffer buffer = this.formatSendPacket(packet.getCmd(), packet
-				.getByteBuffer().array());
+		ByteBuffer dataBuffer = packet.getByteBuffer();
+		dataBuffer.flip();
+		byte[] data = new byte[dataBuffer.limit()];
+		dataBuffer.get(data);
+		ByteBuffer buffer = this.formatSendPacket(packet.getCmd(), data);
 		this.pushWriteData(buffer);
 	}
 
-	private ByteBuffer formatSendPacket(short cmd, byte[] data) {
-		int packetSize = 4 + 2 + data.length;
+	private ByteBuffer formatSendPacket(int cmd, byte[] data) {
+
+		ByteBuffer crcCheckBuffer = ByteBuffer.allocate(data.length + 4);
+		crcCheckBuffer.order(BYTE_ORDER);
+		crcCheckBuffer.putInt(cmd);
+		crcCheckBuffer.put(data);
+		byte[] crcCheckData = crcCheckBuffer.array();
+		
+		short crc = (short) (CRC16.calculate(crcCheckData) & 0xFFFF);
+
+		int packetSize = 4 + 4 + 2 + data.length;
 		ByteBuffer buffer = ByteBuffer.allocate(packetSize);
+		buffer.order(BYTE_ORDER);
 		buffer.putInt(packetSize);
+		buffer.putShort(crc);
 		buffer.putInt(cmd);
 		buffer.put(data);
+		buffer.flip();
 		return buffer;
 	}
 
@@ -260,13 +274,6 @@ public class AioTcpSession {
 			ByteBuffer buffer = outs.poll();
 			if (buffer != null) {
 				this.writeBuffer = buffer;
-				int cmd = this.writeBuffer
-						.getShort(this.writeBuffer.position() + 4);
-				if (cmd == 0) {
-					logger.error(
-							"AioSession.write, send packet cmd 0, data->{}",
-							new String(this.writeBuffer.array()));
-				}
 				this.channel.write(buffer, this, this.writeCompletionHandler);
 			} else {
 				isWriting.set(false);
