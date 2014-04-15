@@ -1,0 +1,1129 @@
+<?xml version="1.0"?>
+<country owner_id='100003075441353' room_id='5' level='126' exp='10114100'  installed=''  adv_id='' current_level_exp='9991000' next_level_exp='10191000' gold='6' coins='5859671' spent_coins='517868325' respect='120' respect_level='10' population='129735' max_population='3548275' request_reward_count='2' next_limited_request='0'  tax='15' auto='1355' auto_enabled='true' quest_flag='1' version='35' adv_counter='0' roll_counter='1429' session_key='1397568780.8090956:nweb19-5295' server_time='1397569634' left_to_end_of_day='29565' room_information='{"rooms":{"room_5":{"available":true,"size_x":27,"size_y":27,"max_population":3548275,"population":129735,"tax":15},"room_2":{"available":true,"size_x":25,"size_y":25,"max_population":3064950,"population":4820,"tax":15},"room_0":{"available":true,"size_x":41,"size_y":41,"size_x_2":27,"size_y_2":27,"size_x_5":37,"size_y_5":37,"size_x_3":41,"size_y_3":41}}}' is_payer='true' last_payment_date='1394614654' next_gifts_time='6325'  kakao='{}'   wish_list='10919,15411,11476,10901,10997,10931,11498,10921,15439,10911' shed='' staff='{"63195961":{"security":"100007351623350","storekeeper":"1659997421"},"72876722":{"operator_gas_station":"1440289155","fitter_boiler":"100007394642554","head_gas_station":"100000067412187"},"72413176":{"mechanic":"100007560911999","driller":"100002003213607","geologist":"100002020307379"},"65404343":{"astrophysicist":"502085384","engineer":"-23293509","analyst":"100001749820052"},"75695959":{"lovers_palace_registrar":"100003188082898","lovers_palace_hostess":"1771103881"},"73698814":{"fitter_boiler":"100006652692600","head_gas_station":"1450171710","operator_gas_station":"100003389440324"},"78519976":{"fitter_boiler":"100000615920340","operator_gas_station":"-20931434","head_gas_station":"100002915917138"},"65028007":{"sawmill_doorman":"100002525958183","sawmill_integrator":"100003651876364","sawmill_director":"100006977681936","sawmill_operator":"534079552","sawmill_gager":"100007396080396"}}'  staff_all='{"shr":{"63195961":{"security":"100007351623350","storekeeper":"1659997421"},"72876722":{"operator_gas_station":"1440289155","fitter_boiler":"100007394642554","head_gas_station":"100000067412187"},"72413176":{"mechanic":"100007560911999","driller":"100002003213607","geologist":"100002020307379"},"65404343":{"astrophysicist":"502085384","engineer":"-23293509","analyst":"100001749820052"},"75695959":{"lovers_palace_registrar":"100003188082898","lovers_palace_hostess":"1771103881"},"73698814":{"fitter_boiler":"100006652692600","head_gas_station":"1450171710","operator_gas_station":"100003389440324"},"78519976":{"fitter_boiler":"100000615920340","operator_gas_station":"-20931434","head_gas_station":"100002915917138"},"65028007":{"sawmill_doorman":"100002525958183","sawmill_integrator":"100003651876364","sawmill_director":"100006977681936","sawmill_operator":"534079552","sawmill_gager":"100007396080396"}}}'  visitors='{"65375385":["1440289155","100003188082898","-20931434","100004152014563"],"79378030":["100003188082898","502085384","514277640","1440289155","100002179561444","1732255945"],"63240184":["502085384","1771103881","1732255945","1245760040","100003651876364"],"82245055":["100003188082898","603205461","100007396080396","1185260543","1245760040","100006194196730","-30016989"],"77576504":["100003188082898","603205461","100007396080396","1185260543","1245760040","100006194196730","-30016989","502085384","100007560843326","1440289155","100002179561444"],"77362982":["100000615920340","-20931434","1440289155","1771103881","100003188082898","100007560843326","-30016989"]}' accelerated_items='' buff_items='{}'  unlocked_items='ios_unlock,mountains_unlock,tourist_island_unlock,icy_cinderellas_castle_unlock,unlock_pop_aquapark,unlock_pop_marine_terminal_ups,unlock_pop_large_planetarium,unlock_pop_observatorium,unlock_pop_coast_hotels,unlock_for_badge_tour_isl_exp,unlock_pop_ancient_fort,unlock_pop_tropical_hotel,unlock_pop_island_airport,sell_bus_transport1_unlock'  resource_options='{"capacity":15,"ticks":{}}' shooting='{"next_randomize_reward_time":1397599047,"rewards":{"0":"11701:500","1":"11706:50","6":"11701:900","11":"11462:1","16":"11700:50","21":"12143:1","23":"11700:100","25":"11701:4000","27":"11706:750","29":"12137:2","31":"11706:750","33":"10915:3","35":"13332:1","37":"11700:400","39":"10970:4","41":"11701:10000","43":"11706:1000","45":"13332:1","47":"12139:5","49":"11700:500","51":"11703:1","52":"11701:20000","53":"15460:6","54":"11701:35000","55":"10190:1","56":"11701:40000","57":"11706:1500","58":"11703:2","59":"11706:1500","60":"10998:8","61":"11273:1","62":"11706:2000","63":"11273:1","64":"10922:9","65":"11701:80000","66":"11703:3","67":"10363:1","68":"11483:10","69":"14312:1","70":"11706:2500","71":"11700:130000","72":"15629:11","73":"11243:1","74":"15436:11","75":"11706:3000","76":"11703:4","77":"11706:3000","78":"15436:12","79":"13557:1","80":"15628:13","81":"11701:220000","82":"11706:4000","83":"12313:1","84":"12111:14","85":"11701:280000","86":"15590:14","87":"11701:300000","88":"11406:15","89":"11701:330000","90":"15454:15","91":"11701:350000","92":"12391:1","93":"11703:6","94":"11701:380000","95":"11435:17","96":"11701:400000","97":"11703:7","98":"12319:1","99":"11701:500000","100":"11703:1000"},"next_free_points_time":1397599199,"today_shots":1,"points":0,"max_points":10,"is_missed":0,"next_free_points_end":29565000}' chest='{"unlock_reward":{},"can_start":false,"duration":-1397569635000,"version":5}' chest_actions='{"chest_action_aspen":{"v":1,"last_open":1387406168,"block_chest_drop":1},"chest_event1":{"v":1,"last_open":1392849998},"chest_event2":{"v":1,"last_open":1395614315,"block_chest_drop":1}}'  four_n_actions='{}'  lottery='{"version":null,"cost":0}' last_excavation_time='-1' last_excavations='-1' in_arpu_top='1' action_version_key='50' action_time_end='501166' material_action_version_key='7' material_action_time_end='-31153636' automation_action_version_key='1' automation_action_time_end='-55950436' gift_for_payment_version_key='3' gift_for_payment_time_end='-47137636' sale_two_plus_one_version_key='1' sale_two_plus_one_time_end='-55273636' every_day='8' current_fund_version_key='0' group_member='false' account_ballance='0' init_last_activity='1397569325' last_invite_window_bonus_date='1395154632' expand_action_version_key='2' expand_action_time_end='-51025636' date_last_viewed_updates='2014-04-15' is_promo_payment_received='0'  buses='{"id_seq":2,"list":{},"friends":{"100000235186005":{"expire_end":-868517},"100000810309018":{"expire_end":-1878747}}}' buses2='{"id_seq":2,"items":{"76954966":{"list":{}}},"friends":{"100000235186005":{"expire_end":-868517},"100000810309018":{"expire_end":-1878747}}}' bus_region='Asia' region='Asia'  drum_action='{"bonus":0.55,"end_date":0,"version":1}'  fb_sales='{"start":0,"end":0}'  one_time_offer_reward_material='steel_reinforcing'  starter_pack=''  can_start_expand_sale='false' expand_sale_end_date='-1397569635000' expand_sale_already_bought=''  buddies_enabled = '1'  invite_reward_left='40'  sales='{}' new_visitors='0' new_visitors_counters='{}' country_name='Korea, Republic of'   settings='{"sbrf_wall_posted":false,"buddies":false,"last_updated":"","zoom":0.5,"sound":false,"animation":true,"community_joint":false,"music":false,"allow_wall_posting":false}'  invitees='143'   next_tick='50500' >
+	<field  zero_x='50' zero_y='23' size_x='77' size_y='50' bounds='{"size_x":{"x":50,"y":23,"width":27,"height":27}}' default_bounds='{"size_x":{"x":29,"y":29,"width":41,"height":41},"size_x_2":{"x":-3,"y":36,"width":27,"height":27},"size_x_3":{"x":-17,"y":-17,"width":41,"height":41},"size_x_5":{"x":31,"y":97,"width":37,"height":37}}'  >
+		<dyno_shop id='79378906' x='76' y='33' process_end='36041000' output_fill='10000'    state='4' created_at='1394464731' rotation='true' />
+		<dyno_shop id='79378905' x='76' y='39' process_end='36038000' output_fill='10000'    state='4' created_at='1394464728' rotation='true' />
+		<srnu_factory id='75474671' x='50' y='46' process_end='28556000'  man_hour='' input_fill='10539'   state='3' created_at='1392249519'  />
+		<dyno_shop id='77997728' x='56' y='40' process_end='35793000' output_fill='10000'    state='4' created_at='1393634228'  />
+		<dyno_shop id='77997729' x='56' y='41' process_end='35794000' output_fill='10000'    state='4' created_at='1393634230'  />
+		<dyno_shop id='78041505' x='58' y='28' process_end='35803000' output_fill='10000'    state='4' created_at='1393657395'  />
+		<dyno_shop id='78041507' x='58' y='30' process_end='35806000' output_fill='10000'    state='4' created_at='1393657399'  />
+		<dyno_shop id='78172992' x='60' y='24' process_end='35846000' output_fill='10000'    state='4' created_at='1393713914'  />
+		<dyno_shop id='78172993' x='60' y='25' process_end='35844000' output_fill='10000'    state='4' created_at='1393713916'  />
+		<dyno_shop id='78172994' x='60' y='26' process_end='35843000' output_fill='10000'    state='4' created_at='1393713918'  />
+		<dyno_shop id='78261306' x='62' y='36' process_end='35861000' output_fill='10000'    state='4' created_at='1393761464'  />
+		<dyno_shop id='78261307' x='62' y='37' process_end='35862000' output_fill='10000'    state='4' created_at='1393761472'  />
+		<dyno_shop id='78261308' x='62' y='38' process_end='35863000' output_fill='10000'    state='4' created_at='1393761481'  />
+		<dyno_shop id='78261309' x='62' y='39' process_end='35864000' output_fill='10000'    state='4' created_at='1393761488'  />
+		<dyno_shop id='78261310' x='62' y='40' process_end='35867000' output_fill='10000'    state='4' created_at='1393761494'  />
+		<dyno_shop id='78413143' x='66' y='34' process_end='35909000' output_fill='10000'    state='4' created_at='1393850686'  />
+		<dyno_shop id='78413144' x='66' y='35' process_end='35910000' output_fill='10000'    state='4' created_at='1393850688'  />
+		<dyno_shop id='78615101' x='70' y='33' process_end='35958000' output_fill='10000'    state='4' created_at='1393978180'  />
+		<dyno_shop id='78615120' x='70' y='35' process_end='35960000' output_fill='10000'    state='4' created_at='1393978188'  />
+		<dyno_shop id='78615121' x='70' y='36' process_end='35961000' output_fill='10000'    state='4' created_at='1393978190'  />
+		<dyno_shop id='78615202' x='72' y='29' process_end='35998000' output_fill='10000'    state='4' created_at='1393978221'  />
+		<dyno_shop id='78615203' x='72' y='27' process_end='35999000' output_fill='10000'    state='4' created_at='1393978223'  />
+		<dyno_shop id='78615206' x='64' y='46' process_end='35871000' output_fill='10000'    state='4' created_at='1393978229'  />
+		<dyno_shop id='78615207' x='64' y='45' process_end='35872000' output_fill='10000'    state='4' created_at='1393978231'  />
+		<dyno_shop id='78633220' x='62' y='42' process_end='35866000' output_fill='10000'    state='4' created_at='1393994235'  />
+		<dyno_shop id='78663762' x='74' y='34' process_end='36017000' output_fill='10000'    state='4' created_at='1394018031'  />
+		<dyno_shop id='78663763' x='74' y='35' process_end='36021000' output_fill='10000'    state='4' created_at='1394018034'  />
+		<dyno_shop id='80682587' x='74' y='29' process_end='36012000' output_fill='10000'    state='4' created_at='1395327900'  />
+		<dyno_shop id='78215378' x='62' y='31' process_end='35855000' output_fill='10000'    state='4' created_at='1393737953'  />
+		<dyno_shop id='78292773' x='64' y='31' process_end='35887000' output_fill='10000'    state='4' created_at='1393774028'  />
+		<dyno_shop id='78413149' x='66' y='40' process_end='35915000' output_fill='10000'    state='4' created_at='1393850697'  />
+		<dyno_shop id='78431499' x='68' y='33' process_end='35938000' output_fill='10000'    state='4' created_at='1393859335'  />
+		<dyno_shop id='71076979' x='50' y='26' process_end='35711000' output_fill='10000'    state='4' created_at='1389962290'  />
+		<dyno_shop id='79378903' x='76' y='45' process_end='36035000' output_fill='10000'    state='4' created_at='1394464720' rotation='true' />
+		<dyno_shop id='69289298' x='50' y='23' process_end='35709000' output_fill='10000'    state='4' created_at='1389179004'  />
+		<dyno_shop id='78413076' x='66' y='28' process_end='35900000' output_fill='10000'    state='4' created_at='1393850672'  />
+		<dyno_shop id='77770065' x='52' y='32' process_end='35744000' output_fill='10000'    state='4' created_at='1393507355'  />
+		<dyno_shop id='77770066' x='50' y='27' process_end='35712000' output_fill='10000'    state='4' created_at='1393507357'  />
+		<dyno_shop id='77868626' x='50' y='41' process_end='35725000' output_fill='10000'    state='4' created_at='1393573425'  />
+		<dyno_shop id='78413075' x='66' y='27' process_end='35904000' output_fill='10000'    state='4' created_at='1393850670'  />
+		<dyno_shop id='78413077' x='66' y='29' process_end='35902000' output_fill='10000'    state='4' created_at='1393850674'  />
+		<dyno_shop id='78663764' x='74' y='36' process_end='36018000' output_fill='10000'    state='4' created_at='1394018038'  />
+		<dyno_shop id='78615204' x='72' y='28' process_end='36001000' output_fill='10000'    state='4' created_at='1393978225'  />
+		<srnu_factory id='75474670' x='52' y='48' process_end='28896000'  man_hour='' input_fill='10539'   state='3' created_at='1392249516'  />
+		<mountain_hotel_stage1 id='64343792' x='44' y='40' process_end='50000'  man_hour=''  contract_input='15959'   state='3' created_at='0'  />
+		<dyno_shop id='78615137' x='70' y='40' process_end='35967000' output_fill='10000'    state='4' created_at='1393978208'  />
+		<dyno_shop id='78615138' x='70' y='41' process_end='35968000' output_fill='10000'    state='4' created_at='1393978212'  />
+		<dyno_shop id='78615201' x='74' y='33' process_end='36016000' output_fill='10000'    state='4' created_at='1393978219'  />
+		<dyno_shop id='78663766' x='74' y='38' process_end='36020000' output_fill='10000'    state='4' created_at='1394018042'  />
+		<srnu_factory id='77742246' x='56' y='46' process_end='28903000'  man_hour='' input_fill='10539'   state='3' created_at='1393489626'  />
+		<srnu_factory id='75474612' x='52' y='46' process_end='28894000'  man_hour='' input_fill='10539'   state='3' created_at='1392249483'  />
+		<dyno_shop id='78286264' x='64' y='28' process_end='35890000' output_fill='10000'    state='4' created_at='1393771595'  />
+		<dyno_shop id='77770069' x='50' y='31' process_end='35716000' output_fill='10000'    state='4' created_at='1393507362'  />
+		<dyno_shop id='78215377' x='62' y='30' process_end='35854000' output_fill='10000'    state='4' created_at='1393737947'  />
+		<dyno_shop id='78216494' x='62' y='34' process_end='35858000' output_fill='10000'    state='4' created_at='1393738767'  />
+		<srnu_factory id='75497292' x='50' y='44' process_end='28890000'  man_hour='' input_fill='10539'   state='3' created_at='1392265024'  />
+		<dyno_shop id='78041508' x='58' y='31' process_end='35812000' output_fill='10000'    state='4' created_at='1393657402'  />
+		<dyno_shop id='79378842' x='58' y='45' process_end='35822000' output_fill='10000'    state='4' created_at='1394464689'  />
+		<dyno_shop id='78261312' x='64' y='23' process_end='35895000' output_fill='10000'    state='4' created_at='1393761511'  />
+		<dyno_shop id='80178845' x='72' y='24' process_end='36004000' output_fill='10000'    state='4' created_at='1394972103'  />
+		<dyno_shop id='80178844' x='72' y='25' process_end='36002000' output_fill='10000'    state='4' created_at='1394972096'  />
+		<dyno_shop id='80178843' x='72' y='23' process_end='36003000' output_fill='10000'    state='4' created_at='1394972091'  />
+		<dyno_shop id='80161864' x='72' y='26' process_end='36000000' output_fill='10000'    state='4' created_at='1394963644'  />
+		<dyno_shop id='80161863' x='74' y='30' process_end='36013000' output_fill='10000'    state='4' created_at='1394963637'  />
+		<dyno_shop id='80161862' x='74' y='31' process_end='36014000' output_fill='10000'    state='4' created_at='1394963631'  />
+		<dyno_shop id='80161861' x='74' y='32' process_end='36015000' output_fill='10000'    state='4' created_at='1394963618'  />
+		<dyno_shop id='79378904' x='76' y='47' process_end='36034000' output_fill='10000'    state='4' created_at='1394464724' rotation='true' />
+		<dyno_shop id='79378614' x='70' y='45' process_end='35972000' output_fill='10000'    state='4' created_at='1394464572'  />
+		<dyno_shop id='79378723' x='58' y='42' process_end='35818000' output_fill='10000'    state='4' created_at='1394464638'  />
+		<dyno_shop id='79378721' x='70' y='42' process_end='35969000' output_fill='10000'    state='4' created_at='1394464632'  />
+		<dyno_shop id='79378720' x='72' y='42' process_end='35984000' output_fill='10000'    state='4' created_at='1394464630'  />
+		<dyno_shop id='79378716' x='70' y='43' process_end='35970000' output_fill='10000'    state='4' created_at='1394464619'  />
+		<dyno_shop id='79378662' x='56' y='43' process_end='35795000' output_fill='10000'    state='4' created_at='1394464606'  />
+		<dyno_shop id='79378661' x='54' y='43' process_end='35755000' output_fill='10000'    state='4' created_at='1394464602'  />
+		<dyno_shop id='79378654' x='74' y='44' process_end='36026000' output_fill='10000'    state='4' created_at='1394464596'  />
+		<dyno_shop id='79378653' x='72' y='44' process_end='35982000' output_fill='10000'    state='4' created_at='1394464594'  />
+		<dyno_shop id='79378652' x='70' y='44' process_end='35971000' output_fill='10000'    state='4' created_at='1394464591'  />
+		<dyno_shop id='79378651' x='68' y='44' process_end='35927000' output_fill='10000'    state='4' created_at='1394464589'  />
+		<dyno_shop id='79378617' x='54' y='42' process_end='35760000' output_fill='10000'    state='4' created_at='1394464581'  />
+		<dyno_shop id='79378616' x='74' y='45' process_end='36027000' output_fill='10000'    state='4' created_at='1394464577'  />
+		<dyno_shop id='79378615' x='72' y='45' process_end='35980000' output_fill='10000'    state='4' created_at='1394464575'  />
+		<dyno_shop id='78173005' x='60' y='37' process_end='35831000' output_fill='10000'    state='4' created_at='1393713941'  />
+		<dyno_shop id='78173004' x='60' y='36' process_end='35832000' output_fill='10000'    state='4' created_at='1393713939'  />
+		<dyno_shop id='77997727' x='56' y='39' process_end='35792000' output_fill='10000'    state='4' created_at='1393634226'  />
+		<dyno_shop id='78663756' x='64' y='44' process_end='35873000' output_fill='10000'    state='4' created_at='1394018017'  />
+		<dyno_shop id='78663757' x='66' y='41' process_end='35916000' output_fill='10000'    state='4' created_at='1394018019'  />
+		<dyno_shop id='78663758' x='66' y='42' process_end='35917000' output_fill='10000'    state='4' created_at='1394018021'  />
+		<dyno_shop id='78663759' x='66' y='44' process_end='35919000' output_fill='10000'    state='4' created_at='1394018023'  />
+		<dyno_shop id='78663760' x='66' y='46' process_end='35920000' output_fill='10000'    state='4' created_at='1394018025'  />
+		<dyno_shop id='78663761' x='72' y='32' process_end='35995000' output_fill='10000'    state='4' created_at='1394018028'  />
+		<dyno_shop id='78663799' x='68' y='49' process_end='35921000' output_fill='10000'    state='4' created_at='1394018065'  />
+		<dyno_shop id='79378946' x='60' y='44' process_end='35823000' output_fill='10000'    state='4' created_at='1394464754'  />
+		<dyno_shop id='79378717' x='72' y='43' process_end='35983000' output_fill='10000'    state='4' created_at='1394464622'  />
+		<dyno_shop id='79378719' x='74' y='42' process_end='36028000' output_fill='10000'    state='4' created_at='1394464627'  />
+		<dyno_shop id='78663767' x='74' y='39' process_end='36022000' output_fill='10000'    state='4' created_at='1394018044'  />
+		<dyno_shop id='78173001' x='60' y='33' process_end='35835000' output_fill='10000'    state='4' created_at='1393713931'  />
+		<dyno_shop id='78173002' x='60' y='34' process_end='35834000' output_fill='10000'    state='4' created_at='1393713934'  />
+		<dyno_shop id='69289297' x='50' y='24' process_end='35710000' output_fill='10000'    state='4' created_at='1389179002'  />
+		<dyno_shop id='77769996' x='52' y='28' process_end='35739000' output_fill='10000'    state='4' created_at='1393507331'  />
+		<dyno_shop id='77770013' x='52' y='31' process_end='35742000' output_fill='10000'    state='4' created_at='1393507339'  />
+		<dyno_shop id='77770029' x='52' y='34' process_end='35746000' output_fill='10000'    state='4' created_at='1393507346'  />
+		<dyno_shop id='80682598' x='76' y='23' process_end='36047000' output_fill='10000'    state='4' created_at='1395327935' rotation='true' />
+		<dyno_shop id='80682597' x='76' y='25' process_end='36044000' output_fill='10000'    state='4' created_at='1395327932' rotation='true' />
+		<dyno_shop id='80682596' x='76' y='27' process_end='36043000' output_fill='10000'    state='4' created_at='1395327929' rotation='true' />
+		<dyno_shop id='80682595' x='76' y='29' process_end='36046000' output_fill='10000'    state='4' created_at='1395327925' rotation='true' />
+		<dyno_shop id='80682594' x='76' y='31' process_end='36042000' output_fill='10000'    state='4' created_at='1395327921' rotation='true' />
+		<dyno_shop id='80682593' x='74' y='23' process_end='36005000' output_fill='10000'    state='4' created_at='1395327916'  />
+		<dyno_shop id='80682592' x='74' y='24' process_end='36006000' output_fill='10000'    state='4' created_at='1395327914'  />
+		<dyno_shop id='80682591' x='74' y='25' process_end='36008000' output_fill='10000'    state='4' created_at='1395327911'  />
+		<dyno_shop id='80682590' x='74' y='26' process_end='36009000' output_fill='10000'    state='4' created_at='1395327909'  />
+		<dyno_shop id='80682589' x='74' y='27' process_end='36010000' output_fill='10000'    state='4' created_at='1395327906'  />
+		<dyno_shop id='80682588' x='74' y='28' process_end='36011000' output_fill='10000'    state='4' created_at='1395327904'  />
+		<dyno_shop id='79378907' x='76' y='35' process_end='36040000' output_fill='10000'    state='4' created_at='1394464736' rotation='true' />
+		<dyno_shop id='78353720' x='64' y='38' process_end='35880000' output_fill='10000'    state='4' created_at='1393803857'  />
+		<dyno_shop id='78100819' x='58' y='40' process_end='35816000' output_fill='10000'    state='4' created_at='1393682043'  />
+		<dyno_shop id='78100818' x='58' y='39' process_end='35815000' output_fill='10000'    state='4' created_at='1393682036'  />
+		<dyno_shop id='78100820' x='58' y='41' process_end='35817000' output_fill='10000'    state='4' created_at='1393682052'  />
+		<dyno_shop id='78353718' x='64' y='36' process_end='35883000' output_fill='10000'    state='4' created_at='1393803854'  />
+		<dyno_shop id='78353719' x='64' y='37' process_end='35881000' output_fill='10000'    state='4' created_at='1393803856'  />
+		<dyno_shop id='78353723' x='64' y='41' process_end='35876000' output_fill='10000'    state='4' created_at='1393803864'  />
+		<dyno_shop id='78686635' x='52' y='43' process_end='35753000' output_fill='10000'    state='4' created_at='1394030782'  />
+		<dyno_shop id='78686628' x='68' y='45' process_end='35926000' output_fill='10000'    state='4' created_at='1394030771'  />
+		<dyno_shop id='78686627' x='74' y='46' process_end='36029000' output_fill='10000'    state='4' created_at='1394030767'  />
+		<dyno_shop id='78686605' x='74' y='47' process_end='36031000' output_fill='10000'    state='4' created_at='1394030764'  />
+		<dyno_shop id='78686600' x='74' y='48' process_end='36032000' output_fill='10000'    state='4' created_at='1394030759'  />
+		<dyno_shop id='78686599' x='74' y='49' process_end='36033000' output_fill='10000'    state='4' created_at='1394030756'  />
+		<dyno_shop id='78686598' x='72' y='46' process_end='35979000' output_fill='10000'    state='4' created_at='1394030752'  />
+		<dyno_shop id='78686597' x='72' y='47' process_end='35978000' output_fill='10000'    state='4' created_at='1394030749'  />
+		<dyno_shop id='78686596' x='72' y='48' process_end='35981000' output_fill='10000'    state='4' created_at='1394030746'  />
+		<dyno_shop id='78686562' x='72' y='49' process_end='35977000' output_fill='10000'    state='4' created_at='1394030744'  />
+		<dyno_shop id='78686561' x='70' y='46' process_end='35973000' output_fill='10000'    state='4' created_at='1394030739'  />
+		<dyno_shop id='78686560' x='70' y='47' process_end='35974000' output_fill='10000'    state='4' created_at='1394030736'  />
+		<dyno_shop id='78663800' x='68' y='47' process_end='35922000' output_fill='10000'    state='4' created_at='1394018070'  />
+		<dyno_shop id='78663804' x='70' y='48' process_end='35975000' output_fill='10000'    state='4' created_at='1394018083'  />
+		<dyno_shop id='78663803' x='70' y='49' process_end='35976000' output_fill='10000'    state='4' created_at='1394018080'  />
+		<dyno_shop id='78663802' x='68' y='46' process_end='35923000' output_fill='10000'    state='4' created_at='1394018077'  />
+		<dyno_shop id='78663801' x='68' y='48' process_end='35924000' output_fill='10000'    state='4' created_at='1394018073'  />
+		<dyno_shop id='78663774' x='74' y='41' process_end='36024000' output_fill='10000'    state='4' created_at='1394018054'  />
+		<dyno_shop id='78663773' x='74' y='40' process_end='36023000' output_fill='10000'    state='4' created_at='1394018050'  />
+		<dyno_shop id='78663765' x='74' y='37' process_end='36019000' output_fill='10000'    state='4' created_at='1394018040'  />
+		<dyno_shop id='78633224' x='64' y='43' process_end='35874000' output_fill='10000'    state='4' created_at='1393994245'  />
+		<dyno_shop id='78633223' x='62' y='45' process_end='35870000' output_fill='10000'    state='4' created_at='1393994242'  />
+		<dyno_shop id='78633222' x='62' y='44' process_end='35869000' output_fill='10000'    state='4' created_at='1393994240'  />
+		<dyno_shop id='78633221' x='62' y='43' process_end='35868000' output_fill='10000'    state='4' created_at='1393994238'  />
+		<dyno_shop id='78633193' x='72' y='41' process_end='35986000' output_fill='10000'    state='4' created_at='1393994227'  />
+		<dyno_shop id='78615218' x='72' y='40' process_end='35987000' output_fill='10000'    state='4' created_at='1393978254'  />
+		<dyno_shop id='78615217' x='72' y='39' process_end='35988000' output_fill='10000'    state='4' created_at='1393978252'  />
+		<dyno_shop id='78615216' x='72' y='38' process_end='35989000' output_fill='10000'    state='4' created_at='1393978250'  />
+		<dyno_shop id='78615215' x='72' y='37' process_end='35990000' output_fill='10000'    state='4' created_at='1393978248'  />
+		<dyno_shop id='78615214' x='72' y='36' process_end='35991000' output_fill='10000'    state='4' created_at='1393978246'  />
+		<dyno_shop id='78615213' x='72' y='35' process_end='35992000' output_fill='10000'    state='4' created_at='1393978244'  />
+		<dyno_shop id='78615212' x='72' y='34' process_end='35993000' output_fill='10000'    state='4' created_at='1393978242'  />
+		<dyno_shop id='78615211' x='72' y='33' process_end='35994000' output_fill='10000'    state='4' created_at='1393978240'  />
+		<dyno_shop id='78615210' x='66' y='43' process_end='35918000' output_fill='10000'    state='4' created_at='1393978238'  />
+		<dyno_shop id='78615209' x='72' y='31' process_end='35996000' output_fill='10000'    state='4' created_at='1393978236'  />
+		<dyno_shop id='78615208' x='72' y='30' process_end='35997000' output_fill='10000'    state='4' created_at='1393978234'  />
+		<dyno_shop id='78615205' x='64' y='42' process_end='35875000' output_fill='10000'    state='4' created_at='1393978227'  />
+		<dyno_shop id='78615124' x='70' y='39' process_end='35965000' output_fill='10000'    state='4' created_at='1393978197'  />
+		<dyno_shop id='78615123' x='70' y='38' process_end='35964000' output_fill='10000'    state='4' created_at='1393978195'  />
+		<dyno_shop id='78615122' x='70' y='37' process_end='35962000' output_fill='10000'    state='4' created_at='1393978192'  />
+		<dyno_shop id='78615103' x='70' y='34' process_end='35959000' output_fill='10000'    state='4' created_at='1393978186'  />
+		<dyno_shop id='78615091' x='70' y='32' process_end='35963000' output_fill='10000'    state='4' created_at='1393978171'  />
+		<dyno_shop id='78615090' x='70' y='31' process_end='35957000' output_fill='10000'    state='4' created_at='1393978170'  />
+		<dyno_shop id='78542851' x='70' y='30' process_end='35956000' output_fill='10000'    state='4' created_at='1393936784'  />
+		<dyno_shop id='78542850' x='70' y='29' process_end='35954000' output_fill='10000'    state='4' created_at='1393936779'  />
+		<dyno_shop id='78542849' x='70' y='28' process_end='35955000' output_fill='10000'    state='4' created_at='1393936777'  />
+		<dyno_shop id='78542848' x='70' y='27' process_end='35953000' output_fill='10000'    state='4' created_at='1393936775'  />
+		<dyno_shop id='78542847' x='70' y='26' process_end='35952000' output_fill='10000'    state='4' created_at='1393936772'  />
+		<dyno_shop id='78542846' x='70' y='25' process_end='35951000' output_fill='10000'    state='4' created_at='1393936768'  />
+		<dyno_shop id='78542845' x='70' y='24' process_end='35950000' output_fill='10000'    state='4' created_at='1393936766'  />
+		<dyno_shop id='78542844' x='70' y='23' process_end='35949000' output_fill='10000'    state='4' created_at='1393936764'  />
+		<dyno_shop id='78542808' x='68' y='41' process_end='35930000' output_fill='10000'    state='4' created_at='1393936757'  />
+		<dyno_shop id='78542807' x='68' y='40' process_end='35931000' output_fill='10000'    state='4' created_at='1393936753'  />
+		<dyno_shop id='78542806' x='68' y='39' process_end='35932000' output_fill='10000'    state='4' created_at='1393936751'  />
+		<dyno_shop id='78542805' x='68' y='38' process_end='35933000' output_fill='10000'    state='4' created_at='1393936749'  />
+		<station_water_synthesis id='78519530' x='60' y='48'  output_fill='30000'    state='2' created_at='1393915485'  />
+		<dyno_shop id='78488733' x='68' y='37' process_end='35934000' output_fill='10000'    state='4' created_at='1393891538'  />
+		<dyno_shop id='78488732' x='68' y='36' process_end='35935000' output_fill='10000'    state='4' created_at='1393891535'  />
+		<dyno_shop id='78488731' x='68' y='35' process_end='35936000' output_fill='10000'    state='4' created_at='1393891533'  />
+		<dyno_shop id='78488730' x='68' y='34' process_end='35937000' output_fill='10000'    state='4' created_at='1393891530'  />
+		<dyno_shop id='78431498' x='68' y='32' process_end='35939000' output_fill='10000'    state='4' created_at='1393859332'  />
+		<dyno_shop id='78431497' x='68' y='31' process_end='35906000' output_fill='10000'    state='4' created_at='1393859330'  />
+		<dyno_shop id='78431496' x='68' y='30' process_end='35940000' output_fill='10000'    state='4' created_at='1393859327'  />
+		<dyno_shop id='78431495' x='68' y='29' process_end='35941000' output_fill='10000'    state='4' created_at='1393859325'  />
+		<dyno_shop id='78431494' x='68' y='28' process_end='35942000' output_fill='10000'    state='4' created_at='1393859322'  />
+		<dyno_shop id='78431493' x='68' y='27' process_end='35943000' output_fill='10000'    state='4' created_at='1393859319'  />
+		<dyno_shop id='78416946' x='68' y='26' process_end='35944000' output_fill='10000'    state='4' created_at='1393852608'  />
+		<dyno_shop id='78416945' x='68' y='25' process_end='35945000' output_fill='10000'    state='4' created_at='1393852606'  />
+		<dyno_shop id='78416944' x='68' y='24' process_end='35947000' output_fill='10000'    state='4' created_at='1393852604'  />
+		<dyno_shop id='78413155' x='68' y='23' process_end='35948000' output_fill='10000'    state='4' created_at='1393850705'  />
+		<dyno_shop id='78413150' x='58' y='44' process_end='35820000' output_fill='10000'    state='4' created_at='1393850700'  />
+		<dyno_shop id='78413148' x='66' y='39' process_end='35914000' output_fill='10000'    state='4' created_at='1393850695'  />
+		<dyno_shop id='78413147' x='66' y='38' process_end='35913000' output_fill='10000'    state='4' created_at='1393850692'  />
+		<dyno_shop id='78413146' x='66' y='37' process_end='35912000' output_fill='10000'    state='4' created_at='1393850691'  />
+		<dyno_shop id='78413145' x='66' y='36' process_end='35911000' output_fill='10000'    state='4' created_at='1393850689'  />
+		<dyno_shop id='78413081' x='66' y='33' process_end='35908000' output_fill='10000'    state='4' created_at='1393850680'  />
+		<dyno_shop id='78413080' x='66' y='32' process_end='35907000' output_fill='10000'    state='4' created_at='1393850679'  />
+		<dyno_shop id='78413079' x='66' y='31' process_end='35905000' output_fill='10000'    state='4' created_at='1393850677'  />
+		<dyno_shop id='78413078' x='66' y='30' process_end='35903000' output_fill='10000'    state='4' created_at='1393850675'  />
+		<atomic_power_new id='78375087' x='59' y='46'      state='2' created_at='1393821212' rotation='true' />
+		<dyno_shop id='78353727' x='66' y='26' process_end='35899000' output_fill='10000'    state='4' created_at='1393803875'  />
+		<dyno_shop id='78353726' x='66' y='25' process_end='35898000' output_fill='10000'    state='4' created_at='1393803871'  />
+		<dyno_shop id='78353725' x='66' y='24' process_end='35897000' output_fill='10000'    state='4' created_at='1393803870'  />
+		<dyno_shop id='78353724' x='66' y='23' process_end='35896000' output_fill='10000'    state='4' created_at='1393803867'  />
+		<dyno_shop id='78353722' x='64' y='40' process_end='35877000' output_fill='10000'    state='4' created_at='1393803862'  />
+		<dyno_shop id='78353721' x='64' y='39' process_end='35878000' output_fill='10000'    state='4' created_at='1393803860'  />
+		<dyno_shop id='78353717' x='64' y='35' process_end='35882000' output_fill='10000'    state='4' created_at='1393803852'  />
+		<dyno_shop id='78353716' x='64' y='34' process_end='35884000' output_fill='10000'    state='4' created_at='1393803850'  />
+		<dyno_shop id='78041506' x='58' y='29' process_end='35805000' output_fill='10000'    state='4' created_at='1393657397'  />
+		<dyno_shop id='78292798' x='64' y='33' process_end='35885000' output_fill='10000'    state='4' created_at='1393774036'  />
+		<dyno_shop id='78292797' x='64' y='32' process_end='35886000' output_fill='10000'    state='4' created_at='1393774034'  />
+		<dyno_shop id='78286266' x='64' y='30' process_end='35888000' output_fill='10000'    state='4' created_at='1393771609'  />
+		<dyno_shop id='78286265' x='64' y='29' process_end='35889000' output_fill='10000'    state='4' created_at='1393771601'  />
+		<dyno_shop id='78286263' x='64' y='27' process_end='35891000' output_fill='10000'    state='4' created_at='1393771587'  />
+		<dyno_shop id='78281123' x='64' y='26' process_end='35892000' output_fill='10000'    state='4' created_at='1393769519'  />
+		<dyno_shop id='78261314' x='64' y='25' process_end='35893000' output_fill='10000'    state='4' created_at='1393761537'  />
+		<dyno_shop id='78261313' x='64' y='24' process_end='35894000' output_fill='10000'    state='4' created_at='1393761528'  />
+		<dyno_shop id='78261311' x='62' y='41' process_end='35865000' output_fill='10000'    state='4' created_at='1393761503'  />
+		<dyno_shop id='78261305' x='62' y='35' process_end='35859000' output_fill='10000'    state='4' created_at='1393761455'  />
+		<atomic_power_new id='78243882' x='55' y='44'      state='2' created_at='1393753746' rotation='true' />
+		<dyno_shop id='78215380' x='62' y='33' process_end='35857000' output_fill='10000'    state='4' created_at='1393737973'  />
+		<dyno_shop id='78215379' x='62' y='32' process_end='35856000' output_fill='10000'    state='4' created_at='1393737962'  />
+		<dyno_shop id='78207737' x='62' y='29' process_end='35853000' output_fill='10000'    state='4' created_at='1393732593'  />
+		<dyno_shop id='78207736' x='62' y='28' process_end='35852000' output_fill='10000'    state='4' created_at='1393732585'  />
+		<dyno_shop id='78207735' x='62' y='27' process_end='35851000' output_fill='10000'    state='4' created_at='1393732577'  />
+		<dyno_shop id='78172997' x='60' y='29' process_end='35839000' output_fill='10000'    state='4' created_at='1393713924'  />
+		<dyno_shop id='78193859' x='62' y='26' process_end='35850000' output_fill='10000'    state='4' created_at='1393723712'  />
+		<dyno_shop id='78193858' x='62' y='25' process_end='35849000' output_fill='10000'    state='4' created_at='1393723703'  />
+		<dyno_shop id='78193857' x='62' y='24' process_end='35848000' output_fill='10000'    state='4' created_at='1393723695'  />
+		<dyno_shop id='78193856' x='62' y='23' process_end='35847000' output_fill='10000'    state='4' created_at='1393723683'  />
+		<dyno_shop id='77894099' x='56' y='28' process_end='35780000' output_fill='10000'    state='4' created_at='1393591537'  />
+		<dyno_shop id='77900806' x='56' y='29' process_end='35781000' output_fill='10000'    state='4' created_at='1393594954'  />
+		<dyno_shop id='77900807' x='56' y='30' process_end='35782000' output_fill='10000'    state='4' created_at='1393594957'  />
+		<dyno_shop id='77900808' x='56' y='31' process_end='35785000' output_fill='10000'    state='4' created_at='1393594958'  />
+		<dyno_shop id='77894098' x='56' y='27' process_end='35779000' output_fill='10000'    state='4' created_at='1393591530'  />
+		<dyno_shop id='77894097' x='56' y='26' process_end='35783000' output_fill='10000'    state='4' created_at='1393591523'  />
+		<dyno_shop id='77894096' x='56' y='25' process_end='35778000' output_fill='10000'    state='4' created_at='1393591509'  />
+		<dyno_shop id='78173009' x='60' y='41' process_end='35827000' output_fill='10000'    state='4' created_at='1393713950'  />
+		<dyno_shop id='78041504' x='58' y='27' process_end='35800000' output_fill='10000'    state='4' created_at='1393657393'  />
+		<dyno_shop id='77846495' x='52' y='36' process_end='35750000' output_fill='10000'    state='4' created_at='1393554887'  />
+		<dyno_shop id='77789199' x='54' y='31' process_end='35767000' output_fill='10000'    state='4' created_at='1393517215'  />
+		<dyno_shop id='77781608' x='54' y='23' process_end='35775000' output_fill='10000'    state='4' created_at='1393513204'  />
+		<eco_power_stage2 id='77646432' x='52' y='44'  output_fill='120000'    state='2' created_at='1393427409'  />
+		<station_water_synthesis id='77594944' x='58' y='48'  output_fill='30000'    state='2' created_at='1393399410'  />
+		<advanced_water_tower2_was_new id='76985939' x='62' y='48'  output_fill='4500'    state='2' created_at='1393048378'  />
+		<atomic_power_new id='76985886' x='57' y='44'      state='2' created_at='1393048349' rotation='true' />
+		<dyno_shop id='79378714' x='56' y='42' process_end='35796000' output_fill='10000'    state='4' created_at='1394464613'  />
+		<dyno_shop id='79378722' x='68' y='42' process_end='35929000' output_fill='10000'    state='4' created_at='1394464635'  />
+		<dyno_shop id='79378715' x='68' y='43' process_end='35928000' output_fill='10000'    state='4' created_at='1394464616'  />
+		<hotel_konrad_stage1 id='79466091' x='63' y='47'   man_hour='' input_fill='11421:1,11443:1'    state='2' created_at='1394522772'  />
+		<dyno_shop id='79378718' x='74' y='43' process_end='36025000' output_fill='10000'    state='4' created_at='1394464624'  />
+		<dyno_shop id='79378948' x='60' y='45' process_end='35824000' output_fill='10000'    state='4' created_at='1394464763'  />
+		<dyno_shop id='79378947' x='58' y='43' process_end='35819000' output_fill='10000'    state='4' created_at='1394464758'  />
+		<dyno_shop id='79378945' x='60' y='43' process_end='35825000' output_fill='10000'    state='4' created_at='1394464750'  />
+		<dyno_shop id='79378944' x='60' y='42' process_end='35826000' output_fill='10000'    state='4' created_at='1394464746'  />
+		<dyno_shop id='79378943' x='76' y='37' process_end='36039000' output_fill='10000'    state='4' created_at='1394464741' rotation='true' />
+		<dyno_shop id='79378887' x='76' y='43' process_end='36036000' output_fill='10000'    state='4' created_at='1394464715' rotation='true' />
+		<dyno_shop id='79378886' x='76' y='41' process_end='36037000' output_fill='10000'    state='4' created_at='1394464709' rotation='true' />
+		<dyno_shop id='79378858' x='50' y='42' process_end='35726000' output_fill='10000'    state='4' created_at='1394464704'  />
+		<dyno_shop id='79378844' x='50' y='43' process_end='35728000' output_fill='10000'    state='4' created_at='1394464696'  />
+		<dyno_shop id='79378843' x='52' y='42' process_end='35752000' output_fill='10000'    state='4' created_at='1394464692'  />
+		<srnu_factory id='76843112' x='50' y='48' process_end='28892000'  man_hour='' input_fill='10539'   state='3' created_at='1392969429'  />
+		<hot_springs_buildsite id='76719104' x='27' y='67'   input_fill='12123:1'   state='2' created_at='1392895233'  />
+		<ropeway_buildsite id='76719103' x='26' y='65'   input_fill='10910:4,10985:2'   state='2' created_at='1392895228'  />
+		<srnu_factory id='75494969' x='54' y='46' process_end='28898000'  man_hour='' input_fill='10539'   state='3' created_at='1392263400'  />
+		<srnu_factory id='75474680' x='56' y='48' process_end='28905000'  man_hour='' input_fill='10539'   state='3' created_at='1392249524'  />
+		<ski_track_buildsite id='74647972' x='46' y='25'   input_fill='11446:2,18311:1'   state='2' created_at='1391825219'  />
+		<victory_stadium_buildsite id='74220059' x='80' y='-2'   man_hour=''     state='2' created_at='1391611854'  />
+		<biathlon_track_buildsite id='72415839' x='50' y='5'   input_fill='15447:5'   state='2' created_at='1390625444'  />
+		<sports_village_buildsite id='71772052' x='57' y='-29'   input_fill='15587:5'   state='2' created_at='1390261737'  />
+		<dyno_shop id='71076980' x='52' y='25' process_end='35735000' output_fill='10000'    state='4' created_at='1389962298'  />
+		<dyno_shop id='71076978' x='50' y='25' process_end='35714000' output_fill='10000'    state='4' created_at='1389962270'  />
+		<dyno_shop id='71076977' x='52' y='23' process_end='35737000' output_fill='10000'    state='4' created_at='1389962255'  />
+		<srnu_factory id='70846018' x='54' y='48' process_end='28901000'  man_hour='' input_fill='10539'   state='3' created_at='1389844735'  />
+		<atomic_power_new id='70818234' x='56' y='44'      state='2' created_at='1389829661' rotation='true' />
+		<dyno_shop id='78173008' x='60' y='40' process_end='35828000' output_fill='10000'    state='4' created_at='1393713946'  />
+		<dyno_shop id='78173007' x='60' y='39' process_end='35829000' output_fill='10000'    state='4' created_at='1393713945'  />
+		<dyno_shop id='78173006' x='60' y='38' process_end='35830000' output_fill='10000'    state='4' created_at='1393713943'  />
+		<dyno_shop id='78173003' x='60' y='35' process_end='35833000' output_fill='10000'    state='4' created_at='1393713937'  />
+		<dyno_shop id='78173000' x='60' y='32' process_end='35836000' output_fill='10000'    state='4' created_at='1393713929'  />
+		<dyno_shop id='78172999' x='60' y='31' process_end='35837000' output_fill='10000'    state='4' created_at='1393713928'  />
+		<dyno_shop id='78172998' x='60' y='30' process_end='35838000' output_fill='10000'    state='4' created_at='1393713926'  />
+		<dyno_shop id='78172996' x='60' y='28' process_end='35841000' output_fill='10000'    state='4' created_at='1393713922'  />
+		<dyno_shop id='78172995' x='60' y='27' process_end='35842000' output_fill='10000'    state='4' created_at='1393713920'  />
+		<atomic_power_new id='78114339' x='58' y='46'      state='2' created_at='1393686711' rotation='true' />
+		<dyno_shop id='78100821' x='60' y='23' process_end='35845000' output_fill='10000'    state='4' created_at='1393682062'  />
+		<dyno_shop id='78063591' x='58' y='35' process_end='35810000' output_fill='10000'    state='4' created_at='1393667057'  />
+		<dyno_shop id='78077419' x='58' y='38' process_end='35814000' output_fill='10000'    state='4' created_at='1393673279'  />
+		<dyno_shop id='78063593' x='58' y='37' process_end='35813000' output_fill='10000'    state='4' created_at='1393667073'  />
+		<dyno_shop id='78063592' x='58' y='36' process_end='35811000' output_fill='10000'    state='4' created_at='1393667064'  />
+		<dyno_shop id='78063590' x='58' y='34' process_end='35809000' output_fill='10000'    state='4' created_at='1393667050'  />
+		<dyno_shop id='78041510' x='58' y='33' process_end='35808000' output_fill='10000'    state='4' created_at='1393657406'  />
+		<dyno_shop id='78041509' x='58' y='32' process_end='35807000' output_fill='10000'    state='4' created_at='1393657405'  />
+		<dyno_shop id='77997733' x='58' y='26' process_end='35802000' output_fill='10000'    state='4' created_at='1393634242'  />
+		<dyno_shop id='77997732' x='58' y='25' process_end='35799000' output_fill='10000'    state='4' created_at='1393634240'  />
+		<dyno_shop id='77997731' x='58' y='24' process_end='35798000' output_fill='10000'    state='4' created_at='1393634237'  />
+		<dyno_shop id='77997730' x='58' y='23' process_end='35801000' output_fill='10000'    state='4' created_at='1393634233'  />
+		<dyno_shop id='77997669' x='56' y='38' process_end='35791000' output_fill='10000'    state='4' created_at='1393634220'  />
+		<dyno_shop id='77997662' x='56' y='37' process_end='35790000' output_fill='10000'    state='4' created_at='1393634217'  />
+		<dyno_shop id='77997630' x='56' y='36' process_end='35789000' output_fill='10000'    state='4' created_at='1393634214'  />
+		<dyno_shop id='77997627' x='56' y='35' process_end='35788000' output_fill='10000'    state='4' created_at='1393634210'  />
+		<dyno_shop id='77997619' x='56' y='34' process_end='35787000' output_fill='10000'    state='4' created_at='1393634204'  />
+		<dyno_shop id='77997618' x='56' y='33' process_end='35797000' output_fill='10000'    state='4' created_at='1393634201'  />
+		<dyno_shop id='77997617' x='56' y='32' process_end='35786000' output_fill='10000'    state='4' created_at='1393634199'  />
+		<atomic_power_new id='77983655' x='61' y='46'      state='2' created_at='1393628240' rotation='true' />
+		<dyno_shop id='77882065' x='52' y='37' process_end='35731000' output_fill='10000'    state='4' created_at='1393583921'  />
+		<dyno_shop id='77882064' x='56' y='24' process_end='35777000' output_fill='10000'    state='4' created_at='1393583918'  />
+		<dyno_shop id='77882063' x='56' y='23' process_end='35776000' output_fill='10000'    state='4' created_at='1393583916'  />
+		<dyno_shop id='77882024' x='54' y='41' process_end='35756000' output_fill='10000'    state='4' created_at='1393583908'  />
+		<dyno_shop id='77871956' x='54' y='40' process_end='35757000' output_fill='10000'    state='4' created_at='1393576268'  />
+		<dyno_shop id='77868638' x='54' y='39' process_end='35758000' output_fill='10000'    state='4' created_at='1393573447'  />
+		<dyno_shop id='77868637' x='54' y='38' process_end='35761000' output_fill='10000'    state='4' created_at='1393573445'  />
+		<dyno_shop id='77868636' x='54' y='37' process_end='35759000' output_fill='10000'    state='4' created_at='1393573444'  />
+		<dyno_shop id='77868630' x='52' y='41' process_end='35751000' output_fill='10000'    state='4' created_at='1393573437'  />
+		<dyno_shop id='77868629' x='52' y='40' process_end='35729000' output_fill='10000'    state='4' created_at='1393573434'  />
+		<dyno_shop id='77868628' x='52' y='39' process_end='35730000' output_fill='10000'    state='4' created_at='1393573432'  />
+		<dyno_shop id='77868627' x='52' y='38' process_end='35749000' output_fill='10000'    state='4' created_at='1393573428'  />
+		<dyno_shop id='77859781' x='50' y='40' process_end='35733000' output_fill='10000'    state='4' created_at='1393565845'  />
+		<dyno_shop id='77859780' x='50' y='39' process_end='35724000' output_fill='10000'    state='4' created_at='1393565843'  />
+		<dyno_shop id='77859779' x='50' y='38' process_end='35732000' output_fill='10000'    state='4' created_at='1393565841'  />
+		<dyno_shop id='77849158' x='50' y='37' process_end='35723000' output_fill='10000'    state='4' created_at='1393557198'  />
+		<dyno_shop id='77846587' x='54' y='36' process_end='35766000' output_fill='10000'    state='4' created_at='1393554965'  />
+		<dyno_shop id='77839254' x='50' y='36' process_end='35722000' output_fill='10000'    state='4' created_at='1393549248'  />
+		<dyno_shop id='77839239' x='54' y='35' process_end='35748000' output_fill='10000'    state='4' created_at='1393549228'  />
+		<dyno_shop id='77832783' x='54' y='34' process_end='35762000' output_fill='10000'    state='4' created_at='1393544422'  />
+		<dyno_shop id='77832782' x='54' y='33' process_end='35764000' output_fill='10000'    state='4' created_at='1393544419'  />
+		<dyno_shop id='77831216' x='54' y='32' process_end='35765000' output_fill='10000'    state='4' created_at='1393543430'  />
+		<dyno_shop id='77831203' x='52' y='35' process_end='35747000' output_fill='10000'    state='4' created_at='1393543416'  />
+		<atomic_power_new id='77827005' x='60' y='46'      state='2' created_at='1393540572' rotation='true' />
+		<dyno_shop id='71076976' x='52' y='24' process_end='35734000' output_fill='10000'    state='4' created_at='1389962236'  />
+		<dyno_shop id='77781624' x='54' y='30' process_end='35768000' output_fill='10000'    state='4' created_at='1393513223'  />
+		<dyno_shop id='77781623' x='54' y='29' process_end='35769000' output_fill='10000'    state='4' created_at='1393513220'  />
+		<dyno_shop id='77781622' x='54' y='28' process_end='35770000' output_fill='10000'    state='4' created_at='1393513218'  />
+		<dyno_shop id='77781621' x='54' y='27' process_end='35771000' output_fill='10000'    state='4' created_at='1393513216'  />
+		<dyno_shop id='77781612' x='54' y='26' process_end='35772000' output_fill='10000'    state='4' created_at='1393513214'  />
+		<dyno_shop id='77781610' x='54' y='25' process_end='35773000' output_fill='10000'    state='4' created_at='1393513208'  />
+		<dyno_shop id='77781609' x='54' y='24' process_end='35774000' output_fill='10000'    state='4' created_at='1393513206'  />
+		<dyno_shop id='77770115' x='52' y='30' process_end='35741000' output_fill='10000'    state='4' created_at='1393507389'  />
+		<dyno_shop id='77770083' x='52' y='26' process_end='35736000' output_fill='10000'    state='4' created_at='1393507380'  />
+		<dyno_shop id='77770082' x='50' y='35' process_end='35720000' output_fill='10000'    state='4' created_at='1393507374'  />
+		<dyno_shop id='77770081' x='50' y='34' process_end='35719000' output_fill='10000'    state='4' created_at='1393507372'  />
+		<dyno_shop id='77770071' x='50' y='33' process_end='35718000' output_fill='10000'    state='4' created_at='1393507365'  />
+		<dyno_shop id='77770070' x='50' y='32' process_end='35717000' output_fill='10000'    state='4' created_at='1393507363'  />
+		<dyno_shop id='77770068' x='50' y='30' process_end='35721000' output_fill='10000'    state='4' created_at='1393507360'  />
+		<dyno_shop id='77770067' x='50' y='28' process_end='35713000' output_fill='10000'    state='4' created_at='1393507358'  />
+		<dyno_shop id='77770064' x='52' y='33' process_end='35745000' output_fill='10000'    state='4' created_at='1393507353'  />
+		<dyno_shop id='77770042' x='52' y='29' process_end='35740000' output_fill='10000'    state='4' created_at='1393507351'  />
+		<dyno_shop id='77770014' x='52' y='27' process_end='35738000' output_fill='10000'    state='4' created_at='1393507340'  />
+		<dyno_shop id='77769990' x='50' y='29' process_end='35715000' output_fill='10000'    state='4' created_at='1393507324'  />
+		<tax_collector_new_art id='66079350' x='62' y='46'      state='4' created_at='1388065733' rotation='true' />
+		<mountain_lift_buildsite id='65146430' x='44' y='31'   input_fill='11423:5,11482:1,11441:5,10931:8,12158:2'   state='2' created_at='0'  />
+		<mountain_heliport_buildsite id='65027954' x='90' y='50'   man_hour='' input_fill='15414:5,15444:1,10903:1,10920:4,11457:4,11406:1,10923:5'    state='2' created_at='0'  />
+		<santas_workshop_buildsite id='64980524' x='29' y='7'   man_hour='' input_fill='11412:5,15453:5,11469:1,10994:5'    state='2' created_at='0'  />
+		<advanced_water_tower1_was_real_new id='63417163' x='62' y='47'      state='2' created_at='0'  />
+		<advanced_water_tower1_was_real_new id='63417162' x='62' y='49'      state='2' created_at='0'  />
+	</field>
+	<barn>
+		<villa_moebius_real_dgift id='85011' quantity='1' updated_at='1397516634000' />
+
+
+
+
+
+
+
+
+
+		<membrane id='11489' quantity='3' updated_at='1396574561000' />
+
+
+
+
+
+
+		<centralized_traffic_system id='12135' quantity='1' updated_at='1395530241000' />
+
+
+
+		<chest_action_tower2 id='90006' quantity='4' updated_at='1395527937000' />
+		<chest_action_chest2 id='90005' quantity='2' updated_at='1395585240000' />
+		<wheel id='10976' quantity='1' updated_at='1395012887000' />
+		<radio_room id='10964' quantity='1' updated_at='1394838254000' />
+
+		<screw id='11453' quantity='1' updated_at='1393715204000' />
+
+
+
+
+		<bus_transport1 id='26301' quantity='1' updated_at='1393030507000' />
+
+
+
+
+
+		<castle_of_brissac_pseudo id='18640' quantity='1' updated_at='1392439905000' />
+		<castle_chenonceaux_pseudo id='18637' quantity='1' updated_at='1392439895000' />
+
+
+
+		<chest_action_tower1 id='90002' quantity='3' updated_at='1392649451000' />
+		<chest_action_chest1 id='90001' quantity='1' updated_at='1392822675000' />
+
+		<hydraulic_turbine id='10917' quantity='1' updated_at='1392160942000' />
+
+		<act_of_expanding id='24533' quantity='10' updated_at='1397468121000' />
+
+
+
+
+
+
+
+
+
+
+		<muleta id='12138' quantity='1' updated_at='1390173188000' />
+
+
+
+
+
+		<baseball_bats id='11496' quantity='1' updated_at='1390000504000' />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<spruce_branches id='18310' quantity='5' updated_at='1388154105000' />
+
+		<cds_with_christmas_songs id='18313' quantity='5' updated_at='1388154105000' />
+
+
+
+
+
+
+		<sunbed id='10905' quantity='7' updated_at='1388019058000' />
+
+
+
+
+
+
+
+
+		<thermos_of_tea id='18308' quantity='5' updated_at='1387515231000' />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<weather_balloon id='10966' quantity='1' updated_at='1386975794000' />
+		<chest_action_aspen_chest id='90003' quantity='3' updated_at='1387275790000' />
+		<chest_action_aspen_tower id='90004' quantity='3' updated_at='1387016604000' />
+
+
+
+		<rope id='10902' quantity='4' updated_at='1396014958000' />
+
+
+
+
+
+		<thermal_packer id='11494' quantity='1' updated_at='1386562225000' />
+	</barn>
+	<quests>
+		<quest id='13001' completed_at='1386562274' completed='true' />
+		<quest id='10240' order='0' />
+		<quest id='10241' order='0' />
+		<quest id='10242' order='0' />
+		<quest id='10243' order='1' />
+		<quest id='10244' order='1' />
+		<quest id='10245' order='0' />
+		<quest id='10246' order='1' />
+		<quest id='10247' order='1' />
+		<quest id='10250' order='0' />
+		<quest id='10251' order='0' />
+		<quest id='10235' order='0' />
+		<quest id='10238' order='0' />
+		<quest id='10239' order='1' />
+		<quest id='10230' order='0' />
+		<quest id='10300' order='0' />
+		<quest id='60001' completed_at='1386562230' completed='true' />
+		<quest id='60003' completed_at='1386562310' completed='true' />
+		<quest id='60004' completed_at='1386562927' completed='true' />
+		<quest id='60005' completed_at='1386563710' completed='true' />
+		<quest id='60006' completed_at='1386594657' completed='true' />
+		<quest id='60007' completed_at='1386640334' completed='true' />
+		<quest id='60008' completed_at='1386644315' completed='true' />
+		<quest id='60009' completed_at='1386680872' completed='true' />
+		<quest id='60010' completed_at='1386748869' completed='true' />
+		<quest id='60011' completed_at='1386778287' completed='true' />
+		<quest id='60012' completed_at='1386818817' completed='true' />
+		<quest id='60013' completed_at='1386819026' completed='true' />
+		<quest id='60014' completed_at='1386823107' completed='true' />
+		<quest id='60015' completed_at='1386836556' completed='true' />
+		<quest id='60016' completed_at='1386858484' completed='true' />
+		<quest id='60017' completed_at='1386928798' completed='true' />
+		<quest id='60018' completed_at='1386928798' completed='true' />
+		<quest id='60019' completed_at='1386928798' completed='true' />
+		<quest id='60020' completed_at='1386934391' completed='true' />
+		<quest id='60022' order='0' />
+		<quest id='60023' completed_at='1386818817' completed='true' />
+		<quest id='60024' completed_at='1386782236' completed='true' />
+		<quest id='60025' order='0' />
+		<quest id='60026' completed_at='1386818816' completed='true' />
+		<quest id='60027' completed_at='1386594666' completed='true' />
+		<quest id='60028' completed_at='1386643863' completed='true' />
+		<quest id='60029' completed_at='1386562230' completed='true' />
+		<quest id='60030' completed_at='1386594666' completed='true' />
+		<quest id='10000' completed_at='1386573305' completed='true' />
+		<quest id='10001' completed_at='1386811332' completed='true' />
+		<quest id='10004' completed_at='1388886853' completed='true' />
+		<quest id='10005' completed_at='1386562429' completed='true' />
+		<quest id='10006' completed_at='1387014160' completed='true' />
+		<quest id='10007' completed_at='1387494581' completed='true' />
+		<quest id='10008' completed_at='1392763328' completed='true' />
+		<quest id='10009' completed_at='1386563708' completed='true' />
+		<quest id='10002' completed_at='1387011283' completed='true' />
+		<quest id='10011' completed_at='1386911751' completed='true' />
+		<quest id='10012' completed_at='1387496743' completed='true' />
+		<quest id='10013' completed_at='1386638332' completed='true' />
+		<quest id='10014' completed_at='1386778285' completed='true' />
+		<quest id='10015' completed_at='1386858480' completed='true' />
+		<quest id='10016' completed_at='1387011283' completed='true' />
+		<quest id='10017' completed_at='1386942745' completed='true' />
+		<quest id='10010' completed_at='1386819024' completed='true' />
+		<quest id='10019' completed_at='1387237952' completed='true' />
+		<quest id='10020' completed_at='1387926737' completed='true' />
+		<quest id='10021' completed_at='1386779054' completed='true' />
+		<quest id='10022' completed_at='1387072744' completed='true' />
+		<quest id='10023' completed_at='1387185463' completed='true' />
+		<quest id='10018' completed_at='1387105497' completed='true' />
+		<quest id='10027' completed_at='1387014154' completed='true' />
+		<quest id='10028' completed_at='1387508185' completed='true' />
+		<quest id='10029' completed_at='1386778367' completed='true' />
+		<quest id='10030' completed_at='1386821646' completed='true' />
+		<quest id='10031' completed_at='1387034281' completed='true' />
+		<quest id='10024' completed_at='1389740457' completed='true' />
+		<quest id='10025' completed_at='1386573303' completed='true' />
+		<quest id='10036' completed_at='1387412159' completed='true' />
+		<quest id='10037' completed_at='1386671298' completed='true' />
+		<quest id='10038' completed_at='1386725610' completed='true' />
+		<quest id='10039' completed_at='1386836547' completed='true' />
+		<quest id='10032' completed_at='1387268802' completed='true' />
+		<quest id='10033' completed_at='1386916634' completed='true' />
+		<quest id='10034' completed_at='1387032145' completed='true' />
+		<quest id='10026' completed_at='1386821006' completed='true' />
+		<quest id='10040' completed_at='1386934074' completed='true' />
+		<quest id='10035' completed_at='1387151663' completed='true' />
+		<quest id='10045' completed_at='1389308650' completed='true' />
+		<quest id='10056' completed_at='1387072736' completed='true' />
+		<quest id='10057' completed_at='1390623598' completed='true' />
+		<quest id='10058' completed_at='1388666936' completed='true' />
+		<quest id='10059' completed_at='1390623591' completed='true' />
+		<quest id='10060' order='0' />
+		<quest id='10053' completed_at='1386811358' completed='true' />
+		<quest id='10054' order='0' />
+		<quest id='10055' order='0' />
+		<quest id='10061' order='0' />
+		<quest id='10065' completed_at='1396014938' completed='true' />
+		<quest id='10076' order='4' />
+		<quest id='10078' completed_at='1397295495' completed='true' />
+		<quest id='10079' order='4' />
+		<quest id='10080' completed_at='1396620196' completed='true' />
+		<quest id='10073' order='1' />
+		<quest id='10074' order='2' />
+		<quest id='10077' completed_at='1397293970' completed='true' />
+		<quest id='10086' order='2' />
+		<quest id='10087' order='3' />
+		<quest id='10088' order='1' />
+		<quest id='10081' order='2' />
+		<quest id='10082' completed_at='1395407151' completed='true' />
+		<quest id='10083' order='2' />
+		<quest id='10075' order='3' />
+		<quest id='10085' completed_at='1396399132' completed='true' />
+		<quest id='10089' order='2' />
+		<quest id='10090' order='3' />
+		<quest id='10100' order='1' />
+		<quest id='10084' order='3' />
+		<quest id='10102' counters='50,0,0' order='3' />
+		<quest id='10103' counters='75,0,0' order='4' />
+		<quest id='10105' order='1' />
+		<quest id='10098' order='1' />
+		<quest id='10101' counters='25,0,0' order='2' />
+		<quest id='10110' order='1' />
+		<quest id='10111' order='1' />
+		<quest id='10118' order='1' />
+		<quest id='10120' order='1' />
+		<quest id='10121' order='1' />
+		<quest id='10115' order='1' />
+		<quest id='10126' order='1' />
+		<quest id='10127' order='1' />
+		<quest id='10104' order='1' />
+		<quest id='10125' order='1' />
+		<quest id='10136' order='1' />
+		<quest id='10137' order='1' />
+		<quest id='10133' order='1' />
+		<quest id='10134' order='1' />
+		<quest id='10117' order='1' />
+		<quest id='10097' order='1' />
+		<quest id='10149' order='1' />
+		<quest id='10150' order='1' />
+		<quest id='10143' order='1' />
+		<quest id='10135' order='1' />
+		<quest id='10145' completed_at='1394320761' completed='true' />
+		<quest id='10116' order='1' />
+		<quest id='10155' order='1' />
+		<quest id='10156' order='1' />
+		<quest id='10157' order='1' />
+		<quest id='10158' order='1' />
+		<quest id='10160' order='1' />
+		<quest id='10144' order='1' />
+		<quest id='10162' order='1' />
+		<quest id='10163' order='1' />
+		<quest id='10147' order='0' />
+		<quest id='10169' order='1' />
+		<quest id='10171' order='1' />
+		<quest id='10164' order='1' />
+		<quest id='10174' order='1' />
+		<quest id='10175' order='1' />
+		<quest id='10176' order='0' />
+		<quest id='10172' order='1' />
+		<quest id='10181' order='1' />
+		<quest id='10182' order='1' />
+		<quest id='10183' order='1' />
+		<quest id='10184' order='1' />
+		<quest id='10185' order='1' />
+		<quest id='10186' order='1' />
+		<quest id='10187' order='1' />
+		<quest id='10188' order='1' />
+		<quest id='10189' order='1' />
+		<quest id='10190' order='1' />
+		<quest id='10191' order='1' />
+		<quest id='10192' order='1' />
+		<quest id='10193' order='1' />
+		<quest id='10194' order='1' />
+		<quest id='10195' order='1' />
+		<quest id='10196' order='0' />
+		<quest id='10197' order='1' />
+		<quest id='10198' order='1' />
+		<quest id='10199' order='1' />
+		<quest id='10200' order='1' />
+		<quest id='10201' order='1' />
+		<quest id='10202' order='1' />
+		<quest id='10203' order='3' />
+		<quest id='10204' order='1' />
+		<quest id='10205' completed_at='1387931675' completed='true' />
+		<quest id='10206' completed_at='1391670873' completed='true' />
+		<quest id='10207' order='0' />
+		<quest id='10208' order='0' />
+		<quest id='10209' completed_at='1389524421' completed='true' />
+		<quest id='10211' completed_at='1390009142' completed='true' />
+		<quest id='10212' completed_at='1391425750' completed='true' />
+		<quest id='10213' order='0' />
+		<quest id='10214' order='0' />
+		<quest id='10215' order='0' />
+		<quest id='10216' order='0' />
+		<quest id='10217' order='0' />
+		<quest id='10218' order='0' />
+		<quest id='10219' order='0' />
+		<quest id='10220' order='0' />
+		<quest id='10221' completed_at='1391305523' completed='true' />
+		<quest id='10223' completed_at='1396574553' completed='true' />
+		<quest id='10224' completed_at='1390623571' completed='true' />
+		<quest id='10225' completed_at='1395996275' completed='true' />
+		<quest id='10226' completed_at='1396233286' completed='true' />
+		<quest id='10210' completed_at='1389749183' completed='true' />
+		<quest id='10228' order='1' />
+		<quest id='10229' order='1' />
+		<quest id='10222' completed_at='1396335409' completed='true' />
+		<quest id='10231' order='1' />
+		<quest id='10232' order='2' />
+		<quest id='10233' order='3' />
+		<quest id='10234' order='4' />
+		<quest id='10227' order='0' />
+		<quest id='10236' order='0' />
+		<quest id='10237' order='0' />
+		<quest id='13002' completed_at='1386562308' completed='true' />
+		<quest id='20101' completed_at='1386562519' completed='true' />
+		<quest id='13003' completed_at='1386562920' completed='true' />
+		<quest id='13004' completed_at='1386562583' completed='true' />
+		<quest id='20102' completed_at='1386562543' completed='true' />
+		<quest id='20103' completed_at='1386562548' completed='true' />
+		<quest id='20207' completed_at='1386905904' completed='true' />
+		<quest id='20214' completed_at='1386573303' completed='true' />
+		<quest id='20201' completed_at='1386819359' completed='true' />
+		<quest id='20104' completed_at='1386562937' completed='true' />
+		<quest id='20109' completed_at='1386575376' completed='true' />
+		<quest id='20110' completed_at='1386575501' completed='true' />
+		<quest id='20106' completed_at='1386643882' completed='true' />
+		<quest id='70288' completed_at='1386822656' completed='true' />
+		<quest id='20115' completed_at='1386821030' completed='true' />
+		<quest id='20215' completed_at='1386563724' completed='true' />
+		<quest id='20216' completed_at='1386574943' completed='true' />
+		<quest id='21001' completed_at='1386649650' completed='true' />
+		<quest id='20217' completed_at='1386778370' completed='true' />
+		<quest id='12012' completed_at='1386811358' completed='true' />
+		<quest id='20111' completed_at='1386644314' completed='true' />
+		<quest id='70001' completed_at='1386725734' completed='true' />
+		<quest id='12023' completed_at='1387072741' completed='true' />
+		<quest id='20105' completed_at='1386652253' completed='true' />
+		<quest id='70002' completed_at='1386725604' completed='true' />
+		<quest id='20116' completed_at='1386671298' completed='true' />
+		<quest id='12025' completed_at='1386821065' completed='true' />
+		<quest id='12038' completed_at='1389916501' completed='true' />
+		<quest id='20107' completed_at='1386652302' completed='true' />
+		<quest id='20117' completed_at='1386725604' completed='true' />
+		<quest id='70088' order='0' />
+		<quest id='10248' order='1' />
+		<quest id='10249' order='1' />
+		<quest id='70003' completed_at='1386934131' completed='true' />
+		<quest id='20118' completed_at='1386772665' completed='true' />
+		<quest id='70400' completed_at='1387875314' completed='true' />
+		<quest id='70284' completed_at='1386819212' completed='true' />
+		<quest id='70279' completed_at='1386934892' completed='true' />
+		<quest id='70220' completed_at='1386936307' completed='true' />
+		<quest id='12065' completed_at='1388618095' completed='true' />
+		<quest id='12062' completed_at='1387545884' completed='true' />
+		<quest id='70260' counters='0,3,0' order='67' />
+		<quest id='70053' completed_at='1396615941' completed='true' />
+		<quest id='70013' completed_at='1387875273' completed='true' />
+		<quest id='20108' completed_at='1386821002' completed='true' />
+		<quest id='70126' completed_at='1388445502' completed='true' />
+		<quest id='20202' completed_at='1386822556' completed='true' />
+		<quest id='20204' completed_at='1386822485' completed='true' />
+		<quest id='12026' completed_at='1386938829' completed='true' />
+		<quest id='12036' completed_at='1386934971' completed='true' />
+		<quest id='12167' completed_at='1386934388' completed='true' />
+		<quest id='20205' completed_at='1386905905' completed='true' />
+		<quest id='20203' completed_at='1386823187' completed='true' />
+		<quest id='70005' completed_at='1387061894' completed='true' />
+		<quest id='70010' completed_at='1394803103' completed='true' />
+		<quest id='70022' order='0' />
+		<quest id='70025' order='0' />
+		<quest id='70031' counters='0,1,0' order='0' />
+		<quest id='70041' completed_at='1396651093' completed='true' />
+		<quest id='70061' completed_at='1386823187' completed='true' />
+		<quest id='70094' completed_at='1388415118' completed='true' />
+		<quest id='70109' completed_at='1388415140' completed='true' />
+		<quest id='70062' completed_at='1389308650' completed='true' />
+		<quest id='70004' completed_at='1386936302' completed='true' />
+		<quest id='70049' completed_at='1387875301' completed='true' />
+		<quest id='70138' order='102' />
+		<quest id='70180' counters='0,1,0' order='92' />
+		<quest id='12041' completed_at='1386918952' completed='true' />
+		<quest id='70071' counters='0,1,0' order='120' />
+		<quest id='20208' completed_at='1386910109' completed='true' />
+		<quest id='20206' completed_at='1386911448' completed='true' />
+		<quest id='70353' counters='0,1,1' order='43' />
+		<quest id='70035' order='14' />
+		<quest id='20209' completed_at='1386911155' completed='true' />
+		<quest id='20211' completed_at='1386911174' completed='true' />
+		<quest id='20210' completed_at='1386911222' completed='true' />
+		<quest id='20213' completed_at='1386911199' completed='true' />
+		<quest id='20212' completed_at='1386911175' completed='true' />
+		<quest id='70348' counters='0,1000,0' order='48' />
+		<quest id='70197' order='87' />
+		<quest id='12042' completed_at='1386926369' completed='true' />
+		<quest id='12058' completed_at='1386926370' completed='true' />
+		<quest id='12043' order='101' />
+		<quest id='12059' completed_at='1386926371' completed='true' />
+		<quest id='12060' completed_at='1386926400' completed='true' />
+		<quest id='12061' completed_at='1387034152' completed='true' />
+		<quest id='70354' counters='0,1,0' order='42' />
+		<quest id='70280' order='61' />
+		<quest id='70255' counters='0,0,160' order='71' />
+		<quest id='70155' order='111' />
+		<quest id='70072' completed_at='1387237859' completed='true' />
+		<quest id='12057' order='2' />
+		<quest id='70014' counters='0,1,0' order='119' />
+		<quest id='70073' counters='0,3,0' order='118' />
+		<quest id='70135' order='25' />
+		<quest id='70184' order='28' />
+		<quest id='70243' completed_at='1387537204' completed='true' />
+		<quest id='70332' completed_at='1394062154' completed='true' />
+		<quest id='70355' order='41' />
+		<quest id='70420' completed_at='1387275760' completed='true' />
+		<quest id='70008' completed_at='1396622018' completed='true' />
+		<quest id='70221' order='45' />
+		<quest id='12027' completed_at='1386939101' completed='true' />
+		<quest id='12028' completed_at='1386940082' completed='true' />
+		<quest id='12029' completed_at='1386939107' completed='true' />
+		<quest id='12030' order='11' />
+		<quest id='12031' completed_at='1387151483' completed='true' />
+		<quest id='70007' completed_at='1394803127' completed='true' />
+		<quest id='70045' completed_at='1394811990' completed='true' />
+		<quest id='70110' counters='0,1,0' order='112' />
+		<quest id='70181' counters='0,-1,0' order='91' />
+		<quest id='70356' counters='0,1,0' order='40' />
+		<quest id='12080' completed_at='1395719848' completed='true' />
+		<quest id='70520' counters='0,0,2' order='32' />
+		<quest id='70571' completed_at='1386972576' completed='true' />
+		<quest id='70570' completed_at='1386972356' completed='true' />
+		<quest id='10252' order='0' />
+		<quest id='70580' completed_at='1387167311' completed='true' />
+		<quest id='70572' completed_at='1387200570' completed='true' />
+		<quest id='70357' counters='0,500,0' order='39' />
+		<quest id='70349' counters='0,1,0' order='47' />
+		<quest id='70261' counters='0,0,500' order='65' />
+		<quest id='70186' order='89' />
+		<quest id='70129' counters='0,1580,0' order='108' />
+		<quest id='70060' completed_at='1396597026' completed='true' />
+		<quest id='70050' counters='0,1,0' order='121' />
+		<quest id='70038' completed_at='1396608271' completed='true' />
+		<quest id='70144' completed_at='1395235245' completed='true' />
+		<quest id='70154' order='113' />
+		<quest id='70157' order='107' />
+		<quest id='70198' counters='0,300,0' order='86' />
+		<quest id='70054' order='22' />
+		<quest id='70123' completed_at='1395552196' completed='true' />
+		<quest id='70231' completed_at='1388409206' completed='true' />
+		<quest id='70283' counters='0,2162,0' order='57' />
+		<quest id='70307' counters='0,503,0' order='60' />
+		<quest id='70350' counters='0,1,0' order='46' />
+		<quest id='70368' completed_at='1390623723' completed='true' />
+		<quest id='70375' completed_at='1387073210' completed='true' />
+		<quest id='70017' completed_at='1394803168' completed='true' />
+		<quest id='70259' counters='0,5,0' order='68' />
+		<quest id='12067' order='99' />
+		<quest id='70006' order='97' />
+		<quest id='70057' order='12' />
+		<quest id='70058' completed_at='1394925657' completed='true' />
+		<quest id='70376' completed_at='1390018998' completed='true' />
+		<quest id='70011' order='16' />
+		<quest id='70299' counters='0,0,1' order='55' />
+		<quest id='70322' order='54' />
+		<quest id='70351' counters='0,1200,0' order='44' />
+		<quest id='12037' counters='0,1,0' order='80' />
+		<quest id='70581' completed_at='1388764180' completed='true' />
+		<quest id='70018' completed_at='1394803251' completed='true' />
+		<quest id='70310' completed_at='1388706806' completed='true' />
+		<quest id='70328' order='51' />
+		<quest id='70573' completed_at='1387200741' completed='true' />
+		<quest id='70574' completed_at='1387254979' completed='true' />
+		<quest id='70575' completed_at='1387515141' completed='true' />
+		<quest id='70182' completed_at='1396596132' completed='true' />
+		<quest id='70282' counters='0,1,0' order='59' />
+		<quest id='70401' order='37' />
+		<quest id='70421' completed_at='1387281303' completed='true' />
+		<quest id='70422' order='0' />
+		<quest id='70600' completed_at='1387319307' completed='true' />
+		<quest id='10253' order='0' />
+		<quest id='12091' order='79' />
+		<quest id='70239' completed_at='1389183709' completed='true' />
+		<quest id='70200' counters='0,500,0' order='85' />
+		<quest id='70163' order='96' />
+		<quest id='70405' counters='0,5,0' order='35' />
+		<quest id='70324' counters='0,0,1' order='52' />
+		<quest id='70323' order='53' />
+		<quest id='70308' counters='0,1,0' order='58' />
+		<quest id='70256' counters='0,0,1' order='70' />
+		<quest id='70130' counters='0,5,0' order='106' />
+		<quest id='70029' counters='0,1,0' order='0' />
+		<quest id='70576' completed_at='1387515162' completed='true' />
+		<quest id='70577' completed_at='1387536868' completed='true' />
+		<quest id='70578' completed_at='1387536962' completed='true' />
+		<quest id='70579' counters='115,0,0' order='0' />
+		<quest id='70244' completed_at='1387931675' completed='true' />
+		<quest id='12063' counters='1,2,0' order='66' />
+		<quest id='70611' completed_at='1387595998' completed='true' />
+		<quest id='10257' order='0' />
+		<quest id='10256' order='0' />
+		<quest id='10255' completed_at='1390110172' completed='true' />
+		<quest id='10254' completed_at='1387596011' completed='true' />
+		<quest id='10260' completed_at='1389775286' completed='true' />
+		<quest id='10259' completed_at='1389191411' completed='true' />
+		<quest id='10258' completed_at='1388445626' completed='true' />
+		<quest id='10263' order='0' />
+		<quest id='10262' order='0' />
+		<quest id='10261' order='0' />
+		<quest id='70286' completed_at='1389052898' completed='true' />
+		<quest id='70208' counters='0,1529,0' order='82' />
+		<quest id='70019' order='15' />
+		<quest id='70012' completed_at='1387749028' completed='true' />
+		<quest id='70612' completed_at='1387596022' completed='true' />
+		<quest id='70613' completed_at='1387686844' completed='true' />
+		<quest id='70055' order='13' />
+		<quest id='70160' completed_at='1394803242' completed='true' />
+		<quest id='70330' order='50' />
+		<quest id='70614' completed_at='1387686921' completed='true' />
+		<quest id='70615' completed_at='1388962919' completed='true' />
+		<quest id='70016' completed_at='1396596775' completed='true' />
+		<quest id='70300' order='7' />
+		<quest id='70240' counters='0,1000,0' order='74' />
+		<quest id='70235' counters='0,5,0' order='77' />
+		<quest id='10268' completed_at='1388063864' completed='true' />
+		<quest id='10269' completed_at='1388063905' completed='true' />
+		<quest id='70403' counters='0,500,0' order='36' started_at='1387931675' />
+		<quest id='70302' counters='0,1,0' order='62' started_at='1387931675' />
+		<quest id='70287' completed_at='1396626204' completed='true' />
+		<quest id='70263' counters='0,5,0' order='63' started_at='1387931675' />
+		<quest id='70159' counters='0,200,0' order='100' started_at='1387931675' />
+		<quest id='70245' completed_at='1388807149' completed='true' />
+		<quest id='70046' order='123' started_at='1388062329' />
+		<quest id='70201' counters='0,2,0' order='84' started_at='1388062329' />
+		<quest id='70285' completed_at='1390439180' completed='true' />
+		<quest id='70406' counters='0,1,0' order='34' started_at='1388100756' />
+		<quest id='70262' counters='0,3,0' order='64' started_at='1388100756' />
+		<quest id='70258' counters='0,500,0' order='69' started_at='1388100756' />
+		<quest id='70209' counters='0,4,0' order='81' started_at='1388100756' />
+		<quest id='70150' order='117' started_at='1388100756' />
+		<quest id='10264' order='0' started_at='1388154030' />
+		<quest id='70569' completed_at='1388154071' completed='true' />
+		<quest id='70630' end_date='1388822400' order='1' started_at='1388154072' />
+		<quest id='70127' order='110' started_at='1388277346' />
+		<quest id='70095' completed_at='1393557836' completed='true' />
+		<quest id='70331' order='49' started_at='1388445617' />
+		<quest id='70226' completed_at='1393839981' completed='true' />
+		<quest id='70202' completed_at='1395407151' completed='true' />
+		<quest id='70164' counters='0,500,0' order='95' started_at='1388445617' />
+		<quest id='70151' counters='0,500,0' order='115' started_at='1388445617' />
+		<quest id='70131' order='105' started_at='1388445617' />
+		<quest id='70047' completed_at='1388568469' completed='true' />
+		<quest id='70021' completed_at='1396596947' completed='true' />
+		<quest id='70407' completed_at='1390000579' completed='true' />
+		<quest id='70241' counters='0,5,0' order='73' started_at='1388617819' />
+		<quest id='70237' counters='0,2025,0' order='75' started_at='1388617819' />
+		<quest id='70236' counters='0,5000,0' order='76' started_at='1388617819' />
+		<quest id='12066' completed_at='1389453274' completed='true' />
+		<quest id='10271' order='1' started_at='1388748879' />
+		<quest id='10270' order='1' started_at='1388748879' />
+		<quest id='70582' counters='0,0,1' order='0' started_at='1388764181' />
+		<quest id='70238' completed_at='1394898622' completed='true' />
+		<quest id='70069' order='23' started_at='1388803420' />
+		<quest id='70074' order='116' started_at='1388803420' />
+		<quest id='70246' completed_at='1389508172' completed='true' />
+		<quest id='70099' completed_at='1390258909' completed='true' />
+		<quest id='70059' completed_at='1396596812' completed='true' />
+		<quest id='70616' counters='0,0,3' order='30' started_at='1388962920' />
+		<quest id='10265' order='0' started_at='1389010609' />
+		<quest id='70640' end_date='1389686400' order='1' started_at='1389010609' />
+		<quest id='70232' counters='0,300,0' order='29' started_at='1389139707' />
+		<quest id='70063' completed_at='1389308676' completed='true' />
+		<quest id='70064' order='19' started_at='1389308676' />
+		<quest id='70183' order='90' started_at='1389341184' />
+		<quest id='70132' counters='0,800,0' order='104' started_at='1389341184' />
+		<quest id='10266' order='1' started_at='1389396200' />
+		<quest id='70247' completed_at='1389786324' completed='true' />
+		<quest id='70161' counters='0,1500,0' order='98' started_at='1389529390' />
+		<quest id='70111' completed_at='1390917022' completed='true' />
+		<quest id='70051' completed_at='1389529391' completed='true' />
+		<quest id='10273' order='1' started_at='1389712981' />
+		<quest id='10272' order='1' started_at='1389712981' />
+		<quest id='70156' order='109' started_at='1389740729' />
+		<quest id='70056' completed_at='1396596874' completed='true' />
+		<quest id='70248' completed_at='1391670873' completed='true' />
+		<quest id='70408' counters='0,1600,0' order='33' started_at='1389913589' />
+		<quest id='70136' order='103' started_at='1389913589' />
+		<quest id='12039' order='20' started_at='1389916502' />
+		<quest id='70650' end_date='1390662524' order='1' started_at='1389971324' />
+		<quest id='10333' order='0' started_at='1389971324' />
+		<quest id='70377' completed_at='1390623575' completed='true' />
+		<quest id='70311' counters='0,300,0' order='56' started_at='1390058452' />
+		<quest id='70165' counters='0,300,0' order='94' started_at='1390058452' />
+		<quest id='70128' order='24' started_at='1390058452' />
+		<quest id='70048' order='122' started_at='1390058452' />
+		<quest id='70118' completed_at='1394328340' completed='true' />
+		<quest id='70113' completed_at='1396153644' completed='true' />
+		<quest id='70107' order='114' started_at='1390232286' />
+		<quest id='70075' completed_at='1390232286' completed='true' />
+		<quest id='70205' counters='0,2,0' order='83' started_at='1390451188' />
+		<quest id='70188' counters='0,700,0' order='88' started_at='1390451188' />
+		<quest id='70166' order='93' started_at='1390451188' />
+		<quest id='70152' order='26' started_at='1390451188' />
+		<quest id='20913' order='1' started_at='1390563489' />
+		<quest id='20912' order='1' started_at='1390563489' />
+		<quest id='70378' completed_at='1390647975' completed='true' />
+		<quest id='70137' order='27' started_at='1390623587' />
+		<quest id='70052' completed_at='1390623597' completed='true' />
+		<quest id='70369' completed_at='1390952860' completed='true' />
+		<quest id='70379' completed_at='1393759153' completed='true' />
+		<quest id='70670' end_date='1391638328' order='1' started_at='1390947128' />
+		<quest id='10500' order='0' started_at='1390947128' />
+		<quest id='70370' completed_at='1391305987' completed='true' />
+		<quest id='70233' counters='0,1150,0' order='78' started_at='1390995643' />
+		<quest id='70358' counters='0,1,0' order='38' started_at='1391239627' />
+		<quest id='70070' completed_at='1391239638' completed='true' />
+		<quest id='70371' completed_at='1391949623' completed='true' />
+		<quest id='70242' counters='0,1000,0' order='72' started_at='1391436721' />
+		<quest id='70306' completed_at='1392993072' completed='true' />
+		<quest id='20914' order='1' started_at='1391517631' />
+		<quest id='20915' order='1' started_at='1391517631' />
+		<quest id='70112' completed_at='1391612745' completed='true' />
+		<quest id='70134' completed_at='1391782617' completed='true' />
+		<quest id='70249' completed_at='1391670874' completed='true' />
+		<quest id='70250' order='21' started_at='1391670874' />
+		<quest id='20949' completed_at='1391726434' completed='true' />
+		<quest id='20948' order='0' started_at='1391726433' />
+		<quest id='10267' completed_at='1391733901' completed='true' />
+		<quest id='20994' completed_at='1391774207' completed='true' />
+		<quest id='20993' completed_at='1391774207' completed='true' />
+		<quest id='20992' completed_at='1391774207' completed='true' />
+		<quest id='20991' completed_at='1391774207' completed='true' />
+		<quest id='20990' completed_at='1391774207' completed='true' />
+		<quest id='20975' completed_at='1391774244' completed='true' />
+		<quest id='20950' counters='0,0,50' order='0' started_at='1391774207' />
+		<quest id='20976' order='0' started_at='1391774244' />
+		<quest id='22015' completed_at='1391813613' completed='true' />
+		<quest id='22004' end_date='1392504813' completed_at='1392420839' completed='true' />
+		<quest id='20998' completed_at='1391821839' completed='true' />
+		<quest id='10274' completed_at='1392420861' completed='true' />
+		<quest id='70372' order='17' started_at='1391949624' />
+		<quest id='70334' completed_at='1392118168' completed='true' />
+		<quest id='70234' completed_at='1394294207' completed='true' />
+		<quest id='70153' completed_at='1392115154' completed='true' />
+		<quest id='70162' completed_at='1394424688' completed='true' />
+		<quest id='10724' order='1' started_at='1392331371' />
+		<quest id='10299' order='1' started_at='1392331371' />
+		<quest id='70082' end_date='1392883200' order='1' started_at='1392331441' />
+		<quest id='70700' end_date='1393401600' order='1' started_at='1392763234' />
+		<quest id='10301' order='1' started_at='1392763234' />
+		<quest id='70404' order='31' started_at='1392939337' />
+		<quest id='10280' completed_at='1393132253' completed='true' />
+		<quest id='10281' completed_at='1393508765' completed='true' />
+		<quest id='10282' completed_at='1393942782' completed='true' />
+		<quest id='10283' counters='938,0,0' order='0' started_at='1393028431' />
+		<quest id='10284' completed_at='1393036209' completed='true' />
+		<quest id='10285' order='0' started_at='1393028431' />
+		<quest id='71000' end_date='1394238031' order='0' started_at='1393028431' />
+		<quest id='71001' completed_at='1393028497' completed='true' />
+		<quest id='71002' counters='0,1,0' order='0' started_at='1393028498' />
+		<quest id='20918' order='1' started_at='1393368030' />
+		<quest id='20916' order='1' started_at='1393368030' />
+		<quest id='70096' order='18' started_at='1393557837' />
+		<quest id='10275' order='0' started_at='1393628153' />
+		<quest id='70710' end_date='1394265600' order='1' started_at='1393628252' />
+		<quest id='70380' completed_at='1393889858' completed='true' />
+		<quest id='70227' completed_at='1396620193' completed='true' />
+		<quest id='70381' completed_at='1395996275' completed='true' />
+		<quest id='70333' completed_at='1394320768' completed='true' />
+		<quest id='20919' order='1' started_at='1394209155' />
+		<quest id='20917' order='1' started_at='1394209155' />
+		<quest id='70119' completed_at='1396146336' completed='true' />
+		<quest id='70723' end_date='1395216000' order='1' started_at='1394577673' />
+		<quest id='10302' order='1' started_at='1394577673' />
+		<quest id='70036' completed_at='1394803195' completed='true' />
+		<quest id='70037' completed_at='1394803206' completed='true' />
+		<quest id='70781' order='10' started_at='1394838254' />
+		<quest id='10725' order='0' started_at='1394838254' />
+		<quest id='10726' order='0' started_at='1394838254' />
+		<quest id='10729' order='0' started_at='1394838254' />
+		<quest id='10728' order='0' started_at='1394838254' />
+		<quest id='10727' order='0' started_at='1394838254' />
+		<quest id='70838' completed_at='1395319493' completed='true' />
+		<quest id='70829' order='1' started_at='1395181885' />
+		<quest id='70830' order='1' started_at='1395181885' />
+		<quest id='70831' order='1' started_at='1395181885' />
+		<quest id='10731' order='1' started_at='1395181885' />
+		<quest id='10730' order='1' started_at='1395181885' />
+		<quest id='70145' counters='0,7,0' order='6' started_at='1395235246' />
+		<quest id='70837' order='0' started_at='1395268854' />
+		<quest id='70836' order='0' started_at='1395268854' />
+		<quest id='70835' order='0' started_at='1395268854' />
+		<quest id='70834' completed_at='1395268855' completed='true' />
+		<quest id='70833' completed_at='1395268855' completed='true' />
+		<quest id='70832' completed_at='1395268855' completed='true' />
+		<quest id='70751' order='0' started_at='1395407133' />
+		<quest id='70740' end_date='1396080000' order='1' started_at='1395407151' />
+		<quest id='70203' completed_at='1395407182' completed='true' />
+		<quest id='70204' order='9' started_at='1395407183' />
+		<quest id='70124' order='8' started_at='1395552197' />
+		<quest id='12081' completed_at='1396272266' completed='true' />
+		<quest id='10739' order='1' started_at='1396010848' />
+		<quest id='10738' order='1' started_at='1396010848' />
+		<quest id='70120' completed_at='1396399132' completed='true' />
+		<quest id='70114' order='5' started_at='1396153645' />
+		<quest id='12082' counters='0,0,2' order='0' started_at='1396272267' />
+		<quest id='10400' order='1' started_at='1396392337' />
+		<quest id='70760' end_date='1397026800' order='1' started_at='1396392428' />
+		<quest id='70121' order='4' started_at='1396399133' />
+		<quest id='70039' completed_at='1396612654' completed='true' />
+		<quest id='70040' completed_at='1396621900' completed='true' />
+		<quest id='82300' order='1' started_at='1396620167' />
+		<quest id='82301' order='1' started_at='1396620167' />
+		<quest id='70228' completed_at='1396620213' completed='true' />
+		<quest id='70229' order='3' started_at='1396620214' />
+		<quest id='70042' completed_at='1396780103' completed='true' />
+		<quest id='70043' completed_at='1396909384' completed='true' />
+		<quest id='70044' order='2' started_at='1396909384' />
+		<quest id='10810' order='1' started_at='1396964730' />
+		<quest id='10794' order='1' started_at='1396964730' />
+		<quest id='70840' end_date='1397890800' order='1' started_at='1397231867' timeout='321166' />
+		<quest id='10401' order='1' started_at='1397231867' />
+		<quest id='70841' completed_at='1397231964' completed='true' />
+		<quest id='70842' completed_at='1397232868' completed='true' />
+		<quest id='70843' order='0' started_at='1397232869' />
+	</quests>
+	<sqbar>{"bar_id":"city_fb_1","parent":null,"reward":[{"roll":0,"items":[{"planetarium":{"min_quantity":1}}]}],"social_achievement":60022,"steps":{"InstallGame":{"done":1},"Like":{"done":0},"GroupMember":{"done":0,"group_id":"377340192294858","social_achievement":60021},"SteadyPlay":{"done":0,"target":5,"current":8},"FriendsIncrease":{"done":0,"target":5,"initial":-1}}}</sqbar>
+	<neighbors max_neighbors='0' last_suggest_neighbors_date='1392908990'>
+		<new_neighbors>
+			<friend id='-24545212' level='53' is_payer='false' exp='835837' population='2318795' max_population='2493550' bounds='{"size_x":{"x":32,"y":32,"width":35,"height":35},"size_x_2":{"x":11,"y":43,"width":13,"height":13}}' respect_level='8' request_reward_count='2' owner_room_info='{"rooms":{"room_2":{"available":true,"size_x":9,"size_y":9,"max_population":17950,"population":590},"room_0":{"available":true,"size_x":35,"size_y":35,"size_x_2":13,"size_y_2":13}}}' send_requests='{}' have_gift='false'  avatar_url='' help_points='7' last_platform='ios' wish_list='11469,10957,11485,10940,10909,10911,11448'  help_items='' friends_top_score = '0'  city_name="Fuck" region="" active="true" country_name='Taiwan}' bus_region=''/>
+			<friend id='-16580252' level='68' is_payer='false' exp='1830038' population='3904255' max_population='4030080' bounds='{"size_x":{"x":29,"y":29,"width":41,"height":41},"size_x_3":{"x":3,"y":3,"width":21,"height":21}}' respect_level='22' request_reward_count='2' owner_room_info='{"rooms":{"room_2":{"available":true,"size_x":13,"size_y":13,"max_population":46275,"population":3415},"room_5":{"available":true,"size_x":15,"size_y":15,"max_population":237775,"population":148005},"room_0":{"available":true,"size_x":41,"size_y":41,"size_x_3":21,"size_y_3":21}}}' send_requests='{}' have_gift='false'  avatar_url='' help_points='7' last_platform='ios' wish_list='10989,11400,15456,11432,12143'  help_items='' friends_top_score = '0'  city_name="Cherry  Hollow" region="NorthAmerica" active="true" country_name='United States}' bus_region='NorthAmerica'/>
+			<friend id='-11993180' level='81' is_payer='false' exp='3118475' population='6086980' max_population='6216000' bounds='{"size_x":{"x":29,"y":29,"width":41,"height":41},"size_x_2":{"x":-17,"y":29,"width":41,"height":41},"size_x_5":{"x":31,"y":97,"width":13,"height":13}}' respect_level='13' request_reward_count='2' owner_room_info='{"rooms":{"room_2":{"available":true,"size_x":9,"size_y":9,"max_population":21450,"population":8045},"room_5":{"available":true,"size_x":9,"size_y":9,"max_population":84375,"population":6850},"room_0":{"available":true,"size_x":41,"size_y":41,"size_x_2":41,"size_y_2":41,"size_x_5":13,"size_y_5":13}}}' send_requests='{}' have_gift='false'  avatar_url='' help_points='7' last_platform='android' wish_list='15411,10991,10987,15442,10998,11497,15588,11417,11428,10911'  help_items='' friends_top_score = '0'  city_name="수유리" region="Asia" active="true" country_name='Korea, Republic of}' bus_region='Asia'/>
+			<friend id='-10626428' level='81' is_payer='true' exp='3124487' population='6952360' max_population='8636875' bounds='{"size_x":{"x":29,"y":29,"width":41,"height":41},"size_x_2":{"x":-13,"y":31,"width":37,"height":37},"size_x_3":{"x":3,"y":3,"width":21,"height":21},"size_x_4":{"x":52,"y":-6,"width":13,"height":13},"size_x_5":{"x":31,"y":97,"width":17,"height":17}}' respect_level='18' request_reward_count='2' owner_room_info='{"rooms":{"room_2":{"available":true,"size_x":13,"size_y":13,"max_population":99500,"population":36415},"room_5":{"available":true,"size_x":15,"size_y":15,"max_population":225725,"population":47110},"room_0":{"available":true,"size_x":41,"size_y":41,"size_x_2":37,"size_y_2":37,"size_x_3":21,"size_y_3":21,"size_x_5":17,"size_y_5":17,"size_x_4":13,"size_y_4":13}}}' send_requests='{}' have_gift='false'  avatar_url='' help_points='7' last_platform='android' wish_list='11424,12139,11428,10927,11421,10956,15442,11416,11431,11402'  help_items='' friends_top_score = '0'  city_name="Siddhartha" region="WestEurope" active="true" country_name='France}' bus_region='WestEurope'/>
+			<friend id='1122188996' level='60' is_payer='false' exp='1248735' population='2923845' max_population='3107300' bounds='{"size_x":{"x":29,"y":29,"width":41,"height":41},"size_x_2":{"x":5,"y":40,"width":19,"height":19}}' respect_level='17' request_reward_count='2' owner_room_info='{"rooms":{"room_5":{"available":true,"size_x":9,"size_y":9,"max_population":46850,"population":5240},"room_0":{"available":true,"size_x":41,"size_y":41,"size_x_2":19,"size_y_2":19}}}' send_requests='{}' have_gift='false'  help_points='7' last_platform='android' wish_list='11434,11428,10970,10920,10996,10931,10968,10903'  help_items='' friends_top_score = '0'  city_name="Schenefeld" region="WestEurope" active="true" country_name='Germany}' bus_region='WestEurope'/>
+			<friend id='1512615812' level='54' is_payer='false' exp='891238' population='2824347' max_population='2973005' bounds='{"size_x":{"x":37,"y":37,"width":25,"height":25},"size_x_2":{"x":15,"y":45,"width":9,"height":9},"size_x_3":{"x":15,"y":15,"width":9,"height":9}}' respect_level='9' request_reward_count='2' owner_room_info='{"rooms":{"room_2":{"available":true,"size_x":11,"size_y":11,"max_population":96300,"population":96300},"room_5":{"available":true,"size_x":11,"size_y":11,"max_population":95095,"population":95035},"room_0":{"available":true,"size_x":25,"size_y":25,"size_x_3":9,"size_y_3":9,"size_x_2":9,"size_y_2":9}}}' send_requests='{}' have_gift='false'  help_points='7' last_platform='ios' wish_list='10993,15417,11470,11428,11410,11474,11442,11445,12118'  help_items='' friends_top_score = '840'  region="WestEurope" active="true" country_name='Italy}' bus_region='WestEurope'/>
+			<friend id='100001072408964' level='46' is_payer='true' exp='474100' population='1390895' max_population='1682475' bounds='{"size_x":{"x":37,"y":37,"width":25,"height":25},"size_x_2":{"x":15,"y":45,"width":9,"height":9},"size_x_3":{"x":15,"y":15,"width":9,"height":9},"size_x_5":{"x":31,"y":97,"width":9,"height":9}}' respect_level='3' request_reward_count='2' owner_room_info='{"rooms":{"room_2":{"available":true,"size_x":11,"size_y":11,"max_population":41275,"population":3685,"tax":0},"room_5":{"available":true,"size_x":9,"size_y":9,"max_population":12950,"population":2030},"room_0":{"available":true,"size_x":25,"size_y":25,"size_x_2":9,"size_y_2":9,"size_x_5":9,"size_y_5":9,"size_x_3":9,"size_y_3":9}}}' send_requests='{}' have_gift='false'  help_points='7' last_platform='ios' wish_list='11430,11424,12112,11435,11469,15460,15630,10921,15645,10957'  help_items='' friends_top_score = '0'  region="NorthAmerica" active="true" country_name='United States}' bus_region='NorthAmerica'/>
+			<friend id='100001965895972' level='60' is_payer='true' exp='1225696' population='4032122' max_population='4356155' bounds='{"size_x":{"x":29,"y":29,"width":41,"height":41},"size_x_2":{"x":-17,"y":29,"width":41,"height":41},"size_x_5":{"x":31,"y":97,"width":17,"height":17}}' respect_level='10' request_reward_count='2' owner_room_info='{"rooms":{"room_2":{"available":true,"size_x":23,"size_y":23,"max_population":237125,"population":91285},"room_5":{"available":true,"size_x":21,"size_y":21,"max_population":461570,"population":157900},"room_0":{"available":true,"size_x":41,"size_y":41,"size_x_2":41,"size_y_2":41,"size_x_5":17,"size_y_5":17}}}' send_requests='{}' have_gift='false'  help_points='7' last_platform='android' wish_list='11477,15589,12154,15444,18308,11441,15438,10958,12103,11417'  help_items='' friends_top_score = '1826'  region="WestEurope" active="true" country_name='Netherlands}' bus_region='WestEurope'/>
+		</new_neighbors>
+	</neighbors>
+</country>
