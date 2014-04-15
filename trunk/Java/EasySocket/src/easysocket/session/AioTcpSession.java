@@ -6,7 +6,6 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
-import java.nio.channels.ReadPendingException;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -140,6 +139,7 @@ public class AioTcpSession {
 			SessionState.UNKNOWN);
 	private List<SessionEventListener> eventListeners = new CopyOnWriteArrayList<>();
 	public static final ByteOrder BYTE_ORDER = ByteOrder.LITTLE_ENDIAN;
+	private AtomicBoolean isClosed = new AtomicBoolean(false);
 
 	private static final PacketBuilder PACKET_BUILDER = new PacketBuilder();
 
@@ -210,15 +210,21 @@ public class AioTcpSession {
 	}
 
 	public void close() throws IOException {
-		this.onClose();
-		if (this.channel.isOpen())
-			this.channel.close();
+		if (isClosed.compareAndSet(false, true)) {
+			this.onClose();
+			if (this.channel.isOpen())
+				this.channel.close();
+		}
 	}
 
 	private void onClose() {
 		for (SessionEventListener listener : this.eventListeners) {
 			listener.onClose();
 		}
+	}
+	
+	public boolean isClosed(){
+		return this.isClosed.get();
 	}
 
 	protected final void pushWriteData(ByteBuffer buffer) {
@@ -242,7 +248,7 @@ public class AioTcpSession {
 		crcCheckBuffer.putInt(cmd);
 		crcCheckBuffer.put(data);
 		byte[] crcCheckData = crcCheckBuffer.array();
-		
+
 		short crc = (short) (CRC16.calculate(crcCheckData) & 0xFFFF);
 
 		int packetSize = 4 + 4 + 2 + data.length;
