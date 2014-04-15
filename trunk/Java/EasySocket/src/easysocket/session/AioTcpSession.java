@@ -140,7 +140,7 @@ public class AioTcpSession {
 	private List<SessionEventListener> eventListeners = new CopyOnWriteArrayList<>();
 	public static final ByteOrder BYTE_ORDER = ByteOrder.LITTLE_ENDIAN;
 	private AtomicBoolean isClosed = new AtomicBoolean(false);
-
+	
 	private static final PacketBuilder PACKET_BUILDER = new PacketBuilder();
 
 	public void registerEventListener(SessionEventListener listener) {
@@ -241,22 +241,22 @@ public class AioTcpSession {
 		this.pushWriteData(buffer);
 	}
 
-	private ByteBuffer formatSendPacket(int cmd, byte[] data) {
+	private ByteBuffer formatSendPacket(short cmd, byte[] data) {
 
-		ByteBuffer crcCheckBuffer = ByteBuffer.allocate(data.length + 4);
+		ByteBuffer crcCheckBuffer = ByteBuffer.allocate(data.length + 2);
 		crcCheckBuffer.order(BYTE_ORDER);
-		crcCheckBuffer.putInt(cmd);
+		crcCheckBuffer.putShort(cmd);
 		crcCheckBuffer.put(data);
 		byte[] crcCheckData = crcCheckBuffer.array();
 
 		short crc = (short) (CRC16.calculate(crcCheckData) & 0xFFFF);
 
-		int packetSize = 4 + 4 + 2 + data.length;
+		int packetSize = 4 + 2 + 2 + data.length;
 		ByteBuffer buffer = ByteBuffer.allocate(packetSize);
 		buffer.order(BYTE_ORDER);
 		buffer.putInt(packetSize);
 		buffer.putShort(crc);
-		buffer.putInt(cmd);
+		buffer.putShort(cmd);
 		buffer.put(data);
 		buffer.flip();
 		return buffer;

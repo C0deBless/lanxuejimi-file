@@ -42,8 +42,8 @@ public class PacketBuilder {
 				if (remaining >= len) {
 					buffer.getInt(); // to forward position
 					short crc = buffer.getShort();
-					int cmd = buffer.getInt();
-					byte[] data = new byte[len - 10];
+					short cmd = buffer.getShort();
+					byte[] data = new byte[len - 8];
 					buffer.get(data);
 
 					packets.add(new Packet(cmd, data, session));
