@@ -54,14 +54,21 @@ public class MainActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	public void onScheduleButtonClick(View v) {
+		Toast.makeText(this, "schedule button clicked", Toast.LENGTH_SHORT)
+				.show();
+	}
+
 	public void onButtonClick(View v) {
 		Toast.makeText(this, "start request", Toast.LENGTH_SHORT).show();
-
+		this.finishToast = Toast.makeText(this, "request finished",
+				Toast.LENGTH_SHORT);
 		Thread thread = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				try {
 					request();
+					finishToast.show();
 				} catch (IOException e) {
 					e.printStackTrace();
 					Log.e("megapolis", "error, type:" + e.getClass().getName()
@@ -86,6 +93,7 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	Toast finishToast;
 	private URL url;
 	private HttpURLConnection httpURLConn;
 	private int[] roomList = new int[] { 0, 2, 5 };
@@ -166,7 +174,7 @@ public class MainActivity extends Activity {
 			}
 			BufferedReader bd = new BufferedReader(new InputStreamReader(in));
 			while ((temp = bd.readLine()) != null) {
-				System.out.println(temp);
+				Log.d("megapolis", temp);
 			}
 
 			Log.d("megapolis", "----------------end");
