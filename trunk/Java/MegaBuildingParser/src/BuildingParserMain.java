@@ -13,7 +13,7 @@ import org.xml.sax.SAXException;
 public class BuildingParserMain {
 	public static void main(String[] args) throws ParserConfigurationException,
 			SAXException, IOException {
-		String xmlPath = "C:\\Users\\trnnn-win7\\Desktop\\buildings_2.xml";
+		String xmlPath = "C:\\Users\\trnnn-win7\\Desktop\\buildings_0.xml";
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
 		Document doc = builder.parse(new File(xmlPath));
