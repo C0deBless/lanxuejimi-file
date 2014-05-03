@@ -1,0 +1,10 @@
+CREATE SCHEMA `chatting` DEFAULT CHARACTER SET utf8 ;
+
+CREATE TABLE `chatting`.`user` (
+  `ID` INT NOT NULL,
+  `USER_NAME` VARCHAR(45) NULL,
+  `PASSWORD` VARCHAR(100) NULL,
+  PRIMARY KEY (`ID`));
+
+INSERT INTO `chatting`.`user` (`ID`, `USER_NAME`, `PASSWORD`) VALUES ('1', 'trnnn', '123456');
+
