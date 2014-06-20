@@ -10,7 +10,7 @@ import java.net.SocketException;
 
 public class TankNewMsg implements Missage{
 	
-	private int msgType = Missage.MISSILE_NEW_MSG;
+	private int msgType = Missage.TANK_NEW_MSG;
 	Tank t;
 	TankClient tc;
 	
