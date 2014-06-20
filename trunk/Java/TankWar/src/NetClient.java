@@ -1,9 +1,7 @@
-import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.DatagramSocket;
-import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
@@ -45,11 +43,13 @@ public class NetClient {
 			dos.writeInt(udpPort);
 			DataInputStream dis = new DataInputStream(s.getInputStream());
 			int id = dis.readInt();
+			
 			if(id%2 == 0){
 				tc.myTank.setGood(true);
 			}else{
 				tc.myTank.setGood(false);
 			}
+			
 			tc.myTank.setId(id);
 System.out.println("connected to server...and server give me a ID:"+id);	
 

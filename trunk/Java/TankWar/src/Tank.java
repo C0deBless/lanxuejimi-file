@@ -24,7 +24,7 @@ public class Tank {
 
 	private boolean live = true;
 	
-	private int step = r.nextInt(15)+4;
+	//private int step = r.nextInt(15)+4;
 	public static Random r = new Random();
 	
 	Direction dir = Direction.STOP;

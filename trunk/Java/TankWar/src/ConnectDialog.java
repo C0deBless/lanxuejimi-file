@@ -1,7 +1,6 @@
 import java.awt.Button;
 import java.awt.Dialog;
 import java.awt.FlowLayout;
-import java.awt.Frame;
 import java.awt.Label;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
@@ -19,6 +18,9 @@ class ConnectDialog extends Dialog{
 	TextField tfIP = new TextField("127.0.0.1", 12);
 	TextField tfPort = new TextField(""+TankClient.TANK_SERVER_TCP_PORT,5);
 	TextField tfMyPort = new TextField("2224", 5);
+	
+	
+	
 	public ConnectDialog(TankClient tankClient) {
 		super(tankClient, true);
 		this.tankClient = tankClient;

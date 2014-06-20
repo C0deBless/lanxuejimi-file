@@ -10,7 +10,7 @@ import java.net.SocketException;
 
 public class MissileNewMsg implements Missage {
 	
-	int msgType = 3;
+	int msgType = Missage.MISSILE_NEW_MSG;
 	
 	Missile m;
 	TankClient tc;
