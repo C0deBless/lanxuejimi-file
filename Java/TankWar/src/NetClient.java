@@ -14,6 +14,8 @@ import java.net.UnknownHostException;
 
 public class NetClient {
 	
+	
+	
 	TankClient tc;
 	
 	String serverIP;
@@ -81,7 +83,7 @@ System.out.println("connected to server...and server give me a ID:"+id);
 	}
 
 	public void send(Missage msg) {
-		msg.send(ds, serverIP, TankServer.UDP_PORT);
+		msg.send(ds, serverIP, TankClient.TANK_SERVER_UDP_PORT);
 	}
 	
 	private class UDPThread implements Runnable{

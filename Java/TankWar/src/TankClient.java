@@ -18,6 +18,9 @@ import java.util.List;
 
 
 public class TankClient extends Frame{
+	public static final int TANK_SERVER_TCP_PORT = 8888;
+	public static final int TANK_SERVER_UDP_PORT = 6666;
+	
 	public static final int GAME_WIDTH = 800;
 	public static final int GAME_HEIGHT = 600;
 	
@@ -145,7 +148,7 @@ public class TankClient extends Frame{
 	private class ConnectDialog extends Dialog{
 		Button b = new Button("Determine");
 		TextField tfIP = new TextField("183.91.206.249", 12);
-		TextField tfPort = new TextField(""+TankServer.TCP_PORT,5);
+		TextField tfPort = new TextField(""+TANK_SERVER_TCP_PORT,5);
 		TextField tfMyPort = new TextField("2224", 5);
 		public ConnectDialog() {
 			super(TankClient.this, true);
