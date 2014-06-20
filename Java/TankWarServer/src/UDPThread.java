@@ -8,14 +8,9 @@ import java.net.SocketException;
 class UDPThread implements Runnable{
 		
 		
-		/**
-		 * 
-		 */
 		private final TankServer tankServer;
 
-		/**
-		 * @param tankServer
-		 */
+		
 		UDPThread(TankServer tankServer) {
 			this.tankServer = tankServer;
 		}
