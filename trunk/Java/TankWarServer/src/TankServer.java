@@ -1,12 +1,8 @@
  import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +20,7 @@ public class TankServer {
 	
 	public void start(){
 		
-		new Thread(new UDPThread()).start();
+		new Thread(new UDPThread(this)).start();
 		
 		ServerSocket ss = null;
 		try {
@@ -61,48 +57,6 @@ System.out.println("A client connected...Address:"+s.getInetAddress()+"--Port:"+
 				}
 			}
 		
-	}
-	private class Clinet{
-		String IP;
-		int udpPort;
-		
-		public Clinet(String IP, int udpPort) {
-			this.IP = IP;
-			this.udpPort = udpPort;
-		}
-
-		
-	}
-	
-	private class UDPThread implements Runnable{
-		
-		
-		byte[] buf = new byte[1024];
-		
-		public void run() {
-			DatagramSocket ds = null;
-			
-			try {
-				ds = new DatagramSocket(UDP_PORT);
-			} catch (SocketException e) {
-				e.printStackTrace();
-			}
-System.out.println("UDPThread strated at PORT:"+UDP_PORT);
-			while(ds != null){
-				DatagramPacket dp = new DatagramPacket(buf, buf.length);
-				try {
-					ds.receive(dp);
-System.out.println("a packet received");
-					for(int i=0; i<clients.size(); i++){
-						Clinet c = clients.get(i);
-						dp.setSocketAddress(new InetSocketAddress(c.IP, c.udpPort));
-						ds.send(dp);
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 	}
 
 }
