@@ -1,13 +1,8 @@
 
 class PaintThread implements Runnable{
-	/**
-	 * 
-	 */
+	
 	private final TankClient tankClient;
 
-	/**
-	 * @param tankClient
-	 */
 	PaintThread(TankClient tankClient) {
 		this.tankClient = tankClient;
 	}

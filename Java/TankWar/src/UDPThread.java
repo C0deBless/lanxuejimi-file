@@ -6,14 +6,9 @@ import java.net.DatagramPacket;
 
 class UDPThread implements Runnable{
 		
-		/**
-		 * 
-		 */
 		private final NetClient netClient;
 
-		/**
-		 * @param netClient
-		 */
+		
 		UDPThread(NetClient netClient) {
 			this.netClient = netClient;
 		}

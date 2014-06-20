@@ -9,7 +9,7 @@ import java.net.SocketException;
 
 
 public class TankMoveMsg implements Missage{
-	int msgType = 2;
+	int msgType = Missage.TANK_MOVE_MSG;
 	
 	
 	Tank t;
