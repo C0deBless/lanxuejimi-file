@@ -1,6 +1,7 @@
 import java.awt.Button;
 import java.awt.Dialog;
 import java.awt.FlowLayout;
+import java.awt.Frame;
 import java.awt.Label;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
@@ -10,16 +11,16 @@ import java.awt.event.WindowEvent;
 
 
 class ConnectDialog extends Dialog{
-	/**
-	 * 
-	 */
+	
 	private final TankClient tankClient;
+	
+	
 	Button b = new Button("Determine");
-	TextField tfIP = new TextField("183.91.206.249", 12);
+	TextField tfIP = new TextField("127.0.0.1", 12);
 	TextField tfPort = new TextField(""+TankClient.TANK_SERVER_TCP_PORT,5);
 	TextField tfMyPort = new TextField("2224", 5);
 	public ConnectDialog(TankClient tankClient) {
-		super(this.tankClient, true);
+		super(tankClient, true);
 		this.tankClient = tankClient;
 		
 		this.setLocation(400, 300);
@@ -43,6 +44,7 @@ class ConnectDialog extends Dialog{
 				int port = Integer.parseInt(tfPort.getText());
 				int myUdpPort = Integer.parseInt(tfMyPort.getText());
 				ConnectDialog.this.tankClient.nc.setUdpPort(myUdpPort);
+				ConnectDialog.this.tankClient.nc.setServerIP(ip);
 				ConnectDialog.this.tankClient.nc.connect(ip, port);
 			}
 		});

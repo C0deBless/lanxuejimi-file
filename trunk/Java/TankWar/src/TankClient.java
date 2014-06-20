@@ -34,7 +34,6 @@ public class TankClient extends Frame{
 		new TankClient().launchFrame();
 	}
 	
-	@Override
 	public void paint(Graphics g) {
 		 myTank.draw(g);
 		 for(int i = 0;i < missiles.size();i++){
@@ -66,7 +65,6 @@ public class TankClient extends Frame{
 		 
 	}
 	
-	@Override
 	public void update(Graphics g) {
 		
 		if(offScreenImage == null){
@@ -105,23 +103,9 @@ public class TankClient extends Frame{
 		
 		
 		this.setVisible(true);
-		new Thread(new paintThread()).start();
+		new Thread(new PaintThread(this)).start();
 		
 		//nc.connect("127.0.0.1", TankServer.TCP_PORT);
-	}
-	
-	private class paintThread implements Runnable{
-		@Override
-		public void run() {
-			while(true){
-				repaint();
-				try {
-					Thread.sleep(50);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 	}
 	
 	private class KeyMonitor extends KeyAdapter{
