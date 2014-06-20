@@ -3,58 +3,58 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.List;
 
-
-
-
 public class Missile {
 	public static final int XSPEED = 10;
 	public static final int YSPEED = 10;
 	public static final int WIDTH = 7;
 	public static final int HEIGHT = 7;
-	
+
 	public static int ID = 1;
-	
-	private int x,y;
+
+	private int x, y;
 	private Direction dir;
 	private TankClient tc;
 	private boolean live = true;
 	private boolean good;
-	
+
 	private int tankId;
 	private int id;
-	
-	public Missile(int tankId ,int x, int y, boolean good,Direction dir,TankClient tc) {
-		this(tankId ,x, y, dir);
+
+	public Missile(int tankId, int x, int y, boolean good, Direction dir,
+			TankClient tc) {
+		this(tankId, x, y, dir);
 		this.tc = tc;
 		this.good = good;
 		this.id = ID++;
 	}
-	
-	public Missile(int tankId ,int x, int y, Direction dir) {
+
+	public Missile(int tankId, int x, int y, Direction dir) {
 		this.tankId = tankId;
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
-		
+
 	}
+
 	public void darw(Graphics g) {
-		if(!live){
+		if (!live) {
 			tc.missiles.remove(this);
 			return;
 		}
 		Color c = g.getColor();
-		if(good){
+		if (good) {
 			g.setColor(Color.PINK);
-		}else{
+		} else {
 			g.setColor(Color.GREEN);
 		}
 		g.fillOval(x, y, 7, 7);
 		g.setColor(c);
-		
+
 		move();
 	}
+
 	private void move() {
-		switch(dir){
+		switch (dir) {
 		case L:
 			x -= XSPEED;
 			break;
@@ -84,18 +84,18 @@ public class Missile {
 			y += YSPEED;
 			break;
 		}
-		
-		if(x  < 0 || y < 0 || x > TankClient.GAME_WIDTH || y > TankClient.GAME_HEIGHT){
+
+		if (x < 0 || y < 0 || x > TankClient.GAME_WIDTH
+				|| y > TankClient.GAME_HEIGHT) {
 			live = false;
 			tc.missiles.remove(this);
 		}
-		
-			
-		
+
 	}
-	
-	public boolean hitTank(Tank t){
-		if(getRectangle().intersects(t.getRectangle()) && t.isLive() && t.isGood() != good ){
+
+	public boolean hitTank(Tank t) {
+		if (getRectangle().intersects(t.getRectangle()) && t.isLive()
+				&& t.isGood() != good) {
 			live = false;
 			t.setLive(false);
 			Explode e = new Explode(x, y, tc);
@@ -104,20 +104,20 @@ public class Missile {
 		}
 		return false;
 	}
-	
-	public boolean hitTanks(List<Tank> tanks){
-		for(int i = 0; i < tanks.size(); i++){
+
+	public boolean hitTanks(List<Tank> tanks) {
+		for (int i = 0; i < tanks.size(); i++) {
 			Tank t = tanks.get(i);
 			hitTank(t);
 		}
-		
+
 		return false;
 	}
-	
-	public Rectangle getRectangle(){
+
+	public Rectangle getRectangle() {
 		return new Rectangle(x, y, WIDTH, HEIGHT);
 	}
-	
+
 	public boolean isLive() {
 		return live;
 	}
@@ -145,7 +145,7 @@ public class Missile {
 	public void setDir(Direction dir) {
 		this.dir = dir;
 	}
-	
+
 	public int getTankId() {
 		return tankId;
 	}
@@ -174,8 +174,4 @@ public class Missile {
 		this.id = id;
 	}
 
-	
-	
-	
-	
 }
