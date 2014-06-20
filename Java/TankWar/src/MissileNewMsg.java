@@ -7,23 +7,17 @@ import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.net.SocketException;
 
-
 public class MissileNewMsg implements Missage {
-	
+
 	int msgType = Missage.MISSILE_NEW_MSG;
-	
+
 	Missile m;
 	TankClient tc;
-	
-	
-	
 
 	public MissileNewMsg(Missile m) {
 		this.m = m;
 	}
-	
-	
-	
+
 	public MissileNewMsg(TankClient tc) {
 		this.tc = tc;
 	}
@@ -31,7 +25,7 @@ public class MissileNewMsg implements Missage {
 	public void send(DatagramSocket ds, String IP, int udpPort) {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		DataOutputStream dos = new DataOutputStream(baos);
-		
+
 		try {
 			dos.writeInt(msgType);
 			dos.writeInt(m.getTankId());
@@ -44,9 +38,10 @@ public class MissileNewMsg implements Missage {
 			e.printStackTrace();
 		}
 		byte[] buf = baos.toByteArray();
-		
+
 		try {
-			DatagramPacket dp = new DatagramPacket(buf, buf.length, new InetSocketAddress(IP, udpPort));
+			DatagramPacket dp = new DatagramPacket(buf, buf.length,
+					new InetSocketAddress(IP, udpPort));
 			ds.send(dp);
 		} catch (SocketException e) {
 			e.printStackTrace();
@@ -58,7 +53,7 @@ public class MissileNewMsg implements Missage {
 	public void parse(DataInputStream dis) {
 		try {
 			int tankId = dis.readInt();
-			if(tc.myTank.getId() == tankId){
+			if (tc.myTank.getId() == tankId) {
 				return;
 			}
 			int id = dis.readInt();
@@ -69,12 +64,10 @@ public class MissileNewMsg implements Missage {
 			Missile m = new Missile(tankId, x, y, good, dir, tc);
 			m.setId(id);
 			tc.missiles.add(m);
-//System.out.println("id:"+id+"--x:"+x+"--y:"+y+"--Direction:"+dir+"--good:"+good);			
+			// System.out.println("id:"+id+"--x:"+x+"--y:"+y+"--Direction:"+dir+"--good:"+good);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
-	
 
 }
