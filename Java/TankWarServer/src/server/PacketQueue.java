@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import common.Command;
 import common.Packet;
 import common.StringUtil;
+import common.Tank;
 
 public class PacketQueue implements Runnable {
 
@@ -39,7 +40,11 @@ public class PacketQueue implements Runnable {
 					.put(user.getClientId(), user);
 			logger.debug("LOGIN, name:{}", name);
 
-			ServerMain.getGameWorld().initUserTank(clientId);
+			Tank tank = ServerMain.getGameWorld().initUserTank(clientId);
+			Packet writePacket2 = new Packet(Command.S_NEW_TANK,
+					Short.MAX_VALUE);
+			tank.serialize(writePacket2.getByteBuffer());
+			ServerMain.getServer().BroadcastPacket(writePacket2);
 
 			Packet writePacket = new Packet(Command.S_LOGIN, Short.MAX_VALUE);
 			writePacket.getByteBuffer().putInt(clientId);

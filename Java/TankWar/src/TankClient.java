@@ -9,6 +9,9 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import common.Command;
 import common.Explode;
 import common.Missile;
@@ -16,6 +19,9 @@ import common.Packet;
 import common.Tank;
 
 public class TankClient extends Frame {
+
+	static Logger logger = LoggerFactory.getLogger(TankClient.class);
+
 	private static final long serialVersionUID = 1L;
 	public static final int TANK_SERVER_TCP_PORT = 8888;
 	public static final int TANK_SERVER_UDP_PORT = 6666;
@@ -103,12 +109,22 @@ public class TankClient extends Frame {
 
 	public void move(int clientId, int tankId, int angle) {
 		Tank tank = getTank(tankId);
+		if (tank == null) {
+			logger.error("cannot find tank, clientId:{}, tankId:{}", clientId,
+					tankId);
+			return;
+		}
 		tank.setAngle(angle);
 		tank.setCurrentSpeed(100);
 	}
 
 	public void stop(int clientId, int tankId) {
 		Tank tank = getTank(tankId);
+		if (tank == null) {
+			logger.error("cannot find tank, clientId:{}, tankId:{}", clientId,
+					tankId);
+			return;
+		}
 		tank.setCurrentSpeed(0);
 	}
 
@@ -191,6 +207,10 @@ public class TankClient extends Frame {
 
 	public List<Tank> getTanks() {
 		return this.tanks;
+	}
+
+	public void addNewTank(Tank tank) {
+		this.tanks.add(tank);
 	}
 
 }

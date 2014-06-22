@@ -19,7 +19,6 @@ import common.Packet;
 import common.PacketEventListener;
 import common.SocketCloseEventListener;
 
-
 public class Server {
 
 	private static final int PORT = 8888;
@@ -53,6 +52,10 @@ public class Server {
 		acceptThread.start();
 	}
 
+	public void removeClient(int clientId) {
+		this.clientPool.remove(clientId);
+	}
+
 	public void BroadcastPacket(Packet packet) {
 		Collection<Client> clients = this.clientPool.values();
 		for (Client client : clients) {
@@ -76,6 +79,7 @@ public class Server {
 			public void onClose() {
 				logger.debug("client closed, id:{}", client.getClientId());
 				ServerMain.getGameWorld().removeUser(client.getClientId());
+				ServerMain.getServer().removeClient(client.getClientId());
 			}
 		});
 		int clientId = client.getClientId();
