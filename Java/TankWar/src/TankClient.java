@@ -156,6 +156,8 @@ public class TankClient extends Frame {
 		case KeyEvent.VK_DOWN:
 			angle = 2;
 			break;
+		default:
+			return;
 		}
 
 		Tank myTank = getMyTank();
