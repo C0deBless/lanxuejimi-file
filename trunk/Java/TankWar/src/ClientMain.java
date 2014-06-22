@@ -60,6 +60,11 @@ public class ClientMain {
 			ClientMain.tank.stop(clientId, tankId);
 		}
 			break;
+		case Command.S_NEW_TANK: {
+			Tank tank = Tank.deserialize(packet.getByteBuffer());
+			ClientMain.tank.addNewTank(tank);
+		}
+			break;
 		}
 	}
 
@@ -78,7 +83,13 @@ public class ClientMain {
 				@Override
 				public void receive(List<Packet> packets) {
 					for (Packet packet : packets) {
-						handlePacket(packet);
+						try {
+							handlePacket(packet);
+						} catch (Exception e) {
+							logger.error("packet error, type:{}, msg:{}", e
+									.getClass().getName(), e.getMessage());
+							e.printStackTrace();
+						}
 					}
 				}
 			});

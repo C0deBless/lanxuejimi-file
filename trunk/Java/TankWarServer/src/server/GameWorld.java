@@ -36,10 +36,11 @@ public class GameWorld implements Runnable {
 		tankList.add(tank);
 	}
 
-	public void initUserTank(int clientId) {
+	public Tank initUserTank(int clientId) {
 		Tank tank = new Tank(200, 200, 1);
 		tank.setClientId(clientId);
 		tankList.add(tank);
+		return tank;
 	}
 
 	public void serializeAllTanks(ByteBuffer buffer) {
