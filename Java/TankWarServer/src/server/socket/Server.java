@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -12,10 +13,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import server.ServerMain;
+
 import common.Client;
 import common.Packet;
 import common.PacketEventListener;
 import common.SocketCloseEventListener;
+
 
 public class Server {
 
@@ -50,6 +53,13 @@ public class Server {
 		acceptThread.start();
 	}
 
+	public void BroadcastPacket(Packet packet) {
+		Collection<Client> clients = this.clientPool.values();
+		for (Client client : clients) {
+			client.pushWritePacket(packet);
+		}
+	}
+
 	private void handleNewSocket(Socket socket) {
 		final Client client = new Client(socket);
 		client.setPacketEventListener(new PacketEventListener() {
@@ -60,7 +70,7 @@ public class Server {
 				}
 			}
 		});
-		
+
 		client.setCloseEventListener(new SocketCloseEventListener() {
 			@Override
 			public void onClose() {

@@ -25,7 +25,7 @@ public class Client implements Runnable {
 
 	public Client(Socket socket) {
 		this.socket = socket;
-		clientId = (CLIENT_INDEX++);
+		clientId = (++CLIENT_INDEX);
 	}
 
 	@Override

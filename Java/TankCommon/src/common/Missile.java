@@ -14,17 +14,14 @@ public class Missile {
 
 	private int x, y;
 	private Direction dir;
-	private TankClient tc;
 	private boolean live = true;
 	private boolean good;
 
 	private int tankId;
 	private int id;
 
-	public Missile(int tankId, int x, int y, boolean good, Direction dir,
-			TankClient tc) {
+	public Missile(int tankId, int x, int y, boolean good, Direction dir) {
 		this(tankId, x, y, dir);
-		this.tc = tc;
 		this.good = good;
 		this.id = ID++;
 	}
@@ -37,83 +34,42 @@ public class Missile {
 
 	}
 
-	public void darw(Graphics g) {
-		if (!live) {
-			tc.missiles.remove(this);
-			return;
-		}
-		Color c = g.getColor();
-		if (good) {
-			g.setColor(Color.PINK);
-		} else {
-			g.setColor(Color.GREEN);
-		}
-		g.fillOval(x, y, 7, 7);
-		g.setColor(c);
+//	public void darw(Graphics g) {
+//		if (!live) {
+//			tc.missiles.remove(this);
+//			return;
+//		}
+//		Color c = g.getColor();
+//		if (good) {
+//			g.setColor(Color.PINK);
+//		} else {
+//			g.setColor(Color.GREEN);
+//		}
+//		g.fillOval(x, y, 7, 7);
+//		g.setColor(c);
+//
+//	}
+//
+//	public boolean hitTank(Tank t) {
+//		if (getRectangle().intersects(t.getRectangle()) && t.isLive()
+//				&& t.isGood() != good) {
+//			live = false;
+//			t.setLive(false);
+//			Explode e = new Explode(x, y, tc);
+//			tc.explode.add(e);
+//			return true;
+//		}
+//		return false;
+//	}
 
-		move();
-	}
-
-	private void move() {
-		switch (dir) {
-		case L:
-			x -= XSPEED;
-			break;
-		case LU:
-			x -= XSPEED;
-			y -= YSPEED;
-			break;
-		case U:
-			y -= YSPEED;
-			break;
-		case RU:
-			x += XSPEED;
-			y -= YSPEED;
-			break;
-		case R:
-			x += XSPEED;
-			break;
-		case RD:
-			x += XSPEED;
-			y += YSPEED;
-			break;
-		case D:
-			y += YSPEED;
-			break;
-		case LD:
-			x -= XSPEED;
-			y += YSPEED;
-			break;
-		}
-
-		if (x < 0 || y < 0 || x > TankClient.GAME_WIDTH
-				|| y > TankClient.GAME_HEIGHT) {
-			live = false;
-			tc.missiles.remove(this);
-		}
-
-	}
-
-	public boolean hitTank(Tank t) {
-		if (getRectangle().intersects(t.getRectangle()) && t.isLive()
-				&& t.isGood() != good) {
-			live = false;
-			t.setLive(false);
-			Explode e = new Explode(x, y, tc);
-			tc.explode.add(e);
-			return true;
-		}
-		return false;
-	}
-
-	public boolean hitTanks(List<Tank> tanks) {
-		for (int i = 0; i < tanks.size(); i++) {
-			Tank t = tanks.get(i);
-			hitTank(t);
-		}
-
-		return false;
-	}
+//	public boolean hitTanks(List<Tank> tanks) {
+//		for (int i = 0; i < tanks.size(); i++) {
+//			Tank t = tanks.get(i);
+//			hitTank(t);
+//		}
+//
+//		return false;
+//	}
 
 	public Rectangle getRectangle() {
 		return new Rectangle(x, y, WIDTH, HEIGHT);
