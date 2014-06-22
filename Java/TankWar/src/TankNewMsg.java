@@ -72,7 +72,7 @@ public class TankNewMsg implements Missage {
 			if (!exist) {
 
 				TankNewMsg tnMsg = new TankNewMsg(tc.myTank);
-				tc.nc.send(tnMsg);
+//				tc.nc.send(tnMsg);
 
 				Tank t = new Tank(x, y, good, tc);
 				t.setId(id);

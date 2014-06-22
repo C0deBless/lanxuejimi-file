@@ -22,15 +22,7 @@ public class TankClient extends Frame {
 	List<Explode> explode = new ArrayList<Explode>();
 	List<Missile> missiles = new ArrayList<Missile>();
 
-	NetClient nc = new NetClient(this);
-
 	Image offScreenImage = null;
-
-	ConnectDialog dialog = new ConnectDialog(this);
-
-	public static void main(String[] args) {
-		new TankClient().launchFrame();
-	}
 
 	public void paint(Graphics g) {
 		myTank.draw(g);
@@ -39,10 +31,10 @@ public class TankClient extends Frame {
 			// m.hitTanks(tanks);
 			if (m.hitTank(myTank)) {
 				TankDeadMsg msg = new TankDeadMsg(myTank.getId());
-				nc.send(msg);
+				// nc.send(msg);
 				MissileDeadMsg mdmMsg = new MissileDeadMsg(m.getTankId(),
 						m.getId());
-				nc.send(mdmMsg);
+				// nc.send(mdmMsg);
 			}
 
 			m.darw(g);
@@ -108,10 +100,6 @@ public class TankClient extends Frame {
 	private class KeyMonitor extends KeyAdapter {
 		@Override
 		public void keyPressed(KeyEvent e) {
-			int key = e.getKeyCode();
-			if (key == KeyEvent.VK_F1) {
-				dialog.setVisible(true);
-			}
 			myTank.keyPressed(e);
 		}
 
