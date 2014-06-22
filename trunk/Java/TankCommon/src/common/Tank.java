@@ -1,3 +1,5 @@
+package common;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -11,7 +13,6 @@ public class Tank {
 	public static final int HEIGHT = 30;
 	int x, y;
 
-	private TankClient tc = null;
 	private Missile m;
 
 	private int id;
@@ -33,11 +34,6 @@ public class Tank {
 		this.x = x;
 		this.y = y;
 		this.good = good;
-	}
-
-	public Tank(int x, int y, boolean good, TankClient tc) {
-		this(x, y, good);
-		this.tc = tc;
 	}
 
 	public void draw(Graphics g) {
@@ -183,7 +179,7 @@ public class Tank {
 				gunTube, this.tc);
 		tc.missiles.add(m);
 		MissileNewMsg msg = new MissileNewMsg(m);
-		tc.nc.send(msg);
+//		tc.nc.send(msg);
 		return m;
 	}
 
@@ -250,8 +246,15 @@ public class Tank {
 		}
 
 		if (dir != oldDirection) {
-			TankMoveMsg msg = new TankMoveMsg(this);
-			tc.nc.send(msg);
+//			TankMoveMsg msg = new TankMoveMsg(this);
+//			tc.nc.send(msg);
+			Packet packet =new Packet(Command.MOVE);
+			packet.getByteBuffer().putInt(this.getId());
+			packet.getByteBuffer().putInt(this.x);
+			packet.getByteBuffer().putInt(this.y);
+			packet.getByteBuffer().putInt(this.getGunTube().ordinal());
+			packet.getByteBuffer().putInt(this.dir.ordinal());
+			ClientMain.client.pushWritePacket(packet);
 		}
 
 	}
