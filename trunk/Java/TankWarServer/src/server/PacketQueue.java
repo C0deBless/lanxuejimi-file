@@ -29,14 +29,50 @@ public class PacketQueue implements Runnable {
 
 	private void handlePacket(Packet packet) {
 		short cmd = packet.getCmd();
+		int clientId = packet.getClient().getClientId();
+
 		switch (cmd) {
-		case Command.LOGIN:
+		case Command.C_LOGIN: {
 			String name = StringUtil.getString(packet.getByteBuffer());
 			User user = new User(packet.getClient(), name);
-			ServerMain.getGameWorld().getUserPool().put(user.getClientId(), user);
+			ServerMain.getGameWorld().getUserPool()
+					.put(user.getClientId(), user);
 			logger.debug("LOGIN, name:{}", name);
-			break;
 
+			ServerMain.getGameWorld().initUserTank(clientId);
+
+			Packet writePacket = new Packet(Command.S_LOGIN, Short.MAX_VALUE);
+			writePacket.getByteBuffer().putInt(clientId);
+			ServerMain.getGameWorld().serializeAllTanks(
+					writePacket.getByteBuffer());
+			packet.getClient().pushWritePacket(writePacket);
+
+		}
+			break;
+		case Command.C_MOVE: {
+			int id = packet.getByteBuffer().getInt();
+			int angle = packet.getByteBuffer().getInt();
+			logger.debug("C_MOVE, id:{}, angle:{}", id, angle);
+			ServerMain.getGameWorld().move(clientId, id, angle);
+
+			Packet writePacket = new Packet(Command.S_MOVE, Short.MAX_VALUE);
+			writePacket.getByteBuffer().putInt(clientId);
+			writePacket.getByteBuffer().putInt(id);
+			writePacket.getByteBuffer().putInt(angle);
+			ServerMain.getServer().BroadcastPacket(writePacket);
+
+		}
+			break;
+		case Command.C_STOP: {
+			int tankId = packet.getByteBuffer().getInt();
+			ServerMain.getGameWorld().stop(clientId, tankId);
+			logger.debug("C_STOP, id:{}, angle:{}", tankId);
+			Packet writePacket = new Packet(Command.S_STOP, 8);
+			writePacket.getByteBuffer().putInt(clientId);
+			writePacket.getByteBuffer().putInt(tankId);
+			ServerMain.getServer().BroadcastPacket(writePacket);
+		}
+			break;
 		default:
 			break;
 		}

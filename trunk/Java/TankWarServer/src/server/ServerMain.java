@@ -20,6 +20,8 @@ public class ServerMain {
 		SERVER.start();
 
 		gameWorld = new GameWorld();
+		gameWorld.init();
+
 		packetQueue = new PacketQueue();
 		logger.info("server started...");
 		Thread.currentThread().join();
@@ -27,5 +29,9 @@ public class ServerMain {
 
 	public static GameWorld getGameWorld() {
 		return gameWorld;
+	}
+
+	public static Server getServer() {
+		return SERVER;
 	}
 }
