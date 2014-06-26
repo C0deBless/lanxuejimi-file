@@ -36,7 +36,7 @@ public class TankClient extends Frame {
 	private int myClientId;
 
 	private boolean judgeKey = true;
-	
+
 	Image offScreenImage = null;
 
 	public void setTankList(List<Tank> tankList) {
@@ -60,11 +60,36 @@ public class TankClient extends Frame {
 		// FIXME angle
 	}
 
+	public void drawGuntube(Tank tank, Graphics g) {
+		int angle = tank.getAngle();
+		int i = 7;
+		Color c = g.getColor();
+		g.setColor(Color.GREEN);
+		switch (angle) {
+		case 0:
+			g.drawLine((int)tank.getX()+tank.getWidth()/2, (int)tank.getY()+tank.getHeight()/2, (int)tank.getX()+tank.getWidth()/2, (int)tank.getY()-i);
+			break;
+		case 1:
+			g.drawLine((int)tank.getX()+tank.getWidth()/2, (int)tank.getY()+tank.getHeight()/2, (int)tank.getX()+tank.getWidth()+i, (int)tank.getY()+tank.getHeight()/2);
+			break;
+		case 2:
+			g.drawLine((int)tank.getX()+tank.getWidth()/2, (int)tank.getY()+tank.getHeight()/2, (int)tank.getX()+tank.getWidth()/2, (int)tank.getY()+tank.getHeight()+i);
+			break;
+		case 3:
+			g.drawLine((int)tank.getX()+tank.getWidth()/2, (int)tank.getY()+tank.getHeight()/2, (int)tank.getX()-i, (int)tank.getY()+tank.getHeight()/2);
+			break;
+			
+		}
+		g.setColor(c);
+	}
+
 	public void paint(Graphics g) {
 
 		for (Tank tank : tanks) {
 			drawTank(tank, g);
+			drawGuntube(tank, g);
 		}
+		
 	}
 
 	public void update(Graphics g) {
@@ -86,14 +111,14 @@ public class TankClient extends Frame {
 		this.setTitle("TankWar");
 		this.setLocation(500, 200);
 		this.setSize(GAME_WIDTH, GAME_HEIGHT);
-		
+
 		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
 			}
 		});
-		
+
 		this.setResizable(false);
 		this.setBackground(Color.BLACK);
 		this.addKeyListener(new KeyMonitor());
@@ -156,13 +181,11 @@ public class TankClient extends Frame {
 	}
 
 	public void keyPressed(KeyEvent e) {
-		
+
 		int key = e.getKeyCode();
 		int angle = 0;
 		switch (key) {
-		case KeyEvent.VK_LEFT:
-			angle = 3;
-			break;
+
 		case KeyEvent.VK_UP:
 			angle = 0;
 			break;
@@ -172,10 +195,13 @@ public class TankClient extends Frame {
 		case KeyEvent.VK_DOWN:
 			angle = 2;
 			break;
+		case KeyEvent.VK_LEFT:
+			angle = 3;
+			break;
 		default:
 			return;
 		}
-		if(judgeKey){
+		if (judgeKey) {
 			Tank myTank = getMyTank();
 
 			Packet packet = new Packet(Command.C_MOVE, 8);
@@ -184,7 +210,7 @@ public class TankClient extends Frame {
 			ClientMain.client.pushWritePacket(packet);
 			judgeKey = false;
 		}
-		
+
 	}
 
 	private Tank getMyTank() {
