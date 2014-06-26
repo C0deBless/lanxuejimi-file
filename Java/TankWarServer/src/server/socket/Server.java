@@ -87,9 +87,6 @@ public class Server {
 				Packet writePacket = new Packet(Command.S_EXIT, 8);
 				writePacket.getByteBuffer().putInt(client.getClientId());
 				ServerMain.getServer().broadcastPacket(writePacket);
-				
-				Packet packet = new Packet(Command.S_EXIT, Short.MAX_VALUE);
-				broadcastPacket(packet);
 			}
 		});
 		int clientId = client.getClientId();
