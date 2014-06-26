@@ -24,7 +24,7 @@ namespace BowlingMetaDataTool
 		public MainWindow()
 		{
 			InitializeComponent();
-			FTPSettings.LoadXML();
+			FTPSettings.Instance.LoadXML();
 		}
 	}
 }
