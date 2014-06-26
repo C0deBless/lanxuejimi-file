@@ -2,6 +2,7 @@ package server;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -60,13 +61,14 @@ public class GameWorld implements Runnable {
 		userPool.remove(clientId);
 	}
 	
-	public void removeTank(int clientId, int tankId){
-		Tank tank = getTank(clientId);
-		if (tank == null || tank.getClientId() != clientId) {
-			logger.error("illegal exit");
-			return;
+	public void removeTankByClientId(int clientId){
+		Iterator<Tank> it = tankList.iterator();
+		while(it.hasNext()){
+			Tank tank = it.next();
+			if(tank.getClientId() == clientId){
+				it.remove();
+			}
 		}
-		tankList.remove(tank);
 	}
 
 	public void move(int clientId, int tankId, int angle) {

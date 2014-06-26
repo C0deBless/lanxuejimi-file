@@ -13,8 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import server.ServerMain;
-
 import common.Client;
+import common.Command;
 import common.Packet;
 import common.PacketEventListener;
 import common.SocketCloseEventListener;
@@ -56,7 +56,7 @@ public class Server {
 		this.clientPool.remove(clientId);
 	}
 
-	public void BroadcastPacket(Packet packet) {
+	public void broadcastPacket(Packet packet) {
 		Collection<Client> clients = this.clientPool.values();
 		for (Client client : clients) {
 			client.pushWritePacket(packet);
@@ -80,6 +80,16 @@ public class Server {
 				logger.debug("client closed, id:{}", client.getClientId());
 				ServerMain.getGameWorld().removeUser(client.getClientId());
 				ServerMain.getServer().removeClient(client.getClientId());
+
+				ServerMain.getGameWorld().removeTankByClientId(client.getClientId());
+				logger.debug("C_EXIT, clientId:{}", client.getClientId());
+				
+				Packet writePacket = new Packet(Command.S_EXIT, 8);
+				writePacket.getByteBuffer().putInt(client.getClientId());
+				ServerMain.getServer().broadcastPacket(writePacket);
+				
+				Packet packet = new Packet(Command.S_EXIT, Short.MAX_VALUE);
+				broadcastPacket(packet);
 			}
 		});
 		int clientId = client.getClientId();
