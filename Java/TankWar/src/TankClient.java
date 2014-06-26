@@ -4,9 +4,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -83,18 +82,9 @@ public class TankClient extends Frame {
 		this.setTitle("TankWar");
 		this.setLocation(500, 200);
 		this.setSize(GAME_WIDTH, GAME_HEIGHT);
-		this.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				Packet writePacket = new Packet(Command.C_EXIT, 4);
-				writePacket.getByteBuffer().putInt(getMyTank().getId());
-				ClientMain.client.pushWritePacket(writePacket);
-			}
-		});
 		this.setResizable(false);
 		this.setBackground(Color.BLACK);
 		this.addKeyListener(new KeyMonitor());
-
 		this.setVisible(true);
 		new Thread(new PaintThread(this)).start();
 
@@ -108,23 +98,15 @@ public class TankClient extends Frame {
 		}
 		return null;
 	}
-	
-	public void exit(int clientId){
-		if(myClientId == clientId){
-			this.setVisible(false);
-			System.exit(0);
+
+	public void removeTankByClientId(int clientId) {
+		Iterator<Tank> it = tanks.iterator();
+		while (it.hasNext()) {
+			Tank tank = it.next();
+			if (tank.getClientId() == clientId) {
+				it.remove();
+			}
 		}
-		
-	}
-	
-	public void removeTank(int clientId, int tankId){
-		Tank tank = getTank(tankId);
-		if (tank == null) {
-			logger.error("cannot find tank, clientId:{}, tankId:{}", clientId,
-					tankId);
-			return;
-		}
-		tanks.remove(tank);
 	}
 
 	public void move(int clientId, int tankId, int angle) {

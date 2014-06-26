@@ -67,9 +67,7 @@ public class ClientMain {
 			break;
 		case Command.S_EXIT:{
 			int clientId = packet.getByteBuffer().getInt();
-			int tankId = packet.getByteBuffer().getInt();
-			ClientMain.tankClient.removeTank(clientId, tankId);
-			ClientMain.tankClient.exit(clientId);
+			ClientMain.tankClient.removeTankByClientId(clientId);
 		}
 			break;
 		}

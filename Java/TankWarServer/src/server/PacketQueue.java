@@ -44,7 +44,7 @@ public class PacketQueue implements Runnable {
 			Packet writePacket2 = new Packet(Command.S_NEW_TANK,
 					Short.MAX_VALUE);
 			tank.serialize(writePacket2.getByteBuffer());
-			ServerMain.getServer().BroadcastPacket(writePacket2);
+			ServerMain.getServer().broadcastPacket(writePacket2);
 
 			Packet writePacket = new Packet(Command.S_LOGIN, Short.MAX_VALUE);
 			writePacket.getByteBuffer().putInt(clientId);
@@ -64,7 +64,7 @@ public class PacketQueue implements Runnable {
 			writePacket.getByteBuffer().putInt(clientId);
 			writePacket.getByteBuffer().putInt(id);
 			writePacket.getByteBuffer().putInt(angle);
-			ServerMain.getServer().BroadcastPacket(writePacket);
+			ServerMain.getServer().broadcastPacket(writePacket);
 
 		}
 			break;
@@ -75,18 +75,7 @@ public class PacketQueue implements Runnable {
 			Packet writePacket = new Packet(Command.S_STOP, 8);
 			writePacket.getByteBuffer().putInt(clientId);
 			writePacket.getByteBuffer().putInt(tankId);
-			ServerMain.getServer().BroadcastPacket(writePacket);
-		}
-			break;
-		case Command.C_EXIT: {
-			int tankId = packet.getByteBuffer().getInt();
-			ServerMain.getGameWorld().removeTank(clientId, tankId);
-			logger.debug("C_EXIT, id:{}"+tankId);
-			
-			Packet writePacket = new Packet(Command.S_EXIT, 8);
-			writePacket.getByteBuffer().putInt(clientId);
-			writePacket.getByteBuffer().putInt(tankId);
-			ServerMain.getServer().BroadcastPacket(writePacket);
+			ServerMain.getServer().broadcastPacket(writePacket);
 		}
 			break;
 		default:
