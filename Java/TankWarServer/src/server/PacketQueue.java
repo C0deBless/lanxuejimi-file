@@ -78,6 +78,17 @@ public class PacketQueue implements Runnable {
 			ServerMain.getServer().BroadcastPacket(writePacket);
 		}
 			break;
+		case Command.C_EXIT: {
+			int tankId = packet.getByteBuffer().getInt();
+			ServerMain.getGameWorld().removeTank(clientId, tankId);
+			logger.debug("C_EXIT, id:{}"+tankId);
+			
+			Packet writePacket = new Packet(Command.S_EXIT, 8);
+			writePacket.getByteBuffer().putInt(clientId);
+			writePacket.getByteBuffer().putInt(tankId);
+			ServerMain.getServer().BroadcastPacket(writePacket);
+		}
+			break;
 		default:
 			break;
 		}

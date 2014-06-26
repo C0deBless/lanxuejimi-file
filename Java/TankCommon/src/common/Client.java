@@ -67,7 +67,7 @@ public class Client implements Runnable {
 	}
 
 	private ByteBuffer readBuffer = ByteBuffer.allocate(1024);
-
+	//切包
 	private void handleBuffer(byte[] readData, int count) {
 		if (readBuffer.remaining() < count) {
 			extendReadBuffer(count);
@@ -113,7 +113,7 @@ public class Client implements Runnable {
 			packetEventListener.receive(packets);
 		}
 	}
-
+	//read缓冲区不够的时候，扩大read缓冲区
 	private final void extendReadBuffer(int count) {
 		ByteBuffer tmp = readBuffer;
 		int pos = tmp.position();
@@ -122,7 +122,7 @@ public class Client implements Runnable {
 		readBuffer = ByteBuffer.allocate(readBuffer.capacity() + count);
 		readBuffer.put(tmp.array(), 0, pos);
 	}
-
+	
 	public void pushWritePacket(Packet packet) {
 		ByteBuffer writeBuffer = packet.getByteBuffer();
 

@@ -22,11 +22,11 @@ public class ClientMain {
 
 	public static Socket socket = null;
 	public static Client client;
-	public static TankClient tank;
+	public static TankClient tankClient;
 
 	public static void main(String[] args) {
-		tank = new TankClient();
-		tank.launchFrame();
+		tankClient = new TankClient();
+		tankClient.launchFrame();
 		connect();
 	}
 
@@ -43,26 +43,33 @@ public class ClientMain {
 				Tank tank = Tank.deserialize(packet.getByteBuffer());
 				tankList.add(tank);
 			}
-			tank.setTankList(tankList);
-			tank.setMyClientId(clientId);
+			tankClient.setTankList(tankList);
+			tankClient.setMyClientId(clientId);
 		}
 			break;
 		case Command.S_MOVE: {
 			int clientId = packet.getByteBuffer().getInt();
 			int id = packet.getByteBuffer().getInt();
 			int angle = packet.getByteBuffer().getInt();
-			ClientMain.tank.move(clientId, id, angle);
+			ClientMain.tankClient.move(clientId, id, angle);
 		}
 			break;
 		case Command.S_STOP: {
 			int clientId = packet.getByteBuffer().getInt();
 			int tankId = packet.getByteBuffer().getInt();
-			ClientMain.tank.stop(clientId, tankId);
+			ClientMain.tankClient.stop(clientId, tankId);
 		}
 			break;
 		case Command.S_NEW_TANK: {
 			Tank tank = Tank.deserialize(packet.getByteBuffer());
-			ClientMain.tank.addNewTank(tank);
+			ClientMain.tankClient.addNewTank(tank);
+		}
+			break;
+		case Command.S_EXIT:{
+			int clientId = packet.getByteBuffer().getInt();
+			int tankId = packet.getByteBuffer().getInt();
+			ClientMain.tankClient.removeTank(clientId, tankId);
+			ClientMain.tankClient.exit(clientId);
 		}
 			break;
 		}

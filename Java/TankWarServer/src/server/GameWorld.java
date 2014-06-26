@@ -59,6 +59,15 @@ public class GameWorld implements Runnable {
 	public void removeUser(int clientId) {
 		userPool.remove(clientId);
 	}
+	
+	public void removeTank(int clientId, int tankId){
+		Tank tank = getTank(clientId);
+		if (tank == null || tank.getClientId() != clientId) {
+			logger.error("illegal exit");
+			return;
+		}
+		tankList.remove(tank);
+	}
 
 	public void move(int clientId, int tankId, int angle) {
 		Tank tank = getTank(tankId);
