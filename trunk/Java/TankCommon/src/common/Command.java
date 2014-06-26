@@ -12,4 +12,7 @@ public class Command {
 	public static final short S_STOP = 1003;
 	
 	public static final short S_NEW_TANK = 4;
+	
+	public static final short C_EXIT = 5;
+	public static final short S_EXIT = 1005;
 }

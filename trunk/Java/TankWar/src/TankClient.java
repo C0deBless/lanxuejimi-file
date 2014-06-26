@@ -86,7 +86,9 @@ public class TankClient extends Frame {
 		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				System.exit(0);
+				Packet writePacket = new Packet(Command.C_EXIT, 4);
+				writePacket.getByteBuffer().putInt(getMyTank().getId());
+				ClientMain.client.pushWritePacket(writePacket);
 			}
 		});
 		this.setResizable(false);
@@ -105,6 +107,24 @@ public class TankClient extends Frame {
 			}
 		}
 		return null;
+	}
+	
+	public void exit(int clientId){
+		if(myClientId == clientId){
+			this.setVisible(false);
+			System.exit(0);
+		}
+		
+	}
+	
+	public void removeTank(int clientId, int tankId){
+		Tank tank = getTank(tankId);
+		if (tank == null) {
+			logger.error("cannot find tank, clientId:{}, tankId:{}", clientId,
+					tankId);
+			return;
+		}
+		tanks.remove(tank);
 	}
 
 	public void move(int clientId, int tankId, int angle) {
