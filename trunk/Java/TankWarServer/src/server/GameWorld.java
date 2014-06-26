@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import common.Missile;
 import common.Tank;
 
 public class GameWorld implements Runnable {
@@ -20,7 +21,7 @@ public class GameWorld implements Runnable {
 	private final Map<Integer, User> userPool = new ConcurrentHashMap<>();
 
 	private List<Tank> tankList = new ArrayList<>();
-	// private List<Missile> missileList = new ArrayList<>();
+	private List<Missile> missileList = new ArrayList<>();
 
 	private Thread thread;
 	private boolean isRunning = false;
@@ -82,6 +83,16 @@ public class GameWorld implements Runnable {
 		tank.setAngle(angle);
 		tank.setCurrentSpeed(100);
 	}
+	
+	public void fire(int tankId){
+		Tank tank = getTank(tankId);
+		Missile m = new Missile(tank.getX() + tank.getWidth() / 2 + 3,
+				tank.getY() + tank.getHeight() / 2 + 3, tank.getAngle(),
+				tank.getTeam());
+		m.setMissileSpeed(300);
+		
+		missileList.add(m);
+	}
 
 	public void stop(int clientId, int tankId) {
 		Tank tank = getTank(tankId);
@@ -113,6 +124,9 @@ public class GameWorld implements Runnable {
 
 		for (Tank tank : tankList) {
 			tank.update(deltaTime);
+		}
+		for (Missile missile : missileList) {
+			missile.update(deltaTime);
 		}
 	}
 

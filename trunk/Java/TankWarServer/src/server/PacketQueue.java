@@ -6,6 +6,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import server.socket.Server;
 import common.Command;
 import common.Packet;
 import common.StringUtil;
@@ -72,13 +73,24 @@ public class PacketQueue implements Runnable {
 			int tankId = packet.getByteBuffer().getInt();
 			ServerMain.getGameWorld().stop(clientId, tankId);
 			logger.debug("C_STOP, id:{}, angle:{}", tankId);
+			
 			Packet writePacket = new Packet(Command.S_STOP, 8);
 			writePacket.getByteBuffer().putInt(clientId);
 			writePacket.getByteBuffer().putInt(tankId);
 			ServerMain.getServer().broadcastPacket(writePacket);
 		}
 			break;
-
+		case Command.C_NEW_MISSILE:{
+			int tankId = packet.getByteBuffer().getInt();
+			logger.debug("C_NEW+MISSILE, tanlId:"+tankId);
+			ServerMain.getGameWorld().fire(tankId);
+			
+			Packet writePacket = new Packet(Command.S_NEW_MISSILE);
+			writePacket.getByteBuffer().putInt(tankId);
+			ServerMain.getServer().broadcastPacket(writePacket);
+			
+		}
+			break;
 		default:
 			break;
 		}

@@ -1,5 +1,6 @@
 import java.util.List;
 
+import common.Missile;
 import common.Tank;
 
 class PaintThread implements Runnable {
@@ -35,8 +36,16 @@ class PaintThread implements Runnable {
 		lastUpdateTime = currentTime;
 
 		this.updateTanks(deltaTime);
+		this.updateMissiles(deltaTime);
 	}
-
+	
+	private void updateMissiles(long deltaTime) {
+		List<Missile> missiles = tankClient.getMissiles();
+		for (Missile missile : missiles) {
+			missile.update(deltaTime);
+		}
+	}
+	
 	private void updateTanks(long deltaTime) {
 		List<Tank> tanks = tankClient.getTanks();
 		for (Tank tank : tanks) {

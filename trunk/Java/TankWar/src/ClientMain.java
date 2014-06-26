@@ -65,9 +65,14 @@ public class ClientMain {
 			ClientMain.tankClient.addNewTank(tank);
 		}
 			break;
-		case Command.S_EXIT:{
+		case Command.S_EXIT: {
 			int clientId = packet.getByteBuffer().getInt();
 			ClientMain.tankClient.removeTankByClientId(clientId);
+		}
+			break;
+		case Command.S_NEW_MISSILE: {
+			int tankId = packet.getByteBuffer().getInt();
+			ClientMain.tankClient.fire(tankId);
 		}
 			break;
 		}

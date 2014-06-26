@@ -55,9 +55,23 @@ public class TankClient extends Frame {
 				tank.getHeight());
 		g.drawString("" + tank.getId(), (int) tank.getX(),
 				(int) tank.getY() - 10);
+		
+		
+		
 		g.setColor(c);
 
 		// FIXME angle
+	}
+	
+	public void drawMissile(Missile missile, Graphics g){
+		Color c = g.getColor();
+		if (missile.getTeam() == 0) {
+			g.setColor(Color.PINK);
+		} else {
+			g.setColor(Color.WHITE);
+		}
+		g.fillOval((int)missile.getX(), (int)missile.getY(), missile.getWidth(), missile.getHeight());
+		g.setColor(c);
 	}
 
 	public void drawGuntube(Tank tank, Graphics g) {
@@ -67,18 +81,28 @@ public class TankClient extends Frame {
 		g.setColor(Color.GREEN);
 		switch (angle) {
 		case 0:
-			g.drawLine((int)tank.getX()+tank.getWidth()/2, (int)tank.getY()+tank.getHeight()/2, (int)tank.getX()+tank.getWidth()/2, (int)tank.getY()-i);
+			g.drawLine((int) tank.getX() + tank.getWidth() / 2,
+					(int) tank.getY() + tank.getHeight() / 2, (int) tank.getX()
+							+ tank.getWidth() / 2, (int) tank.getY() - i);
 			break;
 		case 1:
-			g.drawLine((int)tank.getX()+tank.getWidth()/2, (int)tank.getY()+tank.getHeight()/2, (int)tank.getX()+tank.getWidth()+i, (int)tank.getY()+tank.getHeight()/2);
+			g.drawLine((int) tank.getX() + tank.getWidth() / 2,
+					(int) tank.getY() + tank.getHeight() / 2, (int) tank.getX()
+							+ tank.getWidth() + i,
+					(int) tank.getY() + tank.getHeight() / 2);
 			break;
 		case 2:
-			g.drawLine((int)tank.getX()+tank.getWidth()/2, (int)tank.getY()+tank.getHeight()/2, (int)tank.getX()+tank.getWidth()/2, (int)tank.getY()+tank.getHeight()+i);
+			g.drawLine((int) tank.getX() + tank.getWidth() / 2,
+					(int) tank.getY() + tank.getHeight() / 2, (int) tank.getX()
+							+ tank.getWidth() / 2,
+					(int) tank.getY() + tank.getHeight() + i);
 			break;
 		case 3:
-			g.drawLine((int)tank.getX()+tank.getWidth()/2, (int)tank.getY()+tank.getHeight()/2, (int)tank.getX()-i, (int)tank.getY()+tank.getHeight()/2);
+			g.drawLine((int) tank.getX() + tank.getWidth() / 2,
+					(int) tank.getY() + tank.getHeight() / 2, (int) tank.getX()
+							- i, (int) tank.getY() + tank.getHeight() / 2);
 			break;
-			
+
 		}
 		g.setColor(c);
 	}
@@ -89,7 +113,10 @@ public class TankClient extends Frame {
 			drawTank(tank, g);
 			drawGuntube(tank, g);
 		}
-		
+		for (Missile missile : missiles) {
+			drawMissile(missile,g);
+		}
+
 	}
 
 	public void update(Graphics g) {
@@ -168,6 +195,15 @@ public class TankClient extends Frame {
 		tank.setCurrentSpeed(0);
 	}
 
+	public void fire(int tankId) {
+		Tank tank = getTank(tankId);
+		Missile m = new Missile(tank.getX() + tank.getWidth() / 2 - 3,
+				tank.getY() + tank.getHeight() / 2 - 3, tank.getAngle(),
+				tank.getTeam());
+		m.setMissileSpeed(300);
+		missiles.add(m);
+	}
+
 	private class KeyMonitor extends KeyAdapter {
 		@Override
 		public void keyPressed(KeyEvent e) {
@@ -177,6 +213,7 @@ public class TankClient extends Frame {
 		@Override
 		public void keyReleased(KeyEvent e) {
 			TankClient.this.keyReleased(e);
+
 		}
 	}
 
@@ -228,9 +265,11 @@ public class TankClient extends Frame {
 		// case KeyEvent.VK_O:
 		// fire2();
 		// break;
-		// case KeyEvent.VK_J:
-		// fire();
-		// break;
+		case KeyEvent.VK_J:
+			Packet writePacket = new Packet(Command.C_NEW_MISSILE, 4);
+			writePacket.getByteBuffer().putInt(getMyTank().getId());
+			ClientMain.client.pushWritePacket(writePacket);
+			break;
 		case KeyEvent.VK_LEFT:
 		case KeyEvent.VK_UP:
 		case KeyEvent.VK_RIGHT:
@@ -255,6 +294,9 @@ public class TankClient extends Frame {
 
 	public List<Tank> getTanks() {
 		return this.tanks;
+	}
+	public List<Missile> getMissiles(){
+		return this.missiles;
 	}
 
 	public void addNewTank(Tank tank) {
