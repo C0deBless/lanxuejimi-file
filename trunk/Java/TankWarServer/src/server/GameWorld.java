@@ -60,6 +60,7 @@ public class GameWorld implements Runnable {
 	public void removeUser(int clientId) {
 		userPool.remove(clientId);
 	}
+
 	
 	public void removeTankByClientId(int clientId){
 		Iterator<Tank> it = tankList.iterator();
@@ -69,6 +70,7 @@ public class GameWorld implements Runnable {
 				it.remove();
 			}
 		}
+
 	}
 
 	public void move(int clientId, int tankId, int angle) {

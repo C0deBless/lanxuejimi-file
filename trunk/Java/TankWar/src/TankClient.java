@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -33,6 +35,8 @@ public class TankClient extends Frame {
 	List<Missile> missiles = new ArrayList<Missile>();
 	private int myClientId;
 
+	private boolean judgeKey = true;
+	
 	Image offScreenImage = null;
 
 	public void setTankList(List<Tank> tankList) {
@@ -82,6 +86,14 @@ public class TankClient extends Frame {
 		this.setTitle("TankWar");
 		this.setLocation(500, 200);
 		this.setSize(GAME_WIDTH, GAME_HEIGHT);
+		
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
+		
 		this.setResizable(false);
 		this.setBackground(Color.BLACK);
 		this.addKeyListener(new KeyMonitor());
@@ -106,6 +118,7 @@ public class TankClient extends Frame {
 			if (tank.getClientId() == clientId) {
 				it.remove();
 			}
+
 		}
 	}
 
@@ -143,6 +156,7 @@ public class TankClient extends Frame {
 	}
 
 	public void keyPressed(KeyEvent e) {
+		
 		int key = e.getKeyCode();
 		int angle = 0;
 		switch (key) {
@@ -161,13 +175,16 @@ public class TankClient extends Frame {
 		default:
 			return;
 		}
+		if(judgeKey){
+			Tank myTank = getMyTank();
 
-		Tank myTank = getMyTank();
-
-		Packet packet = new Packet(Command.C_MOVE, 8);
-		packet.getByteBuffer().putInt(myTank.getId());
-		packet.getByteBuffer().putInt(angle);
-		ClientMain.client.pushWritePacket(packet);
+			Packet packet = new Packet(Command.C_MOVE, 8);
+			packet.getByteBuffer().putInt(myTank.getId());
+			packet.getByteBuffer().putInt(angle);
+			ClientMain.client.pushWritePacket(packet);
+			judgeKey = false;
+		}
+		
 	}
 
 	private Tank getMyTank() {
@@ -193,6 +210,7 @@ public class TankClient extends Frame {
 		case KeyEvent.VK_RIGHT:
 		case KeyEvent.VK_DOWN: {
 			// stop
+			judgeKey = true;
 			Packet packet = new Packet(Command.C_STOP, 4);
 			packet.getByteBuffer().putInt(getMyTank().getId());
 			ClientMain.client.pushWritePacket(packet);
