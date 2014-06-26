@@ -78,6 +78,7 @@ public class PacketQueue implements Runnable {
 			ServerMain.getServer().broadcastPacket(writePacket);
 		}
 			break;
+
 		default:
 			break;
 		}
