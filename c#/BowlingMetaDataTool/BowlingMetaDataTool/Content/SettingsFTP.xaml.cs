@@ -23,6 +23,7 @@ namespace BowlingMetaDataTool.Content
 		public SettingsFTP()
 		{
 			InitializeComponent();
+			DG_SETTING.DataContext = FTPSettings.Instance.DataContext;
 		}
 	}
 }
