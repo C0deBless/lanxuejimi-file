@@ -120,19 +120,14 @@ public class Missile {
 	// }
 	//
 	public boolean hitTank(Tank t) {
-		if (getRectangle().intersects(t.getRectangle())) {
+		if (getRectangle().intersects(t.getRectangle()) && t.getTeam() != this.team) {
+			setLive(false);
+			t.setLive(false);
 			return true;
 		}
 		return false;
 	}
 
-	public boolean hitTanks(List<Tank> tanks) {
-		for (Tank tank : tanks) {
-			hitTank(tank);
-			return true;
-		}
-		return false;
-	}
 
 	public Rectangle getRectangle() {
 		return new Rectangle((int) x, (int) y, width, height);

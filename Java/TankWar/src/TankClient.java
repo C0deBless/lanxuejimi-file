@@ -193,23 +193,30 @@ public class TankClient extends Frame {
 		}
 		tank.setCurrentSpeed(0);
 	}
-
-	public void tankAndMissileDead(int tankId, int missileId) {
-
-		Iterator<Tank> itt = tanks.iterator();
+	
+	public void MissileDead(int missileId){
 		Iterator<Missile> itm = missiles.iterator();
-		if (itt.hasNext()) {
-			Tank tank = itt.next();
-			if (tank.getId() == tankId) {
-				itt.remove();
-			}
-		}
-		if(itm.hasNext()){
+		while (itm.hasNext()){
 			Missile missile = itm.next();
 			if(missile.getId() == missileId){
+				missile.setLive(false);
 				itm.remove();
 			}
 		}
+	}
+	
+	public void tankDead(int tankId) {
+
+		Iterator<Tank> itt = tanks.iterator();
+		
+		while (itt.hasNext()) {
+			Tank tank = itt.next();
+			if (tank.getId() == tankId) {
+				tank.setLive(false);
+				itt.remove();
+			}
+		}
+		
 
 	}
 
