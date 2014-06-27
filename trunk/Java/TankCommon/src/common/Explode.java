@@ -4,7 +4,8 @@ import java.awt.Graphics;
 
 
 public class Explode {
-	private int x,y;
+	private float x;
+	private float y;
 	
 	private boolean live = true;
 	
@@ -12,7 +13,7 @@ public class Explode {
 	
 	private int[] diameter = {7,16,20,30,40,55,30,16,7};
 	
-	public Explode(int x, int y) {
+	public Explode(float x, float y) {
 		this.x = x;
 		this.y = y;
 	}

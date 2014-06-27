@@ -7,16 +7,15 @@ import java.nio.ByteBuffer;
 import java.util.List;
 
 public class Missile {
-	
 
 	public static int missileIndex = 0;
 
 	private float x;
 	private float y;
-	
+
 	private int width = 6;
 	private int height = 6;
-	
+
 	private float missileSpeed;
 
 	private int angle;
@@ -63,7 +62,7 @@ public class Missile {
 			factorX = 2;
 			break;
 		case 2:
-			factorY =2;
+			factorY = 2;
 			break;
 		case 3:
 			factorX = -2;
@@ -75,7 +74,7 @@ public class Missile {
 		x += deltaPos * factorX;
 		y += deltaPos * factorY;
 	}
-	
+
 	public void serialize(ByteBuffer buffer) {
 		buffer.putInt(id);
 		buffer.putFloat(x);
@@ -86,7 +85,7 @@ public class Missile {
 		buffer.putInt(height);
 		buffer.putInt(team);
 	}
-	
+
 	public static Missile deserialize(ByteBuffer buffer) {
 		int id = buffer.getInt();
 		float x = buffer.getFloat();
@@ -96,7 +95,7 @@ public class Missile {
 		int width = buffer.getInt();
 		int height = buffer.getInt();
 		int team = buffer.getInt();
-		
+
 		Missile missile = new Missile(x, y, angle, team, id);
 		missile.missileSpeed = currentSpeed;
 		missile.width = width;
@@ -120,29 +119,23 @@ public class Missile {
 	//
 	// }
 	//
-	// public boolean hitTank(Tank t) {
-	// if (getRectangle().intersects(t.getRectangle()) && t.isLive()
-	// && t.isGood() != good) {
-	// live = false;
-	// t.setLive(false);
-	// Explode e = new Explode(x, y, tc);
-	// tc.explode.add(e);
-	// return true;
-	// }
-	// return false;
-	// }
+	public boolean hitTank(Tank t) {
+		if (getRectangle().intersects(t.getRectangle())) {
+			return true;
+		}
+		return false;
+	}
 
-	// public boolean hitTanks(List<Tank> tanks) {
-	// for (int i = 0; i < tanks.size(); i++) {
-	// Tank t = tanks.get(i);
-	// hitTank(t);
-	// }
-	//
-	// return false;
-	// }
+	public boolean hitTanks(List<Tank> tanks) {
+		for (Tank tank : tanks) {
+			hitTank(tank);
+			return true;
+		}
+		return false;
+	}
 
 	public Rectangle getRectangle() {
-		return new Rectangle((int)x, (int)y, width, height);
+		return new Rectangle((int) x, (int) y, width, height);
 	}
 
 	public void setMissileSpeed(float missileSpeed) {
@@ -169,5 +162,9 @@ public class Missile {
 		return height;
 	}
 
+	public int getId() {
+		return id;
+	}
+	
 	
 }

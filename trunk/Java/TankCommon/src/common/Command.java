@@ -17,4 +17,6 @@ public class Command {
 	
 	public static final short C_NEW_MISSILE = 6;
 	public static final short S_NEW_MISSILE = 1006;
+	
+	public static final short S_HIT_TANK = 7;
 }
