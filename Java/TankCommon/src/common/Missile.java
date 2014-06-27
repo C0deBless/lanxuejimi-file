@@ -165,6 +165,14 @@ public class Missile {
 	public int getId() {
 		return id;
 	}
+
+	public boolean isLive() {
+		return live;
+	}
+
+	public void setLive(boolean live) {
+		this.live = live;
+	}
 	
 	
 }
