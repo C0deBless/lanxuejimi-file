@@ -113,26 +113,39 @@ public class GameWorld implements Runnable {
 		}
 		return null;
 	}
-	
-	public void tankAndMissileDead(int tankId, int missileId) {
 
-		Iterator<Tank> itt = tankList.iterator();
-		Iterator<Missile> itm = missileList.iterator();
-		if (itt.hasNext()) {
-			Tank tank = itt.next();
-			if (tank.getId() == tankId) {
-				itt.remove();
+//	public void tankAndMissileDead(int tankId, int missileId) {
+//
+//		Iterator<Tank> itt = tankList.iterator();
+//		Iterator<Missile> itm = missileList.iterator();
+//		if (itt.hasNext()) {
+//			Tank tank = itt.next();
+//			if (tank.getId() == tankId) {
+//				itt.remove();
+//			}
+//		}
+//		if (itm.hasNext()) {
+//			Missile missile = itm.next();
+//			if (missile.getId() == missileId) {
+//				itm.remove();
+//			}
+//		}
+//
+//	}
+
+	public void hitTank(Missile missile) {
+		for (Tank tank : tankList) {
+			if (missile.hitTank(tank)) {
+				Packet packet = new Packet(Command.S_HIT_TANK);
+				packet.getByteBuffer().putInt(missile.getId());
+				packet.getByteBuffer().putInt(tank.getId());
+				ServerMain.getServer().broadcastPacket(packet);
+
+				tank.setLive(false);
+				missile.setLive(false);
 			}
 		}
-		if(itm.hasNext()){
-			Missile missile = itm.next();
-			if(missile.getId() == missileId){
-				itm.remove();
-			}
-		}
-
 	}
-
 
 	private void update() {
 		long currentTime = System.currentTimeMillis();
@@ -143,22 +156,28 @@ public class GameWorld implements Runnable {
 		long deltaTime = currentTime - lastUpdateTime;
 		lastUpdateTime = currentTime;
 
-		for (Tank tank : tankList) {
+		Iterator<Tank> itt = tankList.iterator();
+		if (itt.hasNext()) {
+			Tank tank = itt.next();
+			if (!tank.isLive()) {
+				tankList.remove(tank);
+				return;
+			}
 			tank.update(deltaTime);
 		}
-		for (Missile missile : missileList) {
+//		for (Tank tank : tankList) {
+//			
+//			
+//		}
+		Iterator<Missile> itm = missileList.iterator();
+		if(itm.hasNext()){
+			Missile missile = itm.next();
 			missile.update(deltaTime);
-			for (Tank tank : tankList) {
-				if (missile.hitTank(tank)) {
-					Packet packet = new Packet(Command.S_HIT_TANK);
-					packet.getByteBuffer().putInt(missile.getId());
-					packet.getByteBuffer().putInt(tank.getId());
-					ServerMain.getServer().broadcastPacket(packet);
-					
-					tankAndMissileDead(tank.getId(), missile.getId());
-				}
-			}
+			hitTank(missile);
 		}
+//		for (Missile missile : missileList) {
+//			
+//		}
 	}
 
 	@Override

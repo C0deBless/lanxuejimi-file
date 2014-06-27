@@ -36,6 +36,7 @@ public class Tank {
 	}
 
 	public void update(long deltaTime) {
+
 		int factorX = 0;
 		int factorY = 0;
 
@@ -91,9 +92,9 @@ public class Tank {
 		tank.height = height;
 		return tank;
 	}
-	
-	public Rectangle getRectangle(){
-		return new Rectangle((int)x, (int)y, width, height);
+
+	public Rectangle getRectangle() {
+		return new Rectangle((int) x, (int) y, width, height);
 	}
 
 	public boolean isLive() {
