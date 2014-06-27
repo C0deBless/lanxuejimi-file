@@ -114,24 +114,24 @@ public class GameWorld implements Runnable {
 		return null;
 	}
 
-//	public void tankAndMissileDead(int tankId, int missileId) {
-//
-//		Iterator<Tank> itt = tankList.iterator();
-//		Iterator<Missile> itm = missileList.iterator();
-//		if (itt.hasNext()) {
-//			Tank tank = itt.next();
-//			if (tank.getId() == tankId) {
-//				itt.remove();
-//			}
-//		}
-//		if (itm.hasNext()) {
-//			Missile missile = itm.next();
-//			if (missile.getId() == missileId) {
-//				itm.remove();
-//			}
-//		}
-//
-//	}
+	// public void tankAndMissileDead(int tankId, int missileId) {
+	//
+	// Iterator<Tank> itt = tankList.iterator();
+	// Iterator<Missile> itm = missileList.iterator();
+	// if (itt.hasNext()) {
+	// Tank tank = itt.next();
+	// if (tank.getId() == tankId) {
+	// itt.remove();
+	// }
+	// }
+	// if (itm.hasNext()) {
+	// Missile missile = itm.next();
+	// if (missile.getId() == missileId) {
+	// itm.remove();
+	// }
+	// }
+	//
+	// }
 
 	public void hitTank(Missile missile) {
 		for (Tank tank : tankList) {
@@ -157,27 +157,30 @@ public class GameWorld implements Runnable {
 		lastUpdateTime = currentTime;
 
 		Iterator<Tank> itt = tankList.iterator();
-		if (itt.hasNext()) {
+		while (itt.hasNext()) {
 			Tank tank = itt.next();
+			
 			if (!tank.isLive()) {
 				tankList.remove(tank);
 				return;
 			}
 			tank.update(deltaTime);
 		}
-//		for (Tank tank : tankList) {
-//			
-//			
-//		}
+
 		Iterator<Missile> itm = missileList.iterator();
-		if(itm.hasNext()){
+		while (itm.hasNext()) {
+			
 			Missile missile = itm.next();
+			
+			if(!missile.isLive()){
+				itm.remove();
+				return;
+			}
+		
 			missile.update(deltaTime);
 			hitTank(missile);
 		}
-//		for (Missile missile : missileList) {
-//			
-//		}
+
 	}
 
 	@Override
