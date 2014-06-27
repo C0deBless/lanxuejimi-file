@@ -75,6 +75,11 @@ public class ClientMain {
 			ClientMain.tankClient.fire(tankId);
 		}
 			break;
+		case Command.S_HIT_TANK:{
+			int missileId = packet.getByteBuffer().getInt();
+			int tankId = packet.getByteBuffer().getInt();
+			ClientMain.tankClient.tankAndMissileDead(tankId, missileId);
+		}
 		}
 	}
 

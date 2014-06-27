@@ -1,5 +1,6 @@
 package common;
 
+import java.awt.Rectangle;
 import java.nio.ByteBuffer;
 
 public class Tank {
@@ -89,6 +90,10 @@ public class Tank {
 		tank.width = width;
 		tank.height = height;
 		return tank;
+	}
+	
+	public Rectangle getRectangle(){
+		return new Rectangle((int)x, (int)y, width, height);
 	}
 
 	public boolean isLive() {

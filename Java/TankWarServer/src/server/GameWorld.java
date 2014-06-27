@@ -10,7 +10,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import common.Command;
 import common.Missile;
+import common.Packet;
 import common.Tank;
 
 public class GameWorld implements Runnable {
@@ -62,12 +64,11 @@ public class GameWorld implements Runnable {
 		userPool.remove(clientId);
 	}
 
-	
-	public void removeTankByClientId(int clientId){
+	public void removeTankByClientId(int clientId) {
 		Iterator<Tank> it = tankList.iterator();
-		while(it.hasNext()){
+		while (it.hasNext()) {
 			Tank tank = it.next();
-			if(tank.getClientId() == clientId){
+			if (tank.getClientId() == clientId) {
 				it.remove();
 			}
 		}
@@ -83,14 +84,14 @@ public class GameWorld implements Runnable {
 		tank.setAngle(angle);
 		tank.setCurrentSpeed(100);
 	}
-	
-	public void fire(int tankId){
+
+	public void fire(int tankId) {
 		Tank tank = getTank(tankId);
 		Missile m = new Missile(tank.getX() + tank.getWidth() / 2 + 3,
 				tank.getY() + tank.getHeight() / 2 + 3, tank.getAngle(),
 				tank.getTeam());
 		m.setMissileSpeed(300);
-		
+
 		missileList.add(m);
 	}
 
@@ -112,6 +113,26 @@ public class GameWorld implements Runnable {
 		}
 		return null;
 	}
+	
+	public void tankAndMissileDead(int tankId, int missileId) {
+
+		Iterator<Tank> itt = tankList.iterator();
+		Iterator<Missile> itm = missileList.iterator();
+		if (itt.hasNext()) {
+			Tank tank = itt.next();
+			if (tank.getId() == tankId) {
+				itt.remove();
+			}
+		}
+		if(itm.hasNext()){
+			Missile missile = itm.next();
+			if(missile.getId() == missileId){
+				itm.remove();
+			}
+		}
+
+	}
+
 
 	private void update() {
 		long currentTime = System.currentTimeMillis();
@@ -127,6 +148,16 @@ public class GameWorld implements Runnable {
 		}
 		for (Missile missile : missileList) {
 			missile.update(deltaTime);
+			for (Tank tank : tankList) {
+				if (missile.hitTank(tank)) {
+					Packet packet = new Packet(Command.S_HIT_TANK);
+					packet.getByteBuffer().putInt(missile.getId());
+					packet.getByteBuffer().putInt(tank.getId());
+					ServerMain.getServer().broadcastPacket(packet);
+					
+					tankAndMissileDead(tank.getId(), missile.getId());
+				}
+			}
 		}
 	}
 

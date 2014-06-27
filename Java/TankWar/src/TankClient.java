@@ -55,22 +55,21 @@ public class TankClient extends Frame {
 				tank.getHeight());
 		g.drawString("" + tank.getId(), (int) tank.getX(),
 				(int) tank.getY() - 10);
-		
-		
-		
+
 		g.setColor(c);
 
 		// FIXME angle
 	}
-	
-	public void drawMissile(Missile missile, Graphics g){
+
+	public void drawMissile(Missile missile, Graphics g) {
 		Color c = g.getColor();
 		if (missile.getTeam() == 0) {
 			g.setColor(Color.PINK);
 		} else {
 			g.setColor(Color.WHITE);
 		}
-		g.fillOval((int)missile.getX(), (int)missile.getY(), missile.getWidth(), missile.getHeight());
+		g.fillOval((int) missile.getX(), (int) missile.getY(),
+				missile.getWidth(), missile.getHeight());
 		g.setColor(c);
 	}
 
@@ -114,7 +113,7 @@ public class TankClient extends Frame {
 			drawGuntube(tank, g);
 		}
 		for (Missile missile : missiles) {
-			drawMissile(missile,g);
+			drawMissile(missile, g);
 		}
 
 	}
@@ -193,6 +192,25 @@ public class TankClient extends Frame {
 			return;
 		}
 		tank.setCurrentSpeed(0);
+	}
+
+	public void tankAndMissileDead(int tankId, int missileId) {
+
+		Iterator<Tank> itt = tanks.iterator();
+		Iterator<Missile> itm = missiles.iterator();
+		if (itt.hasNext()) {
+			Tank tank = itt.next();
+			if (tank.getId() == tankId) {
+				itt.remove();
+			}
+		}
+		if(itm.hasNext()){
+			Missile missile = itm.next();
+			if(missile.getId() == missileId){
+				itm.remove();
+			}
+		}
+
 	}
 
 	public void fire(int tankId) {
@@ -295,7 +313,8 @@ public class TankClient extends Frame {
 	public List<Tank> getTanks() {
 		return this.tanks;
 	}
-	public List<Missile> getMissiles(){
+
+	public List<Missile> getMissiles() {
 		return this.missiles;
 	}
 
