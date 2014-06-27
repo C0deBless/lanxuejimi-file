@@ -41,7 +41,12 @@ public class GameWorld implements Runnable {
 	}
 
 	public Tank initUserTank(int clientId) {
-		Tank tank = new Tank(200, 200, 1);
+		Tank tank = null;
+		if(clientId%2 == 0){
+			tank = new Tank(200, 200, 1);
+		}else{
+			tank = new Tank(200, 200, 0);
+		}
 		tank.setClientId(clientId);
 		tankList.add(tank);
 		return tank;

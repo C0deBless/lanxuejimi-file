@@ -45,6 +45,9 @@ public class TankClient extends Frame {
 	}
 
 	private void drawTank(Tank tank, Graphics g) {
+		if(!tank.isLive()){
+			return;
+		}
 		Color c = g.getColor();
 		if (tank.getTeam() == 0) {
 			g.setColor(Color.RED);
@@ -62,6 +65,9 @@ public class TankClient extends Frame {
 	}
 
 	public void drawMissile(Missile missile, Graphics g) {
+		if(!missile.isLive()){
+			return;
+		}
 		Color c = g.getColor();
 		if (missile.getTeam() == 0) {
 			g.setColor(Color.PINK);
@@ -232,11 +238,17 @@ public class TankClient extends Frame {
 	private class KeyMonitor extends KeyAdapter {
 		@Override
 		public void keyPressed(KeyEvent e) {
+			if (getMyTank() == null) {
+				return;
+			}
 			TankClient.this.keyPressed(e);
 		}
 
 		@Override
 		public void keyReleased(KeyEvent e) {
+			if (getMyTank() == null) {
+				return;
+			}
 			TankClient.this.keyReleased(e);
 
 		}
