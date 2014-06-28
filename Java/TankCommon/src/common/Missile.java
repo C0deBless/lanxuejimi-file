@@ -120,7 +120,7 @@ public class Missile {
 	// }
 	//
 	public boolean hitTank(Tank t) {
-		if (getRectangle().intersects(t.getRectangle()) && t.getTeam() != this.team) {
+		if (getRectangle().intersects(t.getRectangle()) && t.getTeam() != this.team && this.live && t.isLive()) {
 			setLive(false);
 			t.setLive(false);
 			return true;
