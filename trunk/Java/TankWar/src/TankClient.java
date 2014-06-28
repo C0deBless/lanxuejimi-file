@@ -45,6 +45,15 @@ public class TankClient extends Frame {
 			tanks.addAll(tankList);
 		}
 	}
+	
+	public void setMissileList(List<Missile> missileList) {
+		synchronized (missiles) {
+			missiles.clear();
+			missiles.addAll(missileList);
+		}
+		
+	}
+
 
 	private void drawTank(Tank tank, Graphics g) {
 		if (!tank.isLive()) {
@@ -231,30 +240,35 @@ public class TankClient extends Frame {
 		tank.setCurrentSpeed(0);
 	}
 
-	public void missileDead(int missileId) {
+	
+	public void missileDead(int missileId, Explode explode){
+
 		synchronized (missiles) {
 			Iterator<Missile> it = missiles.iterator();
-			boolean found = false;
 			while (it.hasNext()) {
 				Missile missile = it.next();
 				if (missile.getId() == missileId) {
 					missile.setLive(false);
-					it.remove();
-					Explode explode = new Explode(missile.getX(),
-							missile.getY());
-					explodes.add(explode);
-					logger.debug(
-							"TankClient, add Explode to TankClient, id:{}",
-							explode.getId());
-					found = true;
+
+					Explode e = explode;
+					explodes.add(e);
+
 				}
 			}
 
-			if (!found) {
-				logger.error("cannot find missile, id:{}", missileId);
+		}
+	}
+	
+	public void explodeDead(int id) {
+		Iterator<Explode> it = explodes.iterator();
+		while(it.hasNext()){
+			Explode explode = it.next();
+			if(!explode.isLive()){
+				it.remove();
 			}
 		}
 	}
+
 
 	public void tankDead(int tankId) {
 
@@ -271,11 +285,11 @@ public class TankClient extends Frame {
 
 	}
 
-	public void fire(int tankId) {
+	public void fire(int tankId, int missileId) {
 		Tank tank = getTank(tankId);
 		Missile m = new Missile(tank.getX() + tank.getWidth() / 2 - 3,
-				tank.getY() + tank.getHeight() / 2 - 3, tank.getAngle(),
-				tank.getTeam());
+				tank.getY() + tank.getHeight() / 2 -3 , tank.getAngle(),
+				tank.getTeam(), missileId);
 		m.setMissileSpeed(300);
 		synchronized (missiles) {
 			missiles.add(m);
@@ -399,4 +413,5 @@ public class TankClient extends Frame {
 		return explodes;
 	}
 
+	
 }

@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 
 import common.Client;
 import common.Command;
+import common.Explode;
+import common.Missile;
 import common.Packet;
 import common.PacketEventListener;
 import common.SocketCloseEventListener;
@@ -36,14 +38,23 @@ public class ClientMain {
 		case Command.S_LOGIN: {
 			logger.debug("S_LOGIN:");
 			int clientId = packet.getByteBuffer().getInt();
-			int count = packet.getByteBuffer().getInt();
-
-			List<Tank> tankList = new ArrayList<>(count);
-			for (int i = 0; i < count; i++) {
+			int tankCount = packet.getByteBuffer().getInt();
+			logger.debug("S_LOGIN:,clientId:{}", clientId);
+			List<Tank> tankList = new ArrayList<>(tankCount);
+			for (int i = 0; i < tankCount; i++) {
 				Tank tank = Tank.deserialize(packet.getByteBuffer());
 				tankList.add(tank);
 			}
+
+			int missileCount = packet.getByteBuffer().getInt();
+			List<Missile> missileList = new ArrayList<>(missileCount);
+			for (int i = 0; i < missileCount; i++) {
+				Missile missile = Missile.deserialize(packet.getByteBuffer());
+				missileList.add(missile);
+			}
+
 			tankClient.setTankList(tankList);
+			tankClient.setMissileList(missileList);
 			tankClient.setMyClientId(clientId);
 		}
 			break;
@@ -72,16 +83,21 @@ public class ClientMain {
 			break;
 		case Command.S_NEW_MISSILE: {
 			int tankId = packet.getByteBuffer().getInt();
-			ClientMain.tankClient.fire(tankId);
+			int missileId = packet.getByteBuffer().getInt();
+			ClientMain.tankClient.fire(tankId, missileId);
 		}
 			break;
 		case Command.S_HIT_TANK: {
 			int missileId = packet.getByteBuffer().getInt();
 			int tankId = packet.getByteBuffer().getInt();
+			
+			Explode explode = Explode.deserialize(packet.getByteBuffer());
 			logger.debug("S_HIT_TANK,missileId:{}, tankId:{}", missileId,
 					tankId);
 			ClientMain.tankClient.tankDead(tankId);
-			ClientMain.tankClient.missileDead(missileId);
+			ClientMain.tankClient.missileDead(missileId, explode);
+			ClientMain.tankClient.explodeDead(explode.getId());
+
 		}
 			break;
 		}

@@ -47,9 +47,11 @@ class PaintThread implements Runnable {
 	}
 
 	private void updateMissiles(long deltaTime) {
-		List<Missile> missiles = tankClient.getMissiles();
-		for (Missile missile : missiles) {
-			missile.update(deltaTime);
+		synchronized (tankClient.getMissiles()) {
+			List<Missile> missiles = tankClient.getMissiles();
+			for (Missile missile : missiles) {
+				missile.update(deltaTime);
+			}
 		}
 	}
 

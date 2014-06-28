@@ -2,6 +2,7 @@ package common;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.nio.ByteBuffer;
 
 public class Explode {
 	static Logger logger = LoggerFactory.getLogger(Explode.class);
@@ -24,6 +25,34 @@ public class Explode {
 		this.y = y;
 		this.id = (++explodeIndex);
 		logger.debug("create Explode, x:{}, y:{}, id:" + this.id, x, y);
+	}
+	
+	
+	
+	public Explode(float x, float y, int id) {
+		this.x = x;
+		this.y = y;
+		this.id = id;
+	}
+
+
+
+	public void serialize(ByteBuffer buffer) {
+		buffer.putInt(id);
+		buffer.putFloat(x);
+		buffer.putFloat(y);
+		
+	}
+
+	public static Explode deserialize(ByteBuffer buffer) {
+		int id = buffer.getInt();
+		float x = buffer.getFloat();
+		float y = buffer.getFloat();
+		
+
+		Explode explode = new Explode(x, y, id);
+		
+		return explode;
 	}
 
 	public void update() {
