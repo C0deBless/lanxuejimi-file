@@ -160,30 +160,32 @@ public class GameWorld implements Runnable {
 		}
 		long deltaTime = currentTime - lastUpdateTime;
 		lastUpdateTime = currentTime;
+		synchronized (tankList) {
+			Iterator<Tank> itt = tankList.iterator();
+			while (itt.hasNext()) {
+				Tank tank = itt.next();
 
-		Iterator<Tank> itt = tankList.iterator();
-		while (itt.hasNext()) {
-			Tank tank = itt.next();
-			
-			if (!tank.isLive()) {
-				tankList.remove(tank);
-				return;
+				if (!tank.isLive()) {
+					tankList.remove(tank);
+					return;
+				}
+				tank.update(deltaTime);
 			}
-			tank.update(deltaTime);
 		}
+		synchronized (missileList) {
+			Iterator<Missile> itm = missileList.iterator();
+			while (itm.hasNext()) {
 
-		Iterator<Missile> itm = missileList.iterator();
-		while (itm.hasNext()) {
-			
-			Missile missile = itm.next();
-			
-			if(!missile.isLive()){
-				itm.remove();
-				return;
+				Missile missile = itm.next();
+
+				if (!missile.isLive()) {
+					itm.remove();
+					return;
+				}
+
+				missile.update(deltaTime);
+				hitTank(missile);
 			}
-		
-			missile.update(deltaTime);
-			hitTank(missile);
 		}
 
 	}
