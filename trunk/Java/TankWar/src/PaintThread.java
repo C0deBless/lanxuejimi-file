@@ -1,4 +1,8 @@
+import java.util.Iterator;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import common.Explode;
 import common.Missile;
@@ -7,6 +11,7 @@ import common.Tank;
 class PaintThread implements Runnable {
 
 	private final TankClient tankClient;
+	static Logger logger = LoggerFactory.getLogger(PaintThread.class);
 
 	PaintThread(TankClient tankClient) {
 		this.tankClient = tankClient;
@@ -40,25 +45,33 @@ class PaintThread implements Runnable {
 		this.updateMissiles(deltaTime);
 		this.updateExplodes();
 	}
-	
+
 	private void updateMissiles(long deltaTime) {
 		List<Missile> missiles = tankClient.getMissiles();
 		for (Missile missile : missiles) {
 			missile.update(deltaTime);
 		}
 	}
-	
+
 	private void updateTanks(long deltaTime) {
 		List<Tank> tanks = tankClient.getTanks();
 		for (Tank tank : tanks) {
 			tank.update(deltaTime);
 		}
 	}
-	
+
 	private void updateExplodes() {
 		List<Explode> explodes = tankClient.getExplodes();
-		for (Explode explode : explodes) {
+		Iterator<Explode> it = explodes.iterator();
+		while (it.hasNext()) {
+			Explode explode = it.next();
 			explode.update();
+			if (!explode.isLive()) {
+				it.remove();
+				logger.debug(
+						"PaintThread.updateExplodes, remove Explode, id:{}",
+						explode.getId());
+			}
 		}
 	}
 }

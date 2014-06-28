@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import common.Command;
-import common.Explode;
 import common.Missile;
 import common.Packet;
 import common.Tank;
@@ -25,7 +24,6 @@ public class GameWorld implements Runnable {
 
 	private List<Tank> tankList = new ArrayList<>();
 	private List<Missile> missileList = new ArrayList<>();
-	private List<Explode> explodeList = new ArrayList<>();
 
 	private Thread thread;
 	private boolean isRunning = false;
@@ -121,39 +119,14 @@ public class GameWorld implements Runnable {
 		return null;
 	}
 
-	// public void tankAndMissileDead(int tankId, int missileId) {
-	//
-	// Iterator<Tank> itt = tankList.iterator();
-	// Iterator<Missile> itm = missileList.iterator();
-	// if (itt.hasNext()) {
-	// Tank tank = itt.next();
-	// if (tank.getId() == tankId) {
-	// itt.remove();
-	// }
-	// }
-	// if (itm.hasNext()) {
-	// Missile missile = itm.next();
-	// if (missile.getId() == missileId) {
-	// itm.remove();
-	// }
-	// }
-	//
-	// }
-
 	public void hitTank(Missile missile) {
 		for (Tank tank : tankList) {
 			if (missile.hitTank(tank)) {
 				Packet packet = new Packet(Command.S_HIT_TANK);
 				packet.getByteBuffer().putInt(missile.getId());
 				packet.getByteBuffer().putInt(tank.getId());
-
-				Explode explode = new Explode(missile.getX(), missile.getY());
-				explodeList.add(explode);
-
-				packet.getByteBuffer().putInt(explode.getId());
-
 				ServerMain.getServer().broadcastPacket(packet);
-
+				
 				tank.setLive(false);
 				missile.setLive(false);
 			}
@@ -195,20 +168,6 @@ public class GameWorld implements Runnable {
 				hitTank(missile);
 			}
 		}
-
-		synchronized (explodeList) {
-			Iterator<Explode> ite = explodeList.iterator();
-			while (ite.hasNext()) {
-				Explode explode = ite.next();
-
-				if (!explode.isLive()) {
-					ite.remove();
-					return;
-				}
-				explode.update();
-			}
-		}
-
 	}
 
 	@Override
