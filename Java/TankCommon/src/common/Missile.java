@@ -1,10 +1,7 @@
 package common;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.nio.ByteBuffer;
-import java.util.List;
 
 public class Missile {
 
@@ -23,7 +20,6 @@ public class Missile {
 	private int team;
 
 	private boolean live = true;
-	private boolean good;
 
 	private int id;
 

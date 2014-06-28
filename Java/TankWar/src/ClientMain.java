@@ -75,15 +75,15 @@ public class ClientMain {
 			ClientMain.tankClient.fire(tankId);
 		}
 			break;
-		case Command.S_HIT_TANK:{
+		case Command.S_HIT_TANK: {
 			int missileId = packet.getByteBuffer().getInt();
 			int tankId = packet.getByteBuffer().getInt();
-			int explodeId = packet.getByteBuffer().getInt();
-			logger.debug("S_HIT_TANK,missileId:{}, tankId:{}"+missileId+tankId);
+			logger.debug("S_HIT_TANK,missileId:{}, tankId:{}", missileId,
+					tankId);
 			ClientMain.tankClient.tankDead(tankId);
 			ClientMain.tankClient.missileDead(missileId);
-			ClientMain.tankClient.explodeDead(explodeId);
 		}
+			break;
 		}
 	}
 

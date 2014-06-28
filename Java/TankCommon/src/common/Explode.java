@@ -1,12 +1,13 @@
 package common;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Explode {
+	static Logger logger = LoggerFactory.getLogger(Explode.class);
+
 	public static int explodeIndex = 0;
-	
-	
+
 	private float x;
 	private float y;
 
@@ -22,6 +23,7 @@ public class Explode {
 		this.x = x;
 		this.y = y;
 		this.id = (++explodeIndex);
+		logger.debug("create Explode, x:{}, y:{}, id:" + this.id, x, y);
 	}
 
 	public void update() {
@@ -64,5 +66,5 @@ public class Explode {
 	public int getId() {
 		return id;
 	}
-	
+
 }
