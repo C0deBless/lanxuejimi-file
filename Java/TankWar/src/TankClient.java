@@ -40,8 +40,10 @@ public class TankClient extends Frame {
 	Image offScreenImage = null;
 
 	public void setTankList(List<Tank> tankList) {
-		tanks.clear();
-		tanks.addAll(tankList);
+		synchronized (tanks) {
+			tanks.clear();
+			tanks.addAll(tankList);
+		}
 	}
 
 	private void drawTank(Tank tank, Graphics g) {
@@ -114,12 +116,16 @@ public class TankClient extends Frame {
 
 	public void paint(Graphics g) {
 
-		for (Tank tank : tanks) {
-			drawTank(tank, g);
-			drawGuntube(tank, g);
+		synchronized (tanks) {
+			for (Tank tank : tanks) {
+				drawTank(tank, g);
+				drawGuntube(tank, g);
+			}
 		}
-		for (Missile missile : missiles) {
-			drawMissile(missile, g);
+		synchronized (missiles) {
+			for (Missile missile : missiles) {
+				drawMissile(missile, g);
+			}
 		}
 
 	}
@@ -160,22 +166,26 @@ public class TankClient extends Frame {
 	}
 
 	private Tank getTank(int tankId) {
-		for (Tank tank : tanks) {
-			if (tank.getId() == tankId) {
-				return tank;
+			synchronized (tanks) {
+				for (Tank tank : tanks) {
+					if (tank.getId() == tankId) {
+						return tank;
+					}
+				}
+				return null;
 			}
-		}
-		return null;
 	}
 
 	public void removeTankByClientId(int clientId) {
-		Iterator<Tank> it = tanks.iterator();
-		while (it.hasNext()) {
-			Tank tank = it.next();
-			if (tank.getClientId() == clientId) {
-				it.remove();
-			}
+		synchronized (tanks) {
+			Iterator<Tank> it = tanks.iterator();
+			while (it.hasNext()) {
+				Tank tank = it.next();
+				if (tank.getClientId() == clientId) {
+					it.remove();
+				}
 
+			}
 		}
 	}
 
@@ -201,25 +211,28 @@ public class TankClient extends Frame {
 	}
 	
 	public void MissileDead(int missileId){
-		Iterator<Missile> itm = missiles.iterator();
-		while (itm.hasNext()){
-			Missile missile = itm.next();
-			if(missile.getId() == missileId){
-				missile.setLive(false);
-				itm.remove();
+		synchronized (missiles) {
+			Iterator<Missile> itm = missiles.iterator();
+			while (itm.hasNext()) {
+				Missile missile = itm.next();
+				if (missile.getId() == missileId) {
+					missile.setLive(false);
+					itm.remove();
+				}
 			}
 		}
 	}
 	
 	public void tankDead(int tankId) {
 
-		Iterator<Tank> itt = tanks.iterator();
-		
-		while (itt.hasNext()) {
-			Tank tank = itt.next();
-			if (tank.getId() == tankId) {
-				tank.setLive(false);
-				itt.remove();
+		synchronized (tanks) {
+			Iterator<Tank> itt = tanks.iterator();
+			while (itt.hasNext()) {
+				Tank tank = itt.next();
+				if (tank.getId() == tankId) {
+					tank.setLive(false);
+					itt.remove();
+				}
 			}
 		}
 		
@@ -232,7 +245,9 @@ public class TankClient extends Frame {
 				tank.getY() + tank.getHeight() / 2 - 3, tank.getAngle(),
 				tank.getTeam());
 		m.setMissileSpeed(300);
-		missiles.add(m);
+		synchronized (missiles) {
+			missiles.add(m);
+		}
 	}
 
 	private class KeyMonitor extends KeyAdapter {
@@ -288,12 +303,14 @@ public class TankClient extends Frame {
 	}
 
 	private Tank getMyTank() {
-		for (Tank tank : tanks) {
-			if (tank.getClientId() == myClientId) {
-				return tank;
+		synchronized (tanks) {
+			for (Tank tank : tanks) {
+				if (tank.getClientId() == myClientId) {
+					return tank;
+				}
 			}
+			return null;
 		}
-		return null;
 	}
 
 	public void keyReleased(KeyEvent e) {
@@ -338,7 +355,9 @@ public class TankClient extends Frame {
 	}
 
 	public void addNewTank(Tank tank) {
-		this.tanks.add(tank);
+		synchronized (tanks) {
+			this.tanks.add(tank);
+		}
 	}
 
 }
