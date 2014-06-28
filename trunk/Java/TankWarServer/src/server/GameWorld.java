@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import common.Command;
+import common.Explode;
 import common.Missile;
 import common.Packet;
 import common.Tank;
@@ -24,6 +25,7 @@ public class GameWorld implements Runnable {
 
 	private List<Tank> tankList = new ArrayList<>();
 	private List<Missile> missileList = new ArrayList<>();
+	private List<Explode> explodeList = new ArrayList<>();
 
 	private Thread thread;
 	private boolean isRunning = false;
@@ -42,9 +44,9 @@ public class GameWorld implements Runnable {
 
 	public Tank initUserTank(int clientId) {
 		Tank tank = null;
-		if(clientId%2 == 0){
+		if (clientId % 2 == 0) {
 			tank = new Tank(200, 200, 1);
-		}else{
+		} else {
 			tank = new Tank(200, 200, 0);
 		}
 		tank.setClientId(clientId);
@@ -144,6 +146,12 @@ public class GameWorld implements Runnable {
 				Packet packet = new Packet(Command.S_HIT_TANK);
 				packet.getByteBuffer().putInt(missile.getId());
 				packet.getByteBuffer().putInt(tank.getId());
+
+				Explode explode = new Explode(missile.getX(), missile.getY());
+				explodeList.add(explode);
+
+				packet.getByteBuffer().putInt(explode.getId());
+
 				ServerMain.getServer().broadcastPacket(packet);
 
 				tank.setLive(false);
@@ -185,6 +193,19 @@ public class GameWorld implements Runnable {
 
 				missile.update(deltaTime);
 				hitTank(missile);
+			}
+		}
+
+		synchronized (explodeList) {
+			Iterator<Explode> ite = explodeList.iterator();
+			while (ite.hasNext()) {
+				Explode explode = ite.next();
+
+				if (!explode.isLive()) {
+					ite.remove();
+					return;
+				}
+				explode.update();
 			}
 		}
 

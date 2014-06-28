@@ -31,7 +31,7 @@ public class TankClient extends Frame {
 	public static final int GAME_HEIGHT = 600;
 
 	List<Tank> tanks = new ArrayList<Tank>();
-	List<Explode> explode = new ArrayList<Explode>();
+	List<Explode> explodes = new ArrayList<Explode>();
 	List<Missile> missiles = new ArrayList<Missile>();
 	private int myClientId;
 
@@ -67,6 +67,8 @@ public class TankClient extends Frame {
 	}
 
 	public void drawMissile(Missile missile, Graphics g) {
+		
+		
 		if(!missile.isLive()){
 			return;
 		}
@@ -80,6 +82,20 @@ public class TankClient extends Frame {
 				missile.getWidth(), missile.getHeight());
 		g.setColor(c);
 	}
+	
+	public void drawExplode(Explode explode, Graphics g){
+		if (explode.getStep() == explode.getDiameter().length) {
+			return;
+		}
+		if(!explode.isLive()){
+			return;
+		}
+		Color c = g.getColor();
+		g.setColor(Color.ORANGE);
+		g.fillOval((int)explode.getX(), (int)explode.getY(), explode.getDiameter()[explode.getStep()], explode.getDiameter()[explode.getStep()]);
+		g.setColor(c);
+	}
+	
 
 	public void drawGuntube(Tank tank, Graphics g) {
 		int angle = tank.getAngle();
@@ -125,6 +141,11 @@ public class TankClient extends Frame {
 		synchronized (missiles) {
 			for (Missile missile : missiles) {
 				drawMissile(missile, g);
+			}
+		}
+		synchronized (explodes) {
+			for (Explode explode : explodes) {
+				drawExplode(explode, g);
 			}
 		}
 
@@ -210,14 +231,28 @@ public class TankClient extends Frame {
 		tank.setCurrentSpeed(0);
 	}
 	
-	public void MissileDead(int missileId){
+	public void missileDead(int missileId){
 		synchronized (missiles) {
-			Iterator<Missile> itm = missiles.iterator();
-			while (itm.hasNext()) {
-				Missile missile = itm.next();
+			Iterator<Missile> it = missiles.iterator();
+			while (it.hasNext()) {
+				Missile missile = it.next();
 				if (missile.getId() == missileId) {
 					missile.setLive(false);
-					itm.remove();
+					it.remove();
+					Explode explode = new Explode(missile.getX(), missile.getY());
+					explodes.add(explode);
+				}
+			}
+		}
+	}
+	
+	public void explodeDead(int explodeId) {
+		synchronized (explodes) {
+			Iterator<Explode> it = explodes.iterator();
+			while (it.hasNext()) {
+				Explode explode = it.next();
+				if (!explode.isLive()) {
+					it.remove();
 				}
 			}
 		}
@@ -226,12 +261,12 @@ public class TankClient extends Frame {
 	public void tankDead(int tankId) {
 
 		synchronized (tanks) {
-			Iterator<Tank> itt = tanks.iterator();
-			while (itt.hasNext()) {
-				Tank tank = itt.next();
+			Iterator<Tank> it = tanks.iterator();
+			while (it.hasNext()) {
+				Tank tank = it.next();
 				if (tank.getId() == tankId) {
 					tank.setLive(false);
-					itt.remove();
+					it.remove();
 				}
 			}
 		}
@@ -359,5 +394,11 @@ public class TankClient extends Frame {
 			this.tanks.add(tank);
 		}
 	}
+
+	public List<Explode> getExplodes() {
+		return explodes;
+	}
+
+	
 
 }
