@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import common.Command;
+import common.Missile;
 import common.Packet;
 import common.StringUtil;
 import common.Tank;
@@ -41,6 +42,7 @@ public class PacketQueue implements Runnable {
 			logger.debug("LOGIN, name:{}", name);
 
 			Tank tank = ServerMain.getGameWorld().initUserTank(clientId);
+
 			Packet writePacket2 = new Packet(Command.S_NEW_TANK,
 					Short.MAX_VALUE);
 			tank.serialize(writePacket2.getByteBuffer());
@@ -49,6 +51,8 @@ public class PacketQueue implements Runnable {
 			Packet writePacket = new Packet(Command.S_LOGIN, Short.MAX_VALUE);
 			writePacket.getByteBuffer().putInt(clientId);
 			ServerMain.getGameWorld().serializeAllTanks(
+					writePacket.getByteBuffer());
+			ServerMain.getGameWorld().serializeAllMissiles(
 					writePacket.getByteBuffer());
 			packet.getClient().pushWritePacket(writePacket);
 
@@ -72,22 +76,24 @@ public class PacketQueue implements Runnable {
 			int tankId = packet.getByteBuffer().getInt();
 			ServerMain.getGameWorld().stop(clientId, tankId);
 			logger.debug("C_STOP, id:{}, angle:{}", tankId);
-			
+
 			Packet writePacket = new Packet(Command.S_STOP, 8);
 			writePacket.getByteBuffer().putInt(clientId);
 			writePacket.getByteBuffer().putInt(tankId);
 			ServerMain.getServer().broadcastPacket(writePacket);
 		}
 			break;
-		case Command.C_NEW_MISSILE:{
+		case Command.C_NEW_MISSILE: {
 			int tankId = packet.getByteBuffer().getInt();
-			logger.debug("C_NEW+MISSILE, tanlId:"+tankId);
-			ServerMain.getGameWorld().fire(tankId);
+			logger.debug("C_NEW+MISSILE, tanlId:" + tankId);
+			Missile missile = ServerMain.getGameWorld().initTankMissile(tankId);
 			
 			Packet writePacket = new Packet(Command.S_NEW_MISSILE);
 			writePacket.getByteBuffer().putInt(tankId);
-			ServerMain.getServer().broadcastPacket(writePacket);
+			writePacket.getByteBuffer().putInt(missile.getId());
 			
+			ServerMain.getServer().broadcastPacket(writePacket);
+
 		}
 			break;
 		default:

@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import common.Command;
+import common.Explode;
 import common.Missile;
 import common.Packet;
 import common.Tank;
@@ -24,10 +25,12 @@ public class GameWorld implements Runnable {
 
 	private List<Tank> tankList = new ArrayList<>();
 	private List<Missile> missileList = new ArrayList<>();
+	private List<Explode> explodeList = new ArrayList<>();
 
 	private Thread thread;
 	private boolean isRunning = false;
 	private long lastUpdateTime = 0;
+
 
 	public GameWorld() {
 		thread = new Thread(this);
@@ -51,6 +54,17 @@ public class GameWorld implements Runnable {
 		tankList.add(tank);
 		return tank;
 	}
+	
+	public Missile initTankMissile(int tankId) {
+		Tank tank = getTank(tankId);
+		Missile missile = new Missile(tank.getX() + tank.getWidth() / 2 + 3,
+				tank.getY() + tank.getHeight() / 2 + 3, tank.getAngle(),
+				tank.getTeam());
+		missile.setMissileSpeed(300);
+		missileList.add(missile);
+		
+		return missile;
+	}
 
 	public void serializeAllTanks(ByteBuffer buffer) {
 		int count = this.tankList.size();
@@ -58,6 +72,15 @@ public class GameWorld implements Runnable {
 		for (int i = 0; i < count; i++) {
 			Tank tank = this.tankList.get(i);
 			tank.serialize(buffer);
+		}
+	}
+	
+	public void serializeAllMissiles(ByteBuffer buffer) {
+		int count = this.missileList.size();
+		buffer.putInt(count);
+		for (int i = 0; i < count; i++) {
+			Missile missile = this.missileList.get(i);
+			missile.serialize(buffer);
 		}
 	}
 
@@ -125,10 +148,14 @@ public class GameWorld implements Runnable {
 				Packet packet = new Packet(Command.S_HIT_TANK);
 				packet.getByteBuffer().putInt(missile.getId());
 				packet.getByteBuffer().putInt(tank.getId());
-				ServerMain.getServer().broadcastPacket(packet);
+
+				Explode explode = new Explode(missile.getX(), missile.getY());
+				explodeList.add(explode);
 				
-				tank.setLive(false);
-				missile.setLive(false);
+				explode.serialize(packet.getByteBuffer());
+
+				ServerMain.getServer().broadcastPacket(packet);
+
 			}
 		}
 	}
@@ -183,5 +210,7 @@ public class GameWorld implements Runnable {
 			}
 		}
 	}
+
+	
 
 }
