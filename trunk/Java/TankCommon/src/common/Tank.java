@@ -5,6 +5,8 @@ import java.nio.ByteBuffer;
 import java.util.List;
 
 public class Tank {
+	public static final int GAME_WIDTH = 800;
+	public static final int GAME_HEIGHT = 600;
 
 	private static int tankIndex = 0;
 	private int clientId;
@@ -14,10 +16,10 @@ public class Tank {
 
 	private float x;
 	private float y;
-	
+
 	private float oldX;
 	private float oldY;
-	
+
 	private float currentSpeed;
 	private final int id;
 	private boolean good;
@@ -65,6 +67,15 @@ public class Tank {
 
 		x += deltaPos * factorX;
 		y += deltaPos * factorY;
+
+		if (x < 0)
+			x = 0;
+		if (y < 25)
+			y = 25;
+		if (x > GAME_WIDTH - width)
+			x = GAME_WIDTH - width;
+		if (y > GAME_HEIGHT - height)
+			y = GAME_HEIGHT - height;
 	}
 
 	public void serialize(ByteBuffer buffer) {
@@ -98,7 +109,8 @@ public class Tank {
 		tank.height = height;
 		return tank;
 	}
-	public void stay(){
+
+	public void stay() {
 		x = oldX;
 		y = oldY;
 	}
