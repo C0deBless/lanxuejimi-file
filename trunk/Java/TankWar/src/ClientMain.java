@@ -90,7 +90,7 @@ public class ClientMain {
 		case Command.S_HIT_TANK: {
 			int missileId = packet.getByteBuffer().getInt();
 			int tankId = packet.getByteBuffer().getInt();
-			
+
 			Explode explode = Explode.deserialize(packet.getByteBuffer());
 			logger.debug("S_HIT_TANK,missileId:{}, tankId:{}", missileId,
 					tankId);
@@ -100,11 +100,21 @@ public class ClientMain {
 
 		}
 			break;
-		case Command.S_TANKS_COLLIDE:{
+		case Command.S_TANKS_COLLIDE: {
 			int tank1Id = packet.getByteBuffer().getInt();
 			int tank2Id = packet.getByteBuffer().getInt();
-			
+
 			ClientMain.tankClient.tanksCollide(tank1Id, tank2Id);
+		}
+			break;
+		case Command.S_HIT_WALL: {
+			int missileId = packet.getByteBuffer().getInt();
+			Explode explode = Explode.deserialize(packet.getByteBuffer());
+			
+			ClientMain.tankClient.missileDead(missileId, explode);
+			ClientMain.tankClient.explodeDead(explode.getId());
+			
+			
 		}
 			break;
 		}

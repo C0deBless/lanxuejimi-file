@@ -18,7 +18,9 @@ import common.Packet;
 import common.Tank;
 
 public class GameWorld implements Runnable {
-
+	public static final int GAME_WIDTH = 800;
+	public static final int GAME_HEIGHT = 600;
+	
 	public static final int TEAM_NPC = 0;
 
 	static Logger logger = LoggerFactory.getLogger(GameWorld.class);
@@ -152,16 +154,16 @@ public class GameWorld implements Runnable {
 	public void hitTank(Missile missile) {
 		for (Tank tank : tankList) {
 			if (missile.hitTank(tank)) {
-				Packet packet = new Packet(Command.S_HIT_TANK);
-				packet.getByteBuffer().putInt(missile.getId());
-				packet.getByteBuffer().putInt(tank.getId());
+				Packet writePacket = new Packet(Command.S_HIT_TANK);
+				writePacket.getByteBuffer().putInt(missile.getId());
+				writePacket.getByteBuffer().putInt(tank.getId());
 
 				Explode explode = new Explode(missile.getX(), missile.getY());
 				explodeList.add(explode);
 				
-				explode.serialize(packet.getByteBuffer());
+				explode.serialize(writePacket.getByteBuffer());
 
-				ServerMain.getServer().broadcastPacket(packet);
+				ServerMain.getServer().broadcastPacket(writePacket);
 
 			}
 		}
@@ -178,6 +180,21 @@ public class GameWorld implements Runnable {
 			}
 		}
 		
+	}
+	
+	private void colloedWithWall(Missile missile) {
+		if (missile.getX() < 10 || missile.getY() < 40 || missile.getX() > GAME_WIDTH - missile.getWidth()
+						|| missile.getY() > GAME_HEIGHT - missile.getHeight()) {
+			
+			missile.setLive(false);
+			
+			Packet writePacket = new Packet(Command.S_HIT_WALL);
+			writePacket.getByteBuffer().putInt(missile.getId());
+			Explode explode = new Explode(missile.getX(), missile.getY());
+			explodeList.add(explode);
+			explode.serialize(writePacket.getByteBuffer());
+			ServerMain.getServer().broadcastPacket(writePacket);
+		}
 	}
 
 	private void update() {
@@ -206,17 +223,22 @@ public class GameWorld implements Runnable {
 			while (itm.hasNext()) {
 
 				Missile missile = itm.next();
-
+				
 				if (!missile.isLive()) {
 					itm.remove();
 					return;
 				}
-
+				
+				colloedWithWall(missile);
 				missile.update(deltaTime);
 				hitTank(missile);
 			}
 		}
 	}
+
+	
+
+	
 
 	@Override
 	public void run() {

@@ -22,4 +22,6 @@ public class Command {
 	
 	public static final short S_TANKS_COLLIDE = 8;
 	
+	public static final short S_HIT_WALL = 9;
+	
 }
