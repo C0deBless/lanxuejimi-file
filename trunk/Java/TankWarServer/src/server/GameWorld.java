@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
@@ -30,7 +31,11 @@ public class GameWorld implements Runnable {
 	private Thread thread;
 	private boolean isRunning = false;
 	private long lastUpdateTime = 0;
-
+	
+	private Random random = new Random();
+	
+	private int randomLocationX;
+	private int randomLocationY;
 
 	public GameWorld() {
 		thread = new Thread(this);
@@ -45,10 +50,12 @@ public class GameWorld implements Runnable {
 
 	public Tank initUserTank(int clientId) {
 		Tank tank = null;
+		randomLocationX = random.nextInt(760);
+		randomLocationY = random.nextInt(660);
 		if (clientId % 2 == 0) {
-			tank = new Tank(200, 200, 1);
+			tank = new Tank(randomLocationX, randomLocationY, 1);
 		} else {
-			tank = new Tank(200, 200, 0);
+			tank = new Tank(randomLocationX, randomLocationY, 0);
 		}
 		tank.setClientId(clientId);
 		tankList.add(tank);
