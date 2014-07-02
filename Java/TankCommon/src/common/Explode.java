@@ -1,7 +1,9 @@
 package common;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.nio.ByteBuffer;
 
 public class Explode {
@@ -18,8 +20,8 @@ public class Explode {
 
 	private int step = 0;
 
-	private int[] diameter = { 7, 16, 20, 30, 40, 55, 30, 16, 7 };
-
+	private static final int DIAMETER = 9; 
+	
 	public Explode(float x, float y) {
 		this.x = x;
 		this.y = y;
@@ -56,7 +58,7 @@ public class Explode {
 	}
 
 	public void update() {
-		if (step == diameter.length) {
+		if (step == DIAMETER) {
 			live = false;
 			step = 0;
 			return;
@@ -80,8 +82,8 @@ public class Explode {
 		this.step = step;
 	}
 
-	public int[] getDiameter() {
-		return diameter;
+	public int getDiameter() {
+		return DIAMETER;
 	}
 
 	public float getX() {

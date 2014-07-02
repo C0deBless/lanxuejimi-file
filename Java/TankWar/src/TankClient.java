@@ -41,13 +41,16 @@ public class TankClient extends Frame {
 	
 	private static Toolkit tk = Toolkit.getDefaultToolkit();
 	private static Image[] tankimages = null;
-	private static Map<String, Image> greenimages  = new HashMap<String, Image>();
-	private static Map<String, Image> redimages  = new HashMap<String, Image>();
-	private static Map<String, Image> missileimages  = new HashMap<String, Image>();
+	private static Map<String, Image> greenImages  = new HashMap<String, Image>();
+	private static Map<String, Image> redImages  = new HashMap<String, Image>();
+	private static Map<String, Image> missileImages  = new HashMap<String, Image>();
+	private static Map<Integer, Image> explodeImages  = new HashMap<Integer, Image>();
 	
 	private boolean judgeKey = true;
 
 	Image offScreenImage = null;
+	
+	private boolean explodeinit = false;
 	
 	static{
 		tankimages = new Image[]{
@@ -63,19 +66,40 @@ public class TankClient extends Frame {
 			tk.getImage(TankClient.class.getClassLoader().getResource("images/missileR.png")),
 			tk.getImage(TankClient.class.getClassLoader().getResource("images/missileD.png")),
 			tk.getImage(TankClient.class.getClassLoader().getResource("images/missileL.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/1.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/2.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/3.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/4.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/5.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/6.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/7.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/8.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/9.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/10.png")),
+			
 		};
-		greenimages.put("0", tankimages[0]);
-		greenimages.put("1", tankimages[1]);
-		greenimages.put("2", tankimages[2]);
-		greenimages.put("3", tankimages[3]);
-		redimages.put("0", tankimages[4]);
-		redimages.put("1", tankimages[5]);
-		redimages.put("2", tankimages[6]);
-		redimages.put("3", tankimages[7]);
-		missileimages.put("0", tankimages[8]);
-		missileimages.put("1", tankimages[9]);
-		missileimages.put("2", tankimages[10]);
-		missileimages.put("3", tankimages[11]);
+		greenImages.put("0", tankimages[0]);
+		greenImages.put("1", tankimages[1]);
+		greenImages.put("2", tankimages[2]);
+		greenImages.put("3", tankimages[3]);
+		redImages.put("0", tankimages[4]);
+		redImages.put("1", tankimages[5]);
+		redImages.put("2", tankimages[6]);
+		redImages.put("3", tankimages[7]);
+		missileImages.put("0", tankimages[8]);
+		missileImages.put("1", tankimages[9]);
+		missileImages.put("2", tankimages[10]);
+		missileImages.put("3", tankimages[11]);
+		explodeImages.put(0, tankimages[12]);
+		explodeImages.put(1, tankimages[13]);
+		explodeImages.put(2, tankimages[14]);
+		explodeImages.put(3, tankimages[15]);
+		explodeImages.put(4, tankimages[16]);
+		explodeImages.put(5, tankimages[17]);
+		explodeImages.put(6, tankimages[18]);
+		explodeImages.put(7, tankimages[19]);
+		explodeImages.put(8, tankimages[20]);
+		explodeImages.put(9, tankimages[21]);
 	}
 	
 	
@@ -124,16 +148,16 @@ public class TankClient extends Frame {
 		int angle = missile.getAngle();
 		switch (angle) {
 		case 0:
-			g.drawImage(missileimages.get("0"), (int)missile.getX(), (int)missile.getY(), null);
+			g.drawImage(missileImages.get("0"), (int)missile.getX(), (int)missile.getY(), null);
 			break;
 		case 1:
-			g.drawImage(missileimages.get("1"), (int)missile.getX(), (int)missile.getY(), null);
+			g.drawImage(missileImages.get("1"), (int)missile.getX(), (int)missile.getY(), null);
 			break;
 		case 2:
-			g.drawImage(missileimages.get("2"), (int)missile.getX(), (int)missile.getY(), null);
+			g.drawImage(missileImages.get("2"), (int)missile.getX(), (int)missile.getY(), null);
 			break;
 		case 3:
-			g.drawImage(missileimages.get("3"), (int)missile.getX(), (int)missile.getY(), null);
+			g.drawImage(missileImages.get("3"), (int)missile.getX(), (int)missile.getY(), null);
 			break;
 
 		}
@@ -141,34 +165,40 @@ public class TankClient extends Frame {
 	}
 
 	public void drawExplode(Explode explode, Graphics g) {
-		if (explode.getStep() == explode.getDiameter().length) {
+		if(!explodeinit){
+			for (int i = 0; i <= explode.getDiameter(); i++) {
+				g.drawImage(explodeImages.get(i), -100, -100, null);
+			}
+			explodeinit = true;
+		}
+		
+		if (explode.getStep() == explode.getDiameter()) {
 			return;
 		}
 		if (!explode.isLive()) {
 			return;
 		}
-		Color c = g.getColor();
-		g.setColor(Color.ORANGE);
-		g.fillOval((int) explode.getX(), (int) explode.getY(),
-				explode.getDiameter()[explode.getStep()],
-				explode.getDiameter()[explode.getStep()]);
-		g.setColor(c);
+		
+		int wdith = explodeImages.get(explode.getStep()).getWidth(null);
+		int height = explodeImages.get(explode.getStep()).getHeight(null);
+		
+		g.drawImage(explodeImages.get(explode.getStep()), (int)explode.getX() - wdith/2, (int)explode.getY() - height/2, null);	
 	}
 
 	public void greenTank(Tank tank, Graphics g) {
 		int angle = tank.getAngle();
 		switch (angle) {
 		case 0:
-			g.drawImage(greenimages.get("0"), (int)tank.getX(), (int)tank.getY(), null);
+			g.drawImage(greenImages.get("0"), (int)tank.getX(), (int)tank.getY(), null);
 			break;
 		case 1:
-			g.drawImage(greenimages.get("1"), (int)tank.getX(), (int)tank.getY(), null);
+			g.drawImage(greenImages.get("1"), (int)tank.getX(), (int)tank.getY(), null);
 			break;
 		case 2:
-			g.drawImage(greenimages.get("2"), (int)tank.getX(), (int)tank.getY(), null);
+			g.drawImage(greenImages.get("2"), (int)tank.getX(), (int)tank.getY(), null);
 			break;
 		case 3:
-			g.drawImage(greenimages.get("3"), (int)tank.getX(), (int)tank.getY(), null);
+			g.drawImage(greenImages.get("3"), (int)tank.getX(), (int)tank.getY(), null);
 			break;
 
 		}
@@ -178,16 +208,16 @@ public class TankClient extends Frame {
 		int angle = tank.getAngle();
 		switch (angle) {
 		case 0:
-			g.drawImage(redimages.get("0"), (int)tank.getX(), (int)tank.getY(), null);
+			g.drawImage(redImages.get("0"), (int)tank.getX(), (int)tank.getY(), null);
 			break;
 		case 1:
-			g.drawImage(redimages.get("1"), (int)tank.getX(), (int)tank.getY(), null);
+			g.drawImage(redImages.get("1"), (int)tank.getX(), (int)tank.getY(), null);
 			break;
 		case 2:
-			g.drawImage(redimages.get("2"), (int)tank.getX(), (int)tank.getY(), null);
+			g.drawImage(redImages.get("2"), (int)tank.getX(), (int)tank.getY(), null);
 			break;
 		case 3:
-			g.drawImage(redimages.get("3"), (int)tank.getX(), (int)tank.getY(), null);
+			g.drawImage(redImages.get("3"), (int)tank.getX(), (int)tank.getY(), null);
 			break;
 
 		}
