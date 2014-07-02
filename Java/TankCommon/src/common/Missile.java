@@ -10,8 +10,8 @@ public class Missile {
 	private float x;
 	private float y;
 
-	private int width = 6;
-	private int height = 6;
+	private int width = 12;
+	private int height = 12;
 
 	private float missileSpeed;
 
@@ -164,6 +164,11 @@ public class Missile {
 	public void setLive(boolean live) {
 		this.live = live;
 	}
+
+	public int getAngle() {
+		return angle;
+	}
+	
 	
 	
 }
