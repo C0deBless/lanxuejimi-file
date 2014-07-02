@@ -26,9 +26,9 @@ public class GameWorld implements Runnable {
 	static Logger logger = LoggerFactory.getLogger(GameWorld.class);
 	private final Map<Integer, User> userPool = new ConcurrentHashMap<>();
 
-	private List<Tank> tankList = new ArrayList<>();
-	private List<Missile> missileList = new ArrayList<>();
-	private List<Explode> explodeList = new ArrayList<>();
+	private List<Tank> tankList = new ArrayList<Tank>();
+	private List<Missile> missileList = new ArrayList<Missile>();
+	private List<Explode> explodeList = new ArrayList<Explode>();
 
 	private Thread thread;
 	private boolean isRunning = false;

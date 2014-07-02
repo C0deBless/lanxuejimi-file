@@ -43,8 +43,9 @@ public class TankClient extends Frame {
 	private static Image[] tankimages = null;
 	private static Map<String, Image> greenImages  = new HashMap<String, Image>();
 	private static Map<String, Image> redImages  = new HashMap<String, Image>();
-	private static Map<String, Image> missileImages  = new HashMap<String, Image>();
+	private static Map<String, Image> energyWaveImages  = new HashMap<String, Image>();
 	private static Map<Integer, Image> explodeImages  = new HashMap<Integer, Image>();
+	
 	
 	private boolean judgeKey = true;
 
@@ -76,6 +77,10 @@ public class TankClient extends Frame {
 			tk.getImage(TankClient.class.getClassLoader().getResource("images/8.png")),
 			tk.getImage(TankClient.class.getClassLoader().getResource("images/9.png")),
 			tk.getImage(TankClient.class.getClassLoader().getResource("images/10.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/EnergyWaveU.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/EnergyWaveR.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/EnergyWaveD.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/EnergyWaveL.png"))
 			
 		};
 		greenImages.put("0", tankimages[0]);
@@ -86,10 +91,10 @@ public class TankClient extends Frame {
 		redImages.put("1", tankimages[5]);
 		redImages.put("2", tankimages[6]);
 		redImages.put("3", tankimages[7]);
-		missileImages.put("0", tankimages[8]);
-		missileImages.put("1", tankimages[9]);
-		missileImages.put("2", tankimages[10]);
-		missileImages.put("3", tankimages[11]);
+		energyWaveImages.put("0", tankimages[8]);
+		energyWaveImages.put("1", tankimages[9]);
+		energyWaveImages.put("2", tankimages[10]);
+		energyWaveImages.put("3", tankimages[11]);
 		explodeImages.put(0, tankimages[12]);
 		explodeImages.put(1, tankimages[13]);
 		explodeImages.put(2, tankimages[14]);
@@ -100,6 +105,10 @@ public class TankClient extends Frame {
 		explodeImages.put(7, tankimages[19]);
 		explodeImages.put(8, tankimages[20]);
 		explodeImages.put(9, tankimages[21]);
+		energyWaveImages.put("0", tankimages[22]);
+		energyWaveImages.put("1", tankimages[23]);
+		energyWaveImages.put("2", tankimages[24]);
+		energyWaveImages.put("3", tankimages[25]);
 	}
 	
 	
@@ -148,16 +157,16 @@ public class TankClient extends Frame {
 		int angle = missile.getAngle();
 		switch (angle) {
 		case 0:
-			g.drawImage(missileImages.get("0"), (int)missile.getX(), (int)missile.getY(), null);
+			g.drawImage(energyWaveImages.get("0"), (int)missile.getX(), (int)missile.getY(), null);
 			break;
 		case 1:
-			g.drawImage(missileImages.get("1"), (int)missile.getX(), (int)missile.getY(), null);
+			g.drawImage(energyWaveImages.get("1"), (int)missile.getX(), (int)missile.getY(), null);
 			break;
 		case 2:
-			g.drawImage(missileImages.get("2"), (int)missile.getX(), (int)missile.getY(), null);
+			g.drawImage(energyWaveImages.get("2"), (int)missile.getX(), (int)missile.getY(), null);
 			break;
 		case 3:
-			g.drawImage(missileImages.get("3"), (int)missile.getX(), (int)missile.getY(), null);
+			g.drawImage(energyWaveImages.get("3"), (int)missile.getX(), (int)missile.getY(), null);
 			break;
 
 		}
