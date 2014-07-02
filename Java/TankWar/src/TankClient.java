@@ -2,13 +2,16 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,12 +36,40 @@ public class TankClient extends Frame {
 	List<Tank> tanks = new ArrayList<Tank>();
 	List<Explode> explodes = new ArrayList<Explode>();
 	List<Missile> missiles = new ArrayList<Missile>();
+	
 	private int myClientId;
-
+	
+	private static Toolkit tk = Toolkit.getDefaultToolkit();
+	private static Image[] tankimages = null;
+	private static Map<String, Image> greenimages  = new HashMap<String, Image>();
+	private static Map<String, Image> redimages  = new HashMap<String, Image>();
+	
 	private boolean judgeKey = true;
 
 	Image offScreenImage = null;
-
+	
+	static{
+		tankimages = new Image[]{
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/greenU.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/greenR.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/greenD.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/greenL.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/redU.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/redR.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/redD.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/redL.png")),
+		};
+		greenimages.put("0", tankimages[0]);
+		greenimages.put("1", tankimages[1]);
+		greenimages.put("2", tankimages[2]);
+		greenimages.put("3", tankimages[3]);
+		redimages.put("0", tankimages[4]);
+		redimages.put("1", tankimages[5]);
+		redimages.put("2", tankimages[6]);
+		redimages.put("3", tankimages[7]);
+	}
+	
+	
 	public void setTankList(List<Tank> tankList) {
 		synchronized (tanks) {
 			tanks.clear();
@@ -62,17 +93,18 @@ public class TankClient extends Frame {
 		Color c = g.getColor();
 		if (tank.getTeam() == 0) {
 			g.setColor(Color.RED);
+			g.drawString("" + tank.getId(), (int) tank.getX(),
+					(int) tank.getY() - 10);
+			redTank(tank, g);
 		} else {
-			g.setColor(Color.LIGHT_GRAY);
+			g.setColor(Color.GREEN);
+			g.drawString("" + tank.getId(), (int) tank.getX(),
+					(int) tank.getY() - 10);
+			greenTank(tank, g);
 		}
-		g.fillRect((int) tank.getX(), (int) tank.getY(), tank.getWidth(),
-				tank.getHeight());
-		g.drawString("" + tank.getId(), (int) tank.getX(),
-				(int) tank.getY() - 10);
-
+		
 		g.setColor(c);
 
-		// FIXME angle
 	}
 
 	public void drawMissile(Missile missile, Graphics g) {
@@ -106,37 +138,42 @@ public class TankClient extends Frame {
 		g.setColor(c);
 	}
 
-	public void drawGuntube(Tank tank, Graphics g) {
+	public void greenTank(Tank tank, Graphics g) {
 		int angle = tank.getAngle();
-		int i = 7;
-		Color c = g.getColor();
-		g.setColor(Color.GREEN);
 		switch (angle) {
 		case 0:
-			g.drawLine((int) tank.getX() + tank.getWidth() / 2,
-					(int) tank.getY() + tank.getHeight() / 2, (int) tank.getX()
-							+ tank.getWidth() / 2, (int) tank.getY() - i);
+			g.drawImage(greenimages.get("0"), (int)tank.getX(), (int)tank.getY(), null);
 			break;
 		case 1:
-			g.drawLine((int) tank.getX() + tank.getWidth() / 2,
-					(int) tank.getY() + tank.getHeight() / 2, (int) tank.getX()
-							+ tank.getWidth() + i,
-					(int) tank.getY() + tank.getHeight() / 2);
+			g.drawImage(greenimages.get("1"), (int)tank.getX(), (int)tank.getY(), null);
 			break;
 		case 2:
-			g.drawLine((int) tank.getX() + tank.getWidth() / 2,
-					(int) tank.getY() + tank.getHeight() / 2, (int) tank.getX()
-							+ tank.getWidth() / 2,
-					(int) tank.getY() + tank.getHeight() + i);
+			g.drawImage(greenimages.get("2"), (int)tank.getX(), (int)tank.getY(), null);
 			break;
 		case 3:
-			g.drawLine((int) tank.getX() + tank.getWidth() / 2,
-					(int) tank.getY() + tank.getHeight() / 2, (int) tank.getX()
-							- i, (int) tank.getY() + tank.getHeight() / 2);
+			g.drawImage(greenimages.get("3"), (int)tank.getX(), (int)tank.getY(), null);
 			break;
 
 		}
-		g.setColor(c);
+	}
+	
+	public void redTank(Tank tank, Graphics g) {
+		int angle = tank.getAngle();
+		switch (angle) {
+		case 0:
+			g.drawImage(redimages.get("0"), (int)tank.getX(), (int)tank.getY(), null);
+			break;
+		case 1:
+			g.drawImage(redimages.get("1"), (int)tank.getX(), (int)tank.getY(), null);
+			break;
+		case 2:
+			g.drawImage(redimages.get("2"), (int)tank.getX(), (int)tank.getY(), null);
+			break;
+		case 3:
+			g.drawImage(redimages.get("3"), (int)tank.getX(), (int)tank.getY(), null);
+			break;
+
+		}
 	}
 
 	public void paint(Graphics g) {
@@ -144,7 +181,6 @@ public class TankClient extends Frame {
 		synchronized (tanks) {
 			for (Tank tank : tanks) {
 				drawTank(tank, g);
-				drawGuntube(tank, g);
 			}
 		}
 		synchronized (missiles) {
