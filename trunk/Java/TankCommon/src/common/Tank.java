@@ -9,15 +9,15 @@ public class Tank {
 	private static int tankIndex = 0;
 	private int clientId;
 
-	private int width = 30;
-	private int height = 30;
+	private int width = 36;
+	private int height = 36;
 
 	private float x;
 	private float y;
 	
 	private float oldX;
 	private float oldY;
-
+	
 	private float currentSpeed;
 	private final int id;
 	private boolean good;
