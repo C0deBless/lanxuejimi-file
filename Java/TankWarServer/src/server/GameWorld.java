@@ -159,6 +159,19 @@ public class GameWorld implements Runnable {
 			}
 		}
 	}
+	
+	public void collidesWithTanks(Tank tank) {
+		for (Tank t : tankList) {
+			if (tank.collidesWithTank(t)) {
+				Packet writePacket = new Packet(Command.S_TANKS_COLLIDE);
+				writePacket.getByteBuffer().putInt(tank.getId());
+				writePacket.getByteBuffer().putInt(t.getId());
+				
+				ServerMain.getServer().broadcastPacket(writePacket);
+			}
+		}
+		
+	}
 
 	private void update() {
 		long currentTime = System.currentTimeMillis();
@@ -177,6 +190,7 @@ public class GameWorld implements Runnable {
 					tankList.remove(tank);
 					return;
 				}
+				collidesWithTanks(tank);
 				tank.update(deltaTime);
 			}
 		}
