@@ -298,6 +298,11 @@ public class TankClient extends Frame {
 					tankId, m.getId());
 		}
 	}
+	
+	public void tanksCollide(int tank1Id, int tank2Id) {
+		getTank(tank1Id).collidesWithTank(getTank(tank2Id));
+		
+	}
 
 	private class KeyMonitor extends KeyAdapter {
 		@Override
@@ -412,6 +417,8 @@ public class TankClient extends Frame {
 	public List<Explode> getExplodes() {
 		return explodes;
 	}
+
+	
 
 	
 }

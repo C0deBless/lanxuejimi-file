@@ -100,6 +100,13 @@ public class ClientMain {
 
 		}
 			break;
+		case Command.S_TANKS_COLLIDE:{
+			int tank1Id = packet.getByteBuffer().getInt();
+			int tank2Id = packet.getByteBuffer().getInt();
+			
+			ClientMain.tankClient.tanksCollide(tank1Id, tank2Id);
+		}
+			break;
 		}
 	}
 

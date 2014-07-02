@@ -2,6 +2,7 @@ package common;
 
 import java.awt.Rectangle;
 import java.nio.ByteBuffer;
+import java.util.List;
 
 public class Tank {
 
@@ -13,6 +14,9 @@ public class Tank {
 
 	private float x;
 	private float y;
+	
+	private float oldX;
+	private float oldY;
 
 	private float currentSpeed;
 	private final int id;
@@ -36,6 +40,8 @@ public class Tank {
 	}
 
 	public void update(long deltaTime) {
+		oldX = x;
+		oldY = y;
 
 		int factorX = 0;
 		int factorY = 0;
@@ -91,6 +97,32 @@ public class Tank {
 		tank.width = width;
 		tank.height = height;
 		return tank;
+	}
+	public void stay(){
+		x = oldX;
+		y = oldY;
+	}
+
+	public boolean collidesWithTank(Tank tank) {
+		if (this != tank) {
+			if (getRectangle().intersects(tank.getRectangle()) && this.live
+					&& tank.isLive()) {
+				stay();
+				tank.stay();
+				return true;
+			}
+		}
+		return false;
+
+	}
+
+	public boolean collidesWithTanks(List<Tank> tanks) {
+		for (Tank tank : tanks) {
+			this.collidesWithTank(tank);
+			return true;
+		}
+		return false;
+
 	}
 
 	public Rectangle getRectangle() {
