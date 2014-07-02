@@ -4,6 +4,8 @@ import java.awt.Rectangle;
 import java.nio.ByteBuffer;
 
 public class Missile {
+	public static final int GAME_WIDTH = 800;
+	public static final int GAME_HEIGHT = 600;
 
 	public static int missileIndex = 0;
 
@@ -69,6 +71,7 @@ public class Missile {
 
 		x += deltaPos * factorX;
 		y += deltaPos * factorY;
+
 	}
 
 	public void serialize(ByteBuffer buffer) {
@@ -116,14 +119,14 @@ public class Missile {
 	// }
 	//
 	public boolean hitTank(Tank t) {
-		if (getRectangle().intersects(t.getRectangle()) && t.getTeam() != this.team && this.live && t.isLive()) {
+		if (getRectangle().intersects(t.getRectangle())
+				&& t.getTeam() != this.team && this.live && t.isLive()) {
 			setLive(false);
 			t.setLive(false);
 			return true;
 		}
 		return false;
 	}
-
 
 	public Rectangle getRectangle() {
 		return new Rectangle((int) x, (int) y, width, height);
@@ -168,7 +171,5 @@ public class Missile {
 	public int getAngle() {
 		return angle;
 	}
-	
-	
-	
+
 }
