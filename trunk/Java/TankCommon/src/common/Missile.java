@@ -12,8 +12,8 @@ public class Missile {
 	private float x;
 	private float y;
 
-	private int width = 12;
-	private int height = 12;
+	private int width = 10;
+	private int height = 16;
 
 	private float missileSpeed;
 
