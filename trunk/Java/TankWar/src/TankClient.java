@@ -43,6 +43,7 @@ public class TankClient extends Frame {
 	private static Image[] tankimages = null;
 	private static Map<String, Image> greenimages  = new HashMap<String, Image>();
 	private static Map<String, Image> redimages  = new HashMap<String, Image>();
+	private static Map<String, Image> missileimages  = new HashMap<String, Image>();
 	
 	private boolean judgeKey = true;
 
@@ -58,6 +59,10 @@ public class TankClient extends Frame {
 			tk.getImage(TankClient.class.getClassLoader().getResource("images/redR.png")),
 			tk.getImage(TankClient.class.getClassLoader().getResource("images/redD.png")),
 			tk.getImage(TankClient.class.getClassLoader().getResource("images/redL.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/missileU.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/missileR.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/missileD.png")),
+			tk.getImage(TankClient.class.getClassLoader().getResource("images/missileL.png")),
 		};
 		greenimages.put("0", tankimages[0]);
 		greenimages.put("1", tankimages[1]);
@@ -67,6 +72,10 @@ public class TankClient extends Frame {
 		redimages.put("1", tankimages[5]);
 		redimages.put("2", tankimages[6]);
 		redimages.put("3", tankimages[7]);
+		missileimages.put("0", tankimages[8]);
+		missileimages.put("1", tankimages[9]);
+		missileimages.put("2", tankimages[10]);
+		missileimages.put("3", tankimages[11]);
 	}
 	
 	
@@ -112,15 +121,23 @@ public class TankClient extends Frame {
 		if (!missile.isLive()) {
 			return;
 		}
-		Color c = g.getColor();
-		if (missile.getTeam() == 0) {
-			g.setColor(Color.PINK);
-		} else {
-			g.setColor(Color.WHITE);
+		int angle = missile.getAngle();
+		switch (angle) {
+		case 0:
+			g.drawImage(missileimages.get("0"), (int)missile.getX(), (int)missile.getY(), null);
+			break;
+		case 1:
+			g.drawImage(missileimages.get("1"), (int)missile.getX(), (int)missile.getY(), null);
+			break;
+		case 2:
+			g.drawImage(missileimages.get("2"), (int)missile.getX(), (int)missile.getY(), null);
+			break;
+		case 3:
+			g.drawImage(missileimages.get("3"), (int)missile.getX(), (int)missile.getY(), null);
+			break;
+
 		}
-		g.fillOval((int) missile.getX(), (int) missile.getY(),
-				missile.getWidth(), missile.getHeight());
-		g.setColor(c);
+		
 	}
 
 	public void drawExplode(Explode explode, Graphics g) {
