@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.LayoutManager;
+import java.awt.Panel;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -15,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import common.Command;
+import common.Constants;
 import common.Explode;
 import common.Missile;
 import common.Packet;
@@ -28,80 +31,95 @@ public class TankClient extends Frame {
 	public static final int TANK_SERVER_TCP_PORT = 8888;
 	public static final int TANK_SERVER_UDP_PORT = 6666;
 
-	public static final int GAME_WIDTH = 800;
-	public static final int GAME_HEIGHT = 600;
+	private List<Tank> tanks = new ArrayList<Tank>();
+	private List<Explode> explodes = new ArrayList<Explode>();
+	private List<Missile> missiles = new ArrayList<Missile>();
 
-	List<Tank> tanks = new ArrayList<Tank>();
-	List<Explode> explodes = new ArrayList<Explode>();
-	List<Missile> missiles = new ArrayList<Missile>();
-	
 	private int myClientId;
-	
-	private static Toolkit tk = Toolkit.getDefaultToolkit();
-	private static Image[] greenImages  = new Image[4];
-	private static Image[] redImages  = new Image[4];
-	private static Image[] energyWaveImages  = new Image[4];
-	private static Image[] explodeImages  = new Image[10];
-	
-	
+
+	private Toolkit tk = Toolkit.getDefaultToolkit();
+	private Image[] greenImages = new Image[4];
+	private Image[] redImages = new Image[4];
+	private Image[] energyWaveImages = new Image[4];
+	private Image[] explodeImages = new Image[10];
 	private boolean judgeKey = true;
-
-	Image offScreenImage = null;
-	
+	private Image offScreenImage = null;
 	private boolean explodeinit = false;
-	
-	static{
-		greenImages = new Image[]{
-			tk.getImage(TankClient.class.getClassLoader().getResource("images/greenU.png")),
-			tk.getImage(TankClient.class.getClassLoader().getResource("images/greenR.png")),
-			tk.getImage(TankClient.class.getClassLoader().getResource("images/greenD.png")),
-			tk.getImage(TankClient.class.getClassLoader().getResource("images/greenL.png"))
-		};
-		
-		redImages = new Image[]{
-			tk.getImage(TankClient.class.getClassLoader().getResource("images/redU.png")),
-			tk.getImage(TankClient.class.getClassLoader().getResource("images/redR.png")),
-			tk.getImage(TankClient.class.getClassLoader().getResource("images/redD.png")),
-			tk.getImage(TankClient.class.getClassLoader().getResource("images/redL.png"))
-		};
 
-		energyWaveImages = new Image[]{
-			tk.getImage(TankClient.class.getClassLoader().getResource("images/EnergyWaveU.png")),
-			tk.getImage(TankClient.class.getClassLoader().getResource("images/EnergyWaveR.png")),
-			tk.getImage(TankClient.class.getClassLoader().getResource("images/EnergyWaveD.png")),
-			tk.getImage(TankClient.class.getClassLoader().getResource("images/EnergyWaveL.png"))
-		};
-		
-		explodeImages = new Image[]{
-			tk.getImage(TankClient.class.getClassLoader().getResource("images/1.png")),
-			tk.getImage(TankClient.class.getClassLoader().getResource("images/2.png")),
-			tk.getImage(TankClient.class.getClassLoader().getResource("images/3.png")),
-			tk.getImage(TankClient.class.getClassLoader().getResource("images/4.png")),
-			tk.getImage(TankClient.class.getClassLoader().getResource("images/5.png")),
-			tk.getImage(TankClient.class.getClassLoader().getResource("images/6.png")),
-			tk.getImage(TankClient.class.getClassLoader().getResource("images/7.png")),
-			tk.getImage(TankClient.class.getClassLoader().getResource("images/8.png")),
-			tk.getImage(TankClient.class.getClassLoader().getResource("images/9.png")),
-			tk.getImage(TankClient.class.getClassLoader().getResource("images/10.png"))
-		};
+	private Panel gamePanel;
+
+	public TankClient() {
+		init();
 	}
-	
-	
+
+	private void init() {
+		greenImages = new Image[] {
+				tk.getImage(TankClient.class.getClassLoader().getResource(
+						"images/greenU.png")),
+				tk.getImage(TankClient.class.getClassLoader().getResource(
+						"images/greenR.png")),
+				tk.getImage(TankClient.class.getClassLoader().getResource(
+						"images/greenD.png")),
+				tk.getImage(TankClient.class.getClassLoader().getResource(
+						"images/greenL.png")) };
+
+		redImages = new Image[] {
+				tk.getImage(TankClient.class.getClassLoader().getResource(
+						"images/redU.png")),
+				tk.getImage(TankClient.class.getClassLoader().getResource(
+						"images/redR.png")),
+				tk.getImage(TankClient.class.getClassLoader().getResource(
+						"images/redD.png")),
+				tk.getImage(TankClient.class.getClassLoader().getResource(
+						"images/redL.png")) };
+
+		energyWaveImages = new Image[] {
+				tk.getImage(TankClient.class.getClassLoader().getResource(
+						"images/EnergyWaveU.png")),
+				tk.getImage(TankClient.class.getClassLoader().getResource(
+						"images/EnergyWaveR.png")),
+				tk.getImage(TankClient.class.getClassLoader().getResource(
+						"images/EnergyWaveD.png")),
+				tk.getImage(TankClient.class.getClassLoader().getResource(
+						"images/EnergyWaveL.png")) };
+
+		explodeImages = new Image[] {
+				tk.getImage(TankClient.class.getClassLoader().getResource(
+						"images/1.png")),
+				tk.getImage(TankClient.class.getClassLoader().getResource(
+						"images/2.png")),
+				tk.getImage(TankClient.class.getClassLoader().getResource(
+						"images/3.png")),
+				tk.getImage(TankClient.class.getClassLoader().getResource(
+						"images/4.png")),
+				tk.getImage(TankClient.class.getClassLoader().getResource(
+						"images/5.png")),
+				tk.getImage(TankClient.class.getClassLoader().getResource(
+						"images/6.png")),
+				tk.getImage(TankClient.class.getClassLoader().getResource(
+						"images/7.png")),
+				tk.getImage(TankClient.class.getClassLoader().getResource(
+						"images/8.png")),
+				tk.getImage(TankClient.class.getClassLoader().getResource(
+						"images/9.png")),
+				tk.getImage(TankClient.class.getClassLoader().getResource(
+						"images/10.png")) };
+	}
+
 	public void setTankList(List<Tank> tankList) {
 		synchronized (tanks) {
 			tanks.clear();
 			tanks.addAll(tankList);
 		}
 	}
-	
+
 	public void setMissileList(List<Missile> missileList) {
 		synchronized (missiles) {
 			missiles.clear();
 			missiles.addAll(missileList);
 		}
-		
-	}
 
+	}
 
 	private void drawTank(Tank tank, Graphics g) {
 		if (!tank.isLive()) {
@@ -119,7 +137,7 @@ public class TankClient extends Frame {
 					(int) tank.getY() - 10);
 			greenTank(tank, g);
 		}
-		
+
 		g.setColor(c);
 
 	}
@@ -130,39 +148,42 @@ public class TankClient extends Frame {
 			return;
 		}
 		int angle = missile.getAngle();
-		
-		g.drawImage(energyWaveImages[angle], (int)missile.getX(), (int)missile.getY(), null);
+		g.drawImage(energyWaveImages[angle], (int) missile.getX(),
+				(int) missile.getY(), null);
 	}
 
 	public void drawExplode(Explode explode, Graphics g) {
-		if(!explodeinit){
+		if (!explodeinit) {
 			for (int i = 0; i <= explode.getDiameter(); i++) {
 				g.drawImage(explodeImages[i], -100, -100, null);
 			}
 			explodeinit = true;
 		}
-		
+
 		if (explode.getStep() == explode.getDiameter()) {
 			return;
 		}
 		if (!explode.isLive()) {
 			return;
 		}
-		
+
 		int wdith = explodeImages[explode.getStep()].getWidth(null);
 		int height = explodeImages[explode.getStep()].getHeight(null);
-		
-		g.drawImage(explodeImages[explode.getStep()], (int)explode.getX() - wdith/2, (int)explode.getY() - height/2, null);	
+
+		g.drawImage(explodeImages[explode.getStep()], (int) explode.getX()
+				- wdith / 2, (int) explode.getY() - height / 2, null);
 	}
 
 	public void greenTank(Tank tank, Graphics g) {
 		int angle = tank.getAngle();
-		g.drawImage(greenImages[angle], (int) tank.getX(), (int) tank.getY(), null);
+		g.drawImage(greenImages[angle], (int) tank.getX(), (int) tank.getY(),
+				null);
 	}
-	
+
 	public void redTank(Tank tank, Graphics g) {
 		int angle = tank.getAngle();
-		g.drawImage(redImages[angle], (int)tank.getX(), (int)tank.getY(), null);
+		g.drawImage(redImages[angle], (int) tank.getX(), (int) tank.getY(),
+				null);
 	}
 
 	public void paint(Graphics g) {
@@ -185,25 +206,35 @@ public class TankClient extends Frame {
 
 	}
 
+	@Override
 	public void update(Graphics g) {
 
 		if (offScreenImage == null) {
-			offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
+			offScreenImage = gamePanel.createImage(Constants.GAME_WIDTH,
+					Constants.GAME_HEIGHT);
 		}
 		Graphics offScreen = offScreenImage.getGraphics();
 		Color c = offScreen.getColor();
-		offScreen.setColor(Color.BLACK);
-		offScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+		offScreen.setColor(Color.GRAY);
+		offScreen.fillRect(0, 0, Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
 		offScreen.setColor(c);
 		paint(offScreen);
-		g.drawImage(offScreenImage, 0, 0, null);
+		
+		gamePanel.getGraphics().drawImage(offScreenImage, 0, 0, null);
 	}
 
 	public void launchFrame() {
 
 		this.setTitle("TankWar");
 		this.setLocation(500, 200);
-		this.setSize(GAME_WIDTH, GAME_HEIGHT);
+		this.setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
+
+		this.setLayout(null);
+		gamePanel = new Panel();
+		gamePanel.setSize(Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
+		gamePanel.setLocation(150, 50);
+		this.add(gamePanel);
+		gamePanel.addKeyListener(new KeyMonitor());
 
 		this.addWindowListener(new WindowAdapter() {
 			@Override
@@ -265,8 +296,7 @@ public class TankClient extends Frame {
 		tank.setCurrentSpeed(0);
 	}
 
-	
-	public void missileDead(int missileId, Explode explode){
+	public void missileDead(int missileId, Explode explode) {
 
 		synchronized (missiles) {
 			Iterator<Missile> it = missiles.iterator();
@@ -283,17 +313,16 @@ public class TankClient extends Frame {
 
 		}
 	}
-	
+
 	public void explodeDead(int id) {
 		Iterator<Explode> it = explodes.iterator();
-		while(it.hasNext()){
+		while (it.hasNext()) {
 			Explode explode = it.next();
-			if(!explode.isLive()){
+			if (!explode.isLive()) {
 				it.remove();
 			}
 		}
 	}
-
 
 	public void tankDead(int tankId) {
 
@@ -313,7 +342,7 @@ public class TankClient extends Frame {
 	public void fire(int tankId, int missileId) {
 		Tank tank = getTank(tankId);
 		Missile m = new Missile(tank.getX() + tank.getWidth() / 2 - 3,
-				tank.getY() + tank.getHeight() / 2 -3 , tank.getAngle(),
+				tank.getY() + tank.getHeight() / 2 - 3, tank.getAngle(),
 				tank.getTeam(), missileId);
 		m.setMissileSpeed(300);
 		synchronized (missiles) {
@@ -323,10 +352,10 @@ public class TankClient extends Frame {
 					tankId, m.getId());
 		}
 	}
-	
+
 	public void tanksCollide(int tank1Id, int tank2Id) {
 		getTank(tank1Id).collidesWithTank(getTank(tank2Id));
-		
+
 	}
 
 	private class KeyMonitor extends KeyAdapter {
@@ -443,7 +472,4 @@ public class TankClient extends Frame {
 		return explodes;
 	}
 
-	
-
-	
 }

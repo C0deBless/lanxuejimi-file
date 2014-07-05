@@ -4,8 +4,6 @@ import java.awt.Rectangle;
 import java.nio.ByteBuffer;
 
 public class Missile {
-	public static final int GAME_WIDTH = 800;
-	public static final int GAME_HEIGHT = 600;
 
 	public static int missileIndex = 0;
 
@@ -102,22 +100,6 @@ public class Missile {
 		return missile;
 	}
 
-	// public void darw(Graphics g) {
-	// if (!live) {
-	// tc.missiles.remove(this);
-	// return;
-	// }
-	// Color c = g.getColor();
-	// if (good) {
-	// g.setColor(Color.PINK);
-	// } else {
-	// g.setColor(Color.GREEN);
-	// }
-	// g.fillOval(x, y, 7, 7);
-	// g.setColor(c);
-	//
-	// }
-	//
 	public boolean hitTank(Tank t) {
 		if (getRectangle().intersects(t.getRectangle())
 				&& t.getTeam() != this.team && this.live && t.isLive()) {

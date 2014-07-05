@@ -75,7 +75,7 @@ public class PacketQueue implements Runnable {
 		case Command.C_STOP: {
 			int tankId = packet.getByteBuffer().getInt();
 			ServerMain.getGameWorld().stop(clientId, tankId);
-			logger.debug("C_STOP, id:{}, angle:{}", tankId);
+			logger.debug("C_STOP, id:{}", tankId);
 
 			Packet writePacket = new Packet(Command.S_STOP, 8);
 			writePacket.getByteBuffer().putInt(clientId);
