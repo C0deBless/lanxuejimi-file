@@ -66,10 +66,6 @@ public class TankClient extends Frame {
 		};
 
 		energyWaveImages = new Image[]{
-//			tk.getImage(TankClient.class.getClassLoader().getResource("images/missileU.png")),
-//			tk.getImage(TankClient.class.getClassLoader().getResource("images/missileR.png")),
-//			tk.getImage(TankClient.class.getClassLoader().getResource("images/missileD.png")),
-//			tk.getImage(TankClient.class.getClassLoader().getResource("images/missileL.png")),
 			tk.getImage(TankClient.class.getClassLoader().getResource("images/EnergyWaveU.png")),
 			tk.getImage(TankClient.class.getClassLoader().getResource("images/EnergyWaveR.png")),
 			tk.getImage(TankClient.class.getClassLoader().getResource("images/EnergyWaveD.png")),
@@ -88,34 +84,6 @@ public class TankClient extends Frame {
 			tk.getImage(TankClient.class.getClassLoader().getResource("images/9.png")),
 			tk.getImage(TankClient.class.getClassLoader().getResource("images/10.png"))
 		};
-			
-			
-		// greenImages.put("0", tankimages[0]);
-		// greenImages.put("1", tankimages[1]);
-		// greenImages.put("2", tankimages[2]);
-		// greenImages.put("3", tankimages[3]);
-		// redImages.put("0", tankimages[4]);
-		// redImages.put("1", tankimages[5]);
-		// redImages.put("2", tankimages[6]);
-		// redImages.put("3", tankimages[7]);
-		// energyWaveImages.put("0", tankimages[8]);
-		// energyWaveImages.put("1", tankimages[9]);
-		// energyWaveImages.put("2", tankimages[10]);
-		// energyWaveImages.put("3", tankimages[11]);
-		// explodeImages.put(0, tankimages[12]);
-		// explodeImages.put(1, tankimages[13]);
-		// explodeImages.put(2, tankimages[14]);
-		// explodeImages.put(3, tankimages[15]);
-		// explodeImages.put(4, tankimages[16]);
-		// explodeImages.put(5, tankimages[17]);
-		// explodeImages.put(6, tankimages[18]);
-		// explodeImages.put(7, tankimages[19]);
-		// explodeImages.put(8, tankimages[20]);
-		// explodeImages.put(9, tankimages[21]);
-		// energyWaveImages.put("0", tankimages[22]);
-		// energyWaveImages.put("1", tankimages[23]);
-		// energyWaveImages.put("2", tankimages[24]);
-		// energyWaveImages.put("3", tankimages[25]);
 	}
 	
 	
@@ -164,23 +132,6 @@ public class TankClient extends Frame {
 		int angle = missile.getAngle();
 		
 		g.drawImage(energyWaveImages[angle], (int)missile.getX(), (int)missile.getY(), null);
-		
-//		switch (angle) {
-//		case 0:
-//			g.drawImage(energyWaveImages.get("0"), (int)missile.getX(), (int)missile.getY(), null);
-//			break;
-//		case 1:
-//			g.drawImage(energyWaveImages.get("1"), (int)missile.getX(), (int)missile.getY(), null);
-//			break;
-//		case 2:
-//			g.drawImage(energyWaveImages.get("2"), (int)missile.getX(), (int)missile.getY(), null);
-//			break;
-//		case 3:
-//			g.drawImage(energyWaveImages.get("3"), (int)missile.getX(), (int)missile.getY(), null);
-//			break;
-//
-//		}
-		
 	}
 
 	public void drawExplode(Explode explode, Graphics g) {
@@ -206,45 +157,12 @@ public class TankClient extends Frame {
 
 	public void greenTank(Tank tank, Graphics g) {
 		int angle = tank.getAngle();
-		
 		g.drawImage(greenImages[angle], (int) tank.getX(), (int) tank.getY(), null);
-//		switch (angle) {
-//		case 0:
-//			g.drawImage(greenImages.get("0"), (int)tank.getX(), (int)tank.getY(), null);
-//			break;
-//		case 1:
-//			g.drawImage(greenImages.get("1"), (int)tank.getX(), (int)tank.getY(), null);
-//			break;
-//		case 2:
-//			g.drawImage(greenImages.get("2"), (int)tank.getX(), (int)tank.getY(), null);
-//			break;
-//		case 3:
-//			g.drawImage(greenImages.get("3"), (int)tank.getX(), (int)tank.getY(), null);
-//			break;
-//
-//		}
 	}
 	
 	public void redTank(Tank tank, Graphics g) {
-		
 		int angle = tank.getAngle();
 		g.drawImage(redImages[angle], (int)tank.getX(), (int)tank.getY(), null);
-		
-//		switch (angle) {
-//		case 0:
-//			g.drawImage(redImages.get("0"), (int)tank.getX(), (int)tank.getY(), null);
-//			break;
-//		case 1:
-//			g.drawImage(redImages.get("1"), (int)tank.getX(), (int)tank.getY(), null);
-//			break;
-//		case 2:
-//			g.drawImage(redImages.get("2"), (int)tank.getX(), (int)tank.getY(), null);
-//			break;
-//		case 3:
-//			g.drawImage(redImages.get("3"), (int)tank.getX(), (int)tank.getY(), null);
-//			break;
-//
-//		}
 	}
 
 	public void paint(Graphics g) {
