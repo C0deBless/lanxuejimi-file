@@ -7,12 +7,7 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class Client implements Runnable {
-
-	static Logger logger = LoggerFactory.getLogger(Client.class);
 
 	private static int CLIENT_INDEX = 0;
 
@@ -43,8 +38,7 @@ public class Client implements Runnable {
 				}
 			}
 		} catch (IOException e) {
-			logger.error("Client error, type:{}, msg:{}", e.getClass()
-					.getName(), e.getMessage());
+			e.printStackTrace();
 		} finally {
 			this.close();
 		}
@@ -57,8 +51,7 @@ public class Client implements Runnable {
 				socket.close();
 			}
 		} catch (IOException e) {
-			logger.error("Client close error, type:{}, msg:{}", e.getClass()
-					.getName(), e.getMessage());
+			e.printStackTrace();
 		}
 		this.isRunning = false;
 		if (closeEventListener != null) {
@@ -76,7 +69,7 @@ public class Client implements Runnable {
 		readBuffer.limit(readBuffer.position());
 		readBuffer.position(0);
 
-		List<Packet> packets = new ArrayList<>();
+		List<Packet> packets = new ArrayList<Packet>();
 
 		boolean loop = true;
 		int remaining = 0;
@@ -87,7 +80,6 @@ public class Client implements Runnable {
 				int len = readBuffer.getInt(readBuffer.position());
 				if (len < 6) {
 					// TODO Illegal packet
-					logger.error("Illegal packet");
 					break;
 				}
 				if (remaining >= len) {

@@ -12,14 +12,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import common.Command;
+import common.Constants;
 import common.Explode;
 import common.Missile;
 import common.Packet;
 import common.Tank;
 
 public class GameWorld implements Runnable {
-	public static final int GAME_WIDTH = 800;
-	public static final int GAME_HEIGHT = 600;
 	
 	public static final int TEAM_NPC = 0;
 
@@ -52,8 +51,8 @@ public class GameWorld implements Runnable {
 
 	public Tank initUserTank(int clientId) {
 		Tank tank = null;
-		randomLocationX = random.nextInt(760);
-		randomLocationY = random.nextInt(660);
+		randomLocationX = random.nextInt(Constants.GAME_WIDTH);
+		randomLocationY = random.nextInt(Constants.GAME_HEIGHT);
 		if (clientId % 2 == 0) {
 			tank = new Tank(randomLocationX, randomLocationY, 1);
 		} else {
@@ -144,7 +143,6 @@ public class GameWorld implements Runnable {
 	public Tank getTank(int tankId) {
 		for (Tank tank : tankList) {
 			if (tank.getId() == tankId) {
-				logger.debug("getTank, id:" + tank.getId());
 				return tank;
 			}
 		}
@@ -183,8 +181,8 @@ public class GameWorld implements Runnable {
 	}
 	
 	private void colloedWithWall(Missile missile) {
-		if (missile.getX() < 10 || missile.getY() < 40 || missile.getX() > GAME_WIDTH - missile.getWidth()
-						|| missile.getY() > GAME_HEIGHT - missile.getHeight()) {
+		if (missile.getX() < 10 || missile.getY() < 40 || missile.getX() > Constants.GAME_WIDTH - missile.getWidth()
+						|| missile.getY() > Constants.GAME_HEIGHT - missile.getHeight()) {
 			
 			missile.setLive(false);
 			
