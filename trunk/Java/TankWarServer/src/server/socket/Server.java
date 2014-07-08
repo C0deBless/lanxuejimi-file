@@ -79,10 +79,10 @@ public class Server {
 			@Override
 			public void onClose() {
 				logger.debug("client closed, id:{}", client.getClientId());
-				ServerMain.getGameWorlds().get(User.getGameWorldIndex(client)).removeUser(client.getClientId());
+				ServerMain.getGameWorlds().removeUser(client.getClientId());
 				ServerMain.getServer().removeClient(client.getClientId());
 
-				ServerMain.getGameWorlds().get(User.getGameWorldIndex(client)).removeTankByClientId(client.getClientId());
+				ServerMain.getGameWorlds().removeTankByClientId(client.getClientId());
 				logger.debug("C_EXIT, clientId:{}", client.getClientId());
 				
 				Packet writePacket = new Packet(Command.S_EXIT, 8);

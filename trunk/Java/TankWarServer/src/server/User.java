@@ -6,7 +6,7 @@ public class User {
 
 	private final Client client;
 	private final String name;
-	private static int gameWorldIndex;
+	private int gameWorldIndex;
 	
 	
 	public User(Client client, String name){
@@ -26,7 +26,7 @@ public class User {
 		return this.client.getClientId();
 	}
 	
-	public static int getGameWorldIndex(Client client) {
+	public  int getGameWorldIndex(Client client) {
 		if(client.equals(client)){
 			return gameWorldIndex;
 		}
@@ -37,7 +37,7 @@ public class User {
 		return gameWorldIndex;
 	}
 
-	public void setGameWorldIndex(int gameWorldIndex) {
+	public  void setGameWorldIndex(int gameWorldIndex) {
 		this.gameWorldIndex = gameWorldIndex;
 	}
 	
