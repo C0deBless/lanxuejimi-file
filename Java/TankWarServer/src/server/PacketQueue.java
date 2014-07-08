@@ -1,5 +1,8 @@
 package server;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -16,6 +19,8 @@ public class PacketQueue implements Runnable {
 
 	static Logger logger = LoggerFactory.getLogger(PacketQueue.class);
 	private BlockingQueue<Packet> queue = new LinkedBlockingQueue<>();
+
+	private List<User> users = new ArrayList<User>();
 	private Thread thread;
 	private boolean isRunning = false;
 
@@ -37,11 +42,18 @@ public class PacketQueue implements Runnable {
 		case Command.C_LOGIN: {
 			String name = StringUtil.getString(packet.getByteBuffer());
 			User user = new User(packet.getClient(), name);
-			ServerMain.getGameWorld().getUserPool()
-					.put(user.getClientId(), user);
+			users.add(user);
+			
+			for (int i = 0; i < ServerMain.getGameWorlds().size(); i++) {
+				if (ServerMain.getGameWorlds().get(i).getUserPool().size() < 3) {
+					GameWorld gameWorld = ServerMain.getGameWorlds().get(i);
+					user.setGameWorldIndex(i);
+				}
+			}
+			ServerMain.getGameWorlds().get(user.getGameWorldIndex()).getUserPool().put(user.getClientId(), user);
 			logger.debug("LOGIN, name:{}", name);
 
-			Tank tank = ServerMain.getGameWorld().initUserTank(clientId);
+			Tank tank = ServerMain.getGameWorlds().get(user.getGameWorldIndex()).initUserTank(clientId);
 
 			Packet writePacket2 = new Packet(Command.S_NEW_TANK,
 					Short.MAX_VALUE);
@@ -50,19 +62,20 @@ public class PacketQueue implements Runnable {
 
 			Packet writePacket = new Packet(Command.S_LOGIN, Short.MAX_VALUE);
 			writePacket.getByteBuffer().putInt(clientId);
-			ServerMain.getGameWorld().serializeAllTanks(
-					writePacket.getByteBuffer());
-			ServerMain.getGameWorld().serializeAllMissiles(
-					writePacket.getByteBuffer());
+			ServerMain.getGameWorlds().get(user.getGameWorldIndex()).serializeAllTanks(writePacket.getByteBuffer());
+			ServerMain.getGameWorlds().get(user.getGameWorldIndex()).serializeAllMissiles(writePacket.getByteBuffer());
 			packet.getClient().pushWritePacket(writePacket);
 
 		}
 			break;
 		case Command.C_MOVE: {
+			int clientId1 = packet.getByteBuffer().getInt();
 			int id = packet.getByteBuffer().getInt();
 			int angle = packet.getByteBuffer().getInt();
 			logger.debug("C_MOVE, id:{}, angle:{}", id, angle);
-			ServerMain.getGameWorld().move(clientId, id, angle);
+			
+			User user = this.getUser(clientId1);
+			ServerMain.getGameWorlds().get(user.getGameWorldIndex()).move(clientId1, id, angle);
 
 			Packet writePacket = new Packet(Command.S_MOVE, Short.MAX_VALUE);
 			writePacket.getByteBuffer().putInt(clientId);
@@ -74,7 +87,8 @@ public class PacketQueue implements Runnable {
 			break;
 		case Command.C_STOP: {
 			int tankId = packet.getByteBuffer().getInt();
-			ServerMain.getGameWorld().stop(clientId, tankId);
+			User user = this.getUser(clientId);
+			ServerMain.getGameWorlds().get(user.getGameWorldIndex()).stop(clientId, tankId);
 			logger.debug("C_STOP, id:{}", tankId);
 
 			Packet writePacket = new Packet(Command.S_STOP, 8);
@@ -86,12 +100,13 @@ public class PacketQueue implements Runnable {
 		case Command.C_NEW_MISSILE: {
 			int tankId = packet.getByteBuffer().getInt();
 			logger.debug("C_NEW+MISSILE, tanlId:" + tankId);
-			Missile missile = ServerMain.getGameWorld().initTankMissile(tankId);
-			
+			User user = this.getUser(clientId);
+			Missile missile = ServerMain.getGameWorlds().get(user.getGameWorldIndex()).initTankMissile(tankId);
+
 			Packet writePacket = new Packet(Command.S_NEW_MISSILE);
 			writePacket.getByteBuffer().putInt(tankId);
 			writePacket.getByteBuffer().putInt(missile.getId());
-			
+
 			ServerMain.getServer().broadcastPacket(writePacket);
 
 		}
@@ -99,6 +114,14 @@ public class PacketQueue implements Runnable {
 		default:
 			break;
 		}
+	}
+	
+	public User getUser(int clientId){
+		for (int i = 0; i < users.size(); i++) {
+			User user = users.get(i).getUser(clientId);
+			return user;
+		}
+		return null;
 	}
 
 	@Override
