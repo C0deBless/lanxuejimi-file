@@ -131,6 +131,15 @@ public class Client implements Runnable {
 		}
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		Client client = (Client)obj;
+		if (this.clientId != client.getClientId()) {
+			return false;
+		}
+		return true;
+	}
+	
 
 	public void start() {
 		this.isRunning = true;
