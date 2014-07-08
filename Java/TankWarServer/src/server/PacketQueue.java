@@ -69,13 +69,12 @@ public class PacketQueue implements Runnable {
 		}
 			break;
 		case Command.C_MOVE: {
-			int clientId1 = packet.getByteBuffer().getInt();
 			int id = packet.getByteBuffer().getInt();
 			int angle = packet.getByteBuffer().getInt();
 			logger.debug("C_MOVE, id:{}, angle:{}", id, angle);
 			
-			User user = this.getUser(clientId1);
-			ServerMain.getGameWorlds().get(user.getGameWorldIndex()).move(clientId1, id, angle);
+			User user = this.getUser(clientId);
+			ServerMain.getGameWorlds().get(user.getGameWorldIndex()).move(clientId, id, angle);
 
 			Packet writePacket = new Packet(Command.S_MOVE, Short.MAX_VALUE);
 			writePacket.getByteBuffer().putInt(clientId);

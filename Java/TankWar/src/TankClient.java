@@ -401,8 +401,7 @@ public class TankClient extends Frame {
 		if (judgeKey) {
 			Tank myTank = getMyTank();
 
-			Packet packet = new Packet(Command.C_MOVE, 12);
-			packet.getByteBuffer().putInt(myTank.getClientId());
+			Packet packet = new Packet(Command.C_MOVE, 8);
 			packet.getByteBuffer().putInt(myTank.getId());
 			packet.getByteBuffer().putInt(angle);
 			ClientMain.client.pushWritePacket(packet);
