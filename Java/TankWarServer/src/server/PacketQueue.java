@@ -3,6 +3,8 @@ package server;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import javax.net.ssl.SSLEngineResult.Status;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,31 +42,44 @@ public class PacketQueue implements Runnable {
 			User user = new User(name);
 
 			session.setUser(user);
-			
-			GameWorld game = ServerMain.getServer().findProperGameWorld(session);
+
+			GameWorld game = ServerMain.getServer()
+					.findProperGameWorld(session);
 			int gameId = game.getId();
 			user.setGameWorldIndex(gameId);
-			
 			game.join(session);
-			logger.debug("LOGIN, name:{}", name);
-			Tank tank =game.initUserTank(clientId);
+			Tank tank = game.initUserTank(clientId);
 
-			Packet writePacket2 = new Packet(Command.S_NEW_TANK,
-					Short.MAX_VALUE);
-			tank.serialize(writePacket2.getByteBuffer());
-			StringUtil.putString(writePacket2.getByteBuffer(), name);
-			game.broadcast(writePacket2);
+			game.sendServerReadyToStart(packet, name);
 
-			Packet writePacket = new Packet(Command.S_LOGIN, Short.MAX_VALUE);
-			writePacket.getByteBuffer().putInt(gameId);
-			writePacket.getByteBuffer().putInt(clientId);
-			game.serializeAllTanks(writePacket.getByteBuffer());
-			game.serializeAllMissiles(writePacket.getByteBuffer());
-			packet.getClient().pushWritePacket(writePacket);
-			
-			Packet writepacket3 = new Packet(Command.S_NEW_PLAYERS_NAME, Short.MAX_VALUE);
-			game.sendAllName(writepacket3.getByteBuffer());
-			packet.getClient().pushWritePacket(writepacket3);
+//			if (game.getStatus() == GameStatus.Idle) {
+//				game.sendServerLoginCommand(packet, clientId);
+//
+//			} else if (game.getStatus() == GameStatus.Waiting) {
+//				game.sendServerNewMsg(tank, name);
+//				game.sendServerLoginCommand(packet, clientId);
+//			}
+			// logger.debug("LOGIN, name:{}", name);
+			// Tank tank =game.initUserTank(clientId);
+			//
+			// Packet writePacket2 = new Packet(Command.S_NEW_TANK,
+			// Short.MAX_VALUE);
+			// tank.serialize(writePacket2.getByteBuffer());
+			// StringUtil.putString(writePacket2.getByteBuffer(), name);
+			// game.broadcast(writePacket2);
+			//
+			// Packet writePacket = new Packet(Command.S_LOGIN,
+			// Short.MAX_VALUE);
+			// writePacket.getByteBuffer().putInt(gameId);
+			// writePacket.getByteBuffer().putInt(clientId);
+			// game.serializeAllTanks(writePacket.getByteBuffer());
+			// game.serializeAllMissiles(writePacket.getByteBuffer());
+			// packet.getClient().pushWritePacket(writePacket);
+
+//			Packet writepacket3 = new Packet(Command.S_NEW_PLAYERS_NAME,
+//					Short.MAX_VALUE);
+//			game.sendAllName(writepacket3.getByteBuffer());
+//			packet.getClient().pushWritePacket(writepacket3);
 		}
 			break;
 		case Command.C_MOVE: {
@@ -73,7 +88,8 @@ public class PacketQueue implements Runnable {
 			logger.debug("C_MOVE, id:{}, angle:{}", id, angle);
 
 			User user = session.getUser();
-			GameWorld game = ServerMain.getServer().getGameWorld(user.getGameWorldIndex());
+			GameWorld game = ServerMain.getServer().getGameWorld(
+					user.getGameWorldIndex());
 			game.move(clientId, id, angle);
 
 			Packet writePacket = new Packet(Command.S_MOVE, Short.MAX_VALUE);
@@ -87,7 +103,8 @@ public class PacketQueue implements Runnable {
 		case Command.C_STOP: {
 			int tankId = packet.getByteBuffer().getInt();
 			User user = session.getUser();
-			GameWorld game = ServerMain.getServer().getGameWorld(user.getGameWorldIndex());
+			GameWorld game = ServerMain.getServer().getGameWorld(
+					user.getGameWorldIndex());
 			game.stop(clientId, tankId);
 			logger.debug("C_STOP, id:{}", tankId);
 
@@ -101,15 +118,21 @@ public class PacketQueue implements Runnable {
 			int tankId = packet.getByteBuffer().getInt();
 			logger.debug("C_NEW+MISSILE, tanlId:" + tankId);
 			User user = session.getUser();
-			GameWorld game = ServerMain.getServer().getGameWorld(user.getGameWorldIndex());
+			GameWorld game = ServerMain.getServer().getGameWorld(
+					user.getGameWorldIndex());
 			Missile missile = game.initTankMissile(tankId);
 
 			Packet writePacket = new Packet(Command.S_NEW_MISSILE);
 			writePacket.getByteBuffer().putInt(tankId);
 			writePacket.getByteBuffer().putInt(missile.getId());
 
-				game.broadcast(writePacket);
+			game.broadcast(writePacket);
 
+		}
+			break;
+		case Command.C_START: {
+			String name = StringUtil.getString(packet.getByteBuffer());
+			session.setReady(true);
 		}
 			break;
 		default:

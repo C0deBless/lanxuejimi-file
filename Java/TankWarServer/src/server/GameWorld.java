@@ -256,6 +256,26 @@ public class GameWorld implements Runnable {
 				hitTank(missile);
 			}
 		}
+		synchronized (userPool) {
+			if(userReady()){
+				setStatus(GameStatus.Playing);
+				
+			}
+		}
+	}
+	public boolean userReady(){
+		Collection<UserSession> ready = userPool.values();
+		int i = 0;
+		for (UserSession userSession : ready) {
+			if(userSession.isReady()){
+				i++;
+				continue;
+			}
+		}
+		if(i == 2){
+			return true;
+		}
+		return false;
 	}
 
 	public void broadcast(Packet packet) {
@@ -305,6 +325,29 @@ public class GameWorld implements Runnable {
 			status = GameStatus.Waiting;
 		}
 		this.userPool.put(session.getClient().getClientId(), session);
+	}
+
+	public void sendServerLoginCommand(Packet packet, int clientId) {
+		Packet writePacket = new Packet(Command.S_LOGIN, Short.MAX_VALUE);
+		writePacket.getByteBuffer().putInt(this.id);
+		writePacket.getByteBuffer().putInt(clientId);
+		this.serializeAllTanks(writePacket.getByteBuffer());
+		this.serializeAllMissiles(writePacket.getByteBuffer());
+		packet.getClient().pushWritePacket(writePacket);
+	}
+
+	public void sendServerNewMsg(Tank tank, String name) {
+		Packet writePacket2 = new Packet(Command.S_NEW_TANK,
+				Short.MAX_VALUE);
+		tank.serialize(writePacket2.getByteBuffer());
+		StringUtil.putString(writePacket2.getByteBuffer(), name);
+		this.broadcast(writePacket2);
+	}
+
+	public void sendServerReadyToStart(Packet packet, String name) {
+		Packet writePacket = new Packet(Command.S_START);
+		StringUtil.putString(writePacket.getByteBuffer(), name);
+		packet.getClient().pushWritePacket(writePacket);
 	}
 
 

@@ -10,22 +10,21 @@ import common.Command;
 import common.Packet;
 import common.StringUtil;
 
+public class GameStartBox extends JFrame {
 
-public class GameStartBox extends JFrame{
-	
 	private JButton gameStart;
-	private int clientId;
 	private String name;
+
 	public static void main(String[] args) {
 		new GameStartBox();
 	}
-	public GameStartBox(int clientId, String name) {
+
+	public GameStartBox(String name) {
 		this();
-		this.clientId = clientId;
 		this.name = name;
-		
+
 	}
-	
+
 	public GameStartBox() {
 		this.setLocation(800, 300);
 		this.setSize(100, 100);
@@ -39,19 +38,18 @@ public class GameStartBox extends JFrame{
 		gameStart = new JButton("游戏开始");
 		this.add(gameStart);
 		gameStart.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				GameStartBox.this.setVisible(false);
+				ClientMain.showGameBox();
 				Packet writePacket = new Packet(Command.C_START);
-				writePacket.getByteBuffer().putInt(clientId);
 				StringUtil.putString(writePacket.getByteBuffer(), name);
 				ClientMain.client.pushWritePacket(writePacket);
-				
+
 			}
 		});
-		
-		
+
 		this.setVisible(true);
 	}
 }
