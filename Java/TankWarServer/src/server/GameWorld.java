@@ -2,6 +2,7 @@ package server;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -19,11 +20,12 @@ import common.Packet;
 import common.Tank;
 
 public class GameWorld implements Runnable {
-	
+
 	public static final int TEAM_NPC = 0;
+	public static final int MAX_USER_COUNT = 2;
 
 	static Logger logger = LoggerFactory.getLogger(GameWorld.class);
-	private final Map<Integer, User> userPool = new ConcurrentHashMap<>();
+	private final Map<Integer, UserSession> userPool = new ConcurrentHashMap<>();
 
 	private List<Tank> tankList = new ArrayList<Tank>();
 	private List<Missile> missileList = new ArrayList<Missile>();
@@ -32,13 +34,16 @@ public class GameWorld implements Runnable {
 	private Thread thread;
 	private boolean isRunning = false;
 	private long lastUpdateTime = 0;
-	
+
 	private Random random = new Random();
-	
+
 	private int randomLocationX;
 	private int randomLocationY;
+	private GameStatus status = GameStatus.Idle;
+	private final int id;
 
-	public GameWorld() {
+	public GameWorld(int id) {
+		this.id = id;
 		thread = new Thread(this);
 		thread.start();
 		isRunning = true;
@@ -62,7 +67,7 @@ public class GameWorld implements Runnable {
 		tankList.add(tank);
 		return tank;
 	}
-	
+
 	public Missile initTankMissile(int tankId) {
 		Tank tank = getTank(tankId);
 		Missile missile = new Missile(tank.getX() + tank.getWidth() / 2 + 3,
@@ -70,7 +75,7 @@ public class GameWorld implements Runnable {
 				tank.getTeam());
 		missile.setMissileSpeed(300);
 		missileList.add(missile);
-		
+
 		return missile;
 	}
 
@@ -82,7 +87,7 @@ public class GameWorld implements Runnable {
 			tank.serialize(buffer);
 		}
 	}
-	
+
 	public void serializeAllMissiles(ByteBuffer buffer) {
 		int count = this.missileList.size();
 		buffer.putInt(count);
@@ -92,12 +97,19 @@ public class GameWorld implements Runnable {
 		}
 	}
 
-	public Map<Integer, User> getUserPool() {
-		return userPool;
-	}
-
-	public void removeUser(int clientId) {
+	public void leaveUser(int clientId) {
 		userPool.remove(clientId);
+		if(userPool.size() == 0){
+			endGame();
+		}
+	}
+	
+	public void endGame(){
+		this.status = GameStatus.Idle;
+		
+		// FIXME broadcast game end message
+		// FIXME handle reward and  game result 
+		// FIXME clear
 	}
 
 	public void removeTankByClientId(int clientId) {
@@ -158,40 +170,41 @@ public class GameWorld implements Runnable {
 
 				Explode explode = new Explode(missile.getX(), missile.getY());
 				explodeList.add(explode);
-				
+
 				explode.serialize(writePacket.getByteBuffer());
 
-				ServerMain.getServer().broadcastPacket(writePacket);
+				broadcast(writePacket);
 
 			}
 		}
 	}
-	
+
 	public void collidesWithTanks(Tank tank) {
 		for (Tank t : tankList) {
 			if (tank.collidesWithTank(t)) {
 				Packet writePacket = new Packet(Command.S_TANKS_COLLIDE);
 				writePacket.getByteBuffer().putInt(tank.getId());
 				writePacket.getByteBuffer().putInt(t.getId());
-				
-				ServerMain.getServer().broadcastPacket(writePacket);
+
+				broadcast(writePacket);
 			}
 		}
-		
+
 	}
-	
+
 	private void colloedWithWall(Missile missile) {
-		if (missile.getX() < 10 || missile.getY() < 40 || missile.getX() > Constants.GAME_WIDTH - missile.getWidth()
-						|| missile.getY() > Constants.GAME_HEIGHT - missile.getHeight()) {
-			
+		if (missile.getX() < 10 || missile.getY() < 40
+				|| missile.getX() > Constants.GAME_WIDTH - missile.getWidth()
+				|| missile.getY() > Constants.GAME_HEIGHT - missile.getHeight()) {
+
 			missile.setLive(false);
-			
+
 			Packet writePacket = new Packet(Command.S_HIT_WALL);
 			writePacket.getByteBuffer().putInt(missile.getId());
 			Explode explode = new Explode(missile.getX(), missile.getY());
 			explodeList.add(explode);
 			explode.serialize(writePacket.getByteBuffer());
-			ServerMain.getServer().broadcastPacket(writePacket);
+			broadcast(writePacket);
 		}
 	}
 
@@ -221,12 +234,12 @@ public class GameWorld implements Runnable {
 			while (itm.hasNext()) {
 
 				Missile missile = itm.next();
-				
+
 				if (!missile.isLive()) {
 					itm.remove();
 					return;
 				}
-				
+
 				colloedWithWall(missile);
 				missile.update(deltaTime);
 				hitTank(missile);
@@ -234,9 +247,12 @@ public class GameWorld implements Runnable {
 		}
 	}
 
-	
-
-	
+	public void broadcast(Packet packet) {
+		Collection<UserSession> sessionList = userPool.values();
+		for (UserSession session : sessionList) {
+			session.getClient().pushWritePacket(packet);
+		}
+	}
 
 	@Override
 	public void run() {
@@ -252,6 +268,31 @@ public class GameWorld implements Runnable {
 		}
 	}
 
-	
+	public GameStatus getStatus() {
+		return status;
+	}
 
+	public void setStatus(GameStatus status) {
+		this.status = status;
+	}
+
+	public boolean canJoin() {
+		if (this.userPool.size() < MAX_USER_COUNT
+				&& (this.status == GameStatus.Idle || this.status == GameStatus.Waiting)) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void join(UserSession session) {
+		if(status == GameStatus.Idle){
+			status = GameStatus.Waiting;
+		}
+		this.userPool.put(session.getClient().getClientId(), session);
+	}
 }
