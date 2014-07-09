@@ -63,7 +63,7 @@ public class PacketQueue implements Runnable {
 			packet.getClient().pushWritePacket(writePacket);
 			
 			Packet writepacket3 = new Packet(Command.S_NEW_PLAYERS_NAME, Short.MAX_VALUE);
-			game.sendAllName(writePacket2.getByteBuffer());
+			game.sendAllName(writepacket3.getByteBuffer());
 			packet.getClient().pushWritePacket(writepacket3);
 		}
 			break;
