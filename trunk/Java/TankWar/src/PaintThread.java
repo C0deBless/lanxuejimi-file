@@ -63,16 +63,18 @@ class PaintThread implements Runnable {
 	}
 
 	private void updateExplodes() {
-		List<Explode> explodes = tankClient.getExplodes();
-		Iterator<Explode> it = explodes.iterator();
-		while (it.hasNext()) {
-			Explode explode = it.next();
-			explode.update();
-			if (!explode.isLive()) {
-				it.remove();
-				logger.debug(
-						"PaintThread.updateExplodes, remove Explode, id:{}",
-						explode.getId());
+		synchronized (tankClient.getExplodes()) {
+			List<Explode> explodes = tankClient.getExplodes();
+			Iterator<Explode> it = explodes.iterator();
+			while (it.hasNext()) {
+				Explode explode = it.next();
+				explode.update();
+				if (!explode.isLive()) {
+					it.remove();
+					logger.debug(
+							"PaintThread.updateExplodes, remove Explode, id:{}",
+							explode.getId());
+				}
 			}
 		}
 	}

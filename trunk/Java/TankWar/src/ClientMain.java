@@ -4,6 +4,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.text.PlainDocument;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,11 +27,19 @@ public class ClientMain {
 	public static Socket socket = null;
 	public static Client client;
 	public static TankClient tankClient;
+	private static String myName;
+	
+	public static String getMyName() {
+		return myName;
+	}
+
+	public static void setMyName(String myName) {
+		ClientMain.myName = myName;
+	}
 
 	public static void main(String[] args) {
-		tankClient = new TankClient();
-		tankClient.launchFrame();
-		connect();
+		
+//		connect();
 	}
 
 	private static void handlePacket(Packet packet) {
@@ -74,6 +84,13 @@ public class ClientMain {
 			break;
 		case Command.S_NEW_TANK: {
 			Tank tank = Tank.deserialize(packet.getByteBuffer());
+			int palyersConut = packet.getByteBuffer().getInt();
+			List<String> playersNameList = new ArrayList<String>();
+			for (int i = 0; i < palyersConut; i++) {
+				String playerName = StringUtil.getString(packet.getByteBuffer());
+				playersNameList.add(playerName);
+			}
+			ClientMain.tankClient.setPlayersName(playersNameList);
 			ClientMain.tankClient.addNewTank(tank);
 		}
 			break;
@@ -121,7 +138,10 @@ public class ClientMain {
 		}
 	}
 
-	private static void connect() {
+	public static void connect(String name) {
+		setMyName(name);
+		tankClient = new TankClient();
+		tankClient.launchFrame();
 		try {
 			socket = new Socket();
 			socket.connect(new InetSocketAddress(SERVER_HOST, SERVER_PORT));
@@ -129,7 +149,7 @@ public class ClientMain {
 			client = new Client(socket);
 
 			Packet packet = new Packet(Command.C_LOGIN);
-			StringUtil.putString(packet.getByteBuffer(), "ClientXXX");
+			StringUtil.putString(packet.getByteBuffer(), name);
 			client.pushWritePacket(packet);
 
 			client.setPacketEventListener(new PacketEventListener() {

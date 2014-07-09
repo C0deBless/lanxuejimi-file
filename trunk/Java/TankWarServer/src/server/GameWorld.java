@@ -17,6 +17,7 @@ import common.Constants;
 import common.Explode;
 import common.Missile;
 import common.Packet;
+import common.StringUtil;
 import common.Tank;
 
 public class GameWorld implements Runnable {
@@ -30,7 +31,8 @@ public class GameWorld implements Runnable {
 	private List<Tank> tankList = new ArrayList<Tank>();
 	private List<Missile> missileList = new ArrayList<Missile>();
 	private List<Explode> explodeList = new ArrayList<Explode>();
-
+	private List<String> palyersName = new ArrayList<String>();
+	
 	private Thread thread;
 	private boolean isRunning = false;
 	private long lastUpdateTime = 0;
@@ -78,7 +80,15 @@ public class GameWorld implements Runnable {
 
 		return missile;
 	}
-
+	
+	public void sendAllName(ByteBuffer buffer){
+		int count = palyersName.size();
+		buffer.putInt(count);
+		for (int i = 0; i < count; i++) {
+			StringUtil.putString(buffer, palyersName.get(i));
+		}
+	}
+	
 	public void serializeAllTanks(ByteBuffer buffer) {
 		int count = this.tankList.size();
 		buffer.putInt(count);
@@ -295,4 +305,10 @@ public class GameWorld implements Runnable {
 		}
 		this.userPool.put(session.getClient().getClientId(), session);
 	}
+
+	public List<String> getPalyersName() {
+		return palyersName;
+	}
+
+	
 }
