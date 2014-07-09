@@ -37,6 +37,7 @@ public class ClientMain {
 		switch (cmd) {
 		case Command.S_LOGIN: {
 			logger.debug("S_LOGIN:");
+			int gameWorldId = packet.getByteBuffer().getInt();
 			int clientId = packet.getByteBuffer().getInt();
 			int tankCount = packet.getByteBuffer().getInt();
 			logger.debug("S_LOGIN:,clientId:{}", clientId);
@@ -52,7 +53,7 @@ public class ClientMain {
 				Missile missile = Missile.deserialize(packet.getByteBuffer());
 				missileList.add(missile);
 			}
-
+			tankClient.setMyGameRoomID(gameWorldId);
 			tankClient.setTankList(tankList);
 			tankClient.setMissileList(missileList);
 			tankClient.setMyClientId(clientId);

@@ -35,6 +35,10 @@ public class TankClient extends Frame {
 	private List<Missile> missiles = new ArrayList<Missile>();
 
 	private int myClientId;
+	private int myGameRoomID;
+	
+
+	
 
 	private Toolkit tk = Toolkit.getDefaultToolkit();
 	private Image[] greenImages = new Image[4];
@@ -184,9 +188,10 @@ public class TankClient extends Frame {
 		g.drawImage(redImages[angle], (int) tank.getX(), (int) tank.getY(),
 				null);
 	}
-
+	
+	
 	public void paint(Graphics g) {
-
+		
 		synchronized (tanks) {
 			for (Tank tank : tanks) {
 				drawTank(tank, g);
@@ -207,7 +212,8 @@ public class TankClient extends Frame {
 
 	@Override
 	public void update(Graphics g) {
-
+		g.setColor(Color.RED);
+		g.drawString("GameRoomNumber:--"+getMyGameRoomID(), 10, 50);
 		if (offScreenImage == null) {
 			offScreenImage = gamePanel.createImage(Constants.GAME_WIDTH,
 					Constants.GAME_HEIGHT);
@@ -470,5 +476,12 @@ public class TankClient extends Frame {
 	public List<Explode> getExplodes() {
 		return explodes;
 	}
+	
+	public int getMyGameRoomID() {
+		return myGameRoomID;
+	}
 
+	public void setMyGameRoomID(int myGameRoomID) {
+		this.myGameRoomID = myGameRoomID;
+	}
 }
