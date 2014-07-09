@@ -2,7 +2,6 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.LayoutManager;
 import java.awt.Panel;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
@@ -215,7 +214,7 @@ public class TankClient extends Frame {
 		}
 		Graphics offScreen = offScreenImage.getGraphics();
 		Color c = offScreen.getColor();
-		offScreen.setColor(Color.GRAY);
+		offScreen.setColor(Color.BLACK);
 		offScreen.fillRect(0, 0, Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
 		offScreen.setColor(c);
 		paint(offScreen);
@@ -244,7 +243,7 @@ public class TankClient extends Frame {
 		});
 
 		this.setResizable(false);
-		this.setBackground(Color.BLACK);
+		this.setBackground(Color.GRAY);
 		this.addKeyListener(new KeyMonitor());
 		this.setVisible(true);
 		new Thread(new PaintThread(this)).start();
