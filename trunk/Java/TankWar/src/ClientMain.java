@@ -54,11 +54,11 @@ public class ClientMain {
 				Missile missile = Missile.deserialize(packet.getByteBuffer());
 				missileList.add(missile);
 			}
-			
+
 			tankClient.setMyGameRoomID(gameWorldId);
 			tankClient.setTankList(tankList);
 			tankClient.setMissileList(missileList);
-			
+
 			tankClient.setMyClientId(clientId);
 		}
 			break;
@@ -130,16 +130,25 @@ public class ClientMain {
 						.getString(packet.getByteBuffer());
 				playersNameList.add(playerName);
 			}
-			
+
 			tankClient.setPlayersName(playersNameList);
+		}
+			break;
+
+		case Command.S_START: {
+			String name = StringUtil.getString(packet.getByteBuffer());
+			new GameStartBox(name);
 		}
 			break;
 		}
 	}
-
-	public static void connect(String name) {
+	
+	public static void showGameBox(){
 		tankClient = new TankClient();
 		tankClient.launchFrame();
+	}
+	
+	public static void connect(String name) {
 		try {
 			socket = new Socket();
 			socket.connect(new InetSocketAddress(SERVER_HOST, SERVER_PORT));

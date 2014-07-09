@@ -6,6 +6,7 @@ public class UserSession {
 
 	private User user;
 	private final Client client;
+	private boolean ready = false;
 
 	public UserSession(Client client) {
 		this.client = client;
@@ -22,4 +23,13 @@ public class UserSession {
 	public Client getClient() {
 		return client;
 	}
+
+	public boolean isReady() {
+		return ready;
+	}
+
+	public void setReady(boolean ready) {
+		this.ready = ready;
+	}
+	
 }
