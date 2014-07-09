@@ -55,7 +55,7 @@ public class LoginBox extends JFrame {
 				LoginBox.this.setVisible(false);
 				String name = gameName.getText();
 				
-//				ClientMain.connect(name);
+				ClientMain.connect(name);
 				
 			}
 		});

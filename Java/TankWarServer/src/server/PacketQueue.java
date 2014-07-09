@@ -47,12 +47,13 @@ public class PacketQueue implements Runnable {
 			
 			game.join(session);
 			logger.debug("LOGIN, name:{}", name);
-			
+			game.getPalyersName().add(name);
 			Tank tank =game.initUserTank(clientId);
 
 			Packet writePacket2 = new Packet(Command.S_NEW_TANK,
 					Short.MAX_VALUE);
 			tank.serialize(writePacket2.getByteBuffer());
+			game.sendAllName(writePacket2.getByteBuffer());
 			game.broadcast(writePacket2);
 
 			Packet writePacket = new Packet(Command.S_LOGIN, Short.MAX_VALUE);

@@ -36,8 +36,7 @@ public class TankClient extends Frame {
 
 	private int myClientId;
 	private int myGameRoomID;
-	
-
+	private List<String> playersName = new ArrayList<String>();
 	
 
 	private Toolkit tk = Toolkit.getDefaultToolkit();
@@ -123,7 +122,20 @@ public class TankClient extends Frame {
 		}
 
 	}
-
+	
+	public void setPlayersName(List<String> playersNameList) {
+		playersName.clear();
+		playersName.addAll(playersNameList);
+		
+	}
+	
+	private void drawPlayersName(Graphics g){
+		for (int i = 0; i < playersName.size(); i++) {
+			int[] y = {70, 90, 110, 130, 150};
+			g.drawString(i+":--" + playersName.get(i), 10, y[i]);
+		}
+	}
+	
 	private void drawTank(Tank tank, Graphics g) {
 		if (!tank.isLive()) {
 			return;
@@ -214,6 +226,7 @@ public class TankClient extends Frame {
 	public void update(Graphics g) {
 		g.setColor(Color.RED);
 		g.drawString("GameRoomNumber:--"+getMyGameRoomID(), 10, 50);
+		drawPlayersName(g);
 		if (offScreenImage == null) {
 			offScreenImage = gamePanel.createImage(Constants.GAME_WIDTH,
 					Constants.GAME_HEIGHT);
@@ -484,4 +497,9 @@ public class TankClient extends Frame {
 	public void setMyGameRoomID(int myGameRoomID) {
 		this.myGameRoomID = myGameRoomID;
 	}
+
+	public List<String> getPlayersName() {
+		return playersName;
+	}
+	
 }
