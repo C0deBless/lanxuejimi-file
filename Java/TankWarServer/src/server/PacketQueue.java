@@ -56,6 +56,7 @@ public class PacketQueue implements Runnable {
 			game.broadcast(writePacket2);
 
 			Packet writePacket = new Packet(Command.S_LOGIN, Short.MAX_VALUE);
+			writePacket.getByteBuffer().putInt(gameId);
 			writePacket.getByteBuffer().putInt(clientId);
 			game.serializeAllTanks(writePacket.getByteBuffer());
 			game.serializeAllMissiles(writePacket.getByteBuffer());
