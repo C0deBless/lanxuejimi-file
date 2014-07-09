@@ -90,7 +90,6 @@ public class Server {
 						GameWorld game = Server.this.gameWorlds.get(sessionId);
 						game.leaveUser(client.getClientId());
 						game.removeTankByClientId(client.getClientId());
-						
 						Packet writePacket = new Packet(Command.S_EXIT, 8);
 						writePacket.getByteBuffer().putInt(client.getClientId());
 						game.broadcast(writePacket);

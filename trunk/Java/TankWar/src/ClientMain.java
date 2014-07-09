@@ -86,7 +86,7 @@ public class ClientMain {
 			Tank tank = Tank.deserialize(packet.getByteBuffer());
 			int palyersConut = packet.getByteBuffer().getInt();
 			List<String> playersNameList = new ArrayList<String>();
-			for (int i = 0; i < palyersConut; i++) {
+			for (int i = palyersConut; i > 0; i--) {
 				String playerName = StringUtil.getString(packet.getByteBuffer());
 				playersNameList.add(playerName);
 			}

@@ -31,8 +31,7 @@ public class GameWorld implements Runnable {
 	private List<Tank> tankList = new ArrayList<Tank>();
 	private List<Missile> missileList = new ArrayList<Missile>();
 	private List<Explode> explodeList = new ArrayList<Explode>();
-	private List<String> palyersName = new ArrayList<String>();
-	
+
 	private Thread thread;
 	private boolean isRunning = false;
 	private long lastUpdateTime = 0;
@@ -80,15 +79,17 @@ public class GameWorld implements Runnable {
 
 		return missile;
 	}
-	
+
 	public void sendAllName(ByteBuffer buffer){
-		int count = palyersName.size();
+		int count = userPool.size();
 		buffer.putInt(count);
-		for (int i = 0; i < count; i++) {
-			StringUtil.putString(buffer, palyersName.get(i));
+		Collection<UserSession> nameList = userPool.values();
+		for (UserSession userSession : nameList) {
+			StringUtil.putString(buffer, userSession.getUser().getName());
 		}
+		
 	}
-	
+
 	public void serializeAllTanks(ByteBuffer buffer) {
 		int count = this.tankList.size();
 		buffer.putInt(count);
@@ -109,16 +110,16 @@ public class GameWorld implements Runnable {
 
 	public void leaveUser(int clientId) {
 		userPool.remove(clientId);
-		if(userPool.size() == 0){
+		if (userPool.size() == 0) {
 			endGame();
 		}
 	}
-	
-	public void endGame(){
+
+	public void endGame() {
 		this.status = GameStatus.Idle;
-		
+
 		// FIXME broadcast game end message
-		// FIXME handle reward and  game result 
+		// FIXME handle reward and game result
 		// FIXME clear
 	}
 
@@ -290,7 +291,7 @@ public class GameWorld implements Runnable {
 		if (this.userPool.size() < MAX_USER_COUNT
 				&& (this.status == GameStatus.Idle || this.status == GameStatus.Waiting)) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
@@ -300,15 +301,11 @@ public class GameWorld implements Runnable {
 	}
 
 	public void join(UserSession session) {
-		if(status == GameStatus.Idle){
+		if (status == GameStatus.Idle) {
 			status = GameStatus.Waiting;
 		}
 		this.userPool.put(session.getClient().getClientId(), session);
 	}
 
-	public List<String> getPalyersName() {
-		return palyersName;
-	}
 
-	
 }

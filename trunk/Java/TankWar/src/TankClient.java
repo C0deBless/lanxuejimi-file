@@ -124,8 +124,10 @@ public class TankClient extends Frame {
 	}
 	
 	public void setPlayersName(List<String> playersNameList) {
-		playersName.clear();
-		playersName.addAll(playersNameList);
+		synchronized (playersNameList) {
+			playersName.clear();
+			playersName.addAll(playersNameList);
+		}
 		
 	}
 	
