@@ -27,4 +27,6 @@ public class Command {
 	
 	public static final short S_HIT_WALL = 9;
 	
+	public static final short S_NEW_PLAYERS_NAME = 10;
+	
 }

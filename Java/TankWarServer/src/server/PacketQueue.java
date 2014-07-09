@@ -52,7 +52,7 @@ public class PacketQueue implements Runnable {
 			Packet writePacket2 = new Packet(Command.S_NEW_TANK,
 					Short.MAX_VALUE);
 			tank.serialize(writePacket2.getByteBuffer());
-			game.sendAllName(writePacket2.getByteBuffer());
+			StringUtil.putString(writePacket2.getByteBuffer(), name);
 			game.broadcast(writePacket2);
 
 			Packet writePacket = new Packet(Command.S_LOGIN, Short.MAX_VALUE);
@@ -61,7 +61,10 @@ public class PacketQueue implements Runnable {
 			game.serializeAllTanks(writePacket.getByteBuffer());
 			game.serializeAllMissiles(writePacket.getByteBuffer());
 			packet.getClient().pushWritePacket(writePacket);
-
+			
+			Packet writepacket3 = new Packet(Command.S_NEW_PLAYERS_NAME, Short.MAX_VALUE);
+			game.sendAllName(writePacket2.getByteBuffer());
+			packet.getClient().pushWritePacket(writepacket3);
 		}
 			break;
 		case Command.C_MOVE: {

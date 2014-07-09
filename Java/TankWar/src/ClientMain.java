@@ -27,19 +27,10 @@ public class ClientMain {
 	public static Socket socket = null;
 	public static Client client;
 	public static TankClient tankClient;
-	private static String myName;
-	
-	public static String getMyName() {
-		return myName;
-	}
-
-	public static void setMyName(String myName) {
-		ClientMain.myName = myName;
-	}
 
 	public static void main(String[] args) {
-		
-//		connect();
+
+		// connect();
 	}
 
 	private static void handlePacket(Packet packet) {
@@ -51,21 +42,23 @@ public class ClientMain {
 			int clientId = packet.getByteBuffer().getInt();
 			int tankCount = packet.getByteBuffer().getInt();
 			logger.debug("S_LOGIN:,clientId:{}", clientId);
-			List<Tank> tankList = new ArrayList<>(tankCount);
+			List<Tank> tankList = new ArrayList<Tank>(tankCount);
 			for (int i = 0; i < tankCount; i++) {
 				Tank tank = Tank.deserialize(packet.getByteBuffer());
 				tankList.add(tank);
 			}
 
 			int missileCount = packet.getByteBuffer().getInt();
-			List<Missile> missileList = new ArrayList<>(missileCount);
+			List<Missile> missileList = new ArrayList<Missile>(missileCount);
 			for (int i = 0; i < missileCount; i++) {
 				Missile missile = Missile.deserialize(packet.getByteBuffer());
 				missileList.add(missile);
 			}
+			
 			tankClient.setMyGameRoomID(gameWorldId);
 			tankClient.setTankList(tankList);
 			tankClient.setMissileList(missileList);
+			
 			tankClient.setMyClientId(clientId);
 		}
 			break;
@@ -84,13 +77,8 @@ public class ClientMain {
 			break;
 		case Command.S_NEW_TANK: {
 			Tank tank = Tank.deserialize(packet.getByteBuffer());
-			int palyersConut = packet.getByteBuffer().getInt();
-			List<String> playersNameList = new ArrayList<String>();
-			for (int i = palyersConut; i > 0; i--) {
-				String playerName = StringUtil.getString(packet.getByteBuffer());
-				playersNameList.add(playerName);
-			}
-			ClientMain.tankClient.setPlayersName(playersNameList);
+			String playerName = StringUtil.getString(packet.getByteBuffer());
+			ClientMain.tankClient.getPlayersName().add(playerName);
 			ClientMain.tankClient.addNewTank(tank);
 		}
 			break;
@@ -128,18 +116,28 @@ public class ClientMain {
 		case Command.S_HIT_WALL: {
 			int missileId = packet.getByteBuffer().getInt();
 			Explode explode = Explode.deserialize(packet.getByteBuffer());
-			
+
 			ClientMain.tankClient.missileDead(missileId, explode);
 			ClientMain.tankClient.explodeDead(explode.getId());
+
+		}
+			break;
+		case Command.S_NEW_PLAYERS_NAME: {
+			int playersCount = packet.getByteBuffer().getInt();
+			List<String> playersNameList = new ArrayList<String>(playersCount);
+			for (int i = 0; i < playersCount; i++) {
+				String playerName = StringUtil
+						.getString(packet.getByteBuffer());
+				playersNameList.add(playerName);
+			}
 			
-			
+			tankClient.setPlayersName(playersNameList);
 		}
 			break;
 		}
 	}
 
 	public static void connect(String name) {
-		setMyName(name);
 		tankClient = new TankClient();
 		tankClient.launchFrame();
 		try {
