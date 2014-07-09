@@ -47,7 +47,6 @@ public class PacketQueue implements Runnable {
 			
 			game.join(session);
 			logger.debug("LOGIN, name:{}", name);
-			game.getPalyersName().add(name);
 			Tank tank =game.initUserTank(clientId);
 
 			Packet writePacket2 = new Packet(Command.S_NEW_TANK,
