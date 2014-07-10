@@ -132,9 +132,10 @@ public class PacketQueue implements Runnable {
 			GameWorld game = ServerMain.getServer().getGameWorld(
 					user.getGameWorldIndex());
 			logger.debug("C_START,GameStatus:" + game.getStatus());
-			if (game.getStatus() == GameStatus.Playing) {
-				game.sendUserReady();
-			}
+			
+			// 实际上没啥用，等以后再说吧
+			Packet writePacket = new Packet(Command.S_READY);
+			session.getClient().pushWritePacket(writePacket);
 
 			// check all user ready
 			if (game.isAllUserReady()) {
