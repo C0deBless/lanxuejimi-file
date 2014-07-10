@@ -13,15 +13,17 @@ import common.StringUtil;
 public class GameStartBox extends JFrame {
 
 	private JButton gameStart;
-	private String name;
+	private int gameWorldId;
+	private int clientId;
 
 	public static void main(String[] args) {
 		new GameStartBox();
 	}
 
-	public GameStartBox(String name) {
+	public GameStartBox(int gameWorldId, int clientId) {
 		this();
-		this.name = name;
+		this.gameWorldId = gameWorldId;
+		this.clientId = clientId;
 
 	}
 
@@ -42,10 +44,9 @@ public class GameStartBox extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				GameStartBox.this.setVisible(false);
-				ClientMain.showGameBox();
-				Packet writePacket = new Packet(Command.C_START);
-				StringUtil.putString(writePacket.getByteBuffer(), name);
-				ClientMain.client.pushWritePacket(writePacket);
+				ClientMain.showGameBox(gameWorldId,clientId);
+				Packet Packet = new Packet(Command.C_START);
+				ClientMain.client.pushWritePacket(Packet);
 
 			}
 		});

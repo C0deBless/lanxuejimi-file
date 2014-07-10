@@ -50,7 +50,7 @@ public class PacketQueue implements Runnable {
 			game.join(session);
 			Tank tank = game.initUserTank(clientId);
 
-			game.sendServerReadyToStart(packet, name);
+			game.sendServerReadyToStart(packet, clientId);
 
 //			if (game.getStatus() == GameStatus.Idle) {
 //				game.sendServerLoginCommand(packet, clientId);
@@ -76,8 +76,7 @@ public class PacketQueue implements Runnable {
 			// game.serializeAllMissiles(writePacket.getByteBuffer());
 			// packet.getClient().pushWritePacket(writePacket);
 
-//			Packet writepacket3 = new Packet(Command.S_NEW_PLAYERS_NAME,
-//					Short.MAX_VALUE);
+//			Packet writepacket3 = new Packet(Command.S_NEW_PLAYERS_NAME);
 //			game.sendAllName(writepacket3.getByteBuffer());
 //			packet.getClient().pushWritePacket(writepacket3);
 		}
@@ -131,8 +130,13 @@ public class PacketQueue implements Runnable {
 		}
 			break;
 		case Command.C_START: {
-			String name = StringUtil.getString(packet.getByteBuffer());
 			session.setReady(true);
+			User user = session.getUser();
+			GameWorld game = ServerMain.getServer().getGameWorld(
+					user.getGameWorldIndex());
+			if(game.getStatus() == GameStatus.Playing){
+				game.sendServerLoginCommand(packet);
+			}
 		}
 			break;
 		default:
