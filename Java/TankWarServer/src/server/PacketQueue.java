@@ -45,8 +45,7 @@ public class PacketQueue implements Runnable {
 
 			GameWorld game = ServerMain.getServer()
 					.findProperGameWorld(session);
-			int gameId = game.getId();
-			user.setGameWorldIndex(gameId);
+			logger.debug("C_LOGIN,game:"+game+"---session:"+session);
 			game.join(session);
 			Tank tank = game.initUserTank(clientId);
 
@@ -134,6 +133,7 @@ public class PacketQueue implements Runnable {
 			User user = session.getUser();
 			GameWorld game = ServerMain.getServer().getGameWorld(
 					user.getGameWorldIndex());
+			logger.debug("C_START,GameStatus:"+game.getStatus());
 			if(game.getStatus() == GameStatus.Playing){
 				game.sendServerLoginCommand(packet);
 			}

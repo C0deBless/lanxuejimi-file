@@ -42,6 +42,8 @@ public class GameWorld implements Runnable {
 	private int randomLocationY;
 	private GameStatus status = GameStatus.Idle;
 	private final int id;
+	
+	private static int i;
 
 	public GameWorld(int id) {
 		this.id = id;
@@ -80,12 +82,13 @@ public class GameWorld implements Runnable {
 		return missile;
 	}
 
-	public void sendAllName(ByteBuffer buffer){
+	public void sendAllName(ByteBuffer buffer,int gameId){
 		int count = userPool.size();
 		buffer.putInt(count);
 		Collection<UserSession> nameList = userPool.values();
 		for (UserSession userSession : nameList) {
 			StringUtil.putString(buffer, userSession.getUser().getName());
+			userSession.getUser().setGameWorldIndex(gameId);
 		}
 		
 	}
@@ -265,7 +268,6 @@ public class GameWorld implements Runnable {
 	}
 	public boolean userReady(){
 		Collection<UserSession> ready = userPool.values();
-		int i = 0;
 		for (UserSession userSession : ready) {
 			if(userSession.isReady()){
 				i++;
@@ -328,10 +330,10 @@ public class GameWorld implements Runnable {
 	}
 
 	public void sendServerLoginCommand(Packet packet) {
-		Packet writePacket = new Packet(Command.S_LOGIN);
+		Packet writePacket = new Packet(Command.S_START);
 		this.serializeAllTanks(writePacket.getByteBuffer());
 		this.serializeAllMissiles(writePacket.getByteBuffer());
-		this.sendAllName(writePacket.getByteBuffer());
+		this.sendAllName(writePacket.getByteBuffer(),id);
 		this.broadcast(writePacket);
 	}
 
@@ -343,7 +345,7 @@ public class GameWorld implements Runnable {
 	}
 
 	public void sendServerReadyToStart(Packet packet, int clientId) {
-		Packet writePacket = new Packet(Command.S_START);
+		Packet writePacket = new Packet(Command.S_LOGIN);
 		writePacket.getByteBuffer().putInt(this.id);
 		writePacket.getByteBuffer().putInt(clientId);
 		packet.getClient().pushWritePacket(writePacket);
