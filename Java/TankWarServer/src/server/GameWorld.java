@@ -329,7 +329,7 @@ public class GameWorld implements Runnable {
 		this.userPool.put(session.getClient().getClientId(), session);
 	}
 
-	public void sendServerLoginCommand(Packet packet) {
+	public void sendServerReadyToStart(Packet packet) {
 		Packet writePacket = new Packet(Command.S_START);
 		this.serializeAllTanks(writePacket.getByteBuffer());
 		this.serializeAllMissiles(writePacket.getByteBuffer());
@@ -344,7 +344,7 @@ public class GameWorld implements Runnable {
 		this.broadcast(writePacket2);
 	}
 
-	public void sendServerReadyToStart(Packet packet, int clientId) {
+	public void sendServerLoginCommand(Packet packet, int clientId) {
 		Packet writePacket = new Packet(Command.S_LOGIN);
 		writePacket.getByteBuffer().putInt(this.id);
 		writePacket.getByteBuffer().putInt(clientId);
