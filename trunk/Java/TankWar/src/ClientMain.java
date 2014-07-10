@@ -4,8 +4,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.text.PlainDocument;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -8,10 +8,10 @@ import javax.swing.JFrame;
 
 import common.Command;
 import common.Packet;
-import common.StringUtil;
 
 public class GameStartBox extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JButton gameStart;
 	private int gameWorldId;
 	private int clientId;
@@ -40,7 +40,7 @@ public class GameStartBox extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				GameStartBox.this.setVisible(false);
-				ClientMain.showGameBox(gameWorldId,clientId);
+				ClientMain.showGameBox(gameWorldId, clientId);
 				Packet Packet = new Packet(Command.C_START);
 				ClientMain.client.pushWritePacket(Packet);
 

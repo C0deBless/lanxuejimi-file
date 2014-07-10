@@ -3,8 +3,6 @@ package server;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import javax.net.ssl.SSLEngineResult.Status;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +10,6 @@ import common.Command;
 import common.Missile;
 import common.Packet;
 import common.StringUtil;
-import common.Tank;
 
 public class PacketQueue implements Runnable {
 
@@ -45,19 +42,20 @@ public class PacketQueue implements Runnable {
 
 			GameWorld game = ServerMain.getServer()
 					.findProperGameWorld(session);
-			logger.debug("C_LOGIN,game:"+game+"---session:"+session);
+			logger.debug("C_LOGIN,game:" + game + "---session:" + session);
 			game.join(session);
-			Tank tank = game.initUserTank(clientId);
+			
+			game.initUserTank(clientId);
 
 			game.sendServerLoginCommand(packet, clientId);
 
-//			if (game.getStatus() == GameStatus.Idle) {
-//				game.sendServerLoginCommand(packet, clientId);
-//
-//			} else if (game.getStatus() == GameStatus.Waiting) {
-//				game.sendServerNewMsg(tank, name);
-//				game.sendServerLoginCommand(packet, clientId);
-//			}
+			// if (game.getStatus() == GameStatus.Idle) {
+			// game.sendServerLoginCommand(packet, clientId);
+			//
+			// } else if (game.getStatus() == GameStatus.Waiting) {
+			// game.sendServerNewMsg(tank, name);
+			// game.sendServerLoginCommand(packet, clientId);
+			// }
 			// logger.debug("LOGIN, name:{}", name);
 			// Tank tank =game.initUserTank(clientId);
 			//
@@ -75,9 +73,9 @@ public class PacketQueue implements Runnable {
 			// game.serializeAllMissiles(writePacket.getByteBuffer());
 			// packet.getClient().pushWritePacket(writePacket);
 
-//			Packet writepacket3 = new Packet(Command.S_NEW_PLAYERS_NAME);
-//			game.sendAllName(writepacket3.getByteBuffer());
-//			packet.getClient().pushWritePacket(writepacket3);
+			// Packet writepacket3 = new Packet(Command.S_NEW_PLAYERS_NAME);
+			// game.sendAllName(writepacket3.getByteBuffer());
+			// packet.getClient().pushWritePacket(writepacket3);
 		}
 			break;
 		case Command.C_MOVE: {
@@ -133,8 +131,8 @@ public class PacketQueue implements Runnable {
 			User user = session.getUser();
 			GameWorld game = ServerMain.getServer().getGameWorld(
 					user.getGameWorldIndex());
-			logger.debug("C_START,GameStatus:"+game.getStatus());
-			if(game.getStatus() == GameStatus.Playing){
+			logger.debug("C_START,GameStatus:" + game.getStatus());
+			if (game.getStatus() == GameStatus.Playing) {
 				game.sendServerReadyToStart(packet);
 			}
 		}
