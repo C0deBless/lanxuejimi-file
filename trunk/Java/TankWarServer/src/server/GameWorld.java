@@ -267,6 +267,9 @@ public class GameWorld implements Runnable {
 	}
 
 	public boolean isAllUserReady() {
+		if(this.userPool.size() < MAX_USER_COUNT){
+			return false;
+		}
 		Collection<UserSession> users = this.userPool.values();
 		for (UserSession user : users) {
 			if (!user.isReady()) {
