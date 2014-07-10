@@ -34,8 +34,13 @@ public class ClientMain {
 	private static void handlePacket(Packet packet) {
 		short cmd = packet.getCmd();
 		switch (cmd) {
-		case Command.S_START: {
-			logger.debug("S_LOGIN:");
+		case Command.S_READY: {
+			logger.debug("S_READY:");
+			
+			// do nothing
+		}
+			break;
+		case Command.S_GAME_START: {
 			int tankCount = packet.getByteBuffer().getInt();
 			// logger.debug("S_LOGIN:,clientId:{}", clientId);
 			List<Tank> tankList = new ArrayList<Tank>(tankCount);
@@ -62,7 +67,6 @@ public class ClientMain {
 			tankClient.setTankList(tankList);
 			tankClient.setMissileList(missileList);
 			tankClient.setPlayersName(playersNameList);
-
 		}
 			break;
 		case Command.S_MOVE: {
@@ -78,13 +82,13 @@ public class ClientMain {
 			ClientMain.tankClient.stop(clientId, tankId);
 		}
 			break;
-//		case Command.S_NEW_TANK: {
-//			Tank tank = Tank.deserialize(packet.getByteBuffer());
-//			String playerName = StringUtil.getString(packet.getByteBuffer());
-//			ClientMain.tankClient.getPlayersName().add(playerName);
-//			ClientMain.tankClient.addNewTank(tank);
-//		}
-//			break;
+		// case Command.S_NEW_TANK: {
+		// Tank tank = Tank.deserialize(packet.getByteBuffer());
+		// String playerName = StringUtil.getString(packet.getByteBuffer());
+		// ClientMain.tankClient.getPlayersName().add(playerName);
+		// ClientMain.tankClient.addNewTank(tank);
+		// }
+		// break;
 		case Command.S_EXIT: {
 			int clientId = packet.getByteBuffer().getInt();
 			ClientMain.tankClient.removeTankByClientId(clientId);
@@ -125,18 +129,18 @@ public class ClientMain {
 
 		}
 			break;
-//		case Command.S_NEW_PLAYERS_NAME: {
-//			int playersCount = packet.getByteBuffer().getInt();
-//			List<String> playersNameList = new ArrayList<String>(playersCount);
-//			for (int i = 0; i < playersCount; i++) {
-//				String playerName = StringUtil
-//						.getString(packet.getByteBuffer());
-//				playersNameList.add(playerName);
-//			}
-//
-//			tankClient.setPlayersName(playersNameList);
-//		}
-//			break;
+		// case Command.S_NEW_PLAYERS_NAME: {
+		// int playersCount = packet.getByteBuffer().getInt();
+		// List<String> playersNameList = new ArrayList<String>(playersCount);
+		// for (int i = 0; i < playersCount; i++) {
+		// String playerName = StringUtil
+		// .getString(packet.getByteBuffer());
+		// playersNameList.add(playerName);
+		// }
+		//
+		// tankClient.setPlayersName(playersNameList);
+		// }
+		// break;
 
 		case Command.S_LOGIN: {
 			int gameWorldId = packet.getByteBuffer().getInt();

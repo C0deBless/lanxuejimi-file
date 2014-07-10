@@ -42,8 +42,6 @@ public class GameWorld implements Runnable {
 	private int randomLocationY;
 	private GameStatus status = GameStatus.Idle;
 	private final int id;
-	
-	private static int i;
 
 	public GameWorld(int id) {
 		this.id = id;
@@ -82,7 +80,7 @@ public class GameWorld implements Runnable {
 		return missile;
 	}
 
-	public void sendAllName(ByteBuffer buffer,int gameId){
+	public void sendAllName(ByteBuffer buffer, int gameId) {
 		int count = userPool.size();
 		buffer.putInt(count);
 		Collection<UserSession> nameList = userPool.values();
@@ -90,7 +88,7 @@ public class GameWorld implements Runnable {
 			StringUtil.putString(buffer, userSession.getUser().getName());
 			userSession.getUser().setGameWorldIndex(gameId);
 		}
-		
+
 	}
 
 	public void serializeAllTanks(ByteBuffer buffer) {
@@ -259,25 +257,6 @@ public class GameWorld implements Runnable {
 				hitTank(missile);
 			}
 		}
-		synchronized (userPool) {
-			if(userReady()){
-				setStatus(GameStatus.Playing);
-				
-			}
-		}
-	}
-	public boolean userReady(){
-		Collection<UserSession> ready = userPool.values();
-		for (UserSession userSession : ready) {
-			if(userSession.isReady()){
-				i++;
-				continue;
-			}
-		}
-		if(i == 2){
-			return true;
-		}
-		return false;
 	}
 
 	public void broadcast(Packet packet) {
@@ -285,6 +264,16 @@ public class GameWorld implements Runnable {
 		for (UserSession session : sessionList) {
 			session.getClient().pushWritePacket(packet);
 		}
+	}
+
+	public boolean isAllUserReady() {
+		Collection<UserSession> users = this.userPool.values();
+		for (UserSession user : users) {
+			if (!user.isReady()) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	@Override
@@ -312,8 +301,11 @@ public class GameWorld implements Runnable {
 	public boolean canJoin() {
 		if (this.userPool.size() < MAX_USER_COUNT
 				&& (this.status == GameStatus.Idle || this.status == GameStatus.Waiting)) {
+			logger.debug("canJoin, true");
 			return true;
 		} else {
+			logger.debug("canJoin, false:{}, status:{}", this.userPool.size(),
+					this.status);
 			return false;
 		}
 	}
@@ -329,11 +321,8 @@ public class GameWorld implements Runnable {
 		this.userPool.put(session.getClient().getClientId(), session);
 	}
 
-	public void sendServerReadyToStart(Packet packet) {
-		Packet writePacket = new Packet(Command.S_START);
-		this.serializeAllTanks(writePacket.getByteBuffer());
-		this.serializeAllMissiles(writePacket.getByteBuffer());
-		this.sendAllName(writePacket.getByteBuffer(),id);
+	public void sendUserReady() {
+		Packet writePacket = new Packet(Command.S_READY);
 		this.broadcast(writePacket);
 	}
 
@@ -351,5 +340,12 @@ public class GameWorld implements Runnable {
 		packet.getClient().pushWritePacket(writePacket);
 	}
 
+	public void broadcastGameStart() {
+		Packet packet = new Packet(Command.S_GAME_START);
+		this.serializeAllTanks(packet.getByteBuffer());
+		this.serializeAllMissiles(packet.getByteBuffer());
+		this.sendAllName(packet.getByteBuffer(), id);
+		this.broadcast(packet);
+	}
 
 }

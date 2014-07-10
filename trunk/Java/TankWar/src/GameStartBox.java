@@ -41,7 +41,7 @@ public class GameStartBox extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				GameStartBox.this.setVisible(false);
 				ClientMain.showGameBox(gameWorldId, clientId);
-				Packet Packet = new Packet(Command.C_START);
+				Packet Packet = new Packet(Command.C_READY);
 				ClientMain.client.pushWritePacket(Packet);
 
 			}
