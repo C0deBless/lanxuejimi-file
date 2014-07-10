@@ -327,26 +327,25 @@ public class GameWorld implements Runnable {
 		this.userPool.put(session.getClient().getClientId(), session);
 	}
 
-	public void sendServerLoginCommand(Packet packet, int clientId) {
-		Packet writePacket = new Packet(Command.S_LOGIN, Short.MAX_VALUE);
-		writePacket.getByteBuffer().putInt(this.id);
-		writePacket.getByteBuffer().putInt(clientId);
+	public void sendServerLoginCommand(Packet packet) {
+		Packet writePacket = new Packet(Command.S_LOGIN);
 		this.serializeAllTanks(writePacket.getByteBuffer());
 		this.serializeAllMissiles(writePacket.getByteBuffer());
-		packet.getClient().pushWritePacket(writePacket);
+		this.sendAllName(writePacket.getByteBuffer());
+		this.broadcast(writePacket);
 	}
 
 	public void sendServerNewMsg(Tank tank, String name) {
-		Packet writePacket2 = new Packet(Command.S_NEW_TANK,
-				Short.MAX_VALUE);
+		Packet writePacket2 = new Packet(Command.S_NEW_TANK);
 		tank.serialize(writePacket2.getByteBuffer());
 		StringUtil.putString(writePacket2.getByteBuffer(), name);
 		this.broadcast(writePacket2);
 	}
 
-	public void sendServerReadyToStart(Packet packet, String name) {
+	public void sendServerReadyToStart(Packet packet, int clientId) {
 		Packet writePacket = new Packet(Command.S_START);
-		StringUtil.putString(writePacket.getByteBuffer(), name);
+		writePacket.getByteBuffer().putInt(this.id);
+		writePacket.getByteBuffer().putInt(clientId);
 		packet.getClient().pushWritePacket(writePacket);
 	}
 

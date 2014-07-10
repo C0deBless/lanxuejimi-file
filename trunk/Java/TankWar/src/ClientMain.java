@@ -38,10 +38,8 @@ public class ClientMain {
 		switch (cmd) {
 		case Command.S_LOGIN: {
 			logger.debug("S_LOGIN:");
-			int gameWorldId = packet.getByteBuffer().getInt();
-			int clientId = packet.getByteBuffer().getInt();
 			int tankCount = packet.getByteBuffer().getInt();
-			logger.debug("S_LOGIN:,clientId:{}", clientId);
+			// logger.debug("S_LOGIN:,clientId:{}", clientId);
 			List<Tank> tankList = new ArrayList<Tank>(tankCount);
 			for (int i = 0; i < tankCount; i++) {
 				Tank tank = Tank.deserialize(packet.getByteBuffer());
@@ -55,11 +53,18 @@ public class ClientMain {
 				missileList.add(missile);
 			}
 
-			tankClient.setMyGameRoomID(gameWorldId);
+			int playersCount = packet.getByteBuffer().getInt();
+			List<String> playersNameList = new ArrayList<String>(playersCount);
+			for (int i = 0; i < playersCount; i++) {
+				String playerName = StringUtil
+						.getString(packet.getByteBuffer());
+				playersNameList.add(playerName);
+			}
+
 			tankClient.setTankList(tankList);
 			tankClient.setMissileList(missileList);
+			tankClient.setPlayersName(playersNameList);
 
-			tankClient.setMyClientId(clientId);
 		}
 			break;
 		case Command.S_MOVE: {
@@ -136,18 +141,22 @@ public class ClientMain {
 			break;
 
 		case Command.S_START: {
-			String name = StringUtil.getString(packet.getByteBuffer());
-			new GameStartBox(name);
+			int gameWorldId = packet.getByteBuffer().getInt();
+			int clientId = packet.getByteBuffer().getInt();
+			new GameStartBox(gameWorldId, clientId);
 		}
 			break;
 		}
 	}
-	
-	public static void showGameBox(){
+
+	public static void showGameBox(int gameWorldId, int clientId) {
 		tankClient = new TankClient();
 		tankClient.launchFrame();
+		tankClient.setMyGameRoomID(gameWorldId);
+		tankClient.setMyClientId(clientId);
+
 	}
-	
+
 	public static void connect(String name) {
 		try {
 			socket = new Socket();
