@@ -5,8 +5,8 @@ public class Command {
 	public static final short C_LOGIN = 0;
 	public static final short S_LOGIN = 1000;
 	
-	public static final short C_START = 1;
-	public static final short S_START = 1001;
+	public static final short C_READY = 1;
+	public static final short S_READY = 1001;
 	
 	public static final short C_MOVE = 2;
 	public static final short S_MOVE = 1002;
@@ -28,5 +28,7 @@ public class Command {
 	public static final short S_HIT_WALL = 9;
 	
 	public static final short S_NEW_PLAYERS_NAME = 10;
+	
+	public static final short S_GAME_START = 1011;
 	
 }
