@@ -16,10 +16,6 @@ public class GameStartBox extends JFrame {
 	private int gameWorldId;
 	private int clientId;
 
-	public static void main(String[] args) {
-		new GameStartBox();
-	}
-
 	public GameStartBox(int gameWorldId, int clientId) {
 		this();
 		this.gameWorldId = gameWorldId;
