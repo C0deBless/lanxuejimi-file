@@ -321,11 +321,6 @@ public class GameWorld implements Runnable {
 		this.userPool.put(session.getClient().getClientId(), session);
 	}
 
-	public void sendUserReady() {
-		Packet writePacket = new Packet(Command.S_READY);
-		this.broadcast(writePacket);
-	}
-
 	public void sendServerNewMsg(Tank tank, String name) {
 		Packet writePacket2 = new Packet(Command.S_NEW_TANK);
 		tank.serialize(writePacket2.getByteBuffer());
