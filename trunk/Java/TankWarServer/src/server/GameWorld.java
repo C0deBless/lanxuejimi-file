@@ -32,7 +32,6 @@ public class GameWorld {
 	private List<Missile> missileList = new ArrayList<Missile>();
 	private List<Explode> explodeList = new ArrayList<Explode>();
 
-
 	private long lastUpdateTime = 0;
 
 	private Random random = new Random();
@@ -224,35 +223,34 @@ public class GameWorld {
 		}
 		long deltaTime = currentTime - lastUpdateTime;
 		lastUpdateTime = currentTime;
-		synchronized (tankList) {
-			Iterator<Tank> itt = tankList.iterator();
-			while (itt.hasNext()) {
-				Tank tank = itt.next();
 
-				if (!tank.isLive()) {
-					tankList.remove(tank);
-					return;
-				}
-				collidesWithTanks(tank);
-				tank.update(deltaTime);
+		Iterator<Tank> itt = tankList.iterator();
+		while (itt.hasNext()) {
+			Tank tank = itt.next();
+
+			if (!tank.isLive()) {
+				tankList.remove(tank);
+				return;
 			}
+			collidesWithTanks(tank);
+			tank.update(deltaTime);
 		}
-		synchronized (missileList) {
-			Iterator<Missile> itm = missileList.iterator();
-			while (itm.hasNext()) {
 
-				Missile missile = itm.next();
+		Iterator<Missile> itm = missileList.iterator();
+		while (itm.hasNext()) {
 
-				if (!missile.isLive()) {
-					itm.remove();
-					return;
-				}
+			Missile missile = itm.next();
 
-				colloedWithWall(missile);
-				missile.update(deltaTime);
-				hitTank(missile);
+			if (!missile.isLive()) {
+				itm.remove();
+				return;
 			}
+
+			colloedWithWall(missile);
+			missile.update(deltaTime);
+			hitTank(missile);
 		}
+
 	}
 
 	public void broadcast(Packet packet) {
@@ -263,7 +261,7 @@ public class GameWorld {
 	}
 
 	public boolean isAllUserReady() {
-		if(this.userPool.size() < MAX_USER_COUNT){
+		if (this.userPool.size() < MAX_USER_COUNT) {
 			return false;
 		}
 		Collection<UserSession> users = this.userPool.values();
@@ -274,7 +272,6 @@ public class GameWorld {
 		}
 		return true;
 	}
-
 
 	public GameStatus getStatus() {
 		return status;
