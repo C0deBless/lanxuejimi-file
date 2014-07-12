@@ -7,7 +7,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import common.Camp;
 import common.Client;
 import common.Command;
 import common.Explode;
@@ -27,11 +26,6 @@ public class ClientMain {
 	public static Client client;
 	public static TankClient tankClient;
 
-	public static void main(String[] args) {
-
-		// connect();
-	}
-
 	private static void handlePacket(Packet packet) {
 		short cmd = packet.getCmd();
 		switch (cmd) {
@@ -43,6 +37,7 @@ public class ClientMain {
 			break;
 		case Command.S_GAME_START: {
 			
+			logger.debug("S_GAME_START");
 			float x = packet.getByteBuffer().getFloat();
 			float y = packet.getByteBuffer().getFloat();
 			ClientMain.tankClient.getCamp().setX(x);

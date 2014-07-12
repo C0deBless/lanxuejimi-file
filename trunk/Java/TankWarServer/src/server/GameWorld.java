@@ -20,6 +20,7 @@ import common.Missile;
 import common.Packet;
 import common.StringUtil;
 import common.Tank;
+import common.TankType;
 
 public class GameWorld {
 
@@ -49,7 +50,7 @@ public class GameWorld {
 	}
 
 	public void init() {
-		Tank tank = new Tank(100, 100, TEAM_NPC);
+		Tank tank = new Tank(100, 100, TEAM_NPC, TankType.A);
 		tankList.add(tank);
 	}
 
@@ -58,9 +59,9 @@ public class GameWorld {
 		randomLocationX = random.nextInt(Constants.GAME_WIDTH);
 		randomLocationY = random.nextInt(Constants.GAME_HEIGHT);
 		if (clientId % 2 == 0) {
-			tank = new Tank(randomLocationX, randomLocationY, 1);
+			tank = new Tank(randomLocationX, randomLocationY, 1, TankType.A);
 		} else {
-			tank = new Tank(randomLocationX, randomLocationY, 0);
+			tank = new Tank(randomLocationX, randomLocationY, 0, TankType.A);
 		}
 		tank.setClientId(clientId);
 		tankList.add(tank);
@@ -315,9 +316,9 @@ public class GameWorld {
 	}
 
 	public boolean isAllUserReady() {
-		if (this.userPool.size() < MAX_USER_COUNT) {
-			return false;
-		}
+//		if (this.userPool.size() < MAX_USER_COUNT) {
+//			return false;
+//		}
 		Collection<UserSession> users = this.userPool.values();
 		for (UserSession user : users) {
 			if (!user.isReady()) {
