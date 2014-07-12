@@ -109,15 +109,45 @@ public class GameWorld {
 			endGame();
 		}
 	}
-
+	
+	public boolean checkGreenTeamIsLive(){
+		for (Tank tank : tankList) {
+			if(tank.getTeam() == 1){
+				if(tank.isLive()){
+					return false;
+				}	
+			}
+		}
+		return true;
+	}
+	
+	public boolean checkRedTeamIsLive(){
+		for (Tank tank : tankList) {
+			if(tank.getTeam() == 0){
+				if(tank.isLive()){
+					return false;
+				}	
+			}
+		}
+		return true;
+	}
+	
 	public void endGame() {
 		this.status = GameStatus.Idle;
-
+		int team = -1;
+		if(!checkRedTeamIsLive()){
+			team = 0;
+		}else if(!checkGreenTeamIsLive()){
+			team = 1;
+		}
+		Packet packet = new Packet(Command.S_GAME_END);
+		packet.getByteBuffer().putInt(team);
+		this.broadcast(packet);
 		// FIXME broadcast game end message
 		// FIXME handle reward and game result
 		// FIXME clear
 	}
-
+	
 	public void removeTankByClientId(int clientId) {
 		Iterator<Tank> it = tankList.iterator();
 		while (it.hasNext()) {
@@ -229,6 +259,7 @@ public class GameWorld {
 
 			if (!tank.isLive()) {
 				tankList.remove(tank);
+				endGame();
 				return;
 			}
 			collidesWithTanks(tank);

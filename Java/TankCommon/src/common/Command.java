@@ -31,4 +31,6 @@ public class Command {
 	
 	public static final short S_GAME_START = 1011;
 	
+	public static final short S_GAME_END = 1012;
+	
 }
