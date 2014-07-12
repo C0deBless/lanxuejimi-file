@@ -15,6 +15,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import common.Block;
 import common.Camp;
 import common.Command;
 import common.Constants;
@@ -34,6 +35,8 @@ public class TankClient extends Frame {
 	private List<Tank> tanks = new ArrayList<Tank>();
 	private List<Explode> explodes = new ArrayList<Explode>();
 	private List<Missile> missiles = new ArrayList<Missile>();
+	private List<Block> blocks = new ArrayList<Block>();
+	
 	private Camp camp;
 	private int myClientId;
 	private int myGameRoomID;
@@ -46,7 +49,8 @@ public class TankClient extends Frame {
 	private Image[] explodeImages = new Image[10];
 	private Image campImage;
 	private Image gameOverImage;
-
+	private Image wallImage;
+	
 	private String teamWin;
 
 	private boolean gameOver = false;
@@ -57,6 +61,8 @@ public class TankClient extends Frame {
 	private boolean explodeinit = false;
 
 	private Panel gamePanel;
+
+	
 
 	public TankClient() {
 		camp = new Camp();
@@ -119,6 +125,8 @@ public class TankClient extends Frame {
 				.getResource("images/GameOver.png"));
 		campImage = tk.getImage(TankClient.class.getClassLoader().getResource(
 				"images/camp.png"));
+		wallImage = tk.getImage(TankClient.class.getClassLoader().getResource(
+				"images/Wall.png"));
 	}
 
 	public void setTankList(List<Tank> tankList) {
@@ -134,6 +142,13 @@ public class TankClient extends Frame {
 			missiles.addAll(missileList);
 		}
 
+	}
+	
+	public void setBlockList(List<Block> blockList) {
+		synchronized (blocks) {
+			blocks.clear();
+			blocks.addAll(blockList);
+		}
 	}
 
 	public void setPlayersName(List<String> playersNameList) {
@@ -180,6 +195,11 @@ public class TankClient extends Frame {
 		int angle = missile.getAngle();
 		g.drawImage(energyWaveImages[angle], (int) missile.getX(),
 				(int) missile.getY(), null);
+	}
+	
+	public void drawBlock(Block block, Graphics g) {
+		g.drawImage(wallImage, (int) block.getX(),
+				(int) block.getY(), null);
 	}
 
 	public void drawExplode(Explode explode, Graphics g) {
@@ -244,6 +264,13 @@ public class TankClient extends Frame {
 				drawMissile(missile, g);
 			}
 		}
+		
+		synchronized (blocks) {
+			for (Block block : blocks) {
+				drawBlock(block, g);
+			}
+		}
+		
 		synchronized (explodes) {
 			for (Explode explode : explodes) {
 				drawExplode(explode, g);
@@ -514,6 +541,10 @@ public class TankClient extends Frame {
 	public List<Missile> getMissiles() {
 		return this.missiles;
 	}
+	
+	public List<Block> getBlocks() {
+		return this.blocks;
+	}
 
 	public void addNewTank(Tank tank) {
 		synchronized (tanks) {
@@ -564,5 +595,9 @@ public class TankClient extends Frame {
 	public Camp getCamp() {
 		return camp;
 	}
+
+	
+
+	
 
 }
