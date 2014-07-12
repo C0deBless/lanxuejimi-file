@@ -12,6 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import server.GameStatus;
 import server.GameWorld;
 import server.ServerMain;
 import server.User;
@@ -49,7 +50,9 @@ public class Server {
 				while (isRunning) {
 					try {
 						for (GameWorld gameWorld : gameWorlds) {
-							gameWorld.update();
+							if (gameWorld.getStatus() != GameStatus.Idle) {
+								gameWorld.update();
+							}
 		
 						}
 						Thread.sleep(20);
