@@ -145,6 +145,14 @@ public class Tank {
 		return new Rectangle((int) x, (int) y, width, height);
 	}
 
+	public Missile makeMissile(int missileId) {
+		Missile m = new Missile(missileId, this.getX() + this.getWidth() / 2
+				- 3, this.getY() + this.getHeight() / 2 - 3, this.getAngle(),
+				this.getTeam(), MissileType.parse(this.type.getValue()));
+		m.setMissileSpeed(300);
+		return m;
+	}
+
 	public boolean isLive() {
 		return live;
 	}
