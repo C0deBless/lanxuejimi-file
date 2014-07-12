@@ -7,6 +7,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import common.Block;
 import common.Client;
 import common.Command;
 import common.Explode;
@@ -57,7 +58,14 @@ public class ClientMain {
 				Missile missile = Missile.deserialize(packet.getByteBuffer());
 				missileList.add(missile);
 			}
-
+			
+			int blockCount = packet.getByteBuffer().getInt();
+			List<Block> BlockList = new ArrayList<Block>(blockCount);
+			for (int i = 0; i < blockCount; i++) {
+				Block block = Block.deserialize(packet.getByteBuffer());
+				BlockList.add(block);
+			}
+			
 			int playersCount = packet.getByteBuffer().getInt();
 			List<String> playersNameList = new ArrayList<String>(playersCount);
 			for (int i = 0; i < playersCount; i++) {
@@ -68,6 +76,7 @@ public class ClientMain {
 
 			tankClient.setTankList(tankList);
 			tankClient.setMissileList(missileList);
+			tankClient.setBlockList(BlockList);
 			tankClient.setPlayersName(playersNameList);
 		}
 			break;
