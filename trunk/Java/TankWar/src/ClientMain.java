@@ -136,6 +136,7 @@ public class ClientMain {
 			}else if(teamWin == 1){
 				ClientMain.tankClient.setTeamWin("GreenTeam");
 			}
+			ClientMain.tankClient.setWiningTeam(true);
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
