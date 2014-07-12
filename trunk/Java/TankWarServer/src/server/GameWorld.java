@@ -27,6 +27,8 @@ public class GameWorld {
 	public static final int TEAM_NPC = 0;
 	public static final int MAX_USER_COUNT = 2;
 
+	private int missileIndex = 0;
+
 	static Logger logger = LoggerFactory.getLogger(GameWorld.class);
 	private final Map<Integer, UserSession> userPool = new ConcurrentHashMap<>();
 
@@ -69,13 +71,10 @@ public class GameWorld {
 	}
 
 	public Missile initTankMissile(int tankId) {
+		int missileId = (++missileIndex);
 		Tank tank = getTank(tankId);
-		Missile missile = new Missile(tank.getX() + tank.getWidth() / 2 + 3,
-				tank.getY() + tank.getHeight() / 2 + 3, tank.getAngle(),
-				tank.getTeam());
-		missile.setMissileSpeed(300);
+		Missile missile = tank.makeMissile(missileId);
 		missileList.add(missile);
-
 		return missile;
 	}
 
@@ -176,16 +175,6 @@ public class GameWorld {
 		tank.setCurrentSpeed(100);
 	}
 
-	public void fire(int tankId) {
-		Tank tank = getTank(tankId);
-		Missile m = new Missile(tank.getX() + tank.getWidth() / 2 + 3,
-				tank.getY() + tank.getHeight() / 2 + 3, tank.getAngle(),
-				tank.getTeam());
-		m.setMissileSpeed(300);
-
-		missileList.add(m);
-	}
-
 	public void stop(int clientId, int tankId) {
 		Tank tank = getTank(tankId);
 		if (tank == null || tank.getClientId() != clientId) {
@@ -223,7 +212,7 @@ public class GameWorld {
 	}
 
 	private void hitCamp(Missile missile) {
-		if(missile.hitCamp(camp)){
+		if (missile.hitCamp(camp)) {
 			Packet writePacket = new Packet(Command.S_HIT_CAMP);
 			writePacket.getByteBuffer().putInt(missile.getId());
 
@@ -268,7 +257,7 @@ public class GameWorld {
 	}
 
 	public void update() {
-		if(!camp.isLive()){
+		if (!camp.isLive()) {
 			endGame();
 			return;
 		}
@@ -320,9 +309,9 @@ public class GameWorld {
 	}
 
 	public boolean isAllUserReady() {
-//		if (this.userPool.size() < MAX_USER_COUNT) {
-//			return false;
-//		}
+		// if (this.userPool.size() < MAX_USER_COUNT) {
+		// return false;
+		// }
 		Collection<UserSession> users = this.userPool.values();
 		for (UserSession user : users) {
 			if (!user.isReady()) {

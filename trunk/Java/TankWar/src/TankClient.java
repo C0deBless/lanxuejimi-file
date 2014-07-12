@@ -217,7 +217,7 @@ public class TankClient extends Frame {
 	}
 
 	private void drawCamp(Graphics g) {
-		if(!camp.isLive()){
+		if (!camp.isLive()) {
 			return;
 		}
 		g.drawImage(campImage, (int) camp.getX(), (int) camp.getY(), null);
@@ -396,9 +396,7 @@ public class TankClient extends Frame {
 
 	public void fire(int tankId, int missileId) {
 		Tank tank = getTank(tankId);
-		Missile m = new Missile(tank.getX() + tank.getWidth() / 2 - 3,
-				tank.getY() + tank.getHeight() / 2 - 3, tank.getAngle(),
-				tank.getTeam(), missileId);
+		Missile m = tank.makeMissile(missileId);
 		m.setMissileSpeed(300);
 		synchronized (missiles) {
 			missiles.add(m);

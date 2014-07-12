@@ -5,45 +5,25 @@ import java.nio.ByteBuffer;
 
 public class Missile {
 
-	public static int missileIndex = 0;
-
 	private float x;
 	private float y;
-
 	private int width = 10;
 	private int height = 16;
-
 	private float missileSpeed;
-
 	private int angle;
-
 	private int team;
-
 	private boolean live = true;
-
 	private int id;
+	private final MissileType type;
 
-	public Missile(float x, float y, int angle, int team, int id) {
+	public Missile(int id, float x, float y, int angle, int team,
+			MissileType type) {
 		this.x = x;
 		this.y = y;
 		this.angle = angle;
 		this.team = team;
 		this.id = id;
-
-	}
-
-	public Missile(float x, float y, int angle, int team) {
-		this.x = x;
-		this.y = y;
-		this.angle = angle;
-		this.team = team;
-		this.id = (++missileIndex);
-	}
-
-	public Missile(float x, float y, int angle) {
-		this.x = x;
-		this.y = y;
-		this.angle = angle;
+		this.type = type;
 	}
 
 	public void update(long deltaTime) {
@@ -92,8 +72,9 @@ public class Missile {
 		int width = buffer.getInt();
 		int height = buffer.getInt();
 		int team = buffer.getInt();
+		MissileType type = MissileType.parse(buffer.get());
 
-		Missile missile = new Missile(x, y, angle, team, id);
+		Missile missile = new Missile(id, x, y, angle, team, type);
 		missile.missileSpeed = currentSpeed;
 		missile.width = width;
 		missile.height = height;
@@ -109,12 +90,14 @@ public class Missile {
 		}
 		return false;
 	}
-	public boolean hitCamp(Camp camp){
-		if(getRectangle().intersects(camp.getRectangle()) && this.live && camp.isLive()){
+
+	public boolean hitCamp(Camp camp) {
+		if (getRectangle().intersects(camp.getRectangle()) && this.live
+				&& camp.isLive()) {
 			setLive(false);
 			camp.setLive(false);
 			return true;
-			
+
 		}
 		return false;
 	}
@@ -161,6 +144,10 @@ public class Missile {
 
 	public int getAngle() {
 		return angle;
+	}
+
+	public MissileType getType() {
+		return type;
 	}
 
 }
