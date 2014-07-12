@@ -268,6 +268,10 @@ public class GameWorld {
 	}
 
 	public void update() {
+		if(!camp.isLive()){
+			endGame();
+			return;
+		}
 		camp.update();
 		long currentTime = System.currentTimeMillis();
 		if (lastUpdateTime == 0) {
