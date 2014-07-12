@@ -33,4 +33,6 @@ public class Command {
 	
 	public static final short S_GAME_END = 1012;
 	
+	public static final short S_HIT_CAMP = 13; 
+	
 }

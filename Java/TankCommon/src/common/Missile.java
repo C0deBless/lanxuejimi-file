@@ -109,6 +109,15 @@ public class Missile {
 		}
 		return false;
 	}
+	public boolean hitCamp(Camp camp){
+		if(getRectangle().intersects(camp.getRectangle()) && this.live && camp.isLive()){
+			setLive(false);
+			camp.setLive(false);
+			return true;
+			
+		}
+		return false;
+	}
 
 	public Rectangle getRectangle() {
 		return new Rectangle((int) x, (int) y, width, height);
