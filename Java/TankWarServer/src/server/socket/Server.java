@@ -16,7 +16,6 @@ import server.GameWorld;
 import server.ServerMain;
 import server.User;
 import server.UserSession;
-
 import common.Client;
 import common.Command;
 import common.Packet;
@@ -30,6 +29,7 @@ public class Server {
 
 	private ServerSocket serverSocket;
 	private Thread acceptThread;
+	private Thread updateThread;
 	private boolean isRunning = false;
 	private Map<Integer, UserSession> clientPool = new ConcurrentHashMap<>();
 	private List<GameWorld> gameWorlds = new ArrayList<GameWorld>();
@@ -37,10 +37,30 @@ public class Server {
 	public void start() throws IOException {
 		isRunning = true;
 		
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 1000; i++) {
 			GameWorld gameWorld = new GameWorld(i);
 			gameWorlds.add(gameWorld);
+			
 		}
+		updateThread = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				while (isRunning) {
+					try {
+						for (GameWorld gameWorld : gameWorlds) {
+							gameWorld.update();
+		
+						}
+						Thread.sleep(20);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			
+		});
+		updateThread.start();
 		
 		serverSocket = new ServerSocket();
 		serverSocket.bind(new InetSocketAddress(PORT));

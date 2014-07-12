@@ -20,7 +20,7 @@ import common.Packet;
 import common.StringUtil;
 import common.Tank;
 
-public class GameWorld implements Runnable {
+public class GameWorld {
 
 	public static final int TEAM_NPC = 0;
 	public static final int MAX_USER_COUNT = 2;
@@ -32,8 +32,7 @@ public class GameWorld implements Runnable {
 	private List<Missile> missileList = new ArrayList<Missile>();
 	private List<Explode> explodeList = new ArrayList<Explode>();
 
-	private Thread thread;
-	private boolean isRunning = false;
+
 	private long lastUpdateTime = 0;
 
 	private Random random = new Random();
@@ -45,9 +44,6 @@ public class GameWorld implements Runnable {
 
 	public GameWorld(int id) {
 		this.id = id;
-		thread = new Thread(this);
-		thread.start();
-		isRunning = true;
 	}
 
 	public void init() {
@@ -220,7 +216,7 @@ public class GameWorld implements Runnable {
 		}
 	}
 
-	private void update() {
+	public void update() {
 		long currentTime = System.currentTimeMillis();
 		if (lastUpdateTime == 0) {
 			lastUpdateTime = currentTime;
@@ -279,19 +275,6 @@ public class GameWorld implements Runnable {
 		return true;
 	}
 
-	@Override
-	public void run() {
-		while (isRunning) {
-
-			update();
-
-			try {
-				Thread.sleep(20);
-			} catch (InterruptedException e) {
-				logger.error("Thread sleep error");
-			}
-		}
-	}
 
 	public GameStatus getStatus() {
 		return status;
