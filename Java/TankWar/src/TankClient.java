@@ -49,7 +49,8 @@ public class TankClient extends Frame {
 	
 	private String teamWin;
 	
-	private boolean GameOver = false;
+	private boolean gameOver = false;
+	private boolean winingTeam = false;
 	
 	private boolean judgeKey = true;
 	private Image offScreenImage = null;
@@ -213,8 +214,11 @@ public class TankClient extends Frame {
 	
 	
 	public void paint(Graphics g) {
-		if(GameOver){
+		if(gameOver){
 			g.drawImage(gameOverImage, 0, 0, null);
+			tanks.clear();
+			missiles.clear();
+			explodes.clear();
 			return;
 		}
 		synchronized (tanks) {
@@ -249,7 +253,7 @@ public class TankClient extends Frame {
 		offScreen.setColor(Color.BLACK);
 		offScreen.fillRect(0, 0, Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
 		offScreen.setColor(c);
-		if(GameOver){
+		if(winingTeam){
 			g.drawString(teamWin+"Win", 700, 50);
 		}
 		paint(offScreen);
@@ -519,11 +523,11 @@ public class TankClient extends Frame {
 	}
 
 	public boolean isGameOver() {
-		return GameOver;
+		return gameOver;
 	}
 
 	public void setGameOver(boolean gameOver) {
-		GameOver = gameOver;
+		this.gameOver = gameOver;
 	}
 
 	public String getTeamWin() {
@@ -532,6 +536,14 @@ public class TankClient extends Frame {
 
 	public void setTeamWin(String teamWin) {
 		this.teamWin = teamWin;
+	}
+
+	public boolean isWiningTeam() {
+		return winingTeam;
+	}
+
+	public void setWiningTeam(boolean winingTeam) {
+		this.winingTeam = winingTeam;
 	}
 	
 }

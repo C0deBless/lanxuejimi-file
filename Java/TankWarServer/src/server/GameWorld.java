@@ -143,6 +143,9 @@ public class GameWorld {
 		Packet packet = new Packet(Command.S_GAME_END);
 		packet.getByteBuffer().putInt(team);
 		this.broadcast(packet);
+		tankList.clear();
+		missileList.clear();
+		explodeList.clear();
 		// FIXME broadcast game end message
 		// FIXME handle reward and game result
 		// FIXME clear
