@@ -7,6 +7,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import common.Camp;
 import common.Client;
 import common.Command;
 import common.Explode;
@@ -41,6 +42,12 @@ public class ClientMain {
 		}
 			break;
 		case Command.S_GAME_START: {
+			
+			float x = packet.getByteBuffer().getFloat();
+			float y = packet.getByteBuffer().getFloat();
+			ClientMain.tankClient.getCamp().setX(x);
+			ClientMain.tankClient.getCamp().setY(y);
+			
 			int tankCount = packet.getByteBuffer().getInt();
 			// logger.debug("S_LOGIN:,clientId:{}", clientId);
 			List<Tank> tankList = new ArrayList<Tank>(tankCount);
@@ -143,6 +150,17 @@ public class ClientMain {
 				e.printStackTrace();
 			}
 			ClientMain.tankClient.setGameOver(true);
+		}
+			break;
+		case Command.S_HIT_CAMP: {
+			int missileId = packet.getByteBuffer().getInt();
+
+			Explode explode = Explode.deserialize(packet.getByteBuffer());
+			logger.debug("S_HIT_CAMP,missileId:{}", missileId);
+			ClientMain.tankClient.missileDead(missileId, explode);
+			ClientMain.tankClient.explodeDead(explode.getId());
+			ClientMain.tankClient.campDead();
+
 		}
 			break;
 		}

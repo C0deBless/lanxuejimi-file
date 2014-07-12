@@ -68,8 +68,8 @@ public class Tank {
 
 		if (x < 0)
 			x = 0;
-		if (y < 25)
-			y = 25;
+		if (y < 0)
+			y = 0;
 		if (x > Constants.GAME_WIDTH - width)
 			x = Constants.GAME_WIDTH - width;
 		if (y > Constants.GAME_HEIGHT - height)

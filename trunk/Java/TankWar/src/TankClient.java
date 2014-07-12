@@ -15,6 +15,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import common.Camp;
 import common.Command;
 import common.Constants;
 import common.Explode;
@@ -33,25 +34,24 @@ public class TankClient extends Frame {
 	private List<Tank> tanks = new ArrayList<Tank>();
 	private List<Explode> explodes = new ArrayList<Explode>();
 	private List<Missile> missiles = new ArrayList<Missile>();
-
+	private Camp camp;
 	private int myClientId;
 	private int myGameRoomID;
 	private List<String> playersName = new ArrayList<String>();
-	
 
 	private Toolkit tk = Toolkit.getDefaultToolkit();
 	private Image[] greenImages = new Image[4];
 	private Image[] redImages = new Image[4];
 	private Image[] energyWaveImages = new Image[4];
 	private Image[] explodeImages = new Image[10];
-	
+	private Image campImage;
 	private Image gameOverImage;
-	
+
 	private String teamWin;
-	
+
 	private boolean gameOver = false;
 	private boolean winingTeam = false;
-	
+
 	private boolean judgeKey = true;
 	private Image offScreenImage = null;
 	private boolean explodeinit = false;
@@ -59,6 +59,7 @@ public class TankClient extends Frame {
 	private Panel gamePanel;
 
 	public TankClient() {
+		camp = new Camp();
 		init();
 	}
 
@@ -114,7 +115,10 @@ public class TankClient extends Frame {
 						"images/9.png")),
 				tk.getImage(TankClient.class.getClassLoader().getResource(
 						"images/10.png")) };
-		gameOverImage = tk.getImage(TankClient.class.getClassLoader().getResource("images/GameOver.png"));
+		gameOverImage = tk.getImage(TankClient.class.getClassLoader()
+				.getResource("images/GameOver.png"));
+		campImage = tk.getImage(TankClient.class.getClassLoader().getResource(
+				"images/camp.png"));
 	}
 
 	public void setTankList(List<Tank> tankList) {
@@ -131,22 +135,22 @@ public class TankClient extends Frame {
 		}
 
 	}
-	
+
 	public void setPlayersName(List<String> playersNameList) {
 		synchronized (playersNameList) {
 			playersName.clear();
 			playersName.addAll(playersNameList);
 		}
-		
+
 	}
-	
-	private void drawPlayersName(Graphics g){
+
+	private void drawPlayersName(Graphics g) {
 		for (int i = 0; i < playersName.size(); i++) {
-			int[] y = {70, 90, 110, 130, 150};
-			g.drawString(i+":--" + playersName.get(i), 10, y[i]);
+			int[] y = { 70, 90, 110, 130, 150 };
+			g.drawString(i + ":--" + playersName.get(i), 10, y[i]);
 		}
 	}
-	
+
 	private void drawTank(Tank tank, Graphics g) {
 		if (!tank.isLive()) {
 			return;
@@ -211,19 +215,28 @@ public class TankClient extends Frame {
 		g.drawImage(redImages[angle], (int) tank.getX(), (int) tank.getY(),
 				null);
 	}
-	
-	
+
+	private void drawCamp(Graphics g) {
+		if(!camp.isLive()){
+			return;
+		}
+		g.drawImage(campImage, (int) camp.getX(), (int) camp.getY(), null);
+
+	}
+
 	public void paint(Graphics g) {
-		if(gameOver){
+		if (gameOver) {
 			g.drawImage(gameOverImage, 0, 0, null);
 			tanks.clear();
 			missiles.clear();
 			explodes.clear();
 			return;
 		}
+
 		synchronized (tanks) {
 			for (Tank tank : tanks) {
 				drawTank(tank, g);
+				drawCamp(g);
 			}
 		}
 		synchronized (missiles) {
@@ -242,7 +255,7 @@ public class TankClient extends Frame {
 	@Override
 	public void update(Graphics g) {
 		g.setColor(Color.RED);
-		g.drawString("GameRoomNumber:--"+getMyGameRoomID(), 10, 50);
+		g.drawString("GameRoomNumber:--" + getMyGameRoomID(), 10, 50);
 		drawPlayersName(g);
 		if (offScreenImage == null) {
 			offScreenImage = gamePanel.createImage(Constants.GAME_WIDTH,
@@ -253,11 +266,11 @@ public class TankClient extends Frame {
 		offScreen.setColor(Color.BLACK);
 		offScreen.fillRect(0, 0, Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
 		offScreen.setColor(c);
-		if(winingTeam){
-			g.drawString(teamWin+"Win", 700, 50);
+		if (winingTeam) {
+			g.drawString(teamWin + "Win", 700, 50);
 		}
 		paint(offScreen);
-		
+
 		gamePanel.getGraphics().drawImage(offScreenImage, 0, 0, null);
 	}
 
@@ -360,6 +373,10 @@ public class TankClient extends Frame {
 				it.remove();
 			}
 		}
+	}
+
+	public void campDead() {
+		camp.setLive(false);
 	}
 
 	public void tankDead(int tankId) {
@@ -509,7 +526,7 @@ public class TankClient extends Frame {
 	public List<Explode> getExplodes() {
 		return explodes;
 	}
-	
+
 	public int getMyGameRoomID() {
 		return myGameRoomID;
 	}
@@ -545,5 +562,9 @@ public class TankClient extends Frame {
 	public void setWiningTeam(boolean winingTeam) {
 		this.winingTeam = winingTeam;
 	}
-	
+
+	public Camp getCamp() {
+		return camp;
+	}
+
 }

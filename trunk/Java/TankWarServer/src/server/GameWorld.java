@@ -12,6 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import common.Camp;
 import common.Command;
 import common.Constants;
 import common.Explode;
@@ -31,6 +32,7 @@ public class GameWorld {
 	private List<Tank> tankList = new ArrayList<Tank>();
 	private List<Missile> missileList = new ArrayList<Missile>();
 	private List<Explode> explodeList = new ArrayList<Explode>();
+	private Camp camp;
 
 	private long lastUpdateTime = 0;
 
@@ -43,6 +45,7 @@ public class GameWorld {
 
 	public GameWorld(int id) {
 		this.id = id;
+		camp = new Camp(232, 464);
 	}
 
 	public void init() {
@@ -109,35 +112,35 @@ public class GameWorld {
 			endGame();
 		}
 	}
-	
-	public boolean checkGreenTeamIsLive(){
+
+	public boolean checkGreenTeamIsLive() {
 		for (Tank tank : tankList) {
-			if(tank.getTeam() == 1){
-				if(tank.isLive()){
+			if (tank.getTeam() == 1) {
+				if (tank.isLive()) {
 					return false;
-				}	
+				}
 			}
 		}
 		return true;
 	}
-	
-	public boolean checkRedTeamIsLive(){
+
+	public boolean checkRedTeamIsLive() {
 		for (Tank tank : tankList) {
-			if(tank.getTeam() == 0){
-				if(tank.isLive()){
+			if (tank.getTeam() == 0) {
+				if (tank.isLive()) {
 					return false;
-				}	
+				}
 			}
 		}
 		return true;
 	}
-	
+
 	public void endGame() {
 		this.status = GameStatus.Idle;
 		int team = -1;
-		if(!checkRedTeamIsLive()){
+		if (!checkRedTeamIsLive()) {
 			team = 0;
-		}else if(!checkGreenTeamIsLive()){
+		} else if (!checkGreenTeamIsLive()) {
 			team = 1;
 		}
 		Packet packet = new Packet(Command.S_GAME_END);
@@ -150,7 +153,7 @@ public class GameWorld {
 		// FIXME handle reward and game result
 		// FIXME clear
 	}
-	
+
 	public void removeTankByClientId(int clientId) {
 		Iterator<Tank> it = tankList.iterator();
 		while (it.hasNext()) {
@@ -218,6 +221,20 @@ public class GameWorld {
 		}
 	}
 
+	private void hitCamp(Missile missile) {
+		if(missile.hitCamp(camp)){
+			Packet writePacket = new Packet(Command.S_HIT_CAMP);
+			writePacket.getByteBuffer().putInt(missile.getId());
+
+			Explode explode = new Explode(missile.getX(), missile.getY());
+			explodeList.add(explode);
+
+			explode.serialize(writePacket.getByteBuffer());
+
+			broadcast(writePacket);
+		}
+	}
+
 	public void collidesWithTanks(Tank tank) {
 		for (Tank t : tankList) {
 			if (tank.collidesWithTank(t)) {
@@ -232,9 +249,11 @@ public class GameWorld {
 	}
 
 	private void colloedWithWall(Missile missile) {
-		if (missile.getX() < 10 || missile.getY() < 40
+		if (missile.getX() < 10
+				|| missile.getY() < 10
 				|| missile.getX() > Constants.GAME_WIDTH - missile.getWidth()
-				|| missile.getY() > Constants.GAME_HEIGHT - missile.getHeight()) {
+				|| missile.getY() > Constants.GAME_HEIGHT - missile.getHeight()
+						/ 2) {
 
 			missile.setLive(false);
 
@@ -248,6 +267,7 @@ public class GameWorld {
 	}
 
 	public void update() {
+		camp.update();
 		long currentTime = System.currentTimeMillis();
 		if (lastUpdateTime == 0) {
 			lastUpdateTime = currentTime;
@@ -282,6 +302,7 @@ public class GameWorld {
 			colloedWithWall(missile);
 			missile.update(deltaTime);
 			hitTank(missile);
+			hitCamp(missile);
 		}
 
 	}
@@ -354,6 +375,8 @@ public class GameWorld {
 
 	public void broadcastGameStart() {
 		Packet packet = new Packet(Command.S_GAME_START);
+		packet.getByteBuffer().putFloat(camp.getX());
+		packet.getByteBuffer().putFloat(camp.getY());
 		this.serializeAllTanks(packet.getByteBuffer());
 		this.serializeAllMissiles(packet.getByteBuffer());
 		this.sendAllName(packet.getByteBuffer(), id);
