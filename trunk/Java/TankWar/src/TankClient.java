@@ -44,6 +44,13 @@ public class TankClient extends Frame {
 	private Image[] redImages = new Image[4];
 	private Image[] energyWaveImages = new Image[4];
 	private Image[] explodeImages = new Image[10];
+	
+	private Image gameOverImage;
+	
+	private String teamWin;
+	
+	private boolean GameOver = false;
+	
 	private boolean judgeKey = true;
 	private Image offScreenImage = null;
 	private boolean explodeinit = false;
@@ -106,6 +113,7 @@ public class TankClient extends Frame {
 						"images/9.png")),
 				tk.getImage(TankClient.class.getClassLoader().getResource(
 						"images/10.png")) };
+		gameOverImage = tk.getImage(TankClient.class.getClassLoader().getResource("images/GameOver.png"));
 	}
 
 	public void setTankList(List<Tank> tankList) {
@@ -205,7 +213,10 @@ public class TankClient extends Frame {
 	
 	
 	public void paint(Graphics g) {
-		
+		if(GameOver){
+			g.drawImage(gameOverImage, 0, 0, null);
+			return;
+		}
 		synchronized (tanks) {
 			for (Tank tank : tanks) {
 				drawTank(tank, g);
@@ -238,6 +249,9 @@ public class TankClient extends Frame {
 		offScreen.setColor(Color.BLACK);
 		offScreen.fillRect(0, 0, Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
 		offScreen.setColor(c);
+		if(GameOver){
+			g.drawString(teamWin+"Win", 700, 50);
+		}
 		paint(offScreen);
 		
 		gamePanel.getGraphics().drawImage(offScreenImage, 0, 0, null);
@@ -502,6 +516,22 @@ public class TankClient extends Frame {
 
 	public List<String> getPlayersName() {
 		return playersName;
+	}
+
+	public boolean isGameOver() {
+		return GameOver;
+	}
+
+	public void setGameOver(boolean gameOver) {
+		GameOver = gameOver;
+	}
+
+	public String getTeamWin() {
+		return teamWin;
+	}
+
+	public void setTeamWin(String teamWin) {
+		this.teamWin = teamWin;
 	}
 	
 }

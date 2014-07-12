@@ -36,7 +36,7 @@ public class ClientMain {
 		switch (cmd) {
 		case Command.S_READY: {
 			logger.debug("S_READY:");
-			
+
 			// do nothing
 		}
 			break;
@@ -82,13 +82,6 @@ public class ClientMain {
 			ClientMain.tankClient.stop(clientId, tankId);
 		}
 			break;
-		// case Command.S_NEW_TANK: {
-		// Tank tank = Tank.deserialize(packet.getByteBuffer());
-		// String playerName = StringUtil.getString(packet.getByteBuffer());
-		// ClientMain.tankClient.getPlayersName().add(playerName);
-		// ClientMain.tankClient.addNewTank(tank);
-		// }
-		// break;
 		case Command.S_EXIT: {
 			int clientId = packet.getByteBuffer().getInt();
 			ClientMain.tankClient.removeTankByClientId(clientId);
@@ -129,23 +122,26 @@ public class ClientMain {
 
 		}
 			break;
-		// case Command.S_NEW_PLAYERS_NAME: {
-		// int playersCount = packet.getByteBuffer().getInt();
-		// List<String> playersNameList = new ArrayList<String>(playersCount);
-		// for (int i = 0; i < playersCount; i++) {
-		// String playerName = StringUtil
-		// .getString(packet.getByteBuffer());
-		// playersNameList.add(playerName);
-		// }
-		//
-		// tankClient.setPlayersName(playersNameList);
-		// }
-		// break;
-
 		case Command.S_LOGIN: {
 			int gameWorldId = packet.getByteBuffer().getInt();
 			int clientId = packet.getByteBuffer().getInt();
 			new GameStartBox(gameWorldId, clientId);
+		}
+			break;
+
+		case Command.S_GAME_END: {
+			int teamWin = packet.getByteBuffer().getInt();
+			if(teamWin == 0){
+				ClientMain.tankClient.setTeamWin("RedTeam");
+			}else if(teamWin == 1){
+				ClientMain.tankClient.setTeamWin("GreenTeam");
+			}
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			ClientMain.tankClient.setGameOver(true);
 		}
 			break;
 		}
