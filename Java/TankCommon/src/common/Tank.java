@@ -25,18 +25,22 @@ public class Tank {
 	private int angle; // 0,1,2,3
 	private int team;
 
-	public Tank(float x, float y, int team) {
+	private final TankType type;
+
+	public Tank(float x, float y, int team, TankType type) {
 		this.x = x;
 		this.y = y;
 		this.team = team;
 		this.id = (++tankIndex);
+		this.type = type;
 	}
 
-	public Tank(float x, float y, int team, int id) {
+	public Tank(float x, float y, int team, int id, TankType type) {
 		this.x = x;
 		this.y = y;
 		this.team = team;
 		this.id = id;
+		this.type = type;
 	}
 
 	public void update(long deltaTime) {
@@ -86,6 +90,7 @@ public class Tank {
 		buffer.putInt(width);
 		buffer.putInt(height);
 		buffer.putInt(team);
+		buffer.put(this.type.getValue());
 	}
 
 	public static Tank deserialize(ByteBuffer buffer) {
@@ -98,8 +103,9 @@ public class Tank {
 		int width = buffer.getInt();
 		int height = buffer.getInt();
 		int team = buffer.getInt();
+		TankType type = TankType.parse(buffer.get());
 
-		Tank tank = new Tank(x, y, team, id);
+		Tank tank = new Tank(x, y, team, id, type);
 		tank.clientId = clientId;
 		tank.currentSpeed = currentSpeed;
 		tank.angle = angle;
@@ -201,5 +207,9 @@ public class Tank {
 
 	public void setCurrentSpeed(float currentSpeed) {
 		this.currentSpeed = currentSpeed;
+	}
+
+	public TankType getType() {
+		return type;
 	}
 }
