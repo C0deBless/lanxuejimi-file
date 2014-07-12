@@ -81,7 +81,6 @@ public class GameWorld {
 		Collection<UserSession> nameList = userPool.values();
 		for (UserSession userSession : nameList) {
 			StringUtil.putString(buffer, userSession.getUser().getName());
-			userSession.getUser().setGameWorldIndex(gameId);
 		}
 
 	}
@@ -284,7 +283,8 @@ public class GameWorld {
 	public boolean canJoin() {
 		if (this.userPool.size() < MAX_USER_COUNT
 				&& (this.status == GameStatus.Idle || this.status == GameStatus.Waiting)) {
-			logger.debug("canJoin, true");
+			logger.debug("canJoin, true,  gameWorldId:{}, status:{}", this.id,
+					this.status);
 			return true;
 		} else {
 			logger.debug("canJoin, false:{}, status:{}", this.userPool.size(),

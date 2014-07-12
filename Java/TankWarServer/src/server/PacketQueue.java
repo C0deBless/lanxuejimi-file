@@ -44,7 +44,8 @@ public class PacketQueue implements Runnable {
 					.findProperGameWorld(session);
 			logger.debug("C_LOGIN,game:" + game + "---session:" + session);
 			game.join(session);
-
+			
+			session.getUser().setGameWorldIndex(game.getId());
 			game.initUserTank(clientId);
 
 			game.sendServerLoginCommand(packet, clientId);
@@ -112,7 +113,7 @@ public class PacketQueue implements Runnable {
 			break;
 		case Command.C_NEW_MISSILE: {
 			int tankId = packet.getByteBuffer().getInt();
-			logger.debug("C_NEW+MISSILE, tanlId:" + tankId);
+			logger.debug("C_NEW_MISSILE, tanlId:" + tankId);
 			User user = session.getUser();
 			GameWorld game = ServerMain.getServer().getGameWorld(
 					user.getGameWorldIndex());
@@ -131,8 +132,7 @@ public class PacketQueue implements Runnable {
 			User user = session.getUser();
 			GameWorld game = ServerMain.getServer().getGameWorld(
 					user.getGameWorldIndex());
-			logger.debug("C_START,GameStatus:" + game.getStatus());
-			
+
 			// 实际上没啥用，等以后再说吧
 			Packet writePacket = new Packet(Command.S_READY);
 			session.getClient().pushWritePacket(writePacket);
@@ -142,6 +142,8 @@ public class PacketQueue implements Runnable {
 				game.setStatus(GameStatus.Playing);
 				game.broadcastGameStart();
 			}
+			logger.debug("C_START,GameStatus:{}, GameId:{}", game.getStatus(),
+					game.getId());
 		}
 			break;
 		default:
