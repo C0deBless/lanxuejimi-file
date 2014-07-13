@@ -1,5 +1,6 @@
 package common;
 
+import java.awt.Rectangle;
 import java.nio.ByteBuffer;
 
 public class Block {
@@ -9,8 +10,8 @@ public class Block {
 	private float x;
 	private float y;
 	private boolean live = true;
-	private final int id ;
-	
+	private final int id;
+
 	public Block(float x, float y) {
 		this.x = x;
 		this.y = y;
@@ -22,10 +23,10 @@ public class Block {
 		this.y = y;
 		this.id = id;
 	}
-	
-	public void update(){
+
+	public void update() {
 	}
-	
+
 	public void serialize(ByteBuffer buffer) {
 		buffer.putInt(id);
 		buffer.putFloat(x);
@@ -47,6 +48,10 @@ public class Block {
 		return wall;
 	}
 
+	public Rectangle getRectangle() {
+		return new Rectangle((int) x, (int) y, width, height);
+	}
+
 	public boolean isLive() {
 		return live;
 	}
@@ -66,6 +71,5 @@ public class Block {
 	public int getId() {
 		return id;
 	}
-	
-	
+
 }
