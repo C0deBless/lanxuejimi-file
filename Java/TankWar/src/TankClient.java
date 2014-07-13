@@ -351,6 +351,17 @@ public class TankClient extends Frame {
 		}
 	}
 
+	private Block getBLock(int blockId) {
+		synchronized (blocks) {
+			for (Block block : blocks) {
+				if (block.getId() == blockId) {
+					return block;
+				}
+			}
+			return null;
+		}
+	}
+
 	public void removeTankByClientId(int clientId) {
 		synchronized (tanks) {
 			Iterator<Tank> it = tanks.iterator();
@@ -462,6 +473,10 @@ public class TankClient extends Frame {
 	public void tanksCollide(int tank1Id, int tank2Id) {
 		getTank(tank1Id).collidesWithTank(getTank(tank2Id));
 
+	}
+
+	public void TanksAndBlockCollision(int tankId, int blockId) {
+		getBLock(blockId).collidesWithTank(getTank(tankId));
 	}
 
 	private class KeyMonitor extends KeyAdapter {

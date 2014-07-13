@@ -124,6 +124,14 @@ public class ClientMain {
 			ClientMain.tankClient.tanksCollide(tank1Id, tank2Id);
 		}
 			break;
+
+		case Command.S_BLOCKS_COLLIDE: {
+			int tankId = packet.getByteBuffer().getInt();
+			int blockId = packet.getByteBuffer().getInt();
+
+			ClientMain.tankClient.TanksAndBlockCollision(tankId, blockId);
+		}
+			break;
 		case Command.S_HIT_WALL: {
 			int missileId = packet.getByteBuffer().getInt();
 			Explode explode = Explode.deserialize(packet.getByteBuffer());
