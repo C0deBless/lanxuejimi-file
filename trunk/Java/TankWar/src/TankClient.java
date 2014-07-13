@@ -36,21 +36,23 @@ public class TankClient extends Frame {
 	private List<Explode> explodes = new ArrayList<Explode>();
 	private List<Missile> missiles = new ArrayList<Missile>();
 	private List<Block> blocks = new ArrayList<Block>();
-	
+
 	private Camp camp;
 	private int myClientId;
 	private int myGameRoomID;
 	private List<String> playersName = new ArrayList<String>();
 
 	private Toolkit tk = Toolkit.getDefaultToolkit();
-	private Image[] greenImages = new Image[4];
-	private Image[] redImages = new Image[4];
+
+	private Image[] tankAImages = new Image[4];
+	private Image[] tankBImages = new Image[4];
+
 	private Image[] energyWaveImages = new Image[4];
 	private Image[] explodeImages = new Image[10];
 	private Image campImage;
 	private Image gameOverImage;
 	private Image wallImage;
-	
+
 	private String teamWin;
 
 	private boolean gameOver = false;
@@ -62,33 +64,30 @@ public class TankClient extends Frame {
 
 	private Panel gamePanel;
 
-	
-
 	public TankClient() {
 		camp = new Camp();
 		init();
 	}
 
 	private void init() {
-		greenImages = new Image[] {
+		tankAImages = new Image[] {
 				tk.getImage(TankClient.class.getClassLoader().getResource(
-						"images/greenU.png")),
+						"images/tank_a_U.png")),
 				tk.getImage(TankClient.class.getClassLoader().getResource(
-						"images/greenR.png")),
+						"images/tank_a_R.png")),
 				tk.getImage(TankClient.class.getClassLoader().getResource(
-						"images/greenD.png")),
+						"images/tank_a_D.png")),
 				tk.getImage(TankClient.class.getClassLoader().getResource(
-						"images/greenL.png")) };
-
-		redImages = new Image[] {
+						"images/tank_a_L.png")) };
+		tankBImages = new Image[] {
 				tk.getImage(TankClient.class.getClassLoader().getResource(
-						"images/redU.png")),
+						"images/tank_b_U.png")),
 				tk.getImage(TankClient.class.getClassLoader().getResource(
-						"images/redR.png")),
+						"images/tank_b_R.png")),
 				tk.getImage(TankClient.class.getClassLoader().getResource(
-						"images/redD.png")),
+						"images/tank_b_D.png")),
 				tk.getImage(TankClient.class.getClassLoader().getResource(
-						"images/redL.png")) };
+						"images/tank_b_L.png")) };
 
 		energyWaveImages = new Image[] {
 				tk.getImage(TankClient.class.getClassLoader().getResource(
@@ -143,7 +142,7 @@ public class TankClient extends Frame {
 		}
 
 	}
-	
+
 	public void setBlockList(List<Block> blockList) {
 		synchronized (blocks) {
 			blocks.clear();
@@ -171,17 +170,32 @@ public class TankClient extends Frame {
 			return;
 		}
 		Color c = g.getColor();
+		int angle = tank.getAngle();
+
 		if (tank.getTeam() == 0) {
 			g.setColor(Color.RED);
 			g.drawString("" + tank.getId(), (int) tank.getX(),
 					(int) tank.getY() - 10);
-			redTank(tank, g);
 		} else {
 			g.setColor(Color.GREEN);
 			g.drawString("" + tank.getId(), (int) tank.getX(),
 					(int) tank.getY() - 10);
-			greenTank(tank, g);
 		}
+
+		Image image = null;
+
+		switch (tank.getType()) {
+		case A:
+			image = tankAImages[angle];
+			break;
+		case B:
+			image = tankBImages[angle];
+			break;
+		default:
+			break;
+		}
+
+		g.drawImage(image, (int) tank.getX(), (int) tank.getY(), null);
 
 		g.setColor(c);
 
@@ -196,7 +210,7 @@ public class TankClient extends Frame {
 		g.drawImage(energyWaveImages[angle], (int) missile.getX(),
 				(int) missile.getY(), null);
 	}
-	
+
 	public void drawBlock(Block block, Graphics g) {
 		if (!block.isLive()) {
 			return;
@@ -227,18 +241,6 @@ public class TankClient extends Frame {
 				- wdith / 2, (int) explode.getY() - height / 2, null);
 	}
 
-	public void greenTank(Tank tank, Graphics g) {
-		int angle = tank.getAngle();
-		g.drawImage(greenImages[angle], (int) tank.getX(), (int) tank.getY(),
-				null);
-	}
-
-	public void redTank(Tank tank, Graphics g) {
-		int angle = tank.getAngle();
-		g.drawImage(redImages[angle], (int) tank.getX(), (int) tank.getY(),
-				null);
-	}
-
 	private void drawCamp(Graphics g) {
 		if (!camp.isLive()) {
 			return;
@@ -267,13 +269,13 @@ public class TankClient extends Frame {
 				drawMissile(missile, g);
 			}
 		}
-		
+
 		synchronized (blocks) {
 			for (Block block : blocks) {
 				drawBlock(block, g);
 			}
 		}
-		
+
 		synchronized (explodes) {
 			for (Explode explode : explodes) {
 				drawExplode(explode, g);
@@ -559,7 +561,7 @@ public class TankClient extends Frame {
 	public List<Missile> getMissiles() {
 		return this.missiles;
 	}
-	
+
 	public List<Block> getBlocks() {
 		return this.blocks;
 	}
@@ -613,9 +615,5 @@ public class TankClient extends Frame {
 	public Camp getCamp() {
 		return camp;
 	}
-
-	
-
-	
 
 }
