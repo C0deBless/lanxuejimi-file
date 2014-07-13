@@ -198,6 +198,9 @@ public class TankClient extends Frame {
 	}
 	
 	public void drawBlock(Block block, Graphics g) {
+		if (!block.isLive()) {
+			return;
+		}
 		g.drawImage(wallImage, (int) block.getX(),
 				(int) block.getY(), null);
 	}
@@ -373,7 +376,22 @@ public class TankClient extends Frame {
 		}
 		tank.setCurrentSpeed(0);
 	}
+	
+	public void blockDead(int blockId) {
 
+		synchronized (blocks) {
+			Iterator<Block> it = blocks.iterator();
+			while (it.hasNext()) {
+				Block block = it.next();
+				if (block.getId() == blockId) {
+					block.setLive(false);
+					it.remove();
+				}
+			}
+		}
+
+	}
+	
 	public void missileDead(int missileId, Explode explode) {
 
 		synchronized (missiles) {

@@ -37,10 +37,10 @@ public class GameWorld {
 	private List<Tank> tankList = new ArrayList<Tank>();
 	private List<Missile> missileList = new ArrayList<Missile>();
 	private List<Explode> explodeList = new ArrayList<Explode>();
-	private List<Block> blockList = new ArrayList<Block>(); 
+	private List<Block> blockList = new ArrayList<Block>();
 	private Camp camp;
 	private int[][] blocksCoordinate;
-			
+
 	private long lastUpdateTime = 0;
 
 	private Random random = new Random();
@@ -56,87 +56,147 @@ public class GameWorld {
 		initblocksCoordinate();
 		initBlocks();
 	}
-	
-	public void initBlocks(){
-		for(int i = 0; i < blocksCoordinate.length; i++){
-			Block block = new Block(blocksCoordinate[i][0], blocksCoordinate[i][1]);
+
+	public void initBlocks() {
+		for (int i = 0; i < blocksCoordinate.length; i++) {
+			Block block = new Block(blocksCoordinate[i][0],
+					blocksCoordinate[i][1]);
 			blockList.add(block);
 		}
 	}
-	
-	public void initblocksCoordinate(){
-		blocksCoordinate = new int[][]{
-				{Constants.CAMP_X + (Constants.A_GRID*0), Constants.CAMP_Y - (Constants.A_GRID*1)},
-				{Constants.CAMP_X + (Constants.A_GRID*0), Constants.CAMP_Y - (Constants.A_GRID*3)},
-				{Constants.CAMP_X + (Constants.A_GRID*0), Constants.CAMP_Y - (Constants.A_GRID*4)},
-				{Constants.CAMP_X + (Constants.A_GRID*0), Constants.CAMP_Y - (Constants.A_GRID*8)},
-				{Constants.CAMP_X + (Constants.A_GRID*0), Constants.CAMP_Y - (Constants.A_GRID*10)},
-				{Constants.CAMP_X - (Constants.A_GRID*1), Constants.CAMP_Y - (Constants.A_GRID*0)},
-				{Constants.CAMP_X - (Constants.A_GRID*1), Constants.CAMP_Y - (Constants.A_GRID*1)},
-				{Constants.CAMP_X - (Constants.A_GRID*1), Constants.CAMP_Y - (Constants.A_GRID*3)},
-				{Constants.CAMP_X - (Constants.A_GRID*1), Constants.CAMP_Y - (Constants.A_GRID*4)},
-				{Constants.CAMP_X - (Constants.A_GRID*1), Constants.CAMP_Y - (Constants.A_GRID*5)},
-				{Constants.CAMP_X - (Constants.A_GRID*1), Constants.CAMP_Y - (Constants.A_GRID*6)},
-				{Constants.CAMP_X - (Constants.A_GRID*1), Constants.CAMP_Y - (Constants.A_GRID*8)},
-				{Constants.CAMP_X - (Constants.A_GRID*3), Constants.CAMP_Y - (Constants.A_GRID*0)},
-				{Constants.CAMP_X - (Constants.A_GRID*3), Constants.CAMP_Y - (Constants.A_GRID*2)},
-				{Constants.CAMP_X - (Constants.A_GRID*3), Constants.CAMP_Y - (Constants.A_GRID*3)},
-				{Constants.CAMP_X - (Constants.A_GRID*3), Constants.CAMP_Y - (Constants.A_GRID*4)},
-				{Constants.CAMP_X - (Constants.A_GRID*3), Constants.CAMP_Y - (Constants.A_GRID*5)},
-				{Constants.CAMP_X - (Constants.A_GRID*3), Constants.CAMP_Y - (Constants.A_GRID*6)},
-				{Constants.CAMP_X - (Constants.A_GRID*3), Constants.CAMP_Y - (Constants.A_GRID*8)},
-				{Constants.CAMP_X - (Constants.A_GRID*3), Constants.CAMP_Y - (Constants.A_GRID*9)},
-				{Constants.CAMP_X - (Constants.A_GRID*3), Constants.CAMP_Y - (Constants.A_GRID*11)},
-				{Constants.CAMP_X - (Constants.A_GRID*3), Constants.CAMP_Y - (Constants.A_GRID*12)},
-				{Constants.CAMP_X - (Constants.A_GRID*4), Constants.CAMP_Y - (Constants.A_GRID*6)},
-				{Constants.CAMP_X - (Constants.A_GRID*5), Constants.CAMP_Y - (Constants.A_GRID*0)},
-				{Constants.CAMP_X - (Constants.A_GRID*5), Constants.CAMP_Y - (Constants.A_GRID*1)},
-				{Constants.CAMP_X - (Constants.A_GRID*5), Constants.CAMP_Y - (Constants.A_GRID*2)},
-				{Constants.CAMP_X - (Constants.A_GRID*5), Constants.CAMP_Y - (Constants.A_GRID*3)},
-				{Constants.CAMP_X - (Constants.A_GRID*5), Constants.CAMP_Y - (Constants.A_GRID*4)},
-				{Constants.CAMP_X - (Constants.A_GRID*5), Constants.CAMP_Y - (Constants.A_GRID*6)},
-				{Constants.CAMP_X - (Constants.A_GRID*5), Constants.CAMP_Y - (Constants.A_GRID*10)},
-				{Constants.CAMP_X - (Constants.A_GRID*5), Constants.CAMP_Y - (Constants.A_GRID*11)},
-				{Constants.CAMP_X - (Constants.A_GRID*6), Constants.CAMP_Y - (Constants.A_GRID*4)},
-				{Constants.CAMP_X + (Constants.A_GRID*1), Constants.CAMP_Y - (Constants.A_GRID*0)},
-				{Constants.CAMP_X + (Constants.A_GRID*1), Constants.CAMP_Y - (Constants.A_GRID*1)},
-				{Constants.CAMP_X + (Constants.A_GRID*1), Constants.CAMP_Y - (Constants.A_GRID*3)},
-				{Constants.CAMP_X + (Constants.A_GRID*1), Constants.CAMP_Y - (Constants.A_GRID*4)},
-				{Constants.CAMP_X + (Constants.A_GRID*1), Constants.CAMP_Y - (Constants.A_GRID*5)},
-				{Constants.CAMP_X + (Constants.A_GRID*1), Constants.CAMP_Y - (Constants.A_GRID*6)},
-				{Constants.CAMP_X + (Constants.A_GRID*1), Constants.CAMP_Y - (Constants.A_GRID*7)},
-				{Constants.CAMP_X + (Constants.A_GRID*1), Constants.CAMP_Y - (Constants.A_GRID*11)},
-				{Constants.CAMP_X + (Constants.A_GRID*1), Constants.CAMP_Y - (Constants.A_GRID*12)},
-				{Constants.CAMP_X + (Constants.A_GRID*2), Constants.CAMP_Y - (Constants.A_GRID*7)},
-				{Constants.CAMP_X + (Constants.A_GRID*3), Constants.CAMP_Y - (Constants.A_GRID*0)},
-				{Constants.CAMP_X + (Constants.A_GRID*3), Constants.CAMP_Y - (Constants.A_GRID*1)},
-				{Constants.CAMP_X + (Constants.A_GRID*3), Constants.CAMP_Y - (Constants.A_GRID*3)},
-				{Constants.CAMP_X + (Constants.A_GRID*3), Constants.CAMP_Y - (Constants.A_GRID*5)},
-				{Constants.CAMP_X + (Constants.A_GRID*3), Constants.CAMP_Y - (Constants.A_GRID*8)},
-				{Constants.CAMP_X + (Constants.A_GRID*3), Constants.CAMP_Y - (Constants.A_GRID*9)},
-				{Constants.CAMP_X + (Constants.A_GRID*3), Constants.CAMP_Y - (Constants.A_GRID*10)},
-				{Constants.CAMP_X + (Constants.A_GRID*3), Constants.CAMP_Y - (Constants.A_GRID*11)},
-				{Constants.CAMP_X + (Constants.A_GRID*4), Constants.CAMP_Y - (Constants.A_GRID*0)},
-				{Constants.CAMP_X + (Constants.A_GRID*4), Constants.CAMP_Y - (Constants.A_GRID*3)},
-				{Constants.CAMP_X + (Constants.A_GRID*4), Constants.CAMP_Y - (Constants.A_GRID*10)},
-				{Constants.CAMP_X + (Constants.A_GRID*5), Constants.CAMP_Y - (Constants.A_GRID*0)},
-				{Constants.CAMP_X + (Constants.A_GRID*5), Constants.CAMP_Y - (Constants.A_GRID*1)},
-				{Constants.CAMP_X + (Constants.A_GRID*5), Constants.CAMP_Y - (Constants.A_GRID*3)},
-				{Constants.CAMP_X + (Constants.A_GRID*5), Constants.CAMP_Y - (Constants.A_GRID*4)},
-				{Constants.CAMP_X + (Constants.A_GRID*5), Constants.CAMP_Y - (Constants.A_GRID*5)},
-				{Constants.CAMP_X + (Constants.A_GRID*5), Constants.CAMP_Y - (Constants.A_GRID*6)},
-				{Constants.CAMP_X + (Constants.A_GRID*5), Constants.CAMP_Y - (Constants.A_GRID*8)},
-				{Constants.CAMP_X + (Constants.A_GRID*5), Constants.CAMP_Y - (Constants.A_GRID*10)},
-				{Constants.CAMP_X + (Constants.A_GRID*5), Constants.CAMP_Y - (Constants.A_GRID*11)},
-				{Constants.CAMP_X + (Constants.A_GRID*6), Constants.CAMP_Y - (Constants.A_GRID*8)},
-				
-				
-			
-			
-				
+
+	public void initblocksCoordinate() {
+		blocksCoordinate = new int[][] {
+				{ Constants.CAMP_X + (Constants.A_GRID * 0),
+						Constants.CAMP_Y - (Constants.A_GRID * 1) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 0),
+						Constants.CAMP_Y - (Constants.A_GRID * 3) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 0),
+						Constants.CAMP_Y - (Constants.A_GRID * 4) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 0),
+						Constants.CAMP_Y - (Constants.A_GRID * 8) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 0),
+						Constants.CAMP_Y - (Constants.A_GRID * 10) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 1),
+						Constants.CAMP_Y - (Constants.A_GRID * 0) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 1),
+						Constants.CAMP_Y - (Constants.A_GRID * 1) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 1),
+						Constants.CAMP_Y - (Constants.A_GRID * 3) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 1),
+						Constants.CAMP_Y - (Constants.A_GRID * 4) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 1),
+						Constants.CAMP_Y - (Constants.A_GRID * 5) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 1),
+						Constants.CAMP_Y - (Constants.A_GRID * 6) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 1),
+						Constants.CAMP_Y - (Constants.A_GRID * 8) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 3),
+						Constants.CAMP_Y - (Constants.A_GRID * 0) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 3),
+						Constants.CAMP_Y - (Constants.A_GRID * 2) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 3),
+						Constants.CAMP_Y - (Constants.A_GRID * 3) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 3),
+						Constants.CAMP_Y - (Constants.A_GRID * 4) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 3),
+						Constants.CAMP_Y - (Constants.A_GRID * 5) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 3),
+						Constants.CAMP_Y - (Constants.A_GRID * 6) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 3),
+						Constants.CAMP_Y - (Constants.A_GRID * 8) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 3),
+						Constants.CAMP_Y - (Constants.A_GRID * 9) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 3),
+						Constants.CAMP_Y - (Constants.A_GRID * 11) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 3),
+						Constants.CAMP_Y - (Constants.A_GRID * 12) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 4),
+						Constants.CAMP_Y - (Constants.A_GRID * 6) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 5),
+						Constants.CAMP_Y - (Constants.A_GRID * 0) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 5),
+						Constants.CAMP_Y - (Constants.A_GRID * 1) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 5),
+						Constants.CAMP_Y - (Constants.A_GRID * 2) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 5),
+						Constants.CAMP_Y - (Constants.A_GRID * 3) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 5),
+						Constants.CAMP_Y - (Constants.A_GRID * 4) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 5),
+						Constants.CAMP_Y - (Constants.A_GRID * 6) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 5),
+						Constants.CAMP_Y - (Constants.A_GRID * 10) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 5),
+						Constants.CAMP_Y - (Constants.A_GRID * 11) },
+				{ Constants.CAMP_X - (Constants.A_GRID * 6),
+						Constants.CAMP_Y - (Constants.A_GRID * 4) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 1),
+						Constants.CAMP_Y - (Constants.A_GRID * 0) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 1),
+						Constants.CAMP_Y - (Constants.A_GRID * 1) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 1),
+						Constants.CAMP_Y - (Constants.A_GRID * 3) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 1),
+						Constants.CAMP_Y - (Constants.A_GRID * 4) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 1),
+						Constants.CAMP_Y - (Constants.A_GRID * 5) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 1),
+						Constants.CAMP_Y - (Constants.A_GRID * 6) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 1),
+						Constants.CAMP_Y - (Constants.A_GRID * 7) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 1),
+						Constants.CAMP_Y - (Constants.A_GRID * 11) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 1),
+						Constants.CAMP_Y - (Constants.A_GRID * 12) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 2),
+						Constants.CAMP_Y - (Constants.A_GRID * 7) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 3),
+						Constants.CAMP_Y - (Constants.A_GRID * 0) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 3),
+						Constants.CAMP_Y - (Constants.A_GRID * 1) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 3),
+						Constants.CAMP_Y - (Constants.A_GRID * 3) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 3),
+						Constants.CAMP_Y - (Constants.A_GRID * 5) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 3),
+						Constants.CAMP_Y - (Constants.A_GRID * 8) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 3),
+						Constants.CAMP_Y - (Constants.A_GRID * 9) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 3),
+						Constants.CAMP_Y - (Constants.A_GRID * 10) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 3),
+						Constants.CAMP_Y - (Constants.A_GRID * 11) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 4),
+						Constants.CAMP_Y - (Constants.A_GRID * 0) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 4),
+						Constants.CAMP_Y - (Constants.A_GRID * 3) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 4),
+						Constants.CAMP_Y - (Constants.A_GRID * 10) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 5),
+						Constants.CAMP_Y - (Constants.A_GRID * 0) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 5),
+						Constants.CAMP_Y - (Constants.A_GRID * 1) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 5),
+						Constants.CAMP_Y - (Constants.A_GRID * 3) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 5),
+						Constants.CAMP_Y - (Constants.A_GRID * 4) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 5),
+						Constants.CAMP_Y - (Constants.A_GRID * 5) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 5),
+						Constants.CAMP_Y - (Constants.A_GRID * 6) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 5),
+						Constants.CAMP_Y - (Constants.A_GRID * 8) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 5),
+						Constants.CAMP_Y - (Constants.A_GRID * 10) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 5),
+						Constants.CAMP_Y - (Constants.A_GRID * 11) },
+				{ Constants.CAMP_X + (Constants.A_GRID * 6),
+						Constants.CAMP_Y - (Constants.A_GRID * 8) },
+
 		};
 	}
-	
+
 	public void init() {
 		Tank tank = new Tank(100, 100, TEAM_NPC, TankType.A);
 		tankList.add(tank);
@@ -156,7 +216,6 @@ public class GameWorld {
 		return tank;
 	}
 
-
 	public Missile initTankMissile(int tankId) {
 		int missileId = (++missileIndex);
 		Tank tank = getTank(tankId);
@@ -174,8 +233,8 @@ public class GameWorld {
 		}
 
 	}
-	
-	public void serializeAllBlock(ByteBuffer buffer){
+
+	public void serializeAllBlock(ByteBuffer buffer) {
 		int count = this.blockList.size();
 		buffer.putInt(count);
 		for (int i = 0; i < count; i++) {
@@ -183,7 +242,7 @@ public class GameWorld {
 			block.serialize(buffer);
 		}
 	}
-	
+
 	public void serializeAllTanks(ByteBuffer buffer) {
 		int count = this.tankList.size();
 		buffer.putInt(count);
@@ -321,6 +380,24 @@ public class GameWorld {
 		}
 	}
 
+	private void hitBlock(Missile missile) {
+		for (Block block : blockList) {
+			if (missile.hitBlock(block)) {
+				Packet writePacket = new Packet(Command.S_HIT_BLOCK);
+				writePacket.getByteBuffer().putInt(missile.getId());
+				writePacket.getByteBuffer().putInt(block.getId());
+				
+				Explode explode = new Explode(missile.getX(), missile.getY());
+				explodeList.add(explode);
+
+				explode.serialize(writePacket.getByteBuffer());
+
+				broadcast(writePacket);
+			}
+		}
+
+	}
+
 	public void collidesWithTanks(Tank tank) {
 		for (Tank t : tankList) {
 			if (tank.collidesWithTank(t)) {
@@ -393,13 +470,14 @@ public class GameWorld {
 			missile.update(deltaTime);
 			hitTank(missile);
 			hitCamp(missile);
+			hitBlock(missile);
 		}
-		
+
 		Iterator<Block> itb = blockList.iterator();
-		while(itb.hasNext()){
-			
+		while (itb.hasNext()) {
+
 			Block block = itb.next();
-			
+
 			block.update();
 		}
 

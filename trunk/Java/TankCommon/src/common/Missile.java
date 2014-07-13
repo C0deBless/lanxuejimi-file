@@ -90,7 +90,16 @@ public class Missile {
 		}
 		return false;
 	}
-
+	
+	public boolean hitBlock(Block block){
+		if(this.getRectangle().intersects(block.getRectangle()) && this.live && block.isLive()){
+			setLive(false);
+			block.setLive(false);
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean hitCamp(Camp camp) {
 		if (getRectangle().intersects(camp.getRectangle()) && this.live
 				&& camp.isLive()) {

@@ -37,13 +37,13 @@ public class ClientMain {
 		}
 			break;
 		case Command.S_GAME_START: {
-			
+
 			logger.debug("S_GAME_START");
 			float x = packet.getByteBuffer().getFloat();
 			float y = packet.getByteBuffer().getFloat();
 			ClientMain.tankClient.getCamp().setX(x);
 			ClientMain.tankClient.getCamp().setY(y);
-			
+
 			int tankCount = packet.getByteBuffer().getInt();
 			// logger.debug("S_LOGIN:,clientId:{}", clientId);
 			List<Tank> tankList = new ArrayList<Tank>(tankCount);
@@ -58,14 +58,14 @@ public class ClientMain {
 				Missile missile = Missile.deserialize(packet.getByteBuffer());
 				missileList.add(missile);
 			}
-			
+
 			int blockCount = packet.getByteBuffer().getInt();
 			List<Block> BlockList = new ArrayList<Block>(blockCount);
 			for (int i = 0; i < blockCount; i++) {
 				Block block = Block.deserialize(packet.getByteBuffer());
 				BlockList.add(block);
 			}
-			
+
 			int playersCount = packet.getByteBuffer().getInt();
 			List<String> playersNameList = new ArrayList<String>(playersCount);
 			for (int i = 0; i < playersCount; i++) {
@@ -142,9 +142,9 @@ public class ClientMain {
 
 		case Command.S_GAME_END: {
 			int teamWin = packet.getByteBuffer().getInt();
-			if(teamWin == 0){
+			if (teamWin == 0) {
 				ClientMain.tankClient.setTeamWin("RedTeam");
-			}else if(teamWin == 1){
+			} else if (teamWin == 1) {
 				ClientMain.tankClient.setTeamWin("GreenTeam");
 			}
 			ClientMain.tankClient.setWiningTeam(true);
@@ -164,6 +164,19 @@ public class ClientMain {
 			ClientMain.tankClient.missileDead(missileId, explode);
 			ClientMain.tankClient.explodeDead(explode.getId());
 			ClientMain.tankClient.campDead();
+
+		}
+			break;
+		case Command.S_HIT_BLOCK: {
+			int missileId = packet.getByteBuffer().getInt();
+			int blockId = packet.getByteBuffer().getInt();
+
+			Explode explode = Explode.deserialize(packet.getByteBuffer());
+			logger.debug("S_HIT_CAMP,missileId:{}, blockId:{}", missileId,
+					blockId);
+			ClientMain.tankClient.missileDead(missileId, explode);
+			ClientMain.tankClient.explodeDead(explode.getId());
+			ClientMain.tankClient.blockDead(blockId);
 
 		}
 			break;
