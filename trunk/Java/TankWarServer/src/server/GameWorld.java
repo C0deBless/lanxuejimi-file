@@ -203,12 +203,14 @@ public class GameWorld {
 
 	public Tank initUserTank(int clientId) {
 		Tank tank = null;
-//		randomLocationX = random.nextInt(Constants.GAME_WIDTH);
-//		randomLocationY = random.nextInt(Constants.GAME_HEIGHT);
+		// randomLocationX = random.nextInt(Constants.GAME_WIDTH);
+		// randomLocationY = random.nextInt(Constants.GAME_HEIGHT);
 		if (clientId % 2 == 0) {
-			tank = new Tank(Constants.CAMP_X + (Constants.A_GRID*2), Constants.CAMP_Y, 1, TankType.A);
+			tank = new Tank(Constants.CAMP_X + (Constants.A_GRID * 2),
+					Constants.CAMP_Y, 1, TankType.A);
 		} else {
-			tank = new Tank(Constants.CAMP_X - (Constants.A_GRID*2), Constants.CAMP_Y, 0, TankType.A);
+			tank = new Tank(Constants.CAMP_X - (Constants.A_GRID * 2),
+					Constants.CAMP_Y, 0, TankType.A);
 		}
 		tank.setClientId(clientId);
 		tankList.add(tank);
@@ -218,9 +220,15 @@ public class GameWorld {
 	public Missile initTankMissile(int tankId) {
 		int missileId = (++missileIndex);
 		Tank tank = getTank(tankId);
-		Missile missile = tank.makeMissile(missileId);
-		missileList.add(missile);
-		return missile;
+		logger.debug("Time:"+tank.getTime());
+		if (tank.isValidShotTime()) {
+			Missile missile = tank.makeMissile(missileId);
+			missileList.add(missile);
+			tank.setLastShotTime(System.currentTimeMillis());
+			return missile;
+		} else {
+			return null;
+		}
 	}
 
 	public void sendAllName(ByteBuffer buffer, int gameId) {
@@ -385,7 +393,7 @@ public class GameWorld {
 				Packet writePacket = new Packet(Command.S_HIT_BLOCK);
 				writePacket.getByteBuffer().putInt(missile.getId());
 				writePacket.getByteBuffer().putInt(block.getId());
-				
+
 				Explode explode = new Explode(missile.getX(), missile.getY());
 				explodeList.add(explode);
 
@@ -409,9 +417,9 @@ public class GameWorld {
 		}
 
 	}
-	
+
 	public void collidesWithBlock(Block block) {
-		for (Tank tank: tankList) {
+		for (Tank tank : tankList) {
 			if (block.collidesWithTank(tank)) {
 				Packet writePacket = new Packet(Command.S_BLOCKS_COLLIDE);
 				writePacket.getByteBuffer().putInt(tank.getId());
@@ -491,7 +499,7 @@ public class GameWorld {
 			Block block = itb.next();
 
 			block.update();
-			
+
 			collidesWithBlock(block);
 		}
 
