@@ -119,6 +119,7 @@ public class Tank {
 		y = oldY;
 	}
 
+
 	public boolean collidesWithTank(Tank tank) {
 		if (this != tank) {
 			if (getRectangle().intersects(tank.getRectangle()) && this.live

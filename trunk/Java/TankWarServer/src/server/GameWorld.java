@@ -203,12 +203,12 @@ public class GameWorld {
 
 	public Tank initUserTank(int clientId) {
 		Tank tank = null;
-		randomLocationX = random.nextInt(Constants.GAME_WIDTH);
-		randomLocationY = random.nextInt(Constants.GAME_HEIGHT);
+//		randomLocationX = random.nextInt(Constants.GAME_WIDTH);
+//		randomLocationY = random.nextInt(Constants.GAME_HEIGHT);
 		if (clientId % 2 == 0) {
-			tank = new Tank(randomLocationX, randomLocationY, 1, TankType.B);
+			tank = new Tank(Constants.CAMP_X + (Constants.A_GRID*2), Constants.CAMP_Y, 1, TankType.A);
 		} else {
-			tank = new Tank(randomLocationX, randomLocationY, 0, TankType.B);
+			tank = new Tank(Constants.CAMP_X - (Constants.A_GRID*2), Constants.CAMP_Y, 0, TankType.A);
 		}
 		tank.setClientId(clientId);
 		tankList.add(tank);
@@ -409,6 +409,19 @@ public class GameWorld {
 		}
 
 	}
+	
+	public void collidesWithBlock(Block block) {
+		for (Tank tank: tankList) {
+			if (block.collidesWithTank(tank)) {
+				Packet writePacket = new Packet(Command.S_BLOCKS_COLLIDE);
+				writePacket.getByteBuffer().putInt(tank.getId());
+				writePacket.getByteBuffer().putInt(block.getId());
+
+				broadcast(writePacket);
+			}
+		}
+
+	}
 
 	private void colloedWithWall(Missile missile) {
 		if (missile.getX() < 10
@@ -478,6 +491,8 @@ public class GameWorld {
 			Block block = itb.next();
 
 			block.update();
+			
+			collidesWithBlock(block);
 		}
 
 	}

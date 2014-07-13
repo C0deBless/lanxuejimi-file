@@ -35,6 +35,8 @@ public class Command {
 	
 	public static final short S_HIT_CAMP = 13;
 	
-	public static final short S_HIT_BLOCK = 14; 
+	public static final short S_HIT_BLOCK = 14;
+	
+	public static final short S_BLOCKS_COLLIDE = 15; 
 	
 }

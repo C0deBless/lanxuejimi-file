@@ -48,6 +48,18 @@ public class Block {
 		return wall;
 	}
 
+	public boolean collidesWithTank(Tank tank) {
+
+		if (getRectangle().intersects(tank.getRectangle()) && this.live
+				&& tank.isLive()) {
+			tank.stay();
+			return true;
+		}
+
+		return false;
+
+	}
+
 	public Rectangle getRectangle() {
 		return new Rectangle((int) x, (int) y, width, height);
 	}

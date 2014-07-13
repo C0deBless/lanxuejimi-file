@@ -63,7 +63,7 @@ class PaintThread implements Runnable {
 			tank.update(deltaTime);
 		}
 	}
-	
+
 	private void updateBlocks() {
 		List<Block> blocks = tankClient.getBlocks();
 		for (Block block : blocks) {
