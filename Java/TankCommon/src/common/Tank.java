@@ -25,6 +25,24 @@ public class Tank {
 	private int angle; // 0,1,2,3
 	private int team;
 
+	private long lastShotTime = 0;
+	private static final int shotDuration = 3;//s
+	private long time;
+	
+	public boolean isValidShotTime(){
+		long currentTime = System.currentTimeMillis();
+		time = currentTime - lastShotTime;
+		if(time > shotDuration * 1000){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public void setLastShotTime(long time){
+		this.lastShotTime = time;
+	}
+	
 	private final TankType type;
 
 	public Tank(float x, float y, int team, TankType type) {
@@ -221,4 +239,14 @@ public class Tank {
 	public TankType getType() {
 		return type;
 	}
+
+	public long getTime() {
+		return time;
+	}
+
+	public void setTime(long time) {
+		this.time = time;
+	}
+	
+	
 }

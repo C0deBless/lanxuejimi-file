@@ -44,7 +44,7 @@ public class PacketQueue implements Runnable {
 					.findProperGameWorld(session);
 			logger.debug("C_LOGIN,game:" + game + "---session:" + session);
 			game.join(session);
-			
+
 			session.getUser().setGameWorldIndex(game.getId());
 			game.initUserTank(clientId);
 
@@ -118,12 +118,15 @@ public class PacketQueue implements Runnable {
 			GameWorld game = ServerMain.getServer().getGameWorld(
 					user.getGameWorldIndex());
 			Missile missile = game.initTankMissile(tankId);
+			if (missile != null) {
+				Packet writePacket = new Packet(Command.S_NEW_MISSILE);
+				writePacket.getByteBuffer().putInt(tankId);
+				writePacket.getByteBuffer().putInt(missile.getId());
 
-			Packet writePacket = new Packet(Command.S_NEW_MISSILE);
-			writePacket.getByteBuffer().putInt(tankId);
-			writePacket.getByteBuffer().putInt(missile.getId());
-
-			game.broadcast(writePacket);
+				game.broadcast(writePacket);
+			} else {
+				// do nothing
+			}
 
 		}
 			break;
