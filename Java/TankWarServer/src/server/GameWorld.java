@@ -207,9 +207,9 @@ public class GameWorld {
 		randomLocationX = random.nextInt(Constants.GAME_WIDTH);
 		randomLocationY = random.nextInt(Constants.GAME_HEIGHT);
 		if (clientId % 2 == 0) {
-			tank = new Tank(randomLocationX, randomLocationY, 1, TankType.A);
+			tank = new Tank(randomLocationX, randomLocationY, 1, TankType.B);
 		} else {
-			tank = new Tank(randomLocationX, randomLocationY, 0, TankType.A);
+			tank = new Tank(randomLocationX, randomLocationY, 0, TankType.B);
 		}
 		tank.setClientId(clientId);
 		tankList.add(tank);
