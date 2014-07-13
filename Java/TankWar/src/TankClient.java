@@ -195,7 +195,15 @@ public class TankClient extends Frame {
 			break;
 		}
 
-		g.drawImage(image, (int) tank.getX(), (int) tank.getY(), null);
+		// AffineTransform at = new AffineTransform();
+		// int transX = 100;
+		// int transY = 100;
+		// at.translate(transX, transY);
+
+		// g.drawImage(image, (int) tank.getX(), (int) tank.getY(), null);
+		g.drawImage(image, (int) tank.getX(), (int) tank.getY(),
+				(int) tank.getX() + 36, (int) tank.getY() + 36, 0, 0,
+				image.getWidth(null), image.getHeight(null), null);
 
 		g.setColor(c);
 
@@ -215,8 +223,7 @@ public class TankClient extends Frame {
 		if (!block.isLive()) {
 			return;
 		}
-		g.drawImage(wallImage, (int) block.getX(),
-				(int) block.getY(), null);
+		g.drawImage(wallImage, (int) block.getX(), (int) block.getY(), null);
 	}
 
 	public void drawExplode(Explode explode, Graphics g) {
@@ -246,7 +253,6 @@ public class TankClient extends Frame {
 			return;
 		}
 		g.drawImage(campImage, (int) camp.getX(), (int) camp.getY(), null);
-
 	}
 
 	public void paint(Graphics g) {
@@ -378,7 +384,7 @@ public class TankClient extends Frame {
 		}
 		tank.setCurrentSpeed(0);
 	}
-	
+
 	public void blockDead(int blockId) {
 
 		synchronized (blocks) {
@@ -393,7 +399,7 @@ public class TankClient extends Frame {
 		}
 
 	}
-	
+
 	public void missileDead(int missileId, Explode explode) {
 
 		synchronized (missiles) {
