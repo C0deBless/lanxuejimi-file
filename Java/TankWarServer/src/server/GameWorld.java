@@ -22,6 +22,7 @@ import common.Packet;
 import common.StringUtil;
 import common.Tank;
 import common.TankType;
+import common.event.TankEventListener;
 
 public class GameWorld {
 
@@ -197,11 +198,23 @@ public class GameWorld {
 	}
 
 	public void init() {
-		Tank tank = new Tank(100, 100, TEAM_NPC, TankType.A);
+		final Tank tank = new Tank(100, 100, TEAM_NPC, TankType.A);
+		tank.registerEventListener(new TankEventListener() {
+
+			@Override
+			public void onStop() {
+				int clientId = tank.getClientId();
+				int tankId = tank.getId();
+				Packet writePacket = new Packet(Command.S_STOP, 8);
+				writePacket.getByteBuffer().putInt(clientId);
+				writePacket.getByteBuffer().putInt(tankId);
+				GameWorld.this.broadcast(writePacket);
+			}
+		});
 		tankList.add(tank);
 	}
 
-	public Tank initUserTank(int clientId) {
+	public Tank initUserTank(final int clientId) {
 		Tank tank = null;
 		// randomLocationX = random.nextInt(Constants.GAME_WIDTH);
 		// randomLocationY = random.nextInt(Constants.GAME_HEIGHT);
@@ -214,13 +227,24 @@ public class GameWorld {
 		}
 		tank.setClientId(clientId);
 		tankList.add(tank);
+		final int tankId = tank.getId();
+		tank.registerEventListener(new TankEventListener() {
+
+			@Override
+			public void onStop() {
+				Packet writePacket = new Packet(Command.S_STOP, 8);
+				writePacket.getByteBuffer().putInt(clientId);
+				writePacket.getByteBuffer().putInt(tankId);
+				GameWorld.this.broadcast(writePacket);
+			}
+		});
 		return tank;
 	}
 
 	public Missile initTankMissile(int tankId) {
 		int missileId = (++missileIndex);
 		Tank tank = getTank(tankId);
-		logger.debug("Time:"+tank.getTime());
+		logger.debug("Time:" + tank.getTime());
 		if (tank.isValidShotTime()) {
 			Missile missile = tank.makeMissile(missileId);
 			missileList.add(missile);
@@ -343,7 +367,19 @@ public class GameWorld {
 			logger.error("illegal move");
 			return;
 		}
-		tank.setCurrentSpeed(0);
+
+		if (tank.isValidGrid()) {
+			tank.correctDeviation();
+			tank.setCurrentSpeed(0);
+
+			Packet writePacket = new Packet(Command.S_STOP, 8);
+			writePacket.getByteBuffer().putInt(clientId);
+			writePacket.getByteBuffer().putInt(tankId);
+			this.broadcast(writePacket);
+		} else {
+			tank.moveToNextBlockAndStop();
+		}
+
 	}
 
 	public Tank getTank(int tankId) {
@@ -462,7 +498,7 @@ public class GameWorld {
 		}
 		long deltaTime = currentTime - lastUpdateTime;
 		lastUpdateTime = currentTime;
-		
+
 		Iterator<Tank> itt = tankList.iterator();
 		while (itt.hasNext()) {
 			Tank tank = itt.next();

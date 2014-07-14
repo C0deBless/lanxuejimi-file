@@ -104,11 +104,6 @@ public class PacketQueue implements Runnable {
 					user.getGameWorldIndex());
 			game.stop(clientId, tankId);
 			logger.debug("C_STOP, id:{}", tankId);
-
-			Packet writePacket = new Packet(Command.S_STOP, 8);
-			writePacket.getByteBuffer().putInt(clientId);
-			writePacket.getByteBuffer().putInt(tankId);
-			game.broadcast(writePacket);
 		}
 			break;
 		case Command.C_NEW_MISSILE: {

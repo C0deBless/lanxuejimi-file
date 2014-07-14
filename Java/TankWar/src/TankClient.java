@@ -393,7 +393,9 @@ public class TankClient extends Frame {
 					tankId);
 			return;
 		}
+		tank.correctDeviation();
 		tank.setCurrentSpeed(0);
+
 	}
 
 	public void blockDead(int blockId) {
