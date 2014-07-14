@@ -63,6 +63,8 @@ public class TankClient extends Frame {
 	private boolean explodeinit = false;
 
 	private Panel gamePanel;
+	private Graphics currentGraphics;
+	private List<Tank> serverTanks;
 
 	public TankClient() {
 		camp = new Camp();
@@ -174,11 +176,11 @@ public class TankClient extends Frame {
 
 		if (tank.getTeam() == 0) {
 			g.setColor(Color.RED);
-			g.drawString("" + tank.getId(), (int) tank.getX(),
+			g.drawString(tank.getDebugInfo(), (int) tank.getX(),
 					(int) tank.getY() - 10);
 		} else {
 			g.setColor(Color.GREEN);
-			g.drawString("" + tank.getId(), (int) tank.getX(),
+			g.drawString(tank.getDebugInfo() + tank.getId(), (int) tank.getX(),
 					(int) tank.getY() - 10);
 		}
 
@@ -226,6 +228,19 @@ public class TankClient extends Frame {
 		g.drawImage(wallImage, (int) block.getX(), (int) block.getY(), null);
 	}
 
+	public void drawDedugInfo(List<Tank> tanks) {
+		for (Tank tank : tanks) {
+			Tank clientTank = this.getTank(tank.getId());
+			if (clientTank != null) {
+				Color color = this.currentGraphics.getColor();
+				this.currentGraphics.setColor(Color.YELLOW);
+				this.currentGraphics.drawString(tank.getDebugInfo(),
+						(int) clientTank.getX(), (int) clientTank.getY() - 20);
+				this.currentGraphics.setColor(color);
+			}
+		}
+	}
+
 	public void drawExplode(Explode explode, Graphics g) {
 		if (!explodeinit) {
 			for (int i = 0; i <= explode.getDiameter(); i++) {
@@ -256,6 +271,7 @@ public class TankClient extends Frame {
 	}
 
 	public void paint(Graphics g) {
+		this.currentGraphics = g;
 		if (gameOver) {
 			g.drawImage(gameOverImage, 0, 0, null);
 			tanks.clear();
@@ -264,12 +280,6 @@ public class TankClient extends Frame {
 			return;
 		}
 
-		synchronized (tanks) {
-			for (Tank tank : tanks) {
-				drawTank(tank, g);
-				drawCamp(g);
-			}
-		}
 		synchronized (missiles) {
 			for (Missile missile : missiles) {
 				drawMissile(missile, g);
@@ -288,6 +298,15 @@ public class TankClient extends Frame {
 			}
 		}
 
+		synchronized (tanks) {
+			for (Tank tank : tanks) {
+				drawTank(tank, g);
+				drawCamp(g);
+			}
+		}
+		if(this.serverTanks != null){
+			this.drawDedugInfo(serverTanks);
+		}
 	}
 
 	@Override
@@ -345,17 +364,6 @@ public class TankClient extends Frame {
 			for (Tank tank : tanks) {
 				if (tank.getId() == tankId) {
 					return tank;
-				}
-			}
-			return null;
-		}
-	}
-
-	private Block getBLock(int blockId) {
-		synchronized (blocks) {
-			for (Block block : blocks) {
-				if (block.getId() == blockId) {
-					return block;
 				}
 			}
 			return null;
@@ -475,10 +483,6 @@ public class TankClient extends Frame {
 	public void tanksCollide(int tank1Id, int tank2Id) {
 		getTank(tank1Id).collidesWithTank(getTank(tank2Id));
 
-	}
-
-	public void TanksAndBlockCollision(int tankId, int blockId) {
-		getBLock(blockId).collidesWithTank(getTank(tankId));
 	}
 
 	private class KeyMonitor extends KeyAdapter {
@@ -639,4 +643,11 @@ public class TankClient extends Frame {
 		return camp;
 	}
 
+	public List<Tank> getServerTanks() {
+		return serverTanks;
+	}
+
+	public void setServerTanks(List<Tank> serverTanks) {
+		this.serverTanks = serverTanks;
+	}
 }

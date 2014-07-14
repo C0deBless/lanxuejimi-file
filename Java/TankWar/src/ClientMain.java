@@ -124,14 +124,6 @@ public class ClientMain {
 			ClientMain.tankClient.tanksCollide(tank1Id, tank2Id);
 		}
 			break;
-
-		case Command.S_BLOCKS_COLLIDE: {
-			int tankId = packet.getByteBuffer().getInt();
-			int blockId = packet.getByteBuffer().getInt();
-
-			ClientMain.tankClient.TanksAndBlockCollision(tankId, blockId);
-		}
-			break;
 		case Command.S_HIT_WALL: {
 			int missileId = packet.getByteBuffer().getInt();
 			Explode explode = Explode.deserialize(packet.getByteBuffer());
@@ -186,6 +178,17 @@ public class ClientMain {
 			ClientMain.tankClient.explodeDead(explode.getId());
 			ClientMain.tankClient.blockDead(blockId);
 
+		}
+			break;
+		case Command.S_DEBUG_TANK_INFO: {
+			int count = packet.getByteBuffer().getInt();
+			List<Tank> tanks = new ArrayList<Tank>(count);
+			for (int i = 0; i < count; i++) {
+				Tank tank = Tank.deserialize(packet.getByteBuffer());
+				tanks.add(tank);
+			}
+			if (ClientMain.tankClient != null)
+				ClientMain.tankClient.setServerTanks(tanks);
 		}
 			break;
 		}

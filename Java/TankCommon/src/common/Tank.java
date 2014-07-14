@@ -99,25 +99,25 @@ public class Tank {
 			x = Constants.GAME_WIDTH - width;
 		if (y > Constants.GAME_HEIGHT - height)
 			y = Constants.GAME_HEIGHT - height;
-		
+
 		// 判断是不是需要停止
-		if(needMoveToNextBlockAndStop){
-			if(this.isValidGrid()){
+		if (needMoveToNextBlockAndStop) {
+			if (this.isValidGrid()) {
 				needMoveToNextBlockAndStop = false;
 				this.correctDeviation();
 				this.currentSpeed = 0;
-				
-				if(this.listener != null){
+
+				if (this.listener != null) {
 					this.listener.onStop();
 				}
-			}else{
+			} else {
 				// do nothing
 			}
 		}
 	}
 
 	boolean needMoveToNextBlockAndStop = false;
-	
+
 	public void moveToNextBlockAndStop() {
 		needMoveToNextBlockAndStop = true;
 	}
@@ -156,10 +156,10 @@ public class Tank {
 		return tank;
 	}
 
-	public void registerEventListener(TankEventListener listener){
+	public void registerEventListener(TankEventListener listener) {
 		this.listener = listener;
 	}
-	
+
 	public void stay() {
 		x = oldX;
 		y = oldY;
@@ -273,6 +273,17 @@ public class Tank {
 
 	public void setTime(long time) {
 		this.time = time;
+	}
+
+	public String getDebugInfo() {
+		StringBuffer sb = new StringBuffer();
+		sb.append(this.id);
+		sb.append(", (");
+		sb.append(((int) x) / Constants.A_GRID);
+		sb.append(",");
+		sb.append(((int) y) / Constants.A_GRID);
+		sb.append(") ");
+		return sb.toString();
 	}
 
 	public boolean isValidGrid() {

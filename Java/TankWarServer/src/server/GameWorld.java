@@ -357,8 +357,53 @@ public class GameWorld {
 			logger.error("illegal move");
 			return;
 		}
-		tank.setAngle(angle);
-		tank.setCurrentSpeed(100);
+
+		int blockX = ((int) tank.getX()) / Constants.A_GRID;
+		int blockY = ((int) tank.getY()) / Constants.A_GRID;
+
+		int targetX = -1;
+		int targetY = -1;
+		switch (angle) {
+		case 0:
+			targetX = blockX;
+			targetY = blockY - 1;
+			break;
+		case 1:
+			targetX = blockX + 1;
+			targetY = blockY;
+			break;
+		case 2:
+			targetX = blockX;
+			targetY = blockY + 1;
+			break;
+		case 3:
+			targetX = blockX - 1;
+			targetY = blockY;
+			break;
+		}
+		if (this.isAnyBlockAt(targetX, targetY)) {
+			// do nothing
+		} else {
+			tank.setAngle(angle);
+			tank.setCurrentSpeed(100);
+
+			Packet writePacket = new Packet(Command.S_MOVE, Short.MAX_VALUE);
+			writePacket.getByteBuffer().putInt(clientId);
+			writePacket.getByteBuffer().putInt(tankId);
+			writePacket.getByteBuffer().putInt(angle);
+			this.broadcast(writePacket);
+		}
+	}
+
+	private boolean isAnyBlockAt(int blockX, int blockY) {
+		for (Block block : this.blockList) {
+			int x = ((int) block.getX()) / Constants.A_GRID;
+			int y = ((int) block.getY()) / Constants.A_GRID;
+			if (x == blockX && y == blockY) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void stop(int clientId, int tankId) {
@@ -454,19 +499,6 @@ public class GameWorld {
 
 	}
 
-	public void collidesWithBlock(Block block) {
-		for (Tank tank : tankList) {
-			if (block.collidesWithTank(tank)) {
-				Packet writePacket = new Packet(Command.S_BLOCKS_COLLIDE);
-				writePacket.getByteBuffer().putInt(tank.getId());
-				writePacket.getByteBuffer().putInt(block.getId());
-
-				broadcast(writePacket);
-			}
-		}
-
-	}
-
 	private void colloedWithWall(Missile missile) {
 		if (missile.getX() < 10
 				|| missile.getY() < 10
@@ -529,16 +561,23 @@ public class GameWorld {
 			hitBlock(missile);
 		}
 
-		Iterator<Block> itb = blockList.iterator();
-		while (itb.hasNext()) {
+		updateDebugInfo();
+	}
 
-			Block block = itb.next();
+	private long lastDebugUpdateTime = 0;
 
-			block.update();
-
-			collidesWithBlock(block);
+	private void updateDebugInfo() {
+		long currentTime = System.currentTimeMillis();
+		if (currentTime - lastDebugUpdateTime >= 1000) {
+			this.lastDebugUpdateTime = currentTime;
+			// send debug packet
+			Packet packet = new Packet(Command.S_DEBUG_TANK_INFO);
+			packet.getByteBuffer().putInt(this.tankList.size());
+			for (Tank tank : this.tankList) {
+				tank.serialize(packet.getByteBuffer());
+			}
+			this.broadcast(packet);
 		}
-
 	}
 
 	public void broadcast(Packet packet) {

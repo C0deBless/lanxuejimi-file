@@ -55,7 +55,7 @@ public class Server {
 							}
 		
 						}
-						Thread.sleep(20);
+						Thread.sleep(5);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

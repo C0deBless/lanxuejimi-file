@@ -4,7 +4,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import common.Block;
 import common.Explode;
 import common.Missile;
 import common.Tank;
@@ -45,7 +44,6 @@ class PaintThread implements Runnable {
 		this.updateTanks(deltaTime);
 		this.updateMissiles(deltaTime);
 		this.updateExplodes();
-		this.updateBlocks();
 	}
 
 	private void updateMissiles(long deltaTime) {
@@ -61,13 +59,6 @@ class PaintThread implements Runnable {
 		List<Tank> tanks = tankClient.getTanks();
 		for (Tank tank : tanks) {
 			tank.update(deltaTime);
-		}
-	}
-
-	private void updateBlocks() {
-		List<Block> blocks = tankClient.getBlocks();
-		for (Block block : blocks) {
-			block.update();
 		}
 	}
 
