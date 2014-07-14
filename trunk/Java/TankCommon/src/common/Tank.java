@@ -4,6 +4,8 @@ import java.awt.Rectangle;
 import java.nio.ByteBuffer;
 import java.util.List;
 
+import common.event.TankEventListener;
+
 public class Tank {
 
 	private static int tankIndex = 0;
@@ -26,23 +28,24 @@ public class Tank {
 	private int team;
 
 	private long lastShotTime = 0;
-	private static final int shotDuration = 3;//s
+	private static final int shotDuration = 3;// s
 	private long time;
-	
-	public boolean isValidShotTime(){
+	private TankEventListener listener;
+
+	public boolean isValidShotTime() {
 		long currentTime = System.currentTimeMillis();
 		time = currentTime - lastShotTime;
-		if(time > shotDuration * 1000){
+		if (time > shotDuration * 1000) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-	
-	public void setLastShotTime(long time){
+
+	public void setLastShotTime(long time) {
 		this.lastShotTime = time;
 	}
-	
+
 	private final TankType type;
 
 	public Tank(float x, float y, int team, TankType type) {
@@ -87,47 +90,7 @@ public class Tank {
 
 		x += deltaPos * factorX;
 		y += deltaPos * factorY;
-		
-		int i = angle;
-		if(x%Constants.A_GRID != 0  || y%Constants.A_GRID != 0 ){
-			do{
-				switch (i) {
-				case 0:
-					y += deltaPos * -1;
-					break;
-				case 1:
-					x += deltaPos * 1;
-					break;
-				case 2:
-					y += deltaPos * 1;
-					break;
-				case 3:
-					x += deltaPos * -1;
-					break;
-				}
-			}while(x%Constants.A_GRID != 0 || y%Constants.A_GRID != 0 );
-		}
-		
-//		if(y%Constants.A_GRID != 0){
-//			do{
-//				
-//				switch (i) {
-//				case 0:
-//					y += deltaPos * -1;
-//					break;
-//				case 1:
-//					y += deltaPos * 1;
-//					break;
-//				case 2:
-//					y += deltaPos * 1;
-//					break;
-//				case 3:
-//					y += deltaPos * -1;
-//					break;
-//				}
-//			}while(y%Constants.A_GRID != 0 && y%Constants.A_GRID>5 && y%Constants.A_GRID<32);
-//		}
-		
+
 		if (x < 0)
 			x = 0;
 		if (y < 0)
@@ -136,6 +99,27 @@ public class Tank {
 			x = Constants.GAME_WIDTH - width;
 		if (y > Constants.GAME_HEIGHT - height)
 			y = Constants.GAME_HEIGHT - height;
+		
+		// 判断是不是需要停止
+		if(needMoveToNextBlockAndStop){
+			if(this.isValidGrid()){
+				needMoveToNextBlockAndStop = false;
+				this.correctDeviation();
+				this.currentSpeed = 0;
+				
+				if(this.listener != null){
+					this.listener.onStop();
+				}
+			}else{
+				// do nothing
+			}
+		}
+	}
+
+	boolean needMoveToNextBlockAndStop = false;
+	
+	public void moveToNextBlockAndStop() {
+		needMoveToNextBlockAndStop = true;
 	}
 
 	public void serialize(ByteBuffer buffer) {
@@ -172,11 +156,14 @@ public class Tank {
 		return tank;
 	}
 
+	public void registerEventListener(TankEventListener listener){
+		this.listener = listener;
+	}
+	
 	public void stay() {
 		x = oldX;
 		y = oldY;
 	}
-
 
 	public boolean collidesWithTank(Tank tank) {
 		if (this != tank) {
@@ -287,6 +274,23 @@ public class Tank {
 	public void setTime(long time) {
 		this.time = time;
 	}
-	
-	
+
+	public boolean isValidGrid() {
+		int modX = ((int) this.x) % Constants.A_GRID;
+		int modY = ((int) this.y) % Constants.A_GRID;
+		int deviation = 2;
+
+		if (modX <= deviation && modY <= deviation) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void correctDeviation() {
+		int blockX = ((int) this.x) / Constants.A_GRID;
+		int blockY = ((int) this.y) / Constants.A_GRID;
+		this.x = blockX * Constants.A_GRID;
+		this.y = blockY * Constants.A_GRID;
+	}
 }
