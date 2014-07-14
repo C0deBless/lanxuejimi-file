@@ -88,13 +88,6 @@ public class PacketQueue implements Runnable {
 			GameWorld game = ServerMain.getServer().getGameWorld(
 					user.getGameWorldIndex());
 			game.move(clientId, id, angle);
-
-			Packet writePacket = new Packet(Command.S_MOVE, Short.MAX_VALUE);
-			writePacket.getByteBuffer().putInt(clientId);
-			writePacket.getByteBuffer().putInt(id);
-			writePacket.getByteBuffer().putInt(angle);
-			game.broadcast(writePacket);
-
 		}
 			break;
 		case Command.C_STOP: {
