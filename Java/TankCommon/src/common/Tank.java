@@ -89,44 +89,44 @@ public class Tank {
 		y += deltaPos * factorY;
 		
 		int i = angle;
-		if(x%Constants.A_GRID != 0){
+		if(x%Constants.A_GRID != 0  || y%Constants.A_GRID != 0 ){
 			do{
 				switch (i) {
 				case 0:
-					x += deltaPos * -1;
+					y += deltaPos * -1;
 					break;
 				case 1:
 					x += deltaPos * 1;
 					break;
 				case 2:
-					x += deltaPos * 1;
+					y += deltaPos * 1;
 					break;
 				case 3:
 					x += deltaPos * -1;
 					break;
 				}
-			}while(x%Constants.A_GRID != 0);
+			}while(x%Constants.A_GRID != 0 || y%Constants.A_GRID != 0 );
 		}
 		
-		if(y%Constants.A_GRID != 0){
-			do{
-				
-				switch (i) {
-				case 0:
-					y += deltaPos * -1;
-					break;
-				case 1:
-					y += deltaPos * 1;
-					break;
-				case 2:
-					y += deltaPos * 1;
-					break;
-				case 3:
-					y += deltaPos * -1;
-					break;
-				}
-			}while(y%Constants.A_GRID != 0);
-		}
+//		if(y%Constants.A_GRID != 0){
+//			do{
+//				
+//				switch (i) {
+//				case 0:
+//					y += deltaPos * -1;
+//					break;
+//				case 1:
+//					y += deltaPos * 1;
+//					break;
+//				case 2:
+//					y += deltaPos * 1;
+//					break;
+//				case 3:
+//					y += deltaPos * -1;
+//					break;
+//				}
+//			}while(y%Constants.A_GRID != 0 && y%Constants.A_GRID>5 && y%Constants.A_GRID<32);
+//		}
 		
 		if (x < 0)
 			x = 0;

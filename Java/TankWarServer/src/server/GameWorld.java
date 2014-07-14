@@ -462,7 +462,7 @@ public class GameWorld {
 		}
 		long deltaTime = currentTime - lastUpdateTime;
 		lastUpdateTime = currentTime;
-
+		
 		Iterator<Tank> itt = tankList.iterator();
 		while (itt.hasNext()) {
 			Tank tank = itt.next();
