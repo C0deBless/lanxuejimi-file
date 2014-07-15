@@ -524,6 +524,15 @@ public class GameWorld {
 			endGame();
 			return;
 		}
+		Iterator<Block> itb = blockList.iterator();
+		while(itb.hasNext()){
+			Block block = itb.next();
+			if(!block.isLive()){
+				itb.remove();
+				
+			}
+		}
+		
 		camp.update();
 		long currentTime = System.currentTimeMillis();
 		if (lastUpdateTime == 0) {
