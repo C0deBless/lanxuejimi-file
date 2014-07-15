@@ -38,4 +38,6 @@ public class Command {
 	public static final short S_HIT_BLOCK = 14;
 	
 	public static final short S_DEBUG_TANK_INFO = 15;
+	
+	public static final short S_TANK_POS_UPDATE = 16;
 }

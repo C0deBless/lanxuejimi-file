@@ -84,7 +84,9 @@ public class ClientMain {
 			int clientId = packet.getByteBuffer().getInt();
 			int id = packet.getByteBuffer().getInt();
 			int angle = packet.getByteBuffer().getInt();
-			ClientMain.tankClient.move(clientId, id, angle);
+			boolean collideWithBlock = packet.getByteBuffer().get() == 1 ? true
+					: false;
+			ClientMain.tankClient.move(clientId, id, angle, collideWithBlock);
 		}
 			break;
 		case Command.S_STOP: {
@@ -189,6 +191,14 @@ public class ClientMain {
 			}
 			if (ClientMain.tankClient != null)
 				ClientMain.tankClient.setServerTanks(tanks);
+		}
+			break;
+		case Command.S_TANK_POS_UPDATE: {
+			int tankId = packet.getByteBuffer().getInt();
+			float x = packet.getByteBuffer().getFloat();
+			float y = packet.getByteBuffer().getFloat();
+			if (ClientMain.tankClient != null)
+				ClientMain.tankClient.correctDeviation(tankId, x, y);
 		}
 			break;
 		}
