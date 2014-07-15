@@ -80,6 +80,7 @@ public class PacketQueue implements Runnable {
 		}
 			break;
 		case Command.C_MOVE: {
+			
 			int id = packet.getByteBuffer().getInt();
 			int angle = packet.getByteBuffer().getInt();
 			logger.debug("C_MOVE, id:{}, angle:{}", id, angle);
@@ -87,7 +88,9 @@ public class PacketQueue implements Runnable {
 			User user = session.getUser();
 			GameWorld game = ServerMain.getServer().getGameWorld(
 					user.getGameWorldIndex());
-			game.move(clientId, id, angle);
+			if(game.getTank(id).isMoveToNextBlock()){
+				game.move(clientId, id, angle);
+			}
 		}
 			break;
 		case Command.C_STOP: {

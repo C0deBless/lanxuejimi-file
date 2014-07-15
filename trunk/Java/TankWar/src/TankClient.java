@@ -390,8 +390,9 @@ public class TankClient extends Frame {
 					tankId);
 			return;
 		}
+		
 		tank.setAngle(angle);
-		tank.setCurrentSpeed(100);
+		tank.setCurrentSpeed(50);
 	}
 
 	public void stop(int clientId, int tankId) {
@@ -525,7 +526,7 @@ public class TankClient extends Frame {
 		default:
 			return;
 		}
-		if (judgeKey) {
+//		if (judgeKey) {
 			Tank myTank = getMyTank();
 
 			Packet packet = new Packet(Command.C_MOVE, 8);
@@ -533,7 +534,7 @@ public class TankClient extends Frame {
 			packet.getByteBuffer().putInt(angle);
 			ClientMain.client.pushWritePacket(packet);
 			judgeKey = false;
-		}
+//		}
 
 	}
 

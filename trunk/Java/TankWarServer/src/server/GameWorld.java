@@ -385,13 +385,15 @@ public class GameWorld {
 			// do nothing
 		} else {
 			tank.setAngle(angle);
-			tank.setCurrentSpeed(100);
+			tank.setCurrentSpeed(50);
 
 			Packet writePacket = new Packet(Command.S_MOVE, Short.MAX_VALUE);
 			writePacket.getByteBuffer().putInt(clientId);
 			writePacket.getByteBuffer().putInt(tankId);
 			writePacket.getByteBuffer().putInt(angle);
 			this.broadcast(writePacket);
+			
+			
 		}
 	}
 
@@ -568,7 +570,7 @@ public class GameWorld {
 
 	private void updateDebugInfo() {
 		long currentTime = System.currentTimeMillis();
-		if (currentTime - lastDebugUpdateTime >= 1000) {
+		if (currentTime - lastDebugUpdateTime >= 100) {
 			this.lastDebugUpdateTime = currentTime;
 			// send debug packet
 			Packet packet = new Packet(Command.S_DEBUG_TANK_INFO);

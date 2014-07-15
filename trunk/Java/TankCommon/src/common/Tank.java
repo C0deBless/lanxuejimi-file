@@ -24,6 +24,16 @@ public class Tank {
 	private final int id;
 	private boolean good;
 	private boolean live = true;
+	private boolean moveToNextBlock = true;
+	
+	public boolean isMoveToNextBlock() {
+		return moveToNextBlock;
+	}
+
+	public void setMoveToNextBlock(boolean moveToNextBlock) {
+		this.moveToNextBlock = moveToNextBlock;
+	}
+
 	private int angle; // 0,1,2,3
 	private int team;
 
@@ -104,6 +114,7 @@ public class Tank {
 		if (needMoveToNextBlockAndStop) {
 			if (this.isValidGrid()) {
 				needMoveToNextBlockAndStop = false;
+				moveToNextBlock = true;
 				this.correctDeviation();
 				this.currentSpeed = 0;
 
@@ -111,7 +122,7 @@ public class Tank {
 					this.listener.onStop();
 				}
 			} else {
-				// do nothing
+				moveToNextBlock = false;
 			}
 		}
 	}
