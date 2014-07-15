@@ -304,7 +304,7 @@ public class TankClient extends Frame {
 				drawCamp(g);
 			}
 		}
-		if(this.serverTanks != null){
+		if (this.serverTanks != null) {
 			this.drawDedugInfo(serverTanks);
 		}
 	}
@@ -383,16 +383,21 @@ public class TankClient extends Frame {
 		}
 	}
 
-	public void move(int clientId, int tankId, int angle) {
+	public void move(int clientId, int tankId, int angle,
+			boolean collideWithBlock) {
 		Tank tank = getTank(tankId);
 		if (tank == null) {
 			logger.error("cannot find tank, clientId:{}, tankId:{}", clientId,
 					tankId);
 			return;
 		}
-		
+
 		tank.setAngle(angle);
-		tank.setCurrentSpeed(50);
+		if (collideWithBlock) {
+			// do nothing
+		} else {
+			tank.setCurrentSpeed(50);
+		}
 	}
 
 	public void stop(int clientId, int tankId) {
@@ -402,9 +407,7 @@ public class TankClient extends Frame {
 					tankId);
 			return;
 		}
-		tank.correctDeviation();
 		tank.setCurrentSpeed(0);
-
 	}
 
 	public void blockDead(int blockId) {
@@ -526,15 +529,15 @@ public class TankClient extends Frame {
 		default:
 			return;
 		}
-//		if (judgeKey) {
-			Tank myTank = getMyTank();
+		// if (judgeKey) {
+		Tank myTank = getMyTank();
 
-			Packet packet = new Packet(Command.C_MOVE, 8);
-			packet.getByteBuffer().putInt(myTank.getId());
-			packet.getByteBuffer().putInt(angle);
-			ClientMain.client.pushWritePacket(packet);
-			judgeKey = false;
-//		}
+		Packet packet = new Packet(Command.C_MOVE, 8);
+		packet.getByteBuffer().putInt(myTank.getId());
+		packet.getByteBuffer().putInt(angle);
+		ClientMain.client.pushWritePacket(packet);
+		judgeKey = false;
+		// }
 
 	}
 
@@ -650,5 +653,15 @@ public class TankClient extends Frame {
 
 	public void setServerTanks(List<Tank> serverTanks) {
 		this.serverTanks = serverTanks;
+	}
+
+	public void correctDeviation(int tankId, float x, float y) {
+		Tank tank = this.getTank(tankId);
+		if (tank != null) {
+			tank.setX(x);
+			tank.setY(y);
+		} else {
+			// FIXME error
+		}
 	}
 }

@@ -115,7 +115,6 @@ public class Tank {
 			if (this.isValidGrid()) {
 				needMoveToNextBlockAndStop = false;
 				moveToNextBlock = true;
-				this.correctDeviation();
 				this.currentSpeed = 0;
 
 				if (this.listener != null) {
@@ -250,6 +249,14 @@ public class Tank {
 		return team;
 	}
 
+	public void setX(float x) {
+		this.x = x;
+	}
+
+	public void setY(float y) {
+		this.y = y;
+	}
+
 	public int getWidth() {
 		return width;
 	}
@@ -307,12 +314,5 @@ public class Tank {
 		} else {
 			return false;
 		}
-	}
-
-	public void correctDeviation() {
-		int blockX = ((int) this.x) / Constants.A_GRID;
-		int blockY = ((int) this.y) / Constants.A_GRID;
-		this.x = blockX * Constants.A_GRID;
-		this.y = blockY * Constants.A_GRID;
 	}
 }

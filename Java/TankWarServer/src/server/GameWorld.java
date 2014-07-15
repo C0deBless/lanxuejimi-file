@@ -209,22 +209,18 @@ public class GameWorld {
 				writePacket.getByteBuffer().putInt(clientId);
 				writePacket.getByteBuffer().putInt(tankId);
 				GameWorld.this.broadcast(writePacket);
+				GameWorld.this.correctDeviation(tank);
 			}
 		});
 		tankList.add(tank);
 	}
 
 	public Tank initUserTank(final int clientId) {
-		Tank tank = null;
 		// randomLocationX = random.nextInt(Constants.GAME_WIDTH);
 		// randomLocationY = random.nextInt(Constants.GAME_HEIGHT);
-		if (clientId % 2 == 0) {
-			tank = new Tank(Constants.CAMP_X + (Constants.A_GRID * 2),
-					Constants.CAMP_Y, 1, TankType.A);
-		} else {
-			tank = new Tank(Constants.CAMP_X - (Constants.A_GRID * 2),
-					Constants.CAMP_Y, 0, TankType.A);
-		}
+		final Tank tank = new Tank(Constants.CAMP_X
+				+ (clientId % 2 == 0 ? 1 : -1) * (Constants.A_GRID * 2),
+				Constants.CAMP_Y, 1, TankType.A);
 		tank.setClientId(clientId);
 		tankList.add(tank);
 		final int tankId = tank.getId();
@@ -236,6 +232,7 @@ public class GameWorld {
 				writePacket.getByteBuffer().putInt(clientId);
 				writePacket.getByteBuffer().putInt(tankId);
 				GameWorld.this.broadcast(writePacket);
+				GameWorld.this.correctDeviation(tank);
 			}
 		});
 		return tank;
@@ -358,43 +355,24 @@ public class GameWorld {
 			return;
 		}
 
-		int blockX = ((int) tank.getX()) / Constants.A_GRID;
-		int blockY = ((int) tank.getY()) / Constants.A_GRID;
-
-		int targetX = -1;
-		int targetY = -1;
-		switch (angle) {
-		case 0:
-			targetX = blockX;
-			targetY = blockY - 1;
-			break;
-		case 1:
-			targetX = blockX + 1;
-			targetY = blockY;
-			break;
-		case 2:
-			targetX = blockX;
-			targetY = blockY + 1;
-			break;
-		case 3:
-			targetX = blockX - 1;
-			targetY = blockY;
-			break;
-		}
-		if (this.isAnyBlockAt(targetX, targetY)) {
-			// do nothing
+		this.syncTankPos(tank);
+		
+		boolean collideWithBlock = false;
+		if (this.collideWithBlock(tank, angle)) {
+			tank.setAngle(angle);
+			collideWithBlock = true;
 		} else {
 			tank.setAngle(angle);
 			tank.setCurrentSpeed(50);
-
-			Packet writePacket = new Packet(Command.S_MOVE, Short.MAX_VALUE);
-			writePacket.getByteBuffer().putInt(clientId);
-			writePacket.getByteBuffer().putInt(tankId);
-			writePacket.getByteBuffer().putInt(angle);
-			this.broadcast(writePacket);
-			
-			
+			collideWithBlock = false;
 		}
+
+		Packet writePacket = new Packet(Command.S_MOVE, Short.MAX_VALUE);
+		writePacket.getByteBuffer().putInt(clientId);
+		writePacket.getByteBuffer().putInt(tankId);
+		writePacket.getByteBuffer().putInt(angle);
+		writePacket.getByteBuffer().put(collideWithBlock ? (byte) 1 : (byte) 0);
+		this.broadcast(writePacket);
 	}
 
 	private boolean isAnyBlockAt(int blockX, int blockY) {
@@ -416,9 +394,8 @@ public class GameWorld {
 		}
 
 		if (tank.isValidGrid()) {
-			tank.correctDeviation();
+			this.syncTankPos(tank);
 			tank.setCurrentSpeed(0);
-
 			Packet writePacket = new Packet(Command.S_STOP, 8);
 			writePacket.getByteBuffer().putInt(clientId);
 			writePacket.getByteBuffer().putInt(tankId);
@@ -428,6 +405,28 @@ public class GameWorld {
 		}
 
 	}
+
+	public void correctDeviation(Tank tank) {
+		int blockX = ((int) tank.getX()) / Constants.A_GRID;
+		int blockY = ((int) tank.getY()) / Constants.A_GRID;
+		tank.setX(blockX * Constants.A_GRID);
+		tank.setY(blockY * Constants.A_GRID);
+
+		Packet packet = new Packet(Command.S_TANK_POS_UPDATE, 12);
+		packet.getByteBuffer().putInt(tank.getId());
+		packet.getByteBuffer().putFloat(tank.getX());
+		packet.getByteBuffer().putFloat(tank.getY());
+		this.broadcast(packet);
+	}
+	
+	public void syncTankPos(Tank tank) {
+		Packet packet = new Packet(Command.S_TANK_POS_UPDATE, 12);
+		packet.getByteBuffer().putInt(tank.getId());
+		packet.getByteBuffer().putFloat(tank.getX());
+		packet.getByteBuffer().putFloat(tank.getY());
+		this.broadcast(packet);
+	}
+	
 
 	public Tank getTank(int tankId) {
 		for (Tank tank : tankList) {
@@ -519,20 +518,57 @@ public class GameWorld {
 		}
 	}
 
+	private boolean collideWithBlock(Tank tank, int angle) {
+
+		if (tank.isValidGrid()) {
+			int blockX = ((int) tank.getX()) / Constants.A_GRID;
+			int blockY = ((int) tank.getY()) / Constants.A_GRID;
+
+			int targetX = -1;
+			int targetY = -1;
+			switch (angle) {
+			case 0:
+				targetX = blockX;
+				targetY = blockY - 1;
+				break;
+			case 1:
+				targetX = blockX + 1;
+				targetY = blockY;
+				break;
+			case 2:
+				targetX = blockX;
+				targetY = blockY + 1;
+				break;
+			case 3:
+				targetX = blockX - 1;
+				targetY = blockY;
+				break;
+			}
+
+			if (this.isAnyBlockAt(targetX, targetY)) {
+				return true;
+			}
+			// do nothing
+		} else {
+
+		}
+		return false;
+	}
+
 	public void update() {
 		if (!camp.isLive()) {
 			endGame();
 			return;
 		}
 		Iterator<Block> itb = blockList.iterator();
-		while(itb.hasNext()){
+		while (itb.hasNext()) {
 			Block block = itb.next();
-			if(!block.isLive()){
+			if (!block.isLive()) {
 				itb.remove();
-				
+
 			}
 		}
-		
+
 		camp.update();
 		long currentTime = System.currentTimeMillis();
 		if (lastUpdateTime == 0) {
@@ -553,6 +589,15 @@ public class GameWorld {
 			}
 			collidesWithTanks(tank);
 			tank.update(deltaTime);
+			// 判断一下有没有和墙相撞
+			if (this.collideWithBlock(tank, tank.getAngle())) {
+				tank.setCurrentSpeed(0);
+
+				Packet writePacket = new Packet(Command.S_STOP, 8);
+				writePacket.getByteBuffer().putInt(tank.getClientId());
+				writePacket.getByteBuffer().putInt(tank.getId());
+				this.broadcast(writePacket);
+			}
 		}
 
 		Iterator<Missile> itm = missileList.iterator();
