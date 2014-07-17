@@ -529,15 +529,15 @@ public class TankClient extends Frame {
 		default:
 			return;
 		}
-		// if (judgeKey) {
-		Tank myTank = getMyTank();
+		if (judgeKey) {
+			Tank myTank = getMyTank();
 
-		Packet packet = new Packet(Command.C_MOVE, 8);
-		packet.getByteBuffer().putInt(myTank.getId());
-		packet.getByteBuffer().putInt(angle);
-		ClientMain.client.pushWritePacket(packet);
-		judgeKey = false;
-		// }
+			Packet packet = new Packet(Command.C_MOVE, 8);
+			packet.getByteBuffer().putInt(myTank.getId());
+			packet.getByteBuffer().putInt(angle);
+			ClientMain.client.pushWritePacket(packet);
+			judgeKey = false;
+		}
 
 	}
 
