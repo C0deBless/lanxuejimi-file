@@ -15,6 +15,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import common.AIStatus;
 import common.Block;
 import common.Camp;
 import common.Command;
@@ -396,7 +397,7 @@ public class TankClient extends Frame {
 		if (collideWithBlock) {
 			// do nothing
 		} else {
-			tank.setCurrentSpeed(100);
+			tank.move(angle);
 		}
 	}
 
@@ -407,7 +408,8 @@ public class TankClient extends Frame {
 					tankId);
 			return;
 		}
-		tank.setCurrentSpeed(0);
+		tank.stop();
+		tank.setStatus(AIStatus.Waiting);
 	}
 
 	public void blockDead(int blockId) {
