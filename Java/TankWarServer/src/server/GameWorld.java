@@ -363,7 +363,7 @@ public class GameWorld {
 			collideWithBlock = true;
 		} else {
 			tank.setAngle(angle);
-			tank.setCurrentSpeed(50);
+			tank.setCurrentSpeed(100);
 			collideWithBlock = false;
 		}
 

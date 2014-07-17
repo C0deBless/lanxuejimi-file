@@ -396,7 +396,7 @@ public class TankClient extends Frame {
 		if (collideWithBlock) {
 			// do nothing
 		} else {
-			tank.setCurrentSpeed(50);
+			tank.setCurrentSpeed(100);
 		}
 	}
 
