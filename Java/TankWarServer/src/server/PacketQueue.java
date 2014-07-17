@@ -46,6 +46,7 @@ public class PacketQueue implements Runnable {
 			game.join(session);
 
 			session.getUser().setGameWorldIndex(game.getId());
+			game.init();
 			game.initUserTank(clientId);
 
 			game.sendServerLoginCommand(packet, clientId);

@@ -12,6 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import common.AIStatus;
 import common.Block;
 import common.Camp;
 import common.Command;
@@ -50,11 +51,14 @@ public class GameWorld {
 	private GameStatus status = GameStatus.Idle;
 	private final int id;
 
+	private final AIFactory aiFactory;
+
 	public GameWorld(int id) {
 		this.id = id;
 		camp = new Camp(Constants.CAMP_X, Constants.CAMP_Y);
 		initblocksCoordinate();
 		initBlocks();
+		aiFactory = new AIFactory(this);
 	}
 
 	public void initBlocks() {
@@ -198,7 +202,7 @@ public class GameWorld {
 	}
 
 	public void init() {
-		final Tank tank = new Tank(100, 100, TEAM_NPC, TankType.A);
+		final Tank tank = new Tank(0, 0, TEAM_NPC, TankType.A);
 		tank.registerEventListener(new TankEventListener() {
 
 			@Override
@@ -211,13 +215,24 @@ public class GameWorld {
 				GameWorld.this.broadcast(writePacket);
 				GameWorld.this.correctDeviation(tank);
 			}
+
+			@Override
+			public void onMove() {
+				int clientId = tank.getClientId();
+				int tankId = tank.getId();
+
+				Packet writePacket = new Packet(Command.S_MOVE, Short.MAX_VALUE);
+				writePacket.getByteBuffer().putInt(clientId);
+				writePacket.getByteBuffer().putInt(tankId);
+				writePacket.getByteBuffer().putInt(tank.getAngle());
+				writePacket.getByteBuffer().put((byte) 0); // 非撞墙停止
+				GameWorld.this.broadcast(writePacket);
+			}
 		});
 		tankList.add(tank);
 	}
 
 	public Tank initUserTank(final int clientId) {
-		// randomLocationX = random.nextInt(Constants.GAME_WIDTH);
-		// randomLocationY = random.nextInt(Constants.GAME_HEIGHT);
 		final Tank tank = new Tank(Constants.CAMP_X
 				+ (clientId % 2 == 0 ? 1 : -1) * (Constants.A_GRID * 2),
 				Constants.CAMP_Y, 1, TankType.A);
@@ -233,6 +248,21 @@ public class GameWorld {
 				writePacket.getByteBuffer().putInt(tankId);
 				GameWorld.this.broadcast(writePacket);
 				GameWorld.this.correctDeviation(tank);
+			}
+
+			@Override
+			public void onMove() {
+				
+				int clientId = tank.getClientId();
+				int tankId = tank.getId();
+
+				Packet writePacket = new Packet(Command.S_MOVE, Short.MAX_VALUE);
+				writePacket.getByteBuffer().putInt(clientId);
+				writePacket.getByteBuffer().putInt(tankId);
+				writePacket.getByteBuffer().putInt(tank.getAngle());
+				writePacket.getByteBuffer().put((byte) 0); // 非撞墙停止
+				GameWorld.this.broadcast(writePacket);
+				
 			}
 		});
 		return tank;
@@ -356,23 +386,18 @@ public class GameWorld {
 		}
 
 		this.syncTankPos(tank);
-		
-		boolean collideWithBlock = false;
+
 		if (this.collideWithBlock(tank, angle)) {
 			tank.setAngle(angle);
-			collideWithBlock = true;
+			Packet writePacket = new Packet(Command.S_MOVE, Short.MAX_VALUE);
+			writePacket.getByteBuffer().putInt(clientId);
+			writePacket.getByteBuffer().putInt(tankId);
+			writePacket.getByteBuffer().putInt(angle);
+			writePacket.getByteBuffer().put((byte)1); // 撞墙的情况
+			this.broadcast(writePacket);
 		} else {
-			tank.setAngle(angle);
-			tank.setCurrentSpeed(100);
-			collideWithBlock = false;
+			tank.move(angle);
 		}
-
-		Packet writePacket = new Packet(Command.S_MOVE, Short.MAX_VALUE);
-		writePacket.getByteBuffer().putInt(clientId);
-		writePacket.getByteBuffer().putInt(tankId);
-		writePacket.getByteBuffer().putInt(angle);
-		writePacket.getByteBuffer().put(collideWithBlock ? (byte) 1 : (byte) 0);
-		this.broadcast(writePacket);
 	}
 
 	private boolean isAnyBlockAt(int blockX, int blockY) {
@@ -395,11 +420,8 @@ public class GameWorld {
 
 		if (tank.isValidGrid()) {
 			this.syncTankPos(tank);
-			tank.setCurrentSpeed(0);
-			Packet writePacket = new Packet(Command.S_STOP, 8);
-			writePacket.getByteBuffer().putInt(clientId);
-			writePacket.getByteBuffer().putInt(tankId);
-			this.broadcast(writePacket);
+			tank.stop();
+			tank.setStatus(AIStatus.Waiting);
 		} else {
 			tank.moveToNextBlockAndStop();
 		}
@@ -418,7 +440,7 @@ public class GameWorld {
 		packet.getByteBuffer().putFloat(tank.getY());
 		this.broadcast(packet);
 	}
-	
+
 	public void syncTankPos(Tank tank) {
 		Packet packet = new Packet(Command.S_TANK_POS_UPDATE, 12);
 		packet.getByteBuffer().putInt(tank.getId());
@@ -426,7 +448,6 @@ public class GameWorld {
 		packet.getByteBuffer().putFloat(tank.getY());
 		this.broadcast(packet);
 	}
-	
 
 	public Tank getTank(int tankId) {
 		for (Tank tank : tankList) {
@@ -556,6 +577,11 @@ public class GameWorld {
 	}
 
 	public void update() {
+		
+		if(this.status == GameStatus.Waiting){
+			return;
+		}
+		
 		if (!camp.isLive()) {
 			endGame();
 			return;
@@ -570,6 +596,8 @@ public class GameWorld {
 		}
 
 		camp.update();
+		aiFactory.update();
+
 		long currentTime = System.currentTimeMillis();
 		if (lastUpdateTime == 0) {
 			lastUpdateTime = currentTime;
@@ -591,12 +619,8 @@ public class GameWorld {
 			tank.update(deltaTime);
 			// 判断一下有没有和墙相撞
 			if (this.collideWithBlock(tank, tank.getAngle())) {
-				tank.setCurrentSpeed(0);
-
-				Packet writePacket = new Packet(Command.S_STOP, 8);
-				writePacket.getByteBuffer().putInt(tank.getClientId());
-				writePacket.getByteBuffer().putInt(tank.getId());
-				this.broadcast(writePacket);
+				tank.stop();
+				tank.setStatus(AIStatus.Waiting);
 			}
 		}
 
@@ -713,4 +737,13 @@ public class GameWorld {
 		this.broadcast(packet);
 	}
 
+	public List<Tank> getNPCTankList() {
+		List<Tank> tankList = new ArrayList<>(this.tankList.size());
+		for (Tank tank : this.tankList) {
+			if (tank.getTeam() == TEAM_NPC) {
+				tankList.add(tank);
+			}
+		}
+		return tankList;
+	}
 }

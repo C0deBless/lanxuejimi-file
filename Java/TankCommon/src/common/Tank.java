@@ -25,7 +25,8 @@ public class Tank {
 	private boolean good;
 	private boolean live = true;
 	private boolean moveToNextBlock = true;
-	
+	private AIStatus status = AIStatus.Start;
+
 	public boolean isMoveToNextBlock() {
 		return moveToNextBlock;
 	}
@@ -115,11 +116,9 @@ public class Tank {
 			if (this.isValidGrid()) {
 				needMoveToNextBlockAndStop = false;
 				moveToNextBlock = true;
-				this.currentSpeed = 0;
-
-				if (this.listener != null) {
-					this.listener.onStop();
-				}
+				
+				this.stop();
+				this.setStatus(AIStatus.Waiting);
 			} else {
 				moveToNextBlock = false;
 			}
@@ -277,10 +276,6 @@ public class Tank {
 		this.angle = angle;
 	}
 
-	public void setCurrentSpeed(float currentSpeed) {
-		this.currentSpeed = currentSpeed;
-	}
-
 	public TankType getType() {
 		return type;
 	}
@@ -291,6 +286,23 @@ public class Tank {
 
 	public void setTime(long time) {
 		this.time = time;
+	}
+
+	public void move(int angle) {
+		this.currentSpeed = 100;
+		this.angle = angle;
+		
+		if(this.listener != null){
+			this.listener.onMove();
+		}
+	}
+	
+	public void stop(){
+		this.currentSpeed = 0;
+		
+		if(this.listener != null){
+			this.listener.onStop();
+		}
 	}
 
 	public String getDebugInfo() {
@@ -314,5 +326,13 @@ public class Tank {
 		} else {
 			return false;
 		}
+	}
+
+	public AIStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(AIStatus status) {
+		this.status = status;
 	}
 }
