@@ -202,34 +202,39 @@ public class GameWorld {
 	}
 
 	public void init() {
-		final Tank tank = new Tank(0, 0, TEAM_NPC, TankType.A);
-		tank.registerEventListener(new TankEventListener() {
+		for (int i = 0; i < 3; i++) {
+			final Tank tank = new Tank(0+(Constants.A_GRID*i), 0, TEAM_NPC, TankType.B);
+			tank.setAngle(2);
+			tank.registerEventListener(new TankEventListener() {
 
-			@Override
-			public void onStop() {
-				int clientId = tank.getClientId();
-				int tankId = tank.getId();
-				Packet writePacket = new Packet(Command.S_STOP, 8);
-				writePacket.getByteBuffer().putInt(clientId);
-				writePacket.getByteBuffer().putInt(tankId);
-				GameWorld.this.broadcast(writePacket);
-				GameWorld.this.correctDeviation(tank);
-			}
+				@Override
+				public void onStop() {
+					int clientId = tank.getClientId();
+					int tankId = tank.getId();
+					Packet writePacket = new Packet(Command.S_STOP, 8);
+					writePacket.getByteBuffer().putInt(clientId);
+					writePacket.getByteBuffer().putInt(tankId);
+					GameWorld.this.broadcast(writePacket);
+					GameWorld.this.correctDeviation(tank);
+				}
 
-			@Override
-			public void onMove() {
-				int clientId = tank.getClientId();
-				int tankId = tank.getId();
+				@Override
+				public void onMove() {
+					int clientId = tank.getClientId();
+					int tankId = tank.getId();
 
-				Packet writePacket = new Packet(Command.S_MOVE, Short.MAX_VALUE);
-				writePacket.getByteBuffer().putInt(clientId);
-				writePacket.getByteBuffer().putInt(tankId);
-				writePacket.getByteBuffer().putInt(tank.getAngle());
-				writePacket.getByteBuffer().put((byte) 0); // 非撞墙停止
-				GameWorld.this.broadcast(writePacket);
-			}
-		});
-		tankList.add(tank);
+					Packet writePacket = new Packet(Command.S_MOVE,
+							Short.MAX_VALUE);
+					writePacket.getByteBuffer().putInt(clientId);
+					writePacket.getByteBuffer().putInt(tankId);
+					writePacket.getByteBuffer().putInt(tank.getAngle());
+					writePacket.getByteBuffer().put((byte) 0); // 非撞墙停止
+					GameWorld.this.broadcast(writePacket);
+				}
+			});
+			tankList.add(tank);
+		}
+		
 	}
 
 	public Tank initUserTank(final int clientId) {
@@ -539,7 +544,7 @@ public class GameWorld {
 		}
 	}
 
-	private boolean collideWithBlock(Tank tank, int angle) {
+	public boolean collideWithBlock(Tank tank, int angle) {
 
 		if (tank.isValidGrid()) {
 			int blockX = ((int) tank.getX()) / Constants.A_GRID;
