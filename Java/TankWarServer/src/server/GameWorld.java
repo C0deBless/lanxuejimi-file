@@ -202,39 +202,39 @@ public class GameWorld {
 	}
 
 	public void init() {
-		for (int i = 0; i < 3; i++) {
-			final Tank tank = new Tank(0+(Constants.A_GRID*i), 0, TEAM_NPC, TankType.B);
-			tank.setAngle(2);
-			tank.registerEventListener(new TankEventListener() {
+		// for (int i = 0; i < 3; i++) {
+		final Tank tank = new Tank(0 + (Constants.A_GRID), 0, TEAM_NPC,
+				TankType.B);
+		tank.setAngle(2);
+		tank.registerEventListener(new TankEventListener() {
 
-				@Override
-				public void onStop() {
-					int clientId = tank.getClientId();
-					int tankId = tank.getId();
-					Packet writePacket = new Packet(Command.S_STOP, 8);
-					writePacket.getByteBuffer().putInt(clientId);
-					writePacket.getByteBuffer().putInt(tankId);
-					GameWorld.this.broadcast(writePacket);
-					GameWorld.this.correctDeviation(tank);
-				}
+			@Override
+			public void onStop() {
+				int clientId = tank.getClientId();
+				int tankId = tank.getId();
+				Packet writePacket = new Packet(Command.S_STOP, 8);
+				writePacket.getByteBuffer().putInt(clientId);
+				writePacket.getByteBuffer().putInt(tankId);
+				GameWorld.this.broadcast(writePacket);
+				GameWorld.this.correctDeviation(tank);
+			}
 
-				@Override
-				public void onMove() {
-					int clientId = tank.getClientId();
-					int tankId = tank.getId();
+			@Override
+			public void onMove() {
+				int clientId = tank.getClientId();
+				int tankId = tank.getId();
 
-					Packet writePacket = new Packet(Command.S_MOVE,
-							Short.MAX_VALUE);
-					writePacket.getByteBuffer().putInt(clientId);
-					writePacket.getByteBuffer().putInt(tankId);
-					writePacket.getByteBuffer().putInt(tank.getAngle());
-					writePacket.getByteBuffer().put((byte) 0); // 非撞墙停止
-					GameWorld.this.broadcast(writePacket);
-				}
-			});
-			tankList.add(tank);
-		}
-		
+				Packet writePacket = new Packet(Command.S_MOVE, Short.MAX_VALUE);
+				writePacket.getByteBuffer().putInt(clientId);
+				writePacket.getByteBuffer().putInt(tankId);
+				writePacket.getByteBuffer().putInt(tank.getAngle());
+				writePacket.getByteBuffer().put((byte) 0); // 非撞墙停止
+				GameWorld.this.broadcast(writePacket);
+			}
+		});
+		tankList.add(tank);
+		// }
+
 	}
 
 	public Tank initUserTank(final int clientId) {
@@ -257,7 +257,7 @@ public class GameWorld {
 
 			@Override
 			public void onMove() {
-				
+
 				int clientId = tank.getClientId();
 				int tankId = tank.getId();
 
@@ -267,7 +267,7 @@ public class GameWorld {
 				writePacket.getByteBuffer().putInt(tank.getAngle());
 				writePacket.getByteBuffer().put((byte) 0); // 非撞墙停止
 				GameWorld.this.broadcast(writePacket);
-				
+
 			}
 		});
 		return tank;
@@ -398,7 +398,7 @@ public class GameWorld {
 			writePacket.getByteBuffer().putInt(clientId);
 			writePacket.getByteBuffer().putInt(tankId);
 			writePacket.getByteBuffer().putInt(angle);
-			writePacket.getByteBuffer().put((byte)1); // 撞墙的情况
+			writePacket.getByteBuffer().put((byte) 1); // 撞墙的情况
 			this.broadcast(writePacket);
 		} else {
 			tank.move(angle);
@@ -582,11 +582,11 @@ public class GameWorld {
 	}
 
 	public void update() {
-		
-		if(this.status == GameStatus.Waiting){
+
+		if (this.status == GameStatus.Waiting) {
 			return;
 		}
-		
+
 		if (!camp.isLive()) {
 			endGame();
 			return;
@@ -750,5 +750,9 @@ public class GameWorld {
 			}
 		}
 		return tankList;
+	}
+
+	public List<Block> getBlockList() {
+		return this.blockList;
 	}
 }

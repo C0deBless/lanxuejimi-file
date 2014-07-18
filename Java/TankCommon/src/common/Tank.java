@@ -102,34 +102,43 @@ public class Tank {
 		x += deltaPos * factorX;
 		y += deltaPos * factorY;
 
+		boolean isCollideWithWall = false;
+		
 		if (x < 0) {
 			x = 0;
-
+			isCollideWithWall = true;
 		}
 		if (y < 0) {
 			y = 0;
-
+			isCollideWithWall = true;
 		}
 		if (x > Constants.GAME_WIDTH - width) {
 			x = Constants.GAME_WIDTH - width;
-
+			isCollideWithWall = true;
 		}
 		if (y > Constants.GAME_HEIGHT - height) {
 			y = Constants.GAME_HEIGHT - height;
-
+			isCollideWithWall = true;
 		}
 
-		// 判断是不是需要停止
-		if (needMoveToNextBlockAndStop) {
-			if (this.isValidGrid()) {
-				needMoveToNextBlockAndStop = false;
-				moveToNextBlock = true;
+		if(isCollideWithWall){
+			this.stop();
+			this.setStatus(AIStatus.Waiting);
+			needMoveToNextBlockAndStop = false;
+		}else{
+			// 判断是不是需要停止
+			if (needMoveToNextBlockAndStop) {
+				if (this.isValidGrid()) {
+					needMoveToNextBlockAndStop = false;
+					moveToNextBlock = true;
 
-				this.stop();
-				this.setStatus(AIStatus.Waiting);
-			} else {
-				moveToNextBlock = false;
+					this.stop();
+					this.setStatus(AIStatus.Waiting);
+				} else {
+					moveToNextBlock = false;
+				}
 			}
+
 		}
 	}
 

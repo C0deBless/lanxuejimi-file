@@ -1,5 +1,6 @@
 package server;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -31,7 +32,6 @@ public class AIFactory {
 			for (Tank tank : game.getNPCTankList()) {
 				this.updateAIStatus(tank);
 				updateShotingStatus(tank);
-				updatecollideWithBlockStatus(tank);
 			}
 		}
 	}
@@ -58,26 +58,61 @@ public class AIFactory {
 		}
 	}
 
+	private List<Integer> getAvailableAngles(Tank tank) {
+		List<Integer> list = new ArrayList<>(4);
+		float x = tank.getX();
+		float y = tank.getY();
+
+		int gridX = ((int) x) / Constants.A_GRID;
+		int gridY = ((int) y) / Constants.A_GRID;
+
+		for (int angle = 0; angle < 4; angle++) {
+
+			if (game.collideWithBlock(tank, angle)) {
+				continue;
+			}
+			Point nextGrid = this.getNextGrid(angle, gridX, gridY);
+			int nextX = nextGrid.x;
+			int nextY = nextGrid.y;
+			if (nextX < 0 || nextY < 0
+					|| nextX > Constants.GAME_WIDTH / Constants.A_GRID
+					|| nextY > Constants.GAME_HEIGHT / Constants.A_GRID) {
+				continue;
+			}
+
+			list.add(angle);
+		}
+		return list;
+	}
+
+	private Point getNextGrid(int angle, int gridX, int gridY) {
+		Point point = new Point();
+		switch (angle) {
+		case 0:
+			point.x = gridX;
+			point.y = gridY - 1;
+			break;
+		case 1:
+			point.x = gridX + 1;
+			point.y = gridY;
+			break;
+		case 2:
+			point.x = gridX;
+			point.y = gridY + 1;
+			break;
+		case 3:
+			point.x = gridX - 1;
+			point.y = gridY;
+			break;
+		}
+		return point;
+	}
+
 	private void onAIRandomMove(Tank tank) {
 
 		if (tank.getCurrentSpeed() == 0) {
-
-			int randomAngle;
-			List<Integer> angles = new ArrayList<Integer>();
-			for (int i = 0; i < 4; i++) {
-				if (!game.collideWithBlock(tank, i)) {
-					if (tank.getX() - Constants.A_GRID >= 0
-							&& tank.getX() + Constants.A_GRID <= Constants.GAME_WIDTH
-									- Constants.A_GRID
-							&& tank.getY() - Constants.A_GRID >= 0
-							&& tank.getY() + Constants.A_GRID <= Constants.GAME_HEIGHT
-									- Constants.A_GRID) {
-						angles.add(i);
-					}
-
-				}
-			}
-			randomAngle = angles.get(random.nextInt(angles.size()));
+			List<Integer> angles = this.getAvailableAngles(tank);
+			int randomAngle = angles.get(random.nextInt(angles.size()));
 			tank.move(randomAngle);
 		} else {
 			int ran = random.nextInt(100);
@@ -106,21 +141,6 @@ public class AIFactory {
 			writePacket.getByteBuffer().putInt(tank.getId());
 			writePacket.getByteBuffer().putInt(m.getId());
 			game.broadcast(writePacket);
-		}
-	}
-
-	private void updatecollideWithBlockStatus(Tank tank) {
-		if (game.collideWithBlock(tank, tank.getAngle())) {
-			int randomAngle = random.nextInt(4);
-			tank.setAngle(randomAngle);
-			Packet writePacket = new Packet(Command.S_MOVE, Short.MAX_VALUE);
-			writePacket.getByteBuffer().putInt(tank.getClientId());
-			writePacket.getByteBuffer().putInt(tank.getId());
-			writePacket.getByteBuffer().putInt(randomAngle);
-			writePacket.getByteBuffer().put((byte) 1); // 撞墙的情况
-			game.broadcast(writePacket);
-		} else {
-			tank.move(tank.getAngle());
 		}
 	}
 }
