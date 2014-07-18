@@ -102,21 +102,29 @@ public class Tank {
 		x += deltaPos * factorX;
 		y += deltaPos * factorY;
 
-		if (x < 0)
+		if (x < 0) {
 			x = 0;
-		if (y < 0)
+
+		}
+		if (y < 0) {
 			y = 0;
-		if (x > Constants.GAME_WIDTH - width)
+
+		}
+		if (x > Constants.GAME_WIDTH - width) {
 			x = Constants.GAME_WIDTH - width;
-		if (y > Constants.GAME_HEIGHT - height)
+
+		}
+		if (y > Constants.GAME_HEIGHT - height) {
 			y = Constants.GAME_HEIGHT - height;
+
+		}
 
 		// 判断是不是需要停止
 		if (needMoveToNextBlockAndStop) {
 			if (this.isValidGrid()) {
 				needMoveToNextBlockAndStop = false;
 				moveToNextBlock = true;
-				
+
 				this.stop();
 				this.setStatus(AIStatus.Waiting);
 			} else {
@@ -291,16 +299,16 @@ public class Tank {
 	public void move(int angle) {
 		this.currentSpeed = 100;
 		this.angle = angle;
-		
-		if(this.listener != null){
+
+		if (this.listener != null) {
 			this.listener.onMove();
 		}
 	}
-	
-	public void stop(){
+
+	public void stop() {
 		this.currentSpeed = 0;
-		
-		if(this.listener != null){
+
+		if (this.listener != null) {
 			this.listener.onStop();
 		}
 	}
