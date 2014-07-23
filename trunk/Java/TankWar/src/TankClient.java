@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.net.ssl.SSLEngineResult.Status;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,6 +26,7 @@ import common.Explode;
 import common.Missile;
 import common.Packet;
 import common.Tank;
+import common.TankType;
 
 public class TankClient extends Frame {
 
@@ -171,6 +174,11 @@ public class TankClient extends Frame {
 	private void drawTank(Tank tank, Graphics g) {
 		if (!tank.isLive()) {
 			return;
+		}
+		if (tank.getType() == TankType.B) {
+			if (tank.getStatus() == AIStatus.Standby) {
+				return;
+			}
 		}
 		Color c = g.getColor();
 		int angle = tank.getAngle();

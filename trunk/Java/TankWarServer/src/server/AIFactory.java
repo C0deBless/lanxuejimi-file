@@ -19,7 +19,12 @@ public class AIFactory {
 	static Logger logger = LoggerFactory.getLogger(AIFactory.class);
 	private final GameWorld game;
 	private long lastUpdateTime;
+	private long lastUpdateTime1;
+	private long currentTime1;
 	private final Random random = new Random();
+	private List<Tank> npcTanks;
+	private boolean three = true;
+	private int playCount;
 
 	public AIFactory(GameWorld game) {
 		this.game = game;
@@ -29,15 +34,37 @@ public class AIFactory {
 		long currentTime = System.currentTimeMillis();
 		if (currentTime - lastUpdateTime > 1000) {
 			lastUpdateTime = currentTime;
-			for (Tank tank : game.getNPCTankList()) {
-				this.updateAIStatus(tank);
-				updateShotingStatus(tank);
+			npcTanks = game.getNPCTankList();
+
+			for (int i = 0; i < npcTanks.size(); i++) {
+				Tank tank = npcTanks.get(i);
+				playCount = i;
+				
+
+				if (playCount < 7) {
+					if (three) {
+						tank.setStatus(AIStatus.Start);
+						this.updateAIStatus(tank);
+						updateShotingStatus(tank);
+						if (i == 2) {
+							three = false;
+							lastUpdateTime1 = System.currentTimeMillis();
+						}
+					}
+				}
+
 			}
+			currentTime1 = System.currentTimeMillis();
+			if(currentTime1 - lastUpdateTime1 > 6000){
+				three = true;
+			}
+
 		}
 	}
 
 	private void updateAIStatus(Tank tank) {
 		if (!tank.isLive()) {
+			npcTanks.remove(tank);
 			return;
 		}
 

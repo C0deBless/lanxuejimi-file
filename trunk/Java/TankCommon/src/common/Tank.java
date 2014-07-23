@@ -25,7 +25,7 @@ public class Tank {
 	private boolean good;
 	private boolean live = true;
 	private boolean moveToNextBlock = true;
-	private AIStatus status = AIStatus.Start;
+	private AIStatus status = AIStatus.Standby;
 
 	public boolean isMoveToNextBlock() {
 		return moveToNextBlock;
