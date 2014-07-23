@@ -145,9 +145,9 @@ public class ClientMain {
 		case Command.S_GAME_END: {
 			int teamWin = packet.getByteBuffer().getInt();
 			if (teamWin == 0) {
-				ClientMain.tankClient.setTeamWin("RedTeam");
+				ClientMain.tankClient.setTeamWin("UserTeam");
 			} else if (teamWin == 1) {
-				ClientMain.tankClient.setTeamWin("GreenTeam");
+				ClientMain.tankClient.setTeamWin("NPCTeam");
 			}
 			ClientMain.tankClient.setWiningTeam(true);
 			try {

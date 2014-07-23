@@ -202,38 +202,39 @@ public class GameWorld {
 	}
 
 	public void init() {
-		// for (int i = 0; i < 3; i++) {
-		final Tank tank = new Tank(0 + (Constants.A_GRID), 0, TEAM_NPC,
-				TankType.B);
-		tank.setAngle(2);
-		tank.registerEventListener(new TankEventListener() {
+		for (int i = 0; i < 20; i++) {
+			final Tank tank = new Tank(0 + (Constants.A_GRID*i ), 0, TEAM_NPC,
+					TankType.B);
+			tank.setAngle(2);
+			tank.registerEventListener(new TankEventListener() {
 
-			@Override
-			public void onStop() {
-				int clientId = tank.getClientId();
-				int tankId = tank.getId();
-				Packet writePacket = new Packet(Command.S_STOP, 8);
-				writePacket.getByteBuffer().putInt(clientId);
-				writePacket.getByteBuffer().putInt(tankId);
-				GameWorld.this.broadcast(writePacket);
-				GameWorld.this.correctDeviation(tank);
-			}
+				@Override
+				public void onStop() {
+					int clientId = tank.getClientId();
+					int tankId = tank.getId();
+					Packet writePacket = new Packet(Command.S_STOP, 8);
+					writePacket.getByteBuffer().putInt(clientId);
+					writePacket.getByteBuffer().putInt(tankId);
+					GameWorld.this.broadcast(writePacket);
+					GameWorld.this.correctDeviation(tank);
+				}
 
-			@Override
-			public void onMove() {
-				int clientId = tank.getClientId();
-				int tankId = tank.getId();
+				@Override
+				public void onMove() {
+					int clientId = tank.getClientId();
+					int tankId = tank.getId();
 
-				Packet writePacket = new Packet(Command.S_MOVE, Short.MAX_VALUE);
-				writePacket.getByteBuffer().putInt(clientId);
-				writePacket.getByteBuffer().putInt(tankId);
-				writePacket.getByteBuffer().putInt(tank.getAngle());
-				writePacket.getByteBuffer().put((byte) 0); // 非撞墙停止
-				GameWorld.this.broadcast(writePacket);
-			}
-		});
-		tankList.add(tank);
-		// }
+					Packet writePacket = new Packet(Command.S_MOVE,
+							Short.MAX_VALUE);
+					writePacket.getByteBuffer().putInt(clientId);
+					writePacket.getByteBuffer().putInt(tankId);
+					writePacket.getByteBuffer().putInt(tank.getAngle());
+					writePacket.getByteBuffer().put((byte) 0); // 非撞墙停止
+					GameWorld.this.broadcast(writePacket);
+				}
+			});
+			tankList.add(tank);
+		}
 
 	}
 
@@ -242,6 +243,7 @@ public class GameWorld {
 				+ (clientId % 2 == 0 ? 1 : -1) * (Constants.A_GRID * 2),
 				Constants.CAMP_Y, 1, TankType.A);
 		tank.setClientId(clientId);
+		tank.setStatus(AIStatus.Start);
 		tankList.add(tank);
 		final int tankId = tank.getId();
 		tank.registerEventListener(new TankEventListener() {
@@ -331,9 +333,9 @@ public class GameWorld {
 		}
 	}
 
-	public boolean checkGreenTeamIsLive() {
+	public boolean userIsDead() {
 		for (Tank tank : tankList) {
-			if (tank.getTeam() == 1) {
+			if (tank.getType() == TankType.A) {
 				if (tank.isLive()) {
 					return false;
 				}
@@ -342,9 +344,9 @@ public class GameWorld {
 		return true;
 	}
 
-	public boolean checkRedTeamIsLive() {
+	public boolean npcIsDead() {
 		for (Tank tank : tankList) {
-			if (tank.getTeam() == 0) {
+			if (tank.getType() == TankType.B) {
 				if (tank.isLive()) {
 					return false;
 				}
@@ -355,15 +357,6 @@ public class GameWorld {
 
 	public void endGame() {
 		this.status = GameStatus.Idle;
-		int team = -1;
-		if (!checkRedTeamIsLive()) {
-			team = 0;
-		} else if (!checkGreenTeamIsLive()) {
-			team = 1;
-		}
-		Packet packet = new Packet(Command.S_GAME_END);
-		packet.getByteBuffer().putInt(team);
-		this.broadcast(packet);
 		tankList.clear();
 		missileList.clear();
 		explodeList.clear();
@@ -588,6 +581,9 @@ public class GameWorld {
 		}
 
 		if (!camp.isLive()) {
+			Packet packet = new Packet(Command.S_GAME_END);
+			packet.getByteBuffer().putInt(1);
+			this.broadcast(packet);
 			endGame();
 			return;
 		}
@@ -617,10 +613,19 @@ public class GameWorld {
 
 			if (!tank.isLive()) {
 				tankList.remove(tank);
-				endGame();
 				return;
 			}
-			collidesWithTanks(tank);
+			if(npcIsDead()){
+				Packet packet = new Packet(Command.S_GAME_END);
+				packet.getByteBuffer().putInt(0);
+				this.broadcast(packet);
+				endGame();
+			}else if(userIsDead()){
+				Packet packet = new Packet(Command.S_GAME_END);
+				packet.getByteBuffer().putInt(1);
+				this.broadcast(packet);
+				endGame();
+			}
 			tank.update(deltaTime);
 			// 判断一下有没有和墙相撞
 			if (this.collideWithBlock(tank, tank.getAngle())) {

@@ -4,4 +4,5 @@ public enum AIStatus {
 	Start,
 	Waiting,
 	RandomMove,
+	Standby,
 }
