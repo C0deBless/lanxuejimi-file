@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
@@ -19,11 +18,12 @@ import common.Command;
 import common.Constants;
 import common.Explode;
 import common.Missile;
-import common.Packet;
 import common.StringUtil;
 import common.Tank;
 import common.TankType;
 import common.event.TankEventListener;
+
+import easysocket.packet.Packet;
 
 public class GameWorld {
 
@@ -44,10 +44,6 @@ public class GameWorld {
 
 	private long lastUpdateTime = 0;
 
-	private Random random = new Random();
-
-	private int randomLocationX;
-	private int randomLocationY;
 	private GameStatus status = GameStatus.Idle;
 	private final int id;
 
@@ -203,7 +199,7 @@ public class GameWorld {
 
 	public void init() {
 		for (int i = 0; i < 20; i++) {
-			final Tank tank = new Tank(0 + (Constants.A_GRID*i ), 0, TEAM_NPC,
+			final Tank tank = new Tank(0 + (Constants.A_GRID * i), 0, TEAM_NPC,
 					TankType.B);
 			tank.setAngle(2);
 			tank.registerEventListener(new TankEventListener() {
@@ -615,12 +611,12 @@ public class GameWorld {
 				tankList.remove(tank);
 				return;
 			}
-			if(npcIsDead()){
+			if (npcIsDead()) {
 				Packet packet = new Packet(Command.S_GAME_END);
 				packet.getByteBuffer().putInt(0);
 				this.broadcast(packet);
 				endGame();
-			}else if(userIsDead()){
+			} else if (userIsDead()) {
 				Packet packet = new Packet(Command.S_GAME_END);
 				packet.getByteBuffer().putInt(1);
 				this.broadcast(packet);
@@ -673,7 +669,7 @@ public class GameWorld {
 	public void broadcast(Packet packet) {
 		Collection<UserSession> sessionList = userPool.values();
 		for (UserSession session : sessionList) {
-			session.getClient().pushWritePacket(packet);
+			session.getSession().sendPacket(packet);
 		}
 	}
 
@@ -719,7 +715,7 @@ public class GameWorld {
 		if (status == GameStatus.Idle) {
 			status = GameStatus.Waiting;
 		}
-		this.userPool.put(session.getClient().getClientId(), session);
+		this.userPool.put(session.getSession().getSessionId(), session);
 	}
 
 	public void sendServerNewMsg(Tank tank, String name) {
@@ -733,7 +729,7 @@ public class GameWorld {
 		Packet writePacket = new Packet(Command.S_LOGIN);
 		writePacket.getByteBuffer().putInt(this.id);
 		writePacket.getByteBuffer().putInt(clientId);
-		packet.getClient().pushWritePacket(writePacket);
+		packet.getSession().sendPacket(writePacket);
 	}
 
 	public void broadcastGameStart() {

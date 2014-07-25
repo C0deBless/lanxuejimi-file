@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="/TankCommon/log4j-1.2.16.jar"/>
 	<classpathentry kind="lib" path="/TankCommon/slf4j-api-1.6.4.jar"/>
 	<classpathentry kind="lib" path="/TankCommon/slf4j-log4j12-1.6.4.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/EasySocket"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

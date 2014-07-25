@@ -12,8 +12,9 @@ import common.AIStatus;
 import common.Command;
 import common.Constants;
 import common.Missile;
-import common.Packet;
 import common.Tank;
+
+import easysocket.packet.Packet;
 
 public class AIFactory {
 	static Logger logger = LoggerFactory.getLogger(AIFactory.class);

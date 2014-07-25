@@ -1,15 +1,15 @@
 package server;
 
-import common.Client;
+import easysocket.session.AioTcpSession;
 
 public class UserSession {
 
 	private User user;
-	private final Client client;
+	private final AioTcpSession session;
 	private boolean ready = false;
 
-	public UserSession(Client client) {
-		this.client = client;
+	public UserSession(AioTcpSession session) {
+		this.session = session;
 	}
 
 	public User getUser() {
@@ -20,10 +20,6 @@ public class UserSession {
 		this.user = user;
 	}
 
-	public Client getClient() {
-		return client;
-	}
-
 	public boolean isReady() {
 		return ready;
 	}
@@ -31,5 +27,9 @@ public class UserSession {
 	public void setReady(boolean ready) {
 		this.ready = ready;
 	}
-	
+
+	public AioTcpSession getSession() {
+		return session;
+	}
+
 }

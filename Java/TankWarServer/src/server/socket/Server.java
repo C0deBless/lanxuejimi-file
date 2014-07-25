@@ -1,9 +1,6 @@
 package server.socket;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,19 +14,21 @@ import server.GameWorld;
 import server.ServerMain;
 import server.User;
 import server.UserSession;
-import common.Client;
+
 import common.Command;
-import common.Packet;
-import common.PacketEventListener;
-import common.SocketCloseEventListener;
+
+import easysocket.packet.Packet;
+import easysocket.server.SocketServer;
+import easysocket.server.SocketServer.ClientConnectedEventHandler;
+import easysocket.session.AioTcpSession;
+import easysocket.session.event.SessionEventListener;
 
 public class Server {
 
 	private static final int PORT = 8888;
 	private static Logger logger = LoggerFactory.getLogger(Server.class);
 
-	private ServerSocket serverSocket;
-	private Thread acceptThread;
+	private SocketServer server;
 	private Thread updateThread;
 	private boolean isRunning = false;
 	private Map<Integer, UserSession> clientPool = new ConcurrentHashMap<>();
@@ -37,14 +36,14 @@ public class Server {
 
 	public void start() throws IOException {
 		isRunning = true;
-		
+
 		for (int i = 0; i < 1000; i++) {
 			GameWorld gameWorld = new GameWorld(i);
 			gameWorlds.add(gameWorld);
-			
+
 		}
 		updateThread = new Thread(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				while (isRunning) {
@@ -53,7 +52,7 @@ public class Server {
 							if (gameWorld.getStatus() != GameStatus.Idle) {
 								gameWorld.update();
 							}
-		
+
 						}
 						Thread.sleep(5);
 					} catch (Exception e) {
@@ -61,86 +60,75 @@ public class Server {
 					}
 				}
 			}
-			
+
 		});
 		updateThread.start();
-		
-		serverSocket = new ServerSocket();
-		serverSocket.bind(new InetSocketAddress(PORT));
 
-		acceptThread = new Thread(new Runnable() {
+		server = new SocketServer(PORT, new ClientConnectedEventHandler() {
 
 			@Override
-			public void run() {
-				while (isRunning) {
-					try {
-						Socket socket = serverSocket.accept();
-						logger.debug("a client connected....");
-						handleNewSocket(socket);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
+			public void OnConnect(AioTcpSession session) {
+				logger.debug("a client connected....");
+				handleNewSocket(session);
 			}
 		});
-		acceptThread.start();
+		server.start();
 	}
 
 	public void removeClient(int clientId) {
 		this.clientPool.remove(clientId);
 	}
 
-	private void handleNewSocket(Socket socket) {
-		final Client client = new Client(socket);
-		final UserSession session = new UserSession(client);
-		client.setPacketEventListener(new PacketEventListener() {
+	private void handleNewSocket(final AioTcpSession session) {
+		final UserSession userSession = new UserSession(session);
+
+		session.registerEventListener(new SessionEventListener() {
+
 			@Override
-			public void receive(List<Packet> packets) {
+			public void onReceivePackets(List<Packet> packets) {
 				for (Packet packet : packets) {
 					ServerMain.packetQueue.pushPacket(packet);
 				}
 			}
-		});
 
-		client.setCloseEventListener(new SocketCloseEventListener() {
 			@Override
 			public void onClose() {
-				logger.debug("client closed, id:{}", client.getClientId());
-				User user = session.getUser();
-				if(user != null){
+				logger.debug("client closed, id:{}", session.getSessionId());
+				User user = userSession.getUser();
+				if (user != null) {
 					int sessionId = user.getGameWorldIndex();
-					if(sessionId > -1){
+					if (sessionId > -1) {
 						GameWorld game = Server.this.gameWorlds.get(sessionId);
-						game.leaveUser(client.getClientId());
-						game.removeTankByClientId(client.getClientId());
+						game.leaveUser(session.getSessionId());
+						game.removeTankByClientId(session.getSessionId());
 						Packet writePacket = new Packet(Command.S_EXIT, 8);
-						writePacket.getByteBuffer().putInt(client.getClientId());
+						writePacket.getByteBuffer().putInt(
+								session.getSessionId());
 						game.broadcast(writePacket);
 					}
 				}
-				
-				ServerMain.getServer().removeClient(client.getClientId());
 
-				logger.debug("C_EXIT, clientId:{}", client.getClientId());
-				
-				
+				ServerMain.getServer().removeClient(session.getSessionId());
+
+				logger.debug("C_EXIT, clientId:{}", session.getSessionId());
 			}
 		});
-		int clientId = client.getClientId();
-		clientPool.put(clientId, session);
-		client.start();
+
+		session.pendingRead();
+
+		clientPool.put(session.getSessionId(), userSession);
 	}
 
-	public GameWorld findProperGameWorld(UserSession session){
-		for(int i = 0; i < gameWorlds.size(); i++){
+	public GameWorld findProperGameWorld(UserSession session) {
+		for (int i = 0; i < gameWorlds.size(); i++) {
 			GameWorld game = gameWorlds.get(i);
-			if(game.canJoin()){
+			if (game.canJoin()) {
 				return game;
 			}
 		}
 		return null;
 	}
-	
+
 	public void stop() {
 		isRunning = false;
 	}

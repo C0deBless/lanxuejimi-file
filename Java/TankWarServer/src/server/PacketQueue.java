@@ -8,8 +8,9 @@ import org.slf4j.LoggerFactory;
 
 import common.Command;
 import common.Missile;
-import common.Packet;
 import common.StringUtil;
+
+import easysocket.packet.Packet;
 
 public class PacketQueue implements Runnable {
 
@@ -31,7 +32,7 @@ public class PacketQueue implements Runnable {
 
 	private void handlePacket(Packet packet) {
 		short cmd = packet.getCmd();
-		int clientId = packet.getClient().getClientId();
+		int clientId = packet.getSession().getSessionId();
 		UserSession session = ServerMain.getServer().getUserSession(clientId);
 		switch (cmd) {
 		case Command.C_LOGIN: {
@@ -128,9 +129,8 @@ public class PacketQueue implements Runnable {
 			GameWorld game = ServerMain.getServer().getGameWorld(
 					user.getGameWorldIndex());
 
-			// 实际上没啥用，等以后再说吧
 			Packet writePacket = new Packet(Command.S_READY);
-			session.getClient().pushWritePacket(writePacket);
+			session.getSession().sendPacket(writePacket);
 
 			// check all user ready
 			if (game.isAllUserReady()) {
