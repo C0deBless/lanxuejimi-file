@@ -7,7 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import common.Command;
-import common.Packet;
+
+import easysocket.packet.Packet;
 
 public class GameStartBox extends JFrame {
 
@@ -42,7 +43,7 @@ public class GameStartBox extends JFrame {
 				GameStartBox.this.setVisible(false);
 				ClientMain.showGameBox(gameWorldId, clientId);
 				Packet Packet = new Packet(Command.C_READY);
-				ClientMain.client.pushWritePacket(Packet);
+				ClientMain.session.sendPacket(Packet);
 
 			}
 		});

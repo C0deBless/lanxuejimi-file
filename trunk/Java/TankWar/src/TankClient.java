@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.net.ssl.SSLEngineResult.Status;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,9 +22,10 @@ import common.Command;
 import common.Constants;
 import common.Explode;
 import common.Missile;
-import common.Packet;
 import common.Tank;
 import common.TankType;
+
+import easysocket.packet.Packet;
 
 public class TankClient extends Frame {
 
@@ -545,7 +544,7 @@ public class TankClient extends Frame {
 			Packet packet = new Packet(Command.C_MOVE, 8);
 			packet.getByteBuffer().putInt(myTank.getId());
 			packet.getByteBuffer().putInt(angle);
-			ClientMain.client.pushWritePacket(packet);
+			ClientMain.session.sendPacket(packet);
 			judgeKey = false;
 		}
 
@@ -571,7 +570,7 @@ public class TankClient extends Frame {
 		case KeyEvent.VK_J:
 			Packet writePacket = new Packet(Command.C_NEW_MISSILE, 4);
 			writePacket.getByteBuffer().putInt(getMyTank().getId());
-			ClientMain.client.pushWritePacket(writePacket);
+			ClientMain.session.sendPacket(writePacket);
 			break;
 		case KeyEvent.VK_LEFT:
 		case KeyEvent.VK_UP:
@@ -581,7 +580,7 @@ public class TankClient extends Frame {
 			judgeKey = true;
 			Packet packet = new Packet(Command.C_STOP, 4);
 			packet.getByteBuffer().putInt(getMyTank().getId());
-			ClientMain.client.pushWritePacket(packet);
+			ClientMain.session.sendPacket(packet);
 		}
 			break;
 		}

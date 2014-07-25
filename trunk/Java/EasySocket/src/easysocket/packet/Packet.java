@@ -13,6 +13,14 @@ public class Packet {
 	private final ByteBuffer buffer;
 	private AioTcpSession session;
 
+	public Packet(short cmd) {
+		this(cmd, null);
+	}
+
+	public Packet(short cmd, int initialBufferSize) {
+		this(cmd, initialBufferSize, null);
+	}
+
 	public Packet(short cmd, AioTcpSession session) {
 		this(cmd, Short.MAX_VALUE, session);
 	}
