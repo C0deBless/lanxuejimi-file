@@ -51,7 +51,7 @@ public class PacketQueue implements Runnable {
 			game.initUserTank(clientId);
 
 			game.sendServerLoginCommand(packet, clientId);
-
+			logger.debug("C_LOGIN, response packet");
 			// if (game.getStatus() == GameStatus.Idle) {
 			// game.sendServerLoginCommand(packet, clientId);
 			//

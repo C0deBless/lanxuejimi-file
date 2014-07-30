@@ -27,6 +27,7 @@ public class ClientMain {
 	public static TankClient tankClient;
 
 	private static void handlePacket(Packet packet) {
+		logger.debug("ClientMain.handlePacket");
 		short cmd = packet.getCmd();
 		switch (cmd) {
 		case Command.S_READY: {
@@ -243,6 +244,8 @@ public class ClientMain {
 				}
 			});
 
+			ClientMain.session = session;
+			session.pendingRead();
 			Packet packet = new Packet(Command.C_LOGIN);
 			StringUtil.putString(packet.getByteBuffer(), name);
 			session.sendPacket(packet);
