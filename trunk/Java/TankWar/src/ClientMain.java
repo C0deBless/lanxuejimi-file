@@ -137,6 +137,7 @@ public class ClientMain {
 		case Command.S_LOGIN: {
 			int gameWorldId = packet.getByteBuffer().getInt();
 			int clientId = packet.getByteBuffer().getInt();
+			logger.debug("S_LOGIN, clientId:{}", clientId);
 			new GameStartBox(gameWorldId, clientId);
 		}
 			break;

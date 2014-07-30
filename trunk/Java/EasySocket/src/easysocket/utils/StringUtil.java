@@ -22,7 +22,6 @@ public class StringUtil {
 			return;
 		}
 		int size = str.getBytes(defaultCharset).length;
-		System.out.println("string size:" + size);
 		bb.putInt(size);
 		if (size > 0)
 			bb.put(str.getBytes(defaultCharset));

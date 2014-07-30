@@ -15,7 +15,6 @@ public class CRC16 {
 			for (byte b : data) {
 				int crcIndex = crcHi ^ (b & 0xFF);
 				// int crcIndex = crcHi ^ b;
-				System.out.println(crcIndex);
 				crcHi = crcLo ^ CRC16TABLE_HI[crcIndex];
 				crcLo = CRC16TABLE_LO[crcIndex];
 			}
