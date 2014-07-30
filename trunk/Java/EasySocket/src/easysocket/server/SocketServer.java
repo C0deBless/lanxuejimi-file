@@ -62,7 +62,7 @@ public class SocketServer {
 		AsynchronousChannelGroup channelGroup = AsynchronousChannelGroup
 				.withCachedThreadPool(Executors.newCachedThreadPool(),
 						initialSize);
-		AsynchronousServerSocketChannel server = AsynchronousServerSocketChannel
+		server = AsynchronousServerSocketChannel
 				.open(channelGroup);
 		server.bind(new InetSocketAddress(port));
 
