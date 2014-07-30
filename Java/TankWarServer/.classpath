@@ -3,9 +3,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/TankCommon"/>
-	<classpathentry kind="lib" path="/TankCommon/log4j-1.2.16.jar"/>
-	<classpathentry kind="lib" path="/TankCommon/slf4j-api-1.6.4.jar"/>
-	<classpathentry kind="lib" path="/TankCommon/slf4j-log4j12-1.6.4.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/EasySocket"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/logger"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
