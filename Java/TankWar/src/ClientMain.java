@@ -27,7 +27,7 @@ public class ClientMain {
 	public static TankClient tankClient;
 
 	private static void handlePacket(Packet packet) {
-		logger.debug("ClientMain.handlePacket");
+		logger.debug("ClientMain.handlePacket, " + packet.getCmd());
 		short cmd = packet.getCmd();
 		switch (cmd) {
 		case Command.S_READY: {
