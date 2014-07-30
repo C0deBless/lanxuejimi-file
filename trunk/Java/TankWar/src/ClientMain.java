@@ -11,12 +11,12 @@ import common.Block;
 import common.Command;
 import common.Explode;
 import common.Missile;
-import common.StringUtil;
 import common.Tank;
 
 import easysocket.packet.Packet;
 import easysocket.session.AioTcpSession;
 import easysocket.session.event.SessionEventListener;
+import easysocket.utils.StringUtil;
 
 public class ClientMain {
 	private static Logger logger = LoggerFactory.getLogger(ClientMain.class);

@@ -114,8 +114,6 @@ public class Server {
 			}
 		});
 
-		session.pendingRead();
-
 		clientPool.put(session.getSessionId(), userSession);
 	}
 

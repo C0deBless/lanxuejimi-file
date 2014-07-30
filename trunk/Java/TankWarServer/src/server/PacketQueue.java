@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 
 import common.Command;
 import common.Missile;
-import common.StringUtil;
 
 import easysocket.packet.Packet;
+import easysocket.utils.StringUtil;
 
 public class PacketQueue implements Runnable {
 
