@@ -1,0 +1,10 @@
+E:\zhaojudi\src\codeplex\osgi.net\Common\UIShell.Extension\bin\Debug\UIShell.Extension.dll
+E:\zhaojudi\src\codeplex\osgi.net\Common\UIShell.Extension\bin\Debug\UIShell.Extension.pdb
+E:\zhaojudi\src\codeplex\osgi.net\Common\UIShell.Extension\obj\Debug\UIShell.Extension.csprojResolveAssemblyReference.cache
+E:\zhaojudi\src\codeplex\osgi.net\Common\UIShell.Extension\obj\Debug\UIShell.Extension.dll
+E:\zhaojudi\src\codeplex\osgi.net\Common\UIShell.Extension\obj\Debug\UIShell.Extension.pdb
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Common\UIShell.Extension\bin\Debug\UIShell.Extension.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Common\UIShell.Extension\bin\Debug\UIShell.Extension.pdb
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Common\UIShell.Extension\obj\Debug\UIShell.Extension.csprojResolveAssemblyReference.cache
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Common\UIShell.Extension\obj\Debug\UIShell.Extension.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Common\UIShell.Extension\obj\Debug\UIShell.Extension.pdb

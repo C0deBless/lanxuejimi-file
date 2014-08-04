@@ -1,0 +1,14 @@
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaManagement\bin\MediaManagement.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaManagement\bin\MediaManagement.pdb
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaManagement\bin\BusinessLayer.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaManagement\bin\BusinessLayer.pdb
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaManagement\obj\Debug\MediaManagement.csprojResolveAssemblyReference.cache
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaManagement\obj\Debug\MediaManagement.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaManagement\obj\Debug\MediaManagement.pdb
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaManagement\bin\MediaManagement.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaManagement\bin\MediaManagement.pdb
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaManagement\bin\BusinessLayer.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaManagement\bin\BusinessLayer.pdb
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaManagement\obj\Debug\MediaManagement.csprojResolveAssemblyReference.cache
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaManagement\obj\Debug\MediaManagement.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaManagement\obj\Debug\MediaManagement.pdb

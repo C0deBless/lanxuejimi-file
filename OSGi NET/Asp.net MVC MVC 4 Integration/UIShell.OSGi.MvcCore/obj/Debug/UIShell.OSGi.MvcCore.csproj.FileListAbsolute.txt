@@ -1,0 +1,12 @@
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\UIShell.OSGi.MvcCore\bin\Debug\UIShell.OSGi.MvcCore.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\UIShell.OSGi.MvcCore\bin\Debug\UIShell.OSGi.MvcCore.pdb
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\UIShell.OSGi.MvcCore\bin\Debug\UIShell.OSGi.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\UIShell.OSGi.MvcCore\obj\Debug\UIShell.OSGi.MvcCore.csprojResolveAssemblyReference.cache
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\UIShell.OSGi.MvcCore\obj\Debug\UIShell.OSGi.MvcCore.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\UIShell.OSGi.MvcCore\obj\Debug\UIShell.OSGi.MvcCore.pdb
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\UIShell.OSGi.MvcCore\bin\Debug\UIShell.OSGi.MvcCore.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\UIShell.OSGi.MvcCore\bin\Debug\UIShell.OSGi.MvcCore.pdb
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\UIShell.OSGi.MvcCore\bin\Debug\UIShell.OSGi.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\UIShell.OSGi.MvcCore\obj\Debug\UIShell.OSGi.MvcCore.csprojResolveAssemblyReference.cache
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\UIShell.OSGi.MvcCore\obj\Debug\UIShell.OSGi.MvcCore.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\UIShell.OSGi.MvcCore\obj\Debug\UIShell.OSGi.MvcCore.pdb
