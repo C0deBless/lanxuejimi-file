@@ -1,0 +1,14 @@
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaPlugin\bin\MediaPlugin.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaPlugin\bin\MediaPlugin.pdb
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaPlugin\bin\BusinessLayer.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaPlugin\bin\BusinessLayer.pdb
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaPlugin\obj\Debug\MediaPlugin.csprojResolveAssemblyReference.cache
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaPlugin\obj\Debug\MediaPlugin.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaPlugin\obj\Debug\MediaPlugin.pdb
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaPlugin\bin\MediaPlugin.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaPlugin\bin\MediaPlugin.pdb
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaPlugin\bin\BusinessLayer.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaPlugin\bin\BusinessLayer.pdb
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaPlugin\obj\Debug\MediaPlugin.csprojResolveAssemblyReference.cache
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaPlugin\obj\Debug\MediaPlugin.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\MediaPlugin\obj\Debug\MediaPlugin.pdb

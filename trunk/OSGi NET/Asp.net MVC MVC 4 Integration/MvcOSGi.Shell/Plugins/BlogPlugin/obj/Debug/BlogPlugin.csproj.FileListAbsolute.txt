@@ -1,0 +1,10 @@
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\BlogPlugin\bin\BlogPlugin.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\BlogPlugin\bin\BlogPlugin.pdb
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\BlogPlugin\obj\Debug\BlogPlugin.csprojResolveAssemblyReference.cache
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\BlogPlugin\obj\Debug\BlogPlugin.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\BlogPlugin\obj\Debug\BlogPlugin.pdb
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\BlogPlugin\bin\BlogPlugin.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\BlogPlugin\bin\BlogPlugin.pdb
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\BlogPlugin\obj\Debug\BlogPlugin.csprojResolveAssemblyReference.cache
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\BlogPlugin\obj\Debug\BlogPlugin.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\BlogPlugin\obj\Debug\BlogPlugin.pdb

@@ -1,0 +1,79 @@
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\MvcOSGi.Shell.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\MvcOSGi.Shell.pdb
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\Antlr3.Runtime.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\EntityFramework.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\Microsoft.Web.Infrastructure.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\Newtonsoft.Json.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Net.Http.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Net.Http.Formatting.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Net.Http.WebRequest.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.Http.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.Http.WebHost.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.Mvc.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.Optimization.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.Providers.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.Razor.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.WebPages.Deployment.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.WebPages.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.WebPages.Razor.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\UIShell.Extension.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\UIShell.OSGi.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\UIShell.OSGi.MvcCore.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\WebGrease.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\UIShell.Extension.pdb
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\UIShell.OSGi.MvcCore.pdb
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\EntityFramework.xml
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\Newtonsoft.Json.xml
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Net.Http.xml
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Net.Http.Formatting.xml
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Net.Http.WebRequest.xml
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.Http.xml
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.Http.WebHost.xml
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.Mvc.xml
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.Razor.xml
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.WebPages.xml
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.WebPages.Deployment.xml
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.WebPages.Razor.xml
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\obj\Debug\MvcOSGi.Shell.csprojResolveAssemblyReference.cache
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\obj\Debug\MvcOSGi.Shell.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\obj\Debug\MvcOSGi.Shell.pdb
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\MvcOSGi.Shell.dll.config
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\MvcOSGi.Shell.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\MvcOSGi.Shell.pdb
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\Antlr3.Runtime.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\EntityFramework.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\Newtonsoft.Json.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Net.Http.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Net.Http.Formatting.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Net.Http.WebRequest.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.Http.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.Http.WebHost.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.Mvc.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.Optimization.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.Providers.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.Razor.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.WebPages.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.WebPages.Razor.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\UIShell.Extension.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\UIShell.OSGi.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\UIShell.OSGi.MvcCore.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\WebGrease.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\UIShell.Extension.pdb
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\UIShell.OSGi.MvcCore.pdb
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\EntityFramework.xml
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\Newtonsoft.Json.xml
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Net.Http.xml
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Net.Http.Formatting.xml
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Net.Http.WebRequest.xml
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.Http.xml
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.Http.WebHost.xml
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.Mvc.xml
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.Razor.xml
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.WebPages.xml
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\bin\System.Web.WebPages.Razor.xml
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\obj\Debug\MvcOSGi.Shell.csprojResolveAssemblyReference.cache
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\obj\Debug\MvcOSGi.Shell.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\obj\Debug\MvcOSGi.Shell.pdb

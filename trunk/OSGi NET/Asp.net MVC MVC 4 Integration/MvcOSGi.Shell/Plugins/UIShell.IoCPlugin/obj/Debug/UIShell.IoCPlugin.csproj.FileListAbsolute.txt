@@ -1,0 +1,20 @@
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\UIShell.IoCPlugin\bin\UIShell.IoCPlugin.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\UIShell.IoCPlugin\bin\UIShell.IoCPlugin.pdb
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\UIShell.IoCPlugin\bin\Autofac.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\UIShell.IoCPlugin\bin\Autofac.Integration.Mvc.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\UIShell.IoCPlugin\bin\UIShell.OSGi.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\UIShell.IoCPlugin\bin\UIShell.OSGi.MvcCore.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\UIShell.IoCPlugin\bin\UIShell.OSGi.MvcCore.pdb
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\UIShell.IoCPlugin\obj\Debug\UIShell.IoCPlugin.csprojResolveAssemblyReference.cache
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\UIShell.IoCPlugin\obj\Debug\UIShell.IoCPlugin.dll
+E:\zhaojudi\src\codeplex\osgi.net\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\UIShell.IoCPlugin\obj\Debug\UIShell.IoCPlugin.pdb
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\UIShell.IoCPlugin\bin\UIShell.IoCPlugin.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\UIShell.IoCPlugin\bin\UIShell.IoCPlugin.pdb
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\UIShell.IoCPlugin\bin\Autofac.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\UIShell.IoCPlugin\bin\Autofac.Integration.Mvc.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\UIShell.IoCPlugin\bin\UIShell.OSGi.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\UIShell.IoCPlugin\bin\UIShell.OSGi.MvcCore.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\UIShell.IoCPlugin\bin\UIShell.OSGi.MvcCore.pdb
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\UIShell.IoCPlugin\obj\Debug\UIShell.IoCPlugin.csprojResolveAssemblyReference.cache
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\UIShell.IoCPlugin\obj\Debug\UIShell.IoCPlugin.dll
+C:\Users\Qingfeng\Desktop\Asp.net MVC 4 Integration\Asp.net MVC MVC 4 Integration\MvcOSGi.Shell\Plugins\UIShell.IoCPlugin\obj\Debug\UIShell.IoCPlugin.pdb
