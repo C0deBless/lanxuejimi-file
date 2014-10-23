@@ -1,0 +1,5 @@
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\Docs\bin\Debug\Docs.exe
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\Docs\bin\Debug\Docs.pdb
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\Docs\obj\Debug\Docs.csprojResolveAssemblyReference.cache
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\Docs\obj\Debug\Docs.exe
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\Docs\obj\Debug\Docs.pdb

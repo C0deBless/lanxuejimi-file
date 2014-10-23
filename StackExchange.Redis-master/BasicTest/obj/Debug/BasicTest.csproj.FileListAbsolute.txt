@@ -1,0 +1,8 @@
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\BasicTest\bin\Debug\BasicTest.exe
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\BasicTest\bin\Debug\BasicTest.pdb
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\BasicTest\bin\Debug\StackExchange.Redis.dll
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\BasicTest\bin\Debug\StackExchange.Redis.pdb
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\BasicTest\bin\Debug\StackExchange.Redis.xml
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\BasicTest\obj\Debug\BasicTest.csprojResolveAssemblyReference.cache
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\BasicTest\obj\Debug\BasicTest.exe
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\BasicTest\obj\Debug\BasicTest.pdb

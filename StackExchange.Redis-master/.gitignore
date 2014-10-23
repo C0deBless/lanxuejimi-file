@@ -1,0 +1,17 @@
+.hg
+bin
+bin.snk
+obj
+*.suo
+*.user
+*.nupkg
+packages/NuGet.CommandLine.*
+*.sln.docstates
+_ReSharper.*
+Mono/
+*.sln.ide
+*.rdb
+*.orig
+redis-cli.exe
+Redis Configs/*.dat
+RedisQFork*.dat

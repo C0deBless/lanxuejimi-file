@@ -1,0 +1,12 @@
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\ConnectionWatcher\bin\Debug\ConnectionWatcher.exe.config
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\ConnectionWatcher\bin\Debug\ConnectionWatcher.exe
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\ConnectionWatcher\bin\Debug\ConnectionWatcher.pdb
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\ConnectionWatcher\bin\Debug\StackExchange.Redis.dll
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\ConnectionWatcher\bin\Debug\StackExchange.Redis.pdb
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\ConnectionWatcher\bin\Debug\StackExchange.Redis.xml
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\ConnectionWatcher\obj\Debug\ConnectionWatcher.csprojResolveAssemblyReference.cache
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\ConnectionWatcher\obj\Debug\ConnectionWatcher.Form1.resources
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\ConnectionWatcher\obj\Debug\ConnectionWatcher.Properties.Resources.resources
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\ConnectionWatcher\obj\Debug\ConnectionWatcher.csproj.GenerateResource.Cache
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\ConnectionWatcher\obj\Debug\ConnectionWatcher.exe
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\ConnectionWatcher\obj\Debug\ConnectionWatcher.pdb
