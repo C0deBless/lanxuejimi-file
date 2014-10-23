@@ -1,0 +1,6 @@
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\StackExchange.Redis\bin.snk\Debug\StackExchange.Redis.StrongName.xml
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\StackExchange.Redis\bin.snk\Debug\StackExchange.Redis.StrongName.dll
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\StackExchange.Redis\bin.snk\Debug\StackExchange.Redis.StrongName.pdb
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\StackExchange.Redis\obj\Debug\StackExchange.Redis.StrongName.csprojResolveAssemblyReference.cache
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\StackExchange.Redis\obj\Debug\StackExchange.Redis.StrongName.dll
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\StackExchange.Redis\obj\Debug\StackExchange.Redis.StrongName.pdb

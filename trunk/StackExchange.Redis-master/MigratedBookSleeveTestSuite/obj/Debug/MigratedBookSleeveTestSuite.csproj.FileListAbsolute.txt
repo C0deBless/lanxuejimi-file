@@ -1,0 +1,11 @@
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\MigratedBookSleeveTestSuite\bin\Debug\MigratedBookSleeveTestSuite.dll.config
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\MigratedBookSleeveTestSuite\bin\Debug\MigratedBookSleeveTestSuite.dll
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\MigratedBookSleeveTestSuite\bin\Debug\MigratedBookSleeveTestSuite.pdb
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\MigratedBookSleeveTestSuite\bin\Debug\nunit.framework.dll
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\MigratedBookSleeveTestSuite\bin\Debug\StackExchange.Redis.dll
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\MigratedBookSleeveTestSuite\bin\Debug\StackExchange.Redis.pdb
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\MigratedBookSleeveTestSuite\bin\Debug\StackExchange.Redis.xml
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\MigratedBookSleeveTestSuite\bin\Debug\nunit.framework.xml
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\MigratedBookSleeveTestSuite\obj\Debug\MigratedBookSleeveTestSuite.csprojResolveAssemblyReference.cache
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\MigratedBookSleeveTestSuite\obj\Debug\MigratedBookSleeveTestSuite.dll
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\MigratedBookSleeveTestSuite\obj\Debug\MigratedBookSleeveTestSuite.pdb

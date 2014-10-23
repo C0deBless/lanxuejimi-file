@@ -1,0 +1,7 @@
+C:\workspace\lanxuejimi-file\c#\RedisStressTest\RedisStressTest\bin\Debug\RedisStressTest.exe.config
+C:\workspace\lanxuejimi-file\c#\RedisStressTest\RedisStressTest\bin\Debug\RedisStressTest.exe
+C:\workspace\lanxuejimi-file\c#\RedisStressTest\RedisStressTest\bin\Debug\RedisStressTest.pdb
+C:\workspace\lanxuejimi-file\c#\RedisStressTest\RedisStressTest\bin\Debug\StackExchange.Redis.dll
+C:\workspace\lanxuejimi-file\c#\RedisStressTest\RedisStressTest\obj\Debug\RedisStressTest.exe
+C:\workspace\lanxuejimi-file\c#\RedisStressTest\RedisStressTest\obj\Debug\RedisStressTest.pdb
+C:\workspace\lanxuejimi-file\c#\RedisStressTest\RedisStressTest\obj\Debug\RedisStressTest.csprojResolveAssemblyReference.cache

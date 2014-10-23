@@ -1,0 +1,13 @@
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\StackExchange.Redis.Tests\bin\Debug\StackExchange.Redis.Tests.dll
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\StackExchange.Redis.Tests\bin\Debug\StackExchange.Redis.Tests.pdb
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\StackExchange.Redis.Tests\bin\Debug\BookSleeve.dll
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\StackExchange.Redis.Tests\bin\Debug\nunit.framework.dll
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\StackExchange.Redis.Tests\bin\Debug\StackExchange.Redis.dll
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\StackExchange.Redis.Tests\bin\Debug\StackExchange.Redis.pdb
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\StackExchange.Redis.Tests\bin\Debug\StackExchange.Redis.xml
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\StackExchange.Redis.Tests\bin\Debug\BookSleeve.pdb
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\StackExchange.Redis.Tests\bin\Debug\BookSleeve.xml
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\StackExchange.Redis.Tests\bin\Debug\nunit.framework.xml
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\StackExchange.Redis.Tests\obj\Debug\StackExchange.Redis.Tests.csprojResolveAssemblyReference.cache
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\StackExchange.Redis.Tests\obj\Debug\StackExchange.Redis.Tests.dll
+C:\workspace\lanxuejimi-file\StackExchange.Redis-master\StackExchange.Redis.Tests\obj\Debug\StackExchange.Redis.Tests.pdb
