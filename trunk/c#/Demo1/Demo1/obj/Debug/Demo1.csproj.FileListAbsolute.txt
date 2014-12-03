@@ -1,0 +1,6 @@
+D:\lanxuejimi-file\c#\Demo1\Demo1\bin\Debug\Demo1.exe.config
+D:\lanxuejimi-file\c#\Demo1\Demo1\bin\Debug\Demo1.exe
+D:\lanxuejimi-file\c#\Demo1\Demo1\bin\Debug\Demo1.pdb
+D:\lanxuejimi-file\c#\Demo1\Demo1\obj\Debug\Demo1.csprojResolveAssemblyReference.cache
+D:\lanxuejimi-file\c#\Demo1\Demo1\obj\Debug\Demo1.exe
+D:\lanxuejimi-file\c#\Demo1\Demo1\obj\Debug\Demo1.pdb

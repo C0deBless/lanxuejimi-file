@@ -1,0 +1,5 @@
+D:\lanxuejimi-file\c#\SocketAPI\SocketAPI\bin\Debug\SocketAPI.dll
+D:\lanxuejimi-file\c#\SocketAPI\SocketAPI\bin\Debug\SocketAPI.pdb
+D:\lanxuejimi-file\c#\SocketAPI\SocketAPI\obj\Debug\SocketAPI.csprojResolveAssemblyReference.cache
+D:\lanxuejimi-file\c#\SocketAPI\SocketAPI\obj\Debug\SocketAPI.dll
+D:\lanxuejimi-file\c#\SocketAPI\SocketAPI\obj\Debug\SocketAPI.pdb
