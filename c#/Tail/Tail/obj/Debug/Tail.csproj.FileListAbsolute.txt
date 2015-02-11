@@ -1,6 +1,0 @@
-C:\workspace\lanxuejimi-file\c#\Tail\Tail\bin\Debug\Tail.exe.config
-C:\workspace\lanxuejimi-file\c#\Tail\Tail\bin\Debug\Tail.exe
-C:\workspace\lanxuejimi-file\c#\Tail\Tail\bin\Debug\Tail.pdb
-C:\workspace\lanxuejimi-file\c#\Tail\Tail\obj\Debug\Tail.csprojResolveAssemblyReference.cache
-C:\workspace\lanxuejimi-file\c#\Tail\Tail\obj\Debug\Tail.exe
-C:\workspace\lanxuejimi-file\c#\Tail\Tail\obj\Debug\Tail.pdb
