@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Servers>
-	<Server ID ="1" Name="Black">
-		<WebFTP Host="192.168.0.192" UserName="tiger" Password="xjdlwj1209*"/>
-	</Server>
-</Servers>
