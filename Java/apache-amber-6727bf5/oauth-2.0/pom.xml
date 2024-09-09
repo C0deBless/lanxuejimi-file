@@ -47,7 +47,7 @@
 
   <properties>
     <cxf.version>2.2.10</cxf.version>
-    <org.springframework.version>3.0.3.RELEASE</org.springframework.version>
+    <org.springframework.version>3.2.18.RELEASE</org.springframework.version>
     <spring-mock.version>2.0.8</spring-mock.version>
     <easy-mock.version>3.0</easy-mock.version>
     <servlet-api.version>2.5</servlet-api.version>
@@ -60,7 +60,7 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>1.6.1</version>
+      <version>1.7.36</version>
     </dependency>
 
     <dependency>
